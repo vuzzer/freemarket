@@ -1,0 +1,7 @@
+{
+    "editor.codeActionsOnSave": {
+        "quickfix.add.required": true,
+"quickfix.add.required.multi": true,
+"quickfix.create.constructorForFinalFields": true
+    }
+}

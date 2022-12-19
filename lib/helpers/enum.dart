@@ -1,0 +1,1 @@
+enum Blockchain{matic, bsc, ethereum, initial}
