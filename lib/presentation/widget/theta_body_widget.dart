@@ -65,12 +65,11 @@ class ThetaBodyWidget extends StatelessWidget {
                             color: greyLight,
                           )),
                       itemBuilder: (context, index) =>
-                          WalletProvider(builder: (context, store) {
-                            store.changeNetwork(networks[index]);
-                            return CryptoAssetWidget(
+                          
+                          CryptoAssetWidget(
                               network: networks[index],
-                            );
-                          })),
+                            )
+                          ),
                   const SingleChildScrollView(child: TxHistoryWidget())
                 ]))
               ],

@@ -19,6 +19,9 @@ class CryptoAssetWidget extends HookWidget {
     //final sizes = MediaQuery.of(context);
     final store = useWallet(context);
 
+    useEffect(() {
+      store.changeNetwork(network);
+    });
 
     return Material(
         color: Colors.transparent,
@@ -27,7 +30,7 @@ class CryptoAssetWidget extends HookWidget {
             highlightColor: blueLight,
             onTap: () {
               logger.d(store.state.network.name);
-              //Navigator.of(context).pushNamed(CryptoAssetScreen.routeName);
+              Navigator.of(context).pushNamed(CryptoAssetScreen.routeName);
             },
             child: ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 0),
