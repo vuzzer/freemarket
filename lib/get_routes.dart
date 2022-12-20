@@ -35,17 +35,17 @@ Map<String, WidgetBuilder> getRoutes(context) {
     OtpScreen.routeName: (context) => const OtpScreen(),
     TxInfoScreen.routeName: (context) => const TxInfoScreen(),
     CryptoAssetScreen.routeName: (context) => const CryptoAssetScreen(),
-    ChooseCurrencyScreen.routeName: (context) => const ChooseCurrencyScreen(),
+    ChooseCurrencyScreen.routeName: (context) =>  const ChooseCurrencyScreen(),
     SetAmountScreen.routeName: (context) => const SetAmountScreen(),
     SendScreen.routeName: (context) => const SendScreen(),
-    ReceiveScreen.routeName: (context) => WalletProvider(builder:(context, store) =>  const ReceiveScreen()),
+    ReceiveScreen.routeName: (context) =>  const ReceiveScreen(),
     QrScanScreen.routeName: (context) => const QrScanScreen(),
     SwapScreen.routeName: (context) => const SwapScreen(),
     SettingScreen.routeName: (context) => const SettingScreen(),
     ThetaScreen.routeName: (BuildContext context) {
       final configurationService = Provider.of<ConfigurationService>(context);
       if (configurationService.didSetupWallet()) {
-        return WalletProvider(builder: (context, store) => ThetaScreen());
+        return  ThetaScreen();
       }
 
       return WalletSetupProvider(builder: (context, store) {

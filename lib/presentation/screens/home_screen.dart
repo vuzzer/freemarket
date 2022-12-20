@@ -1,5 +1,6 @@
 import 'package:defi/domain/wallet/wallet_provider.dart';
 import 'package:defi/presentation/screens/send_screen.dart';
+import 'package:defi/presentation/widget/button_operation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,15 +9,13 @@ import '../widget/button_icon_widget.dart';
 import '../widget/card_balance.dart';
 import '../widget/theta_body_widget.dart';
 import 'choose_currency_screen.dart';
-
+import 'package:logger/logger.dart';
 
 class HomeScreen extends HookWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       body: Column(
         children: [
@@ -29,8 +28,16 @@ class HomeScreen extends HookWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Flexible(
+            children:  [
+              ButtonOperation(icon: Icons.arrow_upward, text: "Send", onPressed:  () =>
+                    Navigator.of(context).pushNamed(SendScreen.routeName),),
+              ButtonOperation(icon: Icons.arrow_downward, text: "Receive", onPressed: () => Navigator.of(context).pushNamed(
+                    ChooseCurrencyScreen.routeName,
+                    ),),
+              ButtonOperation(icon: Icons.payment, text: "Buy", onPressed: (){},),
+                ButtonOperation(icon: Icons.wallet, text: "Deposit", onPressed: (){},),
+                ButtonOperation(icon: Icons.paid, text: "withdraw", onPressed: (){},),
+       /*        Flexible(
                   child: ButtonIconWidget(
                 iconData: Icons.arrow_upward,
                 label: "Send",
@@ -41,15 +48,15 @@ class HomeScreen extends HookWidget {
                   child: ButtonIconWidget(
                 iconData: Icons.arrow_downward,
                 label: "Receive",
-                onPressed: () => Navigator.of(context)
-                    .pushNamed(ChooseCurrencyScreen.routeName),
-              ))
+                onPressed: () => Navigator.of(context).pushNamed(
+                    ChooseCurrencyScreen.routeName,
+                    ),
+              )) */
             ],
           ),
           const SizedBox(
             height: 20,
           ),
-     
           const ThetaBodyWidget()
         ],
       ),

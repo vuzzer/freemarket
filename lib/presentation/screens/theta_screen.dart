@@ -26,27 +26,14 @@ class ThetaScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final store = useWallet(context);
-    final address = store.state.address;
-    final network = store.state.network;
-
-    useEffect(() {
-      store.initialise();
-    }, []);
-
-    useEffect(
-      () => store.listenTransfers(address, network),
-      [address, network],
-    );
-
-    logger.d(address);
-
     return Scaffold(
       body: IndexedStack(
         index: _activeIndex.value,
         children: const [
-          HomeScreen(),
-          SwapScreen(),
+          HomeScreen(
+          
+          ),
+           SwapScreen(),
            SettingScreen()
         ],
       ),

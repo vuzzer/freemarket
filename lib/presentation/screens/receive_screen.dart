@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/domain/wallet/wallet_provider.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -20,8 +21,6 @@ class ReceiveScreen extends HookWidget {
   Widget build(BuildContext context) {
     final store = useWallet(context);
     final address = store.state.address;
-    logger.d(store.state.network.config.label);
-    logger.d(address);
     return Scaffold(
       appBar: const AppBarWidget(
         title: "Receive",
@@ -34,39 +33,50 @@ class ReceiveScreen extends HookWidget {
           ),
           Center(
               child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                   width: (kSizeUnit * 3.2).w,
                   decoration: BoxDecoration(
                       color: blue1, borderRadius: BorderRadius.circular(10)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AutoSizeText(
-                            "Your address",
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                          const SizedBox(
-                            height: 7,
-                          ),
-                          AutoSizeText(
-                            address ?? "",
-                            style: Theme.of(context).textTheme.bodyText2,
-                          )
-                        ],
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            fixedSize: const Size.square(30),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            backgroundColor: blue1),
-                        child: Icon(Icons.copy, color: greyLight),
-                        onPressed: () {},
-                      )
+                      Flexible(
+                          flex: 9,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AutoSizeText(
+                                "Your address",
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                              const SizedBox(
+                                height: 7,
+                              ),
+                              AutoSizeText(
+                                address ?? "",
+                                style: Theme.of(context).textTheme.bodyText1,
+                              )
+                            ],
+                          )),
+                      Flexible(
+                          fit: FlexFit.loose,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.all(0),
+                                elevation: 0,
+                                fixedSize: const Size.square(10),
+                                backgroundColor: blue1),
+                            child: Icon(Icons.copy, color: greyLight),
+                            onPressed: () {
+                              Clipboard.setData(ClipboardData(text: address));
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                   SnackBar(
+                                    duration: const Duration(milliseconds: 300),
+                                    backgroundColor: blueLight,
+                                    content:  Text("Copié", style: Theme.of(context).textTheme.bodyText1, textAlign: TextAlign.center, )));
+                            },
+                          ))
                     ],
                   ))),
           const SizedBox(

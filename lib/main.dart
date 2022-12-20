@@ -1,3 +1,4 @@
+import 'package:defi/domain/wallet/wallet_provider.dart';
 import 'package:defi/firebase_options.dart';
 import 'package:defi/get_routes.dart';
 import 'package:defi/presentation/provider/network_provider.dart';
@@ -8,9 +9,11 @@ import 'package:defi/services/service_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -29,18 +32,32 @@ await Firebase.initializeApp(
   runApp( MultiProvider(providers: [
     ...stores,
       ChangeNotifierProvider(create: (context) => UserProvider(), 
-      child: const VerificationScreen(),),
+      child: const VerificationScreen()),
       Provider(create: (context) => NetworkProvider())
   ], 
-  child: const MyApp()));
+  child: WalletProvider(builder: (context, store) =>  const MyApp())));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends HookWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final store = useWallet(context);
+    final address = store.state.address;
+    final network = store.state.network;
+
+    useEffect(() {
+      store.initialise();
+      return null;
+    }, []);
+
+    useEffect(
+      () => store.listenTransfers(address, network),
+      [address, network],
+    );
+
     return ScreenUtilInit(
         designSize: const Size(360, 690),
         minTextAdapt: true,
@@ -60,6 +77,7 @@ class MyApp extends StatelessWidget {
                   primaryColor: Colors.white,
                   fontFamily: 'Raleway',
                   scaffoldBackgroundColor: const Color(0XFF171B2F),
+                  splashFactory: InkRipple.splashFactory,
                   textTheme: TextTheme(
                       headline6: const TextStyle(
                         fontFamily: "RobotoCondensed",
@@ -74,6 +92,7 @@ class MyApp extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                       bodyText1: const TextStyle(color: Colors.white),
+                      
                       bodyText2:
                           TextStyle(color: Colors.grey.withOpacity(0.6)))),
               initialRoute: StartedScreen.routeName,

@@ -24,7 +24,6 @@ class ButtonWidget extends StatelessWidget {
           minimumSize: Size(MediaQuery.of(context).size.width, 50),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(raduis)),
-               
           backgroundColor: color),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

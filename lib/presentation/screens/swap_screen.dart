@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
+import 'package:defi/domain/wallet/wallet_provider.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/button_widget.dart';
 import 'package:defi/presentation/widget/swap_token_widget.dart';
@@ -35,14 +36,20 @@ class SwapScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50)),
               ),
               child: const Icon(Icons.swap_vert)),
-               const SizedBox(
+          const SizedBox(
             height: 20,
           ),
-             const SwapTokenWidget(),
-             const SizedBox(
+          const SwapTokenWidget(),
+          const SizedBox(
             height: 60,
           ),
-          Padding(padding: const EdgeInsets.symmetric(horizontal: 30), child: ButtonWidget(onPressed: (){}, title: "Exchange now", raduis: 10,))
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: ButtonWidget(
+                onPressed: () {},
+                title: "Exchange now",
+                raduis: 10,
+              ))
         ],
       ),
     );
