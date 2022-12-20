@@ -30,7 +30,7 @@ class KeyBoardWidget extends StatelessWidget {
                   children: List.generate(3, (index) {
                     key++;
                     return NumberButtonWiget(
-                        touch: key, controller: controller);
+                        touch: key, controller: controller, amount: amount,);
                   }),
                 )))),
         Padding(
@@ -45,7 +45,10 @@ class KeyBoardWidget extends StatelessWidget {
               children: [
                 amount
                     ? TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.text += ",";
+                           controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
+                        },
                         style: TextButton.styleFrom(
                           padding: const EdgeInsets.all(0),
                           minimumSize: const Size.square(60),
@@ -66,6 +69,8 @@ class KeyBoardWidget extends StatelessWidget {
                     onPressed: () {
                       controller.text = controller.text
                           .substring(0, controller.text.length - 1);
+                          //Change the cursor position
+                          controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
                     },
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.all(0),

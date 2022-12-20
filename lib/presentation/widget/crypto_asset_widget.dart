@@ -19,9 +19,9 @@ class CryptoAssetWidget extends HookWidget {
     //final sizes = MediaQuery.of(context);
     final store = useWallet(context);
 
-    useEffect(() {
+    /* useEffect(() {
       store.changeNetwork(network);
-    });
+    }); */
 
     return Material(
         color: Colors.transparent,

@@ -29,14 +29,14 @@ class HomeScreen extends HookWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children:  [
-              ButtonOperation(icon: Icons.arrow_upward, text: "Send", onPressed:  () =>
+              ButtonOperation(icon: Icons.arrow_upward, text: "Envoyer", onPressed:  () =>
                     Navigator.of(context).pushNamed(SendScreen.routeName),),
-              ButtonOperation(icon: Icons.arrow_downward, text: "Receive", onPressed: () => Navigator.of(context).pushNamed(
+              ButtonOperation(icon: Icons.arrow_downward, text: "Recevoir", onPressed: () => Navigator.of(context).pushNamed(
                     ChooseCurrencyScreen.routeName,
                     ),),
-              ButtonOperation(icon: Icons.payment, text: "Buy", onPressed: (){},),
-                ButtonOperation(icon: Icons.wallet, text: "Deposit", onPressed: (){},),
-                ButtonOperation(icon: Icons.paid, text: "withdraw", onPressed: (){},),
+              ButtonOperation(icon: Icons.payment, text: "Acheter", onPressed: (){},),
+                ButtonOperation(icon: Icons.wallet, text: "Dépôt", onPressed: (){},),
+                ButtonOperation(icon: Icons.paid, text: "Retrait", onPressed: (){},),
        /*        Flexible(
                   child: ButtonIconWidget(
                 iconData: Icons.arrow_upward,

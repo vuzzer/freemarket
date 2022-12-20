@@ -51,11 +51,13 @@ class _SendScreenState extends State<SendScreen> {
                         child: TextFormField(
                       keyboardType: TextInputType.none,
                       autocorrect: false,
-                      cursorColor: greyLight,
-                      style: TextStyle(color: greyLight),
+                      cursorColor: Colors.white,
+                      style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
+                         contentPadding: const EdgeInsets.only(bottom: 10),
                           labelText: "Recipient address",
                           labelStyle: TextStyle(color: greyLight),
+                      
                           border: InputBorder.none),
                     )),
                   ))),
@@ -89,12 +91,15 @@ class _SendScreenState extends State<SendScreen> {
                       color: blue1, borderRadius: BorderRadius.circular(10)),
                   child: Center(
                     child: Form(
-                        child: TextFormField(
+                      child: TextFormField(
+                      
+                      controller: _controller,
                       keyboardType: TextInputType.none,
                       autocorrect: false,
-                      cursorColor: greyLight,
-                      style: TextStyle(color: greyLight),
+                      cursorColor: Colors.white,
+                      style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.only(bottom: 10),
                           labelText: "Amount",
                           labelStyle: TextStyle(color: greyLight),
                           suffixIcon: Row(

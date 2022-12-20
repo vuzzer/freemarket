@@ -5,15 +5,25 @@ import '../../constants/app_colors.dart';
 class NumberButtonWiget extends StatelessWidget {
   final int touch;
   final TextEditingController controller;
-  const NumberButtonWiget({Key? key, required this.touch, required this.controller}) : super(key: key);
+  final bool amount;
+  const NumberButtonWiget(
+      {Key? key,
+      required this.touch,
+      required this.controller,
+      this.amount = false})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return TextButton(
         onPressed: () {
-          if(controller.text.length < 4){
-controller.text += touch.toString();
+          //If Keyboard is activate for pincode, number is limited to 4
+          if (!amount && controller.text.length < 4) {
+            controller.text += touch.toString();
+          }else{
+            controller.text += touch.toString();
+            // Change the cursor position
+controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
           }
-          
         },
         style: TextButton.styleFrom(
           padding: const EdgeInsets.all(0),
