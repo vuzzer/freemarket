@@ -1,11 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
+import 'package:defi/domain/transfer/wallet_transfer_provider.dart';
+import 'package:defi/domain/wallet/wallet_action.dart';
+import 'package:defi/presentation/screens/qr_code_reader_screen.dart';
 import 'package:defi/presentation/screens/set_amount_screen.dart';
+import 'package:defi/presentation/screens/theta_screen.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/button_icon_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:logger/logger.dart';
 import '../../constants/app_colors.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/keyboard_widget.dart';
@@ -19,12 +24,14 @@ class SendScreen extends StatefulWidget {
 }
 
 class _SendScreenState extends State<SendScreen> {
-  late TextEditingController _controller;
+  TextEditingController amountController = TextEditingController();
+  TextEditingController toController = TextEditingController();
 
   @override
-  void initState() {
-    _controller = TextEditingController();
-    super.initState();
+  void dispose() {
+    amountController.dispose();
+    toController.dispose();
+    super.dispose();
   }
 
   @override
@@ -49,15 +56,15 @@ class _SendScreenState extends State<SendScreen> {
                   child: Center(
                     child: Form(
                         child: TextFormField(
+                      controller: toController,
                       keyboardType: TextInputType.none,
                       autocorrect: false,
                       cursorColor: Colors.white,
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                         contentPadding: const EdgeInsets.only(bottom: 10),
+                          contentPadding: const EdgeInsets.only(bottom: 10),
                           labelText: "Recipient address",
                           labelStyle: TextStyle(color: greyLight),
-                      
                           border: InputBorder.none),
                     )),
                   ))),
@@ -76,7 +83,10 @@ class _SendScreenState extends State<SendScreen> {
                   iconData: Icons.qr_code_scanner,
                   label: "QR-code",
                   raduis: 10,
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushNamed(QRCodeReaderScreen.routeName);
+                  }),
             ],
           ),
           const SizedBox(
@@ -91,9 +101,8 @@ class _SendScreenState extends State<SendScreen> {
                       color: blue1, borderRadius: BorderRadius.circular(10)),
                   child: Center(
                     child: Form(
-                      child: TextFormField(
-                      
-                      controller: _controller,
+                        child: TextFormField(
+                      controller: amountController,
                       keyboardType: TextInputType.none,
                       autocorrect: false,
                       cursorColor: Colors.white,
@@ -138,11 +147,22 @@ class _SendScreenState extends State<SendScreen> {
               padding: const EdgeInsets.only(bottom: 30),
               decoration: const BoxDecoration(color: blue1),
               child: KeyBoardWidget(
-                controller: _controller,
+                controller: amountController,
                 routeName: SetAmountScreen.routeName,
                 amount: true,
-                    onPressed: () {
-                  
+                onPressed: () async {
+                  context.loaderOverlay.show(); // show loading
+                  /* final success = await transferStore.transfer(
+                      store.state.network,
+                      toController.text,
+                      amountController.text); */
+                  context.loaderOverlay.hide(); // close loading
+                  /* if (success) {
+                    // ignore: use_build_context_synchronously
+                    Navigator.popUntil(
+                        context, ModalRoute.withName(ThetaScreen.routeName));
+                  } */
+                  //Logger().d(store.state.errors);
                 },
               )),
         ],

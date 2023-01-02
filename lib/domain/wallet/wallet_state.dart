@@ -1,58 +1,39 @@
-
-
 import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/domain/entities/wallet.dart';
+import 'package:defi/domain/wallet/wallet_action.dart';
+import 'package:flutter/material.dart';
 
-abstract class WalletAction {}
 
-class WalletInit extends WalletAction {}
 
-class InitialiseWallet extends WalletAction {
-  InitialiseWallet(this.network, this.address, this.privateKey);
-  final NetworkType network;
-  final String address;
-  final String privateKey;
+class WalletState extends ChangeNotifier {
+  Wallet state = Wallet();
+  void setState(WalletAction action) {
+    if (action is WalletInit) {
+      state = Wallet();
+    }
+
+    if (action is InitialiseWallet) {
+      state = state.rebuild((b) => b
+        ..network = action.network
+        ..address = action.address
+        ..privateKey = action.privateKey);
+    }
+
+    if (action is NetworkChanged) {
+      state = state.rebuild((b) => b..network = action.network);
+    }
+
+    if (action is UpdatingBalance) {
+      state = state.rebuild((b) => b..loading = true);
+    }
+
+    if (action is BalanceUpdated) {
+      state = state.rebuild((b) => b
+        ..loading = false
+        ..ethBalance = action.ethBalance
+        ..tokenBalance = action.tokenBalance);
+    }
+    notifyListeners();
+  }
 }
 
-class NetworkChanged extends WalletAction {
-  NetworkChanged(this.network);
-  final NetworkType network;
-}
-
-class BalanceUpdated extends WalletAction {
-  BalanceUpdated(this.ethBalance, this.tokenBalance);
-  final BigInt ethBalance;
-  final BigInt tokenBalance;
-}
-
-class UpdatingBalance extends WalletAction {}
-
-Wallet reducer(Wallet state, WalletAction action) {
-  if (action is WalletInit) {
-    return Wallet();
-  }
-
-  if (action is InitialiseWallet) {
-    return state.rebuild((b) => b
-      ..network = action.network
-      ..address = action.address
-      ..privateKey = action.privateKey);
-  }
-
-  if (action is NetworkChanged) {
-    return state.rebuild((b) => b..network = action.network);
-  }
-
-  if (action is UpdatingBalance) {
-    return state.rebuild((b) => b..loading = true);
-  }
-
-  if (action is BalanceUpdated) {
-    return state.rebuild((b) => b
-      ..loading = false
-      ..ethBalance = action.ethBalance
-      ..tokenBalance = action.tokenBalance);
-  }
-
-  return state;
-}

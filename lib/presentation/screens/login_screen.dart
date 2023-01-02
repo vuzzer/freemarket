@@ -64,12 +64,10 @@ class LoginScreen extends StatelessWidget {
               ),
 
               //social networks
-              WalletSetupProvider(builder: (context, store) {
+            /*   WalletSetupProvider(builder: (context, store) {
         // ignore: body_might_complete_normally_nullable
         return const GoogleLoginButtonWidget();
-      })
-            ,
-            
+      }) */ 
               const SizedBox(
                 height: 16,
               ),

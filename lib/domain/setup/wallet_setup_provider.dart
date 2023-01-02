@@ -1,5 +1,5 @@
-
-import 'package:defi/presentation/hook_provider.dart';
+/* import 'package:defi/domain/wallet/wallet_state.dart';
+import 'package:defi/presentation/context_provider.dart';
 import 'package:defi/domain/setup/wallet_setup_handler.dart';
 import 'package:defi/domain/setup/wallet_setup_state.dart';
 import 'package:defi/domain/entities/wallet_setup.dart';
@@ -9,12 +9,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:defi/domain/setup/wallet_setup_state.dart';
 import 'package:provider/provider.dart';
 
+class WalletSetupProvider extends StatelessWidget {
+  final Widget scaffold;
+  const WalletSetupProvider({super.key, required this.scaffold});
 
-
-class WalletSetupProvider extends ContextProviderWidget<WalletSetupHandler> {
-  const WalletSetupProvider(
-      {Widget? child, HookWidgetBuilder<WalletSetupHandler>? builder, Key? key})
-      : super(child: child, builder: builder, key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +22,11 @@ class WalletSetupProvider extends ContextProviderWidget<WalletSetupHandler> {
     final addressService = Provider.of<AddressService>(context);
     final handler = useMemoized(
       () => WalletSetupHandler(store, addressService),
-      [addressService, store],  
+      [addressService, store],
     );
 
     return provide(context, handler);
   }
 }
 
-WalletSetupHandler useWalletSetup(BuildContext context) =>
-    Provider.of<WalletSetupHandler>(context);
+ */

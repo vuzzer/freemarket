@@ -1,8 +1,7 @@
-import 'package:defi/domain/wallet/wallet_provider.dart';
+import 'package:defi/domain/wallet/wallet_action.dart';
 import 'package:defi/presentation/screens/send_screen.dart';
 import 'package:defi/presentation/widget/button_operation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/button_icon_widget.dart';
@@ -11,11 +10,12 @@ import '../widget/theta_body_widget.dart';
 import 'choose_currency_screen.dart';
 import 'package:logger/logger.dart';
 
-class HomeScreen extends HookWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       body: Column(
         children: [
@@ -28,16 +28,36 @@ class HomeScreen extends HookWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children:  [
-              ButtonOperation(icon: Icons.arrow_upward, text: "Envoyer", onPressed:  () =>
-                    Navigator.of(context).pushNamed(SendScreen.routeName),),
-              ButtonOperation(icon: Icons.arrow_downward, text: "Recevoir", onPressed: () => Navigator.of(context).pushNamed(
-                    ChooseCurrencyScreen.routeName,
-                    ),),
-              ButtonOperation(icon: Icons.payment, text: "Acheter", onPressed: (){},),
-                ButtonOperation(icon: Icons.wallet, text: "Dépôt", onPressed: (){},),
-                ButtonOperation(icon: Icons.paid, text: "Retrait", onPressed: (){},),
-       /*        Flexible(
+            children: [
+              ButtonOperation(
+                icon: Icons.arrow_upward,
+                text: "Envoyer",
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(SendScreen.routeName),
+              ),
+              ButtonOperation(
+                icon: Icons.arrow_downward,
+                text: "Recevoir",
+                onPressed: () => Navigator.of(context).pushNamed(
+                  ChooseCurrencyScreen.routeName,
+                ),
+              ),
+              ButtonOperation(
+                icon: Icons.payment,
+                text: "Acheter",
+                onPressed: () {},
+              ),
+              ButtonOperation(
+                icon: Icons.wallet,
+                text: "Dépôt",
+                onPressed: () {},
+              ),
+              ButtonOperation(
+                icon: Icons.paid,
+                text: "Retrait",
+                onPressed: () {},
+              ),
+              /*        Flexible(
                   child: ButtonIconWidget(
                 iconData: Icons.arrow_upward,
                 label: "Send",

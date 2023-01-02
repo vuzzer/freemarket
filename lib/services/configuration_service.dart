@@ -1,5 +1,6 @@
 import 'package:defi/domain/repositories/configuration_service_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:logger/logger.dart';
 
 class ConfigurationService implements ConfigurationServiceRepository {
   const ConfigurationService(this._preferences);

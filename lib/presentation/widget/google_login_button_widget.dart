@@ -9,7 +9,6 @@ import 'package:defi/presentation/screens/verification_screen.dart';
 import 'package:defi/services/verification_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
@@ -17,16 +16,17 @@ import 'package:logger/logger.dart';
 
 var logger = Logger();
 
-class GoogleLoginButtonWidget extends HookWidget {
+class GoogleLoginButtonWidget extends StatelessWidget {
   const GoogleLoginButtonWidget({Key? key}) : super(key: key);
+
+  /* useEffect((() {
+      EmailOTP.init();
+      return null;
+    })); */
 
   @override
   Widget build(BuildContext context) {
-    useEffect((() {
-      EmailOTP.init();
-      return null;
-    }));
-    final store = useWalletSetup(context);
+    //final store = useWalletSetup(context);
     final navigator = Navigator.of(context);
     final user = Provider.of<UserProvider>(context, listen: false);
     //final alertBox = showDialogAlert(context);
@@ -40,14 +40,14 @@ class GoogleLoginButtonWidget extends HookWidget {
 
             //await EmailOTP.sendOTP(data.email as String);
             //context.loaderOverlay.hide();
-            store.generateMnemonic();
+            /* store.generateMnemonic();
             Logger().d(store.state.mnemonic);
             store.goto(WalletCreateSteps.confirm);
             if (await store.confirmMnemonic(store.state.mnemonic!)) {
                 context.loaderOverlay.hide();
               navigator.pushNamed(ThetaScreen.routeName);
-            }
-              context.loaderOverlay.hide();
+            } */
+            context.loaderOverlay.hide();
             //Display dialog box
             //alertBox();
           } else {

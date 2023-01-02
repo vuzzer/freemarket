@@ -1,7 +1,7 @@
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/domain/wallet/wallet_handler.dart';
-import 'package:defi/domain/wallet/wallet_provider.dart';
+import 'package:defi/domain/wallet/wallet_action.dart';
 import 'package:defi/helpers/enum.dart';
 import 'package:defi/presentation/screens/receive_screen.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
@@ -24,7 +24,7 @@ class ChooseCurrencyScreen extends StatefulWidget {
 
 class _ChooseCurrencyScreenState extends State<ChooseCurrencyScreen> {
   Blockchain radio = Blockchain.initial;
-
+  final networks = NetworkType.enabledValues;
   void _update(Blockchain value) {
     setState(() {
       radio = value;
@@ -33,9 +33,6 @@ class _ChooseCurrencyScreenState extends State<ChooseCurrencyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final store = useWallet(context);
-    Logger().d(store.state.address);
-    final networks = NetworkType.enabledValues;
     return Scaffold(
       appBar: const AppBarWidget(
         title: "Receive",

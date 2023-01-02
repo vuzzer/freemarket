@@ -18,7 +18,7 @@ class KeyBoardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int key = 0;
-   
+
     return Column(
       children: [
         ...List.generate(
@@ -30,7 +30,10 @@ class KeyBoardWidget extends StatelessWidget {
                   children: List.generate(3, (index) {
                     key++;
                     return NumberButtonWiget(
-                        touch: key, controller: controller, amount: amount,);
+                      touch: key,
+                      controller: controller,
+                      amount: amount,
+                    );
                   }),
                 )))),
         Padding(
@@ -47,7 +50,8 @@ class KeyBoardWidget extends StatelessWidget {
                     ? TextButton(
                         onPressed: () {
                           controller.text += ",";
-                           controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
+                          controller.selection = TextSelection.fromPosition(
+                              TextPosition(offset: controller.text.length));
                         },
                         style: TextButton.styleFrom(
                           padding: const EdgeInsets.all(0),
@@ -64,13 +68,16 @@ class KeyBoardWidget extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                         ))
                     : const SizedBox.shrink(),
-                NumberButtonWiget(touch: 0, controller: controller),
+                NumberButtonWiget(touch: 0, controller: controller,  amount: amount),
                 TextButton(
                     onPressed: () {
-                      controller.text = controller.text
-                          .substring(0, controller.text.length - 1);
-                          //Change the cursor position
-                          controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
+                      if (controller.text.isNotEmpty) {
+                        controller.text = controller.text
+                            .substring(0, controller.text.length - 1);
+                        //Change the cursor position
+                        controller.selection = TextSelection.fromPosition(
+                            TextPosition(offset: controller.text.length));
+                      }
                     },
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.all(0),
@@ -89,10 +96,7 @@ class KeyBoardWidget extends StatelessWidget {
           height: 25,
         ),
         ElevatedButton(
-            onPressed: () async {
-              onPressed();
-       
-            },
+            onPressed: onPressed,
             style: ElevatedButton.styleFrom(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 70, vertical: 18),
