@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:defi/domain/transfer/wallet_transfer_action.dart';
 import 'package:defi/domain/transfer/wallet_transfer_state.dart';
 import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/domain/entities/wallet_transfer.dart';
@@ -8,7 +9,7 @@ import 'package:defi/services/contract_locator.dart';
 
 import 'package:web3dart/credentials.dart';
 
-class WalletTransferHandler {
+class WalletTransferHandler extends WalletTransferState {
   WalletTransferHandler(
     this._contractLocator,
     this._configurationService,
@@ -18,14 +19,14 @@ class WalletTransferHandler {
   final ContractLocator _contractLocator;
   final ConfigurationService _configurationService;
 
-  //WalletTransfer get state => _store.state;
+  WalletTransfer get states => state;
 
   Future<bool> transfer(NetworkType network, String to, String amount) async {
     final completer = Completer<bool>();
     final privateKey = _configurationService.getPrivateKey();
 
     //_store.dispatch(WalletTransferStarted());
-
+    setState(WalletTransferStarted());
     try {
       await _contractLocator.getInstance(network).send(
         privateKey!,
@@ -36,11 +37,13 @@ class WalletTransferHandler {
         },
         onError: (ex) {
           //_store.dispatch(WalletTransferError(ex.toString()));
+          setState(WalletTransferError(ex.toString()));
           completer.complete(false);
         },
       );
     } catch (ex) {
       //_store.dispatch(WalletTransferError(ex.toString()));
+      setState(WalletTransferError(ex.toString()));
       completer.complete(false);
     }
 

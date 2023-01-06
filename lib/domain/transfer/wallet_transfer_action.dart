@@ -8,3 +8,5 @@ class WalletTransferError implements WalletTransferAction {
   WalletTransferError(this.error);
   final String error;
 }
+
+class WalletTransferConfirmed implements WalletTransferAction {}
