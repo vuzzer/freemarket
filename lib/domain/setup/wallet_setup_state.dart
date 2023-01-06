@@ -1,70 +1,48 @@
-
-
 import 'package:defi/domain/entities/wallet_setup.dart';
+import 'package:defi/domain/setup/wallet_setup_action.dart';
+import 'package:flutter/foundation.dart';
 
-abstract class WalletSetupAction {}
+class WalletSetupState extends ChangeNotifier {
+  WalletSetup state = WalletSetup();
+  void setState(WalletSetupAction action) {
+    if (action is WalletSetupInit) {
+      state = WalletSetup();
+    }
 
-class WalletSetupInit implements WalletSetupAction {}
+    if (action is WalletSetupConfirmMnemonic) {
+      state = state.rebuild((b) => b
+        ..mnemonic = action.mnemonic
+        ..loading = true
+        ..errors.clear());
+    }
 
-class WalletSetupConfirmMnemonic implements WalletSetupAction {
-  WalletSetupConfirmMnemonic(this.mnemonic);
-  final String mnemonic;
-}
+    if (action is WalletSetupStarted) {
+      state = state.rebuild((b) => b
+        ..errors.clear()
+        ..loading = true);
+    }
 
-class WalletSetupChangeStep implements WalletSetupAction {
-  WalletSetupChangeStep(this.step);
-  final WalletCreateSteps step;
-}
+    if (action is WalletSetupChangeStep) {
+      state = state.rebuild((b) => b
+        ..step = action.step
+        ..loading = false
+        ..errors.clear());
+    }
 
-class WalletSetupAddError implements WalletSetupAction {
-  WalletSetupAddError(this.error);
-  final String error;
-}
+    if (action is WalletSetupChangeMethod) {
+      state = state.rebuild((b) => b
+        ..method = action.method
+        ..loading = false
+        ..errors.clear());
+    }
 
-class WalletSetupChangeMethod implements WalletSetupAction {
-  WalletSetupChangeMethod(this.method);
-  final WalletSetupMethod method;
-}
+    if (action is WalletSetupAddError) {
+      state = state.rebuild((b) => b
+        ..loading = false
+        ..errors.clear()
+        ..errors.add(action.error));
+    }
 
-class WalletSetupStarted implements WalletSetupAction {}
-
-WalletSetup reducer(WalletSetup state, WalletSetupAction action) {
-  if (action is WalletSetupInit) {
-    return WalletSetup();
+    notifyListeners();
   }
-
-  if (action is WalletSetupConfirmMnemonic) {
-    return state.rebuild((b) => b
-      ..mnemonic = action.mnemonic
-      ..loading = true
-      ..errors.clear());
-  }
-
-  if (action is WalletSetupStarted) {
-    return state.rebuild((b) => b
-      ..errors.clear()
-      ..loading = true);
-  }
-
-  if (action is WalletSetupChangeStep) {
-    return state.rebuild((b) => b
-      ..step = action.step
-      ..loading = false
-      ..errors.clear());
-  }
-
-  if (action is WalletSetupChangeMethod) {
-    return state.rebuild((b) => b
-      ..method = action.method
-      ..loading = false
-      ..errors.clear());
-  }
-
-  if (action is WalletSetupAddError)
-    return state.rebuild((b) => b
-      ..loading = false
-      ..errors.clear()
-      ..errors.add(action.error));
-
-  return state;
 }

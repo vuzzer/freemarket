@@ -12,7 +12,11 @@ Future<void> setupLocator() async {
   final configurationService = ConfigurationService(sharedPrefs);
   final addressService = AddressService(configurationService);
   final contractLocator = await ContractLocator.setup();
+
+  //INJECT CONFIGURATIONSERVICE
   sl.registerLazySingleton<ConfigurationService>(() => ConfigurationService(sharedPrefs));
+
+  //INJECT WalletHandler
   sl.registerLazySingleton(() =>
       WalletHandler(addressService, contractLocator, configurationService));
 }

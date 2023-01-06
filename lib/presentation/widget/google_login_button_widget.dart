@@ -1,6 +1,6 @@
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/domain/entities/wallet_setup.dart';
-import 'package:defi/domain/setup/wallet_setup_provider.dart';
+import 'package:defi/domain/setup/wallet_setup_action.dart';
 import 'package:defi/helpers/show_dialog_alert.dart';
 import 'package:defi/presentation/provider/user_provider.dart';
 import 'package:defi/presentation/screens/theta_screen.dart';
