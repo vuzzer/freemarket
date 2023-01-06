@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
-import 'package:defi/domain/transfer/wallet_transfer_provider.dart';
+import 'package:defi/domain/transfer/wallet_transfer_action.dart';
 import 'package:defi/domain/wallet/wallet_action.dart';
 import 'package:defi/presentation/screens/qr_code_reader_screen.dart';
 import 'package:defi/presentation/screens/set_amount_screen.dart';

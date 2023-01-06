@@ -5,8 +5,7 @@ abstract class WalletAction {}
 class WalletInit extends WalletAction {}
 
 class InitialiseWallet extends WalletAction {
-  InitialiseWallet(this.network, this.address, this.privateKey);
-  final NetworkType network;
+  InitialiseWallet( this.address, this.privateKey);
   final String address;
   final String privateKey;
 }
@@ -17,9 +16,13 @@ class NetworkChanged extends WalletAction {
 }
 
 class BalanceUpdated extends WalletAction {
-  BalanceUpdated(this.ethBalance, this.tokenBalance);
+  BalanceUpdated(this.network, this.ethBalance, this.tokenBalance);
+  final NetworkType network;
   final BigInt ethBalance;
   final BigInt tokenBalance;
 }
 
-class UpdatingBalance extends WalletAction {}
+class UpdatingBalance extends WalletAction {
+  UpdatingBalance(this.network);
+  final NetworkType network;
+}

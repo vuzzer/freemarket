@@ -1,17 +1,8 @@
-
-
 import 'package:defi/domain/entities/wallet_transfer.dart';
+import 'package:defi/domain/transfer/wallet_transfer_action.dart';
 
-abstract class WalletTransferAction {}
 
-class WalletTransferInit implements WalletTransferAction {}
 
-class WalletTransferStarted implements WalletTransferAction {}
-
-class WalletTransferError implements WalletTransferAction {
-  WalletTransferError(this.error);
-  final String error;
-}
 
 class WalletTransferConfirmed implements WalletTransferAction {}
 

@@ -1,39 +1,44 @@
 import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/domain/entities/wallet.dart';
+import 'package:defi/domain/super_wallet.dart';
 import 'package:defi/domain/wallet/wallet_action.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
-
+var logger = Logger();
 
 class WalletState extends ChangeNotifier {
-  Wallet state = Wallet();
+  SuperWallet state = SuperWallet();
   void setState(WalletAction action) {
     if (action is WalletInit) {
-      state = Wallet();
+      state = SuperWallet();
     }
 
     if (action is InitialiseWallet) {
       state = state.rebuild((b) => b
-        ..network = action.network
         ..address = action.address
         ..privateKey = action.privateKey);
     }
 
     if (action is NetworkChanged) {
-      state = state.rebuild((b) => b..network = action.network);
+      //state = state.rebuild((b) => b..network = action.network);
     }
 
     if (action is UpdatingBalance) {
-      state = state.rebuild((b) => b..loading = true);
+      for (NetworkType network in NetworkType.enabledValues) {
+        state.wallets[network] =
+            state.wallets[network]!.rebuild((b) => b..loading = true);
+      }
     }
 
+    //UPDATE BALANCE FOR A SPECIFIC NETWORK
     if (action is BalanceUpdated) {
-      state = state.rebuild((b) => b
-        ..loading = false
-        ..ethBalance = action.ethBalance
-        ..tokenBalance = action.tokenBalance);
+        state.wallets[action.network] = state.wallets[action.network]!.rebuild((b) => b
+          ..loading = false
+          ..ethBalance = action.ethBalance
+          ..tokenBalance = action.tokenBalance);
+      
     }
     notifyListeners();
   }
 }
-

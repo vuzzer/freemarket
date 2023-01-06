@@ -1,5 +1,6 @@
 import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/domain/entities/wallet.dart';
+import 'package:defi/domain/super_wallet.dart';
 import 'package:defi/domain/wallet/wallet_action.dart';
 import 'package:defi/services/address_service.dart';
 import 'package:defi/services/configuration_service.dart';
@@ -25,7 +26,7 @@ class WalletHandler extends WalletState {
   final ConfigurationService _configurationService;
   final ContractLocator _contractLocator;
 
-  Wallet get states => state;
+  SuperWallet get states => state;
 
   Future<void> initialise() async {
     //logger.d(network);
@@ -34,19 +35,18 @@ class WalletHandler extends WalletState {
     final privateKey = _configurationService.getPrivateKey();
 
     if (entropyMnemonic != null && entropyMnemonic.isNotEmpty) {
-      _initialiseFromMnemonic(NetworkType.BSC, entropyMnemonic);
+      _initialiseFromMnemonic(entropyMnemonic);
       return;
     }
     if (privateKey != null && privateKey.isNotEmpty) {
-      _initialiseFromPrivateKey(states.network, privateKey);
+      _initialiseFromPrivateKey(privateKey);
       return;
     }
 
     throw Exception('Wallet could not be initialised.');
   }
 
-  Future<void> _initialiseFromMnemonic(
-      NetworkType network, String entropyMnemonic) async {
+  Future<void> _initialiseFromMnemonic(String entropyMnemonic) async {
     final mnemonic = _addressService.entropyToMnemonic(entropyMnemonic);
     final privateKey = await _addressService.getPrivateKey(mnemonic);
     final address = await _addressService.getPublicAddress(privateKey);
@@ -54,19 +54,18 @@ class WalletHandler extends WalletState {
     //Replace this _store.dispatch with setState
     //_store.dispatch(InitialiseWallet(network, address.toString(), privateKey));
 
-    setState(InitialiseWallet(network, address.toString(), privateKey));
+    setState(InitialiseWallet(address.toString(), privateKey));
 
-    await refreshBalance(network);
+    await refreshBalance();
   }
 
-  Future<void> _initialiseFromPrivateKey(
-      NetworkType network, String privateKey) async {
+  Future<void> _initialiseFromPrivateKey(String privateKey) async {
     final address = await _addressService.getPublicAddress(privateKey);
 
     //_store.dispatch(InitialiseWallet(network, address.toString(), privateKey));
-    setState(InitialiseWallet(network, address.toString(), privateKey));
+    setState(InitialiseWallet(address.toString(), privateKey));
 
-    await refreshBalance(network);
+    await refreshBalance();
   }
 
   Function()? listenTransfers(String? address, NetworkType network) {
@@ -86,7 +85,7 @@ class WalletHandler extends WalletState {
 
       print('======= balance updated =======');
 
-      await refreshBalance(network);
+      await refreshBalance();
     });
 
     return subscription.cancel;
@@ -95,29 +94,33 @@ class WalletHandler extends WalletState {
   Future<void> changeNetwork(NetworkType network) async {
     //_store.dispatch(NetworkChanged(network));
     setState(NetworkChanged(network));
-    await refreshBalance(network);
+    await refreshBalance();
   }
 
-  Future<void> refreshBalance(NetworkType network) async {
+  Future<void> refreshBalance() async {
     //logger.d(network);
 
     if (state.address?.isEmpty ?? true) {
       return;
     }
 
-    final contractService = _contractLocator.getInstance(network);
+    for (NetworkType network in NetworkType.enabledValues) {
+      final contractService = _contractLocator.getInstance(network);
 
-    //_store.dispatch(UpdatingBalance());
-    setState(UpdatingBalance());
+      //_store.dispatch(UpdatingBalance());
+      //setState(UpdatingBalance(network));
 
-    final tokenBalance = await contractService
-        .getTokenBalance(web3.EthereumAddress.fromHex(state.address!));
+      final tokenBalance = await contractService
+          .getTokenBalance(web3.EthereumAddress.fromHex(state.address!));
 
-    final ethBalance = await contractService
-        .getEthBalance(web3.EthereumAddress.fromHex(state.address!));
+      //logger.d(tokenBalance);
 
-    //_store.dispatch(BalanceUpdated(ethBalance.getInWei, tokenBalance));
-    setState(BalanceUpdated(ethBalance.getInWei, tokenBalance));
+      final ethBalance = await contractService
+          .getEthBalance(web3.EthereumAddress.fromHex(state.address!));
+
+      //_store.dispatch(BalanceUpdated(ethBalance.getInWei, tokenBalance));
+      setState(BalanceUpdated(network, ethBalance.getInWei, tokenBalance));
+    }
   }
 
   Future<void> resetWallet() async {

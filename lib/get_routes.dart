@@ -1,6 +1,6 @@
 import 'package:defi/domain/entities/wallet_transfer.dart';
 import 'package:defi/domain/setup/wallet_setup_provider.dart';
-import 'package:defi/domain/transfer/wallet_transfer_provider.dart';
+import 'package:defi/domain/transfer/wallet_transfer_action.dart';
 import 'package:defi/domain/wallet/wallet_action.dart';
 import 'package:defi/presentation/screens/choose_currency_screen.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';

@@ -20,9 +20,7 @@ class CryptoAssetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     //final sizes = MediaQuery.of(context);
     return ContextProviderWidget<WalletHandler>(
-        onModelReady: (wallet)  {
-          
-        },
+        onModelReady: (wallet)  {},
         builder: (context, value, child) => Material(
             color: Colors.transparent,
             child: InkWell(
@@ -69,7 +67,7 @@ class CryptoAssetWidget extends StatelessWidget {
                               height: 8,
                             ),
                             AutoSizeText(
-                                "${EthAmountFormatter(value.states.tokenBalance).format()} ${network.config.symbol}",
+                                "${EthAmountFormatter(value.states.wallets[network]!.tokenBalance).format()} ${network.config.symbol}",
                                 style: TextStyle(
                                     color: greyLight, fontFamily: roboto)),
                           ],
