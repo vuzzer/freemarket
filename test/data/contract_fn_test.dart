@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:defi/data/contract_fn.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart';

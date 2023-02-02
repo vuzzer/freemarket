@@ -1,12 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
+import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/domain/transfer/wallet_transfer_action.dart';
+import 'package:defi/domain/transfer/wallet_transfer_handler.dart';
 import 'package:defi/domain/wallet/wallet_action.dart';
+import 'package:defi/domain/wallet/wallet_handler.dart';
+import 'package:defi/presentation/context_provider.dart';
 import 'package:defi/presentation/screens/qr_code_reader_screen.dart';
 import 'package:defi/presentation/screens/set_amount_screen.dart';
 import 'package:defi/presentation/screens/theta_screen.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/button_icon_widget.dart';
+import 'package:defi/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -136,7 +141,7 @@ class _SendScreenState extends State<SendScreen> {
                   raduis: 10,
                   onPressed: () {}),
               ButtonIconWidget(
-                  iconData: Icons.sync_alt,
+                  iconData: Icons.swap_vert,
                   label: "USD",
                   raduis: 10,
                   onPressed: () {}),
@@ -151,17 +156,24 @@ class _SendScreenState extends State<SendScreen> {
                 routeName: SetAmountScreen.routeName,
                 amount: true,
                 onPressed: () async {
+                  //amount
+                  //Logger().d("amount  ${amountController.text}");
+
+                  //final wallet = sl.get<WalletHandler>();
+                  final transfertHandler = sl.get<WalletTransferHandler>();
                   context.loaderOverlay.show(); // show loading
-                  /* final success = await transferStore.transfer(
-                      store.state.network,
-                      toController.text,
-                      amountController.text); */
-                  context.loaderOverlay.hide(); // close loading
-                  /* if (success) {
+                  final success = await transfertHandler.transfer(
+                      NetworkType.Ethereum,
+                      toController.text.trim(),
+                      amountController.text.trim());
+                  if (success) {
                     // ignore: use_build_context_synchronously
-                    Navigator.popUntil(
-                        context, ModalRoute.withName(ThetaScreen.routeName));
-                  } */
+                    Navigator.of(context).pushNamed(ThetaScreen.routeName);
+                    Logger().d("Transfer success");
+                  } else {
+                    Logger().d(transfertHandler.state.errors);
+                  }
+                  context.loaderOverlay.hide(); // close loading
                   //Logger().d(store.state.errors);
                 },
               )),

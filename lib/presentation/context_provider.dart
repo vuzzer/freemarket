@@ -29,9 +29,8 @@ class ContextProviderWidgetState<T extends ChangeNotifier>
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<T>(
-      create: (context) => model,
-      child: Consumer<T>(builder: widget.builder),
+    return ChangeNotifierProvider<T>.value(value: model,
+      child:  Consumer<T>(builder: widget.builder),
     );
   }
 }

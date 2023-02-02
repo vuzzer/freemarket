@@ -68,7 +68,7 @@ class WalletHandler extends WalletState {
     await refreshBalance();
   }
 
-  Function()? listenTransfers(String? address, NetworkType network) {
+  Function()?  listenTransfers(String? address, NetworkType network) {
     if (address == null || address.isEmpty) {
       return null;
     }

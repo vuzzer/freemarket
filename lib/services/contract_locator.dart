@@ -27,6 +27,7 @@ class ContractLocator {
     return instance[network]!;
   }
 
+
   static Future<ContractService> createInstance(
       AppConfigParams networkConfig) async {
     final wsAddress = networkConfig.web3RdpUrl;

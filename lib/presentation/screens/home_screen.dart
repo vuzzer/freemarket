@@ -15,7 +15,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       body: Column(
         children: [
@@ -45,13 +44,16 @@ class HomeScreen extends StatelessWidget {
               ButtonOperation(
                 icon: Icons.payment,
                 text: "Acheter",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(ChooseCurrencyScreen.routeName);
+                },
               ),
-              ButtonOperation(
+              /* ButtonOperation(
                 icon: Icons.wallet,
                 text: "Dépôt",
                 onPressed: () {},
-              ),
+              ), */
               ButtonOperation(
                 icon: Icons.paid,
                 text: "Retrait",

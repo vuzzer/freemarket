@@ -1,16 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:defi/domain/contracts/payment.dart';
 import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/helpers/enum.dart';
 import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
 
-class CurrencyWidget extends StatelessWidget {
-  final NetworkType network;
-  final Blockchain radio;
+class PaymentMethodWidget extends StatelessWidget {
+  final PaymentType payment;
+  final PaymentType radio;
   final Function update;
-  const CurrencyWidget(
+  const PaymentMethodWidget(
       {Key? key,
-      required this.network,
+      required this.payment,
       required this.radio,
       required this.update})
       : super(key: key);
@@ -36,7 +37,7 @@ class CurrencyWidget extends StatelessWidget {
             splashColor: blueLight,
             highlightColor: blueLight,
             onTap: () {
-              update(network.config.value);
+              update(payment);
             },
             child: ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 0),
@@ -44,12 +45,13 @@ class CurrencyWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: CircleAvatar(
                     radius: 30,
-                    child: Image.asset(
-                        "assets/cryptos/${network.config.icon}.png"),
+                    backgroundImage: AssetImage(
+                      "assets/payment/${payment.name}.png",
+                    ),
                   ),
                 ),
                 title: AutoSizeText(
-                  network.config.label,
+                  payment.name,
                   style: const TextStyle(
                     color: Colors.white,
                   ),
@@ -64,10 +66,10 @@ class CurrencyWidget extends StatelessWidget {
                             fillColor:
                                 MaterialStateProperty.resolveWith(getColor),
                             activeColor: blue,
-                            value: network.config.value,
+                            value: payment,
                             groupValue: radio,
                             onChanged: (value) {
-                              update(network.config.value);
+                              update(payment);
                               //select.setNetwork(network.config.value);
                             })
                       ],

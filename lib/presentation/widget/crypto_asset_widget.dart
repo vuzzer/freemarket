@@ -20,7 +20,9 @@ class CryptoAssetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     //final sizes = MediaQuery.of(context);
     return ContextProviderWidget<WalletHandler>(
-        onModelReady: (wallet)  {},
+        onModelReady: (wallet) async {
+          wallet.listenTransfers(wallet.states.address, NetworkType.Ethereum);
+        },
         builder: (context, value, child) => Material(
             color: Colors.transparent,
             child: InkWell(

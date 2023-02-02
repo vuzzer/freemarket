@@ -6,8 +6,11 @@ import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/domain/entities/wallet_transfer.dart';
 import 'package:defi/services/configuration_service.dart';
 import 'package:defi/services/contract_locator.dart';
-
 import 'package:web3dart/credentials.dart';
+
+import 'package:logger/logger.dart';
+
+var logger = Logger();
 
 class WalletTransferHandler extends WalletTransferState {
   WalletTransferHandler(
@@ -24,6 +27,8 @@ class WalletTransferHandler extends WalletTransferState {
   Future<bool> transfer(NetworkType network, String to, String amount) async {
     final completer = Completer<bool>();
     final privateKey = _configurationService.getPrivateKey();
+
+    //logger.d(privateKey);
 
     //_store.dispatch(WalletTransferStarted());
     setState(WalletTransferStarted());

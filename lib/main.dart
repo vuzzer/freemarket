@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:defi/domain/wallet/wallet_action.dart';
 import 'package:defi/firebase_options.dart';
 import 'package:defi/get_routes.dart';
 import 'package:defi/presentation/provider/network_provider.dart';
 import 'package:defi/presentation/provider/user_provider.dart';
+import 'package:defi/presentation/screens/confirm_deposit_screen.dart';
+import 'package:defi/presentation/screens/deposit_screen.dart';
 import 'package:defi/presentation/screens/started_screen.dart';
 import 'package:defi/presentation/screens/verification_screen.dart';
 import 'package:defi/service_locator.dart';
@@ -29,11 +33,13 @@ void main() async {
     statusBarBrightness: Brightness.dark,
   ));
 
+  HttpOverrides.global = MyHttpOverrides();
+
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
         create: (context) => UserProvider(), child: const VerificationScreen()),
     Provider(create: (context) => NetworkProvider())
-  ], child:  const MyApp()));
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -78,7 +84,16 @@ class MyApp extends StatelessWidget {
                         bodyText1: const TextStyle(color: Colors.white),
                         bodyText2:
                             TextStyle(color: Colors.grey.withOpacity(0.6)))),
-                initialRoute: StartedScreen.routeName,
+                initialRoute: DepositScreen.routeName,
                 routes: getRoutes(context))));
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

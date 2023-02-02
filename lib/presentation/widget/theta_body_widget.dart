@@ -64,9 +64,8 @@ class ThetaBodyWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: greyLight,
                           )),
-                      itemBuilder: (context, index) =>
-                          
-                          CryptoAssetWidget(
+                      itemBuilder: (context, index) => CryptoAssetWidget(
+                              key: ValueKey(networks[index]),
                               network: networks[index],
                             )
                           ),

@@ -4,6 +4,8 @@ import 'package:defi/domain/transfer/wallet_transfer_action.dart';
 import 'package:defi/domain/wallet/wallet_action.dart';
 import 'package:defi/presentation/screens/choose_currency_screen.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
+import 'package:defi/presentation/screens/confirm_deposit_screen.dart';
+import 'package:defi/presentation/screens/deposit_screen.dart';
 import 'package:defi/presentation/screens/login_screen.dart';
 import 'package:defi/presentation/screens/otp_screen.dart';
 import 'package:defi/presentation/screens/qr_code_reader_screen.dart';
@@ -21,14 +23,13 @@ import 'package:defi/presentation/screens/verification_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/services/configuration_service.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 Map<String, WidgetBuilder> getRoutes(context) {
   return {
     StartedScreen.routeName: (context) {
       final configurationService = sl.get<ConfigurationService>();
       if (configurationService.didSetupWallet()) {
-         return ThetaScreen();
+         return const ThetaScreen();
       }
       return const StartedScreen();
     },
@@ -48,12 +49,14 @@ Map<String, WidgetBuilder> getRoutes(context) {
     QrScanScreen.routeName: (context) => const QrScanScreen(),
     SwapScreen.routeName: (context) => const SwapScreen(),
     SettingScreen.routeName: (context) => const SettingScreen(),
+    ConfirmDepositScreen.routeName: (context) => const ConfirmDepositScreen(),
+    DepositScreen.routeName:(context) => const DepositScreen(),
     ThetaScreen.routeName: (BuildContext context) {
       final configurationService = sl.get<ConfigurationService>();
       if (configurationService.didSetupWallet()) {
-        return  ThetaScreen();
+        return  const ThetaScreen();
       }
-        return ThetaScreen();
+        return const ThetaScreen();
 
     },
   };
