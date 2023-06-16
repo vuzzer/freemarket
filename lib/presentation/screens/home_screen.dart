@@ -1,5 +1,7 @@
 import 'package:defi/domain/wallet/wallet_action.dart';
+import 'package:defi/presentation/screens/deposit_screen.dart';
 import 'package:defi/presentation/screens/send_screen.dart';
+import 'package:defi/presentation/screens/withdraw_screen.dart';
 import 'package:defi/presentation/widget/button_operation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,6 +22,37 @@ class HomeScreen extends StatelessWidget {
         children: [
           SizedBox(
             height: (kFontSizeUnit * 5).h,
+          ),
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Icon(
+                    Icons.person,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  Row(
+                    children: const [
+                      Icon(
+                        Icons.notifications,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Icon(
+                        Icons.menu,
+                        color: Colors.white,
+                        size: 30,
+                      )
+                    ],
+                  )
+                ],
+              )),
+          const SizedBox(
+            height: 10,
           ),
           const CardBalance(),
           const SizedBox(
@@ -45,8 +78,7 @@ class HomeScreen extends StatelessWidget {
                 icon: Icons.payment,
                 text: "Acheter",
                 onPressed: () {
-                  Navigator.of(context)
-                      .pushNamed(ChooseCurrencyScreen.routeName);
+                  Navigator.of(context).pushNamed(DepositScreen.routeName);
                 },
               ),
               /* ButtonOperation(
@@ -57,7 +89,9 @@ class HomeScreen extends StatelessWidget {
               ButtonOperation(
                 icon: Icons.paid,
                 text: "Retrait",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(WithDrawScreen.routeName);
+                },
               ),
               /*        Flexible(
                   child: ButtonIconWidget(

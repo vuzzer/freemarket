@@ -4,6 +4,7 @@ import 'package:defi/constants/app_font.dart';
 import 'package:defi/presentation/screens/confirm_deposit_screen.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/keyboard_v2_widget.dart';
+import 'package:defi/presentation/widget/limit_prize_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -19,7 +20,6 @@ class DepositScreen extends StatefulWidget {
 class _DepositScreenState extends State<DepositScreen> {
   TextEditingController amountController = TextEditingController(text: "0");
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +28,13 @@ class _DepositScreenState extends State<DepositScreen> {
         children: [
           const SizedBox(
             height: 23,
+          ),
+          const AutoSizeText(
+            "1ETH =2000000 FCFA",
+            style: TextStyle(fontFamily: roboto),
+          ),
+          const SizedBox(
+            height: 8,
           ),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -51,8 +58,7 @@ class _DepositScreenState extends State<DepositScreen> {
                                 child: Center(
                                     child: TextField(
                                   controller: amountController,
-                              
-                                  textAlign: TextAlign.left,
+                                  textAlign: TextAlign.end,
                                   keyboardType: TextInputType.none,
                                   autocorrect: false,
                                   cursorColor: Colors.white,
@@ -96,12 +102,24 @@ class _DepositScreenState extends State<DepositScreen> {
                       ],
                     ))
                   ])),
-                const SizedBox(height: 20,),
-                Row(
-                  children: [
-                    
-                  ],
-                ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              LimitPrizeWidget(
+                onPressed: () {},
+                minMax: "Min",
+                prize: 100,
+              ),
+              LimitPrizeWidget(
+                onPressed: () {},
+                minMax: "Max",
+                prize: 100,
+              ),
+            ],
+          ),
           const Spacer(),
           Container(
               padding: const EdgeInsets.only(bottom: 30),
@@ -110,7 +128,10 @@ class _DepositScreenState extends State<DepositScreen> {
                 controller: amountController,
                 routeName: ConfirmDepositScreen.routeName,
                 amount: true,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(ConfirmDepositScreen.routeName);
+                },
               ))
         ],
       ),

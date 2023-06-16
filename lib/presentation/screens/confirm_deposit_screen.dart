@@ -107,8 +107,8 @@ class _ConfirmDepositScreenState extends State<ConfirmDepositScreen> {
               const SizedBox(
                 height: 20,
               ),
-              PaymentMethodWidget(
-                  payment: PaymentType.wave, radio: radio, update: _update),
+                PaymentMethodWidget(
+                    payment: PaymentType.wave, radio: radio, update: _update),
               const SizedBox(
                 height: 10,
               ),

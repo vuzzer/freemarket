@@ -20,6 +20,7 @@ import 'package:defi/presentation/screens/swap_screen.dart';
 import 'package:defi/presentation/screens/theta_screen.dart';
 import 'package:defi/presentation/screens/tx_info_screen.dart';
 import 'package:defi/presentation/screens/verification_screen.dart';
+import 'package:defi/presentation/screens/withdraw_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/services/configuration_service.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ Map<String, WidgetBuilder> getRoutes(context) {
     QRCodeReaderScreen.routeName:(context) =>  QRCodeReaderScreen(
       onScanned: ModalRoute.of(context)?.settings.arguments as OnScanned?,
     ),
+    WithDrawScreen.routeName:(context) => const WithDrawScreen(),
     LoginScreen.routeName: ((context) => const LoginScreen()),
     VerificationScreen.routeName: (context) => const VerificationScreen(),
     SecretCodeScreen.routeName: (context) => const SecretCodeScreen(),

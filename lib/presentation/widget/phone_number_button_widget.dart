@@ -9,9 +9,7 @@ class PhoneNumberButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        Navigator.of(context).pushNamed(OtpScreen.routeName);
-      },
+      onPressed: null,
       style: ElevatedButton.styleFrom(
           minimumSize: Size(MediaQuery.of(context).size.width, 50),
           backgroundColor: blue1),

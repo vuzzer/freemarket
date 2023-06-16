@@ -1,9 +1,12 @@
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/domain/entities/wallet_setup.dart';
 import 'package:defi/domain/setup/wallet_setup_action.dart';
+import 'package:defi/domain/setup/wallet_setup_handler.dart';
+import 'package:defi/domain/wallet/wallet_handler.dart';
 import 'package:defi/helpers/show_dialog_alert.dart';
 import 'package:defi/presentation/provider/user_provider.dart';
 import 'package:defi/presentation/screens/theta_screen.dart';
+import 'package:defi/service_locator.dart';
 import 'package:defi/services/google_auth/google_oauth.dart';
 import 'package:defi/presentation/screens/verification_screen.dart';
 import 'package:defi/services/verification_otp/email_otp.dart';
@@ -29,24 +32,28 @@ class GoogleLoginButtonWidget extends StatelessWidget {
     //final store = useWalletSetup(context);
     final navigator = Navigator.of(context);
     final user = Provider.of<UserProvider>(context, listen: false);
+    WalletSetupHandler walletSetupHandler = sl.get<WalletSetupHandler>();
     //final alertBox = showDialogAlert(context);
     return ElevatedButton(
       onPressed: () async {
         GoogleOAuth.googleLogin().then((data) async {
           context.loaderOverlay.show();
+
           if (data != null) {
             //Logger().d(data.uid);
             user.setUser(data);
 
             //await EmailOTP.sendOTP(data.email as String);
             //context.loaderOverlay.hide();
-            /* store.generateMnemonic();
-            Logger().d(store.state.mnemonic);
-            store.goto(WalletCreateSteps.confirm);
-            if (await store.confirmMnemonic(store.state.mnemonic!)) {
-                context.loaderOverlay.hide();
+            walletSetupHandler.generateMnemonic();
+            //Logger().d(walletSetupHandler.state.mnemonic);
+            walletSetupHandler.goto(WalletCreateSteps.confirm);
+            if (await walletSetupHandler
+                .confirmMnemonic(walletSetupHandler.state.mnemonic!)) {
+              context.loaderOverlay.hide();
               navigator.pushNamed(ThetaScreen.routeName);
-            } */
+            }
+
             context.loaderOverlay.hide();
             //Display dialog box
             //alertBox();
@@ -54,6 +61,7 @@ class GoogleLoginButtonWidget extends StatelessWidget {
             context.loaderOverlay.hide();
           }
         }).catchError((e) {
+          logger.d(e.toString());
           context.loaderOverlay.hide();
         });
       },

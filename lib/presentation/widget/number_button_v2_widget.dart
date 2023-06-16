@@ -32,8 +32,9 @@ class NumberButtonV2Wiget extends StatelessWidget {
             //logger.d(controller.text);
             //format Number in
             //NumberFormat myFormat = NumberFormat.decimalPattern("en_us");
-            controller.text =
-                _formatNumber(controller.text.replaceAll(',', ''));
+
+            //Replace comma by space in french currency to have english format
+            //controller.text =_formatNumber(controller.text.replaceAll(',', ''));
 
             // Change the cursor position
             controller.selection = TextSelection.fromPosition(

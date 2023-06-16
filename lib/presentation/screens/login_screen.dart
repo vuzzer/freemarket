@@ -68,6 +68,7 @@ class LoginScreen extends StatelessWidget {
         // ignore: body_might_complete_normally_nullable
         return const GoogleLoginButtonWidget();
       }) */ 
+      const GoogleLoginButtonWidget(),
               const SizedBox(
                 height: 16,
               ),

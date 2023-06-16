@@ -104,16 +104,10 @@ class ReceiveScreen extends StatelessWidget {
                     elevation: 3,
                     color: blue1,
                     child: Container(
-                      padding: const EdgeInsets.all(10),
-                      width: 250,
-                      height: 250,
-                      child: QrImage(
-                        data: "date",
-                        size: 200,
-                        backgroundColor: Colors.transparent,
-                        foregroundColor: Colors.white,
-                      ),
-                    ),
+                        padding: const EdgeInsets.all(10),
+                        width: 250,
+                        height: 250,
+                        child: QrImageView(data: "data")),
                   ),
                   const SizedBox(
                     height: 35,

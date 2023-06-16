@@ -95,7 +95,7 @@ class _SendScreenState extends State<SendScreen> {
             ],
           ),
           const SizedBox(
-            height: 70,
+            height: 50,
           ),
           Center(
               child: Container(
@@ -130,9 +130,9 @@ class _SendScreenState extends State<SendScreen> {
                     )),
                   ))),
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
-          Row(
+          /*  Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ButtonIconWidget(
@@ -146,37 +146,37 @@ class _SendScreenState extends State<SendScreen> {
                   raduis: 10,
                   onPressed: () {}),
             ],
-          ),
-          const Spacer(),
-          Container(
-              padding: const EdgeInsets.only(bottom: 30),
-              decoration: const BoxDecoration(color: blue1),
-              child: KeyBoardWidget(
-                controller: amountController,
-                routeName: SetAmountScreen.routeName,
-                amount: true,
-                onPressed: () async {
-                  //amount
-                  //Logger().d("amount  ${amountController.text}");
+          ), */
+          Expanded(
+              child: Container(
+                  padding: const EdgeInsets.only(bottom: 30),
+                  decoration: const BoxDecoration(color: blue1),
+                  child: KeyBoardWidget(
+                    controller: amountController,
+                    routeName: SetAmountScreen.routeName,
+                    amount: true,
+                    onPressed: () async {
+                      //amount
+                      //Logger().d("amount  ${amountController.text}");
 
-                  //final wallet = sl.get<WalletHandler>();
-                  final transfertHandler = sl.get<WalletTransferHandler>();
-                  context.loaderOverlay.show(); // show loading
-                  final success = await transfertHandler.transfer(
-                      NetworkType.Ethereum,
-                      toController.text.trim(),
-                      amountController.text.trim());
-                  if (success) {
-                    // ignore: use_build_context_synchronously
-                    Navigator.of(context).pushNamed(ThetaScreen.routeName);
-                    Logger().d("Transfer success");
-                  } else {
-                    Logger().d(transfertHandler.state.errors);
-                  }
-                  context.loaderOverlay.hide(); // close loading
-                  //Logger().d(store.state.errors);
-                },
-              )),
+                      //final wallet = sl.get<WalletHandler>();
+                      final transfertHandler = sl.get<WalletTransferHandler>();
+                      context.loaderOverlay.show(); // show loading
+                      final success = await transfertHandler.transfer(
+                          NetworkType.Ethereum,
+                          toController.text.trim(),
+                          amountController.text.trim());
+                      if (success) {
+                        // ignore: use_build_context_synchronously
+                        Navigator.of(context).pushNamed(ThetaScreen.routeName);
+                        Logger().d("Transfer success");
+                      } else {
+                        Logger().d(transfertHandler.state.errors);
+                      }
+                      context.loaderOverlay.hide(); // close loading
+                      //Logger().d(store.state.errors);
+                    },
+                  ))),
         ],
       ),
     );

@@ -1,6 +1,5 @@
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/presentation/widget/number_button_v2_widget.dart';
-import 'package:defi/presentation/widget/number_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -76,9 +75,11 @@ class KeyBoardV2Widget extends StatelessWidget {
                     : const SizedBox.shrink(),
                 NumberButtonV2Wiget(
                     touch: 0, controller: controller, amount: amount),
+                //Button for backspace
                 TextButton(
                     onPressed: () {
                       HapticFeedbackTypes.vibrate;
+                      //
                       if (controller.text.length == 1) {
                         controller.text = "0";
                       } else {

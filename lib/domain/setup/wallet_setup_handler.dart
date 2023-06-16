@@ -14,6 +14,7 @@ class WalletSetupHandler extends WalletSetupState {
 
   void generateMnemonic() {
     final mnemonic = _addressService.generateMnemonic();
+    print(mnemonic);
     //_store.dispatch(WalletSetupConfirmMnemonic(mnemonic));
     setState(WalletSetupConfirmMnemonic(mnemonic));
   }

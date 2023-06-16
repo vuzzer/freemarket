@@ -13,7 +13,7 @@ void main() {
       "email": "legend@gmail.com",
       "photoUrl": "me"
     };
-
+    
     final user = UserInfo.fromJson(data);
 
     logger.d(user);

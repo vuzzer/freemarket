@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
                         bodyText1: const TextStyle(color: Colors.white),
                         bodyText2:
                             TextStyle(color: Colors.grey.withOpacity(0.6)))),
-                initialRoute: DepositScreen.routeName,
+            
                 routes: getRoutes(context))));
   }
 }

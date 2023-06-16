@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 class LimitPrizeWidget extends StatelessWidget {
   final VoidCallback onPressed;
-  const LimitPrizeWidget({super.key, required this.onPressed});
+  final String minMax;
+  final double prize;
+  const LimitPrizeWidget({super.key, required this.onPressed, required this.prize, required this.minMax});
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +15,10 @@ class LimitPrizeWidget extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: blueLight,
-        minimumSize: const Size.square(55),
+        minimumSize: const Size.square(35),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
       ),
-      child: const AutoSizeText("Min 1000"),
+      child:  AutoSizeText("$minMax $prize Fcfa"),
     );
   }
 }
