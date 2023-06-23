@@ -1,6 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:defi/domain/contracts/payment.dart';
-import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/helpers/enum.dart';
 import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';

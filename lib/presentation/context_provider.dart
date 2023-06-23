@@ -1,4 +1,3 @@
-import 'package:defi/presentation/screens/choose_currency_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';

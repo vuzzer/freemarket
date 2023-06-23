@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:math';
-
 import 'package:defi/domain/repositories/contact_service_repository.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:logger/logger.dart';

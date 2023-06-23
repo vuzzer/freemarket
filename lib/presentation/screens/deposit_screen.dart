@@ -6,7 +6,6 @@ import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/keyboard_v2_widget.dart';
 import 'package:defi/presentation/widget/limit_prize_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class DepositScreen extends StatefulWidget {

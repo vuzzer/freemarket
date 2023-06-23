@@ -1,12 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:defi/constants/app_colors.dart';
-import 'package:defi/helpers/crypto_symbols.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/withdraw/withdraw_crypto_fiat.dart';
 import 'package:defi/presentation/widget/withdraw/withdraw_crypto_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WithDrawScreen extends StatelessWidget {
   static const routeName = "/withdraw";

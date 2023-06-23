@@ -1,4 +1,3 @@
-import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/helpers/enum.dart';
 import 'package:flutter/material.dart';
 

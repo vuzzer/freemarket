@@ -1,4 +1,3 @@
-import 'package:defi/domain/wallet/wallet_action.dart';
 import 'package:defi/presentation/screens/deposit_screen.dart';
 import 'package:defi/presentation/screens/send_screen.dart';
 import 'package:defi/presentation/screens/withdraw_screen.dart';
@@ -6,11 +5,10 @@ import 'package:defi/presentation/widget/button_operation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../helpers/crypto_symbols.dart';
-import '../widget/button_icon_widget.dart';
 import '../widget/card_balance.dart';
 import '../widget/theta_body_widget.dart';
 import 'choose_currency_screen.dart';
-import 'package:logger/logger.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -23,18 +21,18 @@ class HomeScreen extends StatelessWidget {
           SizedBox(
             height: (kFontSizeUnit * 5).h,
           ),
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
+          const Padding(
+              padding:  EdgeInsets.symmetric(horizontal: 18),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Icon(
+                   Icon(
                     Icons.person,
                     color: Colors.white,
                     size: 30,
                   ),
                   Row(
-                    children: const [
+                    children:  [
                       Icon(
                         Icons.notifications,
                         color: Colors.white,

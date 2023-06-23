@@ -1,5 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/helpers/crypto_symbols.dart';
 import 'package:flutter/material.dart';

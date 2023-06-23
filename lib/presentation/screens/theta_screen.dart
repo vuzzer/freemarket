@@ -1,6 +1,5 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:defi/constants/app_colors.dart';
-import 'package:defi/domain/wallet/wallet_action.dart';
 import 'package:defi/domain/wallet/wallet_handler.dart';
 import 'package:defi/presentation/context_provider.dart';
 import 'package:defi/presentation/screens/home_screen.dart';

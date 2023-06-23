@@ -1,5 +1,4 @@
 import 'package:defi/constants/app_colors.dart';
-import 'package:defi/helpers/number_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';

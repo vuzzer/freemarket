@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:defi/domain/setup/wallet_setup_action.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/google_login_button_widget.dart';
 import 'package:defi/presentation/widget/phone_number_button_widget.dart';

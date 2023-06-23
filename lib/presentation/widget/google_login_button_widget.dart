@@ -1,16 +1,10 @@
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/domain/entities/wallet_setup.dart';
-import 'package:defi/domain/setup/wallet_setup_action.dart';
 import 'package:defi/domain/setup/wallet_setup_handler.dart';
-import 'package:defi/domain/wallet/wallet_handler.dart';
-import 'package:defi/helpers/show_dialog_alert.dart';
 import 'package:defi/presentation/provider/user_provider.dart';
 import 'package:defi/presentation/screens/theta_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/services/google_auth/google_oauth.dart';
-import 'package:defi/presentation/screens/verification_screen.dart';
-import 'package:defi/services/verification_otp/email_otp.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';

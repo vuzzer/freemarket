@@ -1,23 +1,16 @@
 import 'dart:io';
-
-import 'package:defi/domain/wallet/wallet_action.dart';
 import 'package:defi/firebase_options.dart';
 import 'package:defi/get_routes.dart';
 import 'package:defi/presentation/provider/network_provider.dart';
 import 'package:defi/presentation/provider/user_provider.dart';
-import 'package:defi/presentation/screens/confirm_deposit_screen.dart';
-import 'package:defi/presentation/screens/deposit_screen.dart';
-import 'package:defi/presentation/screens/started_screen.dart';
 import 'package:defi/presentation/screens/verification_screen.dart';
 import 'package:defi/service_locator.dart';
-import 'package:defi/services/service_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 
 void main() async {

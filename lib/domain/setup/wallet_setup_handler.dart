@@ -81,7 +81,7 @@ class WalletSetupHandler extends WalletSetupState {
   List<String> _mnemonicWords(String mnemonic) {
     return mnemonic
         .split(' ')
-        .where((item) => item != null && item.trim().isNotEmpty)
+        .where((item) => item.isNotEmpty  && item.trim().isNotEmpty)
         .map((item) => item.trim())
         .toList();
   }

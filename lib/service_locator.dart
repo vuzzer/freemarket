@@ -1,4 +1,3 @@
-import 'package:defi/domain/entities/wallet_transfer.dart';
 import 'package:defi/domain/setup/wallet_setup_handler.dart';
 import 'package:defi/domain/transfer/wallet_transfer_handler.dart';
 import 'package:defi/domain/wallet/wallet_handler.dart';
