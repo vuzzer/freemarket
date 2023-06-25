@@ -62,9 +62,9 @@ class GoogleLoginButtonWidget extends StatelessWidget {
       style: ElevatedButton.styleFrom(
           minimumSize: Size(MediaQuery.of(context).size.width, 50),
           backgroundColor: blue1),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
+        children:  [
           Icon(
             FontAwesomeIcons.google,
             color: Colors.red,

@@ -12,7 +12,8 @@ class EthAmountFormatter {
       return '-';
     }
 
-    return EtherAmount.fromUnitAndValue(fromUnit, amount)
+
+    return EtherAmount.fromBigInt(fromUnit, amount as BigInt)
         .getValueInUnit(toUnit)
         .toString();
   }

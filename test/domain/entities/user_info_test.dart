@@ -1,6 +1,5 @@
 import 'package:defi/domain/entities/user_info.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'dart:convert';
 import 'package:logger/logger.dart';
 
 var logger = Logger();
