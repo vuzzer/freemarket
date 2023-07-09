@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:defi/domain/transfer/wallet_transfer_action.dart';
-import 'package:defi/domain/transfer/wallet_transfer_state.dart';
+import 'package:defi/domain/usecases/transfer/wallet_transfer_action.dart';
+import 'package:defi/domain/usecases/transfer/wallet_transfer_state.dart';
 import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/domain/entities/wallet_transfer.dart';
 import 'package:defi/services/configuration_service.dart';

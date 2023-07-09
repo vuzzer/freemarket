@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:defi/domain/entities/wallet_setup.dart';
-import 'package:defi/domain/setup/wallet_setup_action.dart';
+import 'package:defi/domain/usecases/setup/wallet_setup_action.dart';
 import 'package:defi/services/address_service.dart';
 
 import 'wallet_setup_state.dart';

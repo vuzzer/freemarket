@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/constants/app_font.dart';
 import 'package:defi/domain/entities/network_type.dart';
-import 'package:defi/domain/wallet/wallet_handler.dart';
+import 'package:defi/domain/usecases/wallet/wallet_handler.dart';
 import 'package:defi/presentation/context_provider.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
 import 'package:defi/utils/eth_amount_formatter.dart';

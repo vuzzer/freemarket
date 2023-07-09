@@ -1,6 +1,6 @@
 import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/domain/super_wallet.dart';
-import 'package:defi/domain/wallet/wallet_action.dart';
+import 'package:defi/domain/usecases/wallet/wallet_action.dart';
 import 'package:defi/services/address_service.dart';
 import 'package:defi/services/configuration_service.dart';
 import 'package:defi/services/contract_locator.dart';

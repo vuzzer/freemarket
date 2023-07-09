@@ -1,5 +1,5 @@
 import 'package:defi/domain/entities/wallet_transfer.dart';
-import 'package:defi/domain/transfer/wallet_transfer_action.dart';
+import 'package:defi/domain/usecases/transfer/wallet_transfer_action.dart';
 import 'package:flutter/foundation.dart';
 
 class WalletTransferState extends ChangeNotifier {

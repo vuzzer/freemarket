@@ -1,4 +1,6 @@
-abstract class WalletTransferAction {}
+abstract class WalletTransferAction {
+  
+}
 
 class WalletTransferInit implements WalletTransferAction {}
 

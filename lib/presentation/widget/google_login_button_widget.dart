@@ -1,6 +1,6 @@
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/domain/entities/wallet_setup.dart';
-import 'package:defi/domain/setup/wallet_setup_handler.dart';
+import 'package:defi/domain/usecases/setup/wallet_setup_handler.dart';
 import 'package:defi/presentation/provider/user_provider.dart';
 import 'package:defi/presentation/screens/theta_screen.dart';
 import 'package:defi/service_locator.dart';

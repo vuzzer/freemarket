@@ -1,6 +1,6 @@
 import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/domain/super_wallet.dart';
-import 'package:defi/domain/wallet/wallet_action.dart';
+import 'package:defi/domain/usecases/wallet/wallet_action.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
