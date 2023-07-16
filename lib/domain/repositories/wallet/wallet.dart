@@ -6,4 +6,5 @@ abstract class WalletRepository {
   Future<Either<Failure, void>> initialiseFromMnemonic(String entropyMnemonic);
   Future<Either<Failure, void>> initialiseFromPrivateKey(String privateKey);
   Future<Either<Failure, void>> changeNetwork(NetworkType network);
+  Future<Either<Failure, String>> getTokenBalance(NetworkType networkType);
 }

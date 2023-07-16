@@ -1,7 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:defi/domain/app_config_network.dart';
+import 'package:defi/core/network/app_config_network.dart';
 
 
 part 'network_type.g.dart';

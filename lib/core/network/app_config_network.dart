@@ -1,5 +1,5 @@
 import 'package:defi/helpers/enum.dart';
-import 'entities/network_type.dart';
+import '../../domain/entities/network_type.dart';
 
 class AppConfig {
   static Map<NetworkType, AppConfigParams> networks =

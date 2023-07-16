@@ -2,7 +2,6 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:defi/domain/entities/network_type.dart';
 
-
 part 'wallet.g.dart';
 
 abstract class Wallet implements Built<Wallet, WalletBuilder> {
@@ -12,11 +11,17 @@ abstract class Wallet implements Built<Wallet, WalletBuilder> {
     ..network = NetworkType.Ethereum
     ..errors = BuiltList<String>().toBuilder()
     ..loading = false
+    ..idWallet
+    ..idOwner
     ..update(updates));
 
   Wallet._();
 
   NetworkType get network;
+
+  String? get idWallet;
+
+  String? get idOwner; //Owner of wallet
 
   String? get address;
 

@@ -10,6 +10,12 @@ class _$WalletTransfer extends WalletTransfer {
   @override
   final BuiltList<String>? errors;
   @override
+  final String? idTransfer;
+  @override
+  final String? idSender;
+  @override
+  final String? idRecipient;
+  @override
   final WalletTransferStatus status;
   @override
   final bool loading;
@@ -17,7 +23,13 @@ class _$WalletTransfer extends WalletTransfer {
   factory _$WalletTransfer([void Function(WalletTransferBuilder)? updates]) =>
       (new WalletTransferBuilder()..update(updates))._build();
 
-  _$WalletTransfer._({this.errors, required this.status, required this.loading})
+  _$WalletTransfer._(
+      {this.errors,
+      this.idTransfer,
+      this.idSender,
+      this.idRecipient,
+      required this.status,
+      required this.loading})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(status, r'WalletTransfer', 'status');
     BuiltValueNullFieldError.checkNotNull(
@@ -37,20 +49,33 @@ class _$WalletTransfer extends WalletTransfer {
     if (identical(other, this)) return true;
     return other is WalletTransfer &&
         errors == other.errors &&
+        idTransfer == other.idTransfer &&
+        idSender == other.idSender &&
+        idRecipient == other.idRecipient &&
         status == other.status &&
         loading == other.loading;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, errors.hashCode), status.hashCode), loading.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, errors.hashCode);
+    _$hash = $jc(_$hash, idTransfer.hashCode);
+    _$hash = $jc(_$hash, idSender.hashCode);
+    _$hash = $jc(_$hash, idRecipient.hashCode);
+    _$hash = $jc(_$hash, status.hashCode);
+    _$hash = $jc(_$hash, loading.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'WalletTransfer')
           ..add('errors', errors)
+          ..add('idTransfer', idTransfer)
+          ..add('idSender', idSender)
+          ..add('idRecipient', idRecipient)
           ..add('status', status)
           ..add('loading', loading))
         .toString();
@@ -66,6 +91,18 @@ class WalletTransferBuilder
       _$this._errors ??= new ListBuilder<String>();
   set errors(ListBuilder<String>? errors) => _$this._errors = errors;
 
+  String? _idTransfer;
+  String? get idTransfer => _$this._idTransfer;
+  set idTransfer(String? idTransfer) => _$this._idTransfer = idTransfer;
+
+  String? _idSender;
+  String? get idSender => _$this._idSender;
+  set idSender(String? idSender) => _$this._idSender = idSender;
+
+  String? _idRecipient;
+  String? get idRecipient => _$this._idRecipient;
+  set idRecipient(String? idRecipient) => _$this._idRecipient = idRecipient;
+
   WalletTransferStatus? _status;
   WalletTransferStatus? get status => _$this._status;
   set status(WalletTransferStatus? status) => _$this._status = status;
@@ -80,6 +117,9 @@ class WalletTransferBuilder
     final $v = _$v;
     if ($v != null) {
       _errors = $v.errors?.toBuilder();
+      _idTransfer = $v.idTransfer;
+      _idSender = $v.idSender;
+      _idRecipient = $v.idRecipient;
       _status = $v.status;
       _loading = $v.loading;
       _$v = null;
@@ -107,6 +147,9 @@ class WalletTransferBuilder
       _$result = _$v ??
           new _$WalletTransfer._(
               errors: _errors?.build(),
+              idTransfer: idTransfer,
+              idSender: idSender,
+              idRecipient: idRecipient,
               status: BuiltValueNullFieldError.checkNotNull(
                   status, r'WalletTransfer', 'status'),
               loading: BuiltValueNullFieldError.checkNotNull(
@@ -127,4 +170,4 @@ class WalletTransferBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

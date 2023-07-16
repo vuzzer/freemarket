@@ -12,11 +12,20 @@ abstract class WalletTransfer
         ..errors = BuiltList<String>().toBuilder()
         ..status = WalletTransferStatus.none
         ..loading = false
+        ..idTransfer
+        ..idSender
+        ..idRecipient
         ..update(updates));
 
   WalletTransfer._();
 
   BuiltList<String>? get errors;
+
+  String? get idTransfer;
+
+  String? get idSender;
+
+  String? get idRecipient;
 
   WalletTransferStatus get status;
 

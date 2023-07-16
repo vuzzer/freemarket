@@ -1,4 +1,4 @@
-import 'package:defi/domain/repositories/configuration_service_repository.dart';
+import 'package:defi/core/configuration_service_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfigurationService implements ConfigurationServiceRepository {

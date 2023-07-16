@@ -10,6 +10,10 @@ class _$Wallet extends Wallet {
   @override
   final NetworkType network;
   @override
+  final String? idWallet;
+  @override
+  final String? idOwner;
+  @override
   final String? address;
   @override
   final String? privateKey;
@@ -27,6 +31,8 @@ class _$Wallet extends Wallet {
 
   _$Wallet._(
       {required this.network,
+      this.idWallet,
+      this.idOwner,
       this.address,
       this.privateKey,
       required this.tokenBalance,
@@ -53,6 +59,8 @@ class _$Wallet extends Wallet {
     if (identical(other, this)) return true;
     return other is Wallet &&
         network == other.network &&
+        idWallet == other.idWallet &&
+        idOwner == other.idOwner &&
         address == other.address &&
         privateKey == other.privateKey &&
         tokenBalance == other.tokenBalance &&
@@ -63,22 +71,26 @@ class _$Wallet extends Wallet {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc($jc($jc(0, network.hashCode), address.hashCode),
-                        privateKey.hashCode),
-                    tokenBalance.hashCode),
-                ethBalance.hashCode),
-            loading.hashCode),
-        errors.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, network.hashCode);
+    _$hash = $jc(_$hash, idWallet.hashCode);
+    _$hash = $jc(_$hash, idOwner.hashCode);
+    _$hash = $jc(_$hash, address.hashCode);
+    _$hash = $jc(_$hash, privateKey.hashCode);
+    _$hash = $jc(_$hash, tokenBalance.hashCode);
+    _$hash = $jc(_$hash, ethBalance.hashCode);
+    _$hash = $jc(_$hash, loading.hashCode);
+    _$hash = $jc(_$hash, errors.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'Wallet')
           ..add('network', network)
+          ..add('idWallet', idWallet)
+          ..add('idOwner', idOwner)
           ..add('address', address)
           ..add('privateKey', privateKey)
           ..add('tokenBalance', tokenBalance)
@@ -95,6 +107,14 @@ class WalletBuilder implements Builder<Wallet, WalletBuilder> {
   NetworkType? _network;
   NetworkType? get network => _$this._network;
   set network(NetworkType? network) => _$this._network = network;
+
+  String? _idWallet;
+  String? get idWallet => _$this._idWallet;
+  set idWallet(String? idWallet) => _$this._idWallet = idWallet;
+
+  String? _idOwner;
+  String? get idOwner => _$this._idOwner;
+  set idOwner(String? idOwner) => _$this._idOwner = idOwner;
 
   String? _address;
   String? get address => _$this._address;
@@ -127,6 +147,8 @@ class WalletBuilder implements Builder<Wallet, WalletBuilder> {
     final $v = _$v;
     if ($v != null) {
       _network = $v.network;
+      _idWallet = $v.idWallet;
+      _idOwner = $v.idOwner;
       _address = $v.address;
       _privateKey = $v.privateKey;
       _tokenBalance = $v.tokenBalance;
@@ -159,6 +181,8 @@ class WalletBuilder implements Builder<Wallet, WalletBuilder> {
           new _$Wallet._(
               network: BuiltValueNullFieldError.checkNotNull(
                   network, r'Wallet', 'network'),
+              idWallet: idWallet,
+              idOwner: idOwner,
               address: address,
               privateKey: privateKey,
               tokenBalance: BuiltValueNullFieldError.checkNotNull(
@@ -184,4 +208,4 @@ class WalletBuilder implements Builder<Wallet, WalletBuilder> {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint
