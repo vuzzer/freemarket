@@ -6,12 +6,7 @@ part 'super_wallet.g.dart';
 
 abstract class SuperWallet implements Built<SuperWallet, SuperWalletBuilder> {
   
-  factory SuperWallet([void Function(SuperWalletBuilder)? updates]) =>
-      _$SuperWallet((b) => b..wallets={
-    NetworkType.Ethereum: Wallet((b) => b..network = NetworkType.Ethereum),
-    NetworkType.BSC: Wallet((b) => b..network = NetworkType.BSC),
-    NetworkType.Matic: Wallet((b) => b..network = NetworkType.Matic)
-  });
+  factory SuperWallet([void Function(SuperWalletBuilder)? updates]) => _$SuperWallet();
   
   SuperWallet._();
 

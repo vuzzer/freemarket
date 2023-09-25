@@ -25,19 +25,18 @@ class WalletState extends ChangeNotifier {
 
     if (action is UpdatingBalance) {
       for (NetworkType network in NetworkType.enabledValues) {
-        state.wallets[network] =
+        /*  state.wallets[network] =
             state.wallets[network]!.rebuild((b) => b..loading = true);
+      } */
       }
-    }
 
-    //UPDATE BALANCE FOR A SPECIFIC NETWORK
-    if (action is BalanceUpdated) {
-        state.wallets[action.network] = state.wallets[action.network]!.rebuild((b) => b
-          ..loading = false
+      //UPDATE BALANCE FOR A SPECIFIC NETWORK
+      if (action is BalanceUpdated) {
+/*         state.wallets[action.network] = state.wallets[action.network]!.rebuild((b) => b
           ..ethBalance = action.ethBalance
-          ..tokenBalance = action.tokenBalance);
-      
+          ..tokenBalance = action.tokenBalance); */
+      }
+      notifyListeners();
     }
-    notifyListeners();
   }
 }

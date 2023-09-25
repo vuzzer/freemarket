@@ -5,7 +5,6 @@ import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/domain/usecases/wallet/wallet_handler.dart';
 import 'package:defi/presentation/context_provider.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
-import 'package:defi/utils/eth_amount_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
@@ -67,10 +66,11 @@ class CryptoAssetWidget extends StatelessWidget {
                             const SizedBox(
                               height: 8,
                             ),
-                            AutoSizeText(
+                            //ANALYZING ARCHITECTURE WALLET
+                            /*  AutoSizeText(
                                 "${EthAmountFormatter(value.states.wallets[network]!.tokenBalance).format()} ${network.config.symbol}",
                                 style: TextStyle(
-                                    color: greyLight, fontFamily: roboto)),
+                                    color: greyLight, fontFamily: roboto)), */
                           ],
                         ))))));
   }
