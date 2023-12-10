@@ -1,7 +1,7 @@
 {
     "editor.codeActionsOnSave": {
-        "quickfix.add.required": true,
-"quickfix.add.required.multi": true,
-"quickfix.create.constructorForFinalFields": true
+        "quickfix.add.required": "explicit",
+        "quickfix.add.required.multi": "explicit",
+        "quickfix.create.constructorForFinalFields": "explicit"
     }
 }
