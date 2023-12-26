@@ -1,5 +1,5 @@
 import 'package:defi/domain/usecases/setup/wallet_setup_handler.dart';
-import 'package:defi/domain/usecases/transfer/wallet_transfer_handler.dart';
+import 'package:defi/domain/usecases/transaction/wallet_transfer_handler.dart';
 import 'package:defi/domain/usecases/wallet/wallet_handler.dart';
 import 'package:defi/services/address_service.dart';
 import 'package:defi/services/configuration_service.dart';

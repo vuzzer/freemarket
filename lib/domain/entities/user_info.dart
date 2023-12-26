@@ -6,6 +6,8 @@ import 'package:defi/core/serializer/serializers.dart';
 
 part 'user_info.g.dart';
 
+// Replace User_info by ClientP(ClientProfil)
+
 abstract class UserInfo implements Built<UserInfo, UserInfoBuilder> {
   UserInfo._();
   factory UserInfo([void Function(UserInfoBuilder)? updates]) = _$UserInfo;

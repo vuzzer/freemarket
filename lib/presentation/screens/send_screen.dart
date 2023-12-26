@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:defi/domain/entities/network_type.dart';
-import 'package:defi/domain/usecases/transfer/wallet_transfer_handler.dart';
+import 'package:defi/domain/usecases/transaction/wallet_transfer_handler.dart';
 import 'package:defi/presentation/screens/qr_code_reader_screen.dart';
 import 'package:defi/presentation/screens/set_amount_screen.dart';
 import 'package:defi/presentation/screens/theta_screen.dart';

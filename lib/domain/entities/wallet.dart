@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 
 class Wallet extends Equatable {
   final String address;
-
   final String privateKey;
 
   const Wallet(

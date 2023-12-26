@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'wallet_transfer.dart';
+part of 'transaction.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-class _$WalletTransfer extends WalletTransfer {
+class _$Transaction extends Transaction {
   @override
   final BuiltList<String>? errors;
   @override
@@ -20,10 +20,10 @@ class _$WalletTransfer extends WalletTransfer {
   @override
   final bool loading;
 
-  factory _$WalletTransfer([void Function(WalletTransferBuilder)? updates]) =>
-      (new WalletTransferBuilder()..update(updates))._build();
+  factory _$Transaction([void Function(TransactionBuilder)? updates]) =>
+      (new TransactionBuilder()..update(updates))._build();
 
-  _$WalletTransfer._(
+  _$Transaction._(
       {this.errors,
       this.idTransfer,
       this.idSender,
@@ -31,23 +31,21 @@ class _$WalletTransfer extends WalletTransfer {
       required this.status,
       required this.loading})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(status, r'WalletTransfer', 'status');
-    BuiltValueNullFieldError.checkNotNull(
-        loading, r'WalletTransfer', 'loading');
+    BuiltValueNullFieldError.checkNotNull(status, r'Transaction', 'status');
+    BuiltValueNullFieldError.checkNotNull(loading, r'Transaction', 'loading');
   }
 
   @override
-  WalletTransfer rebuild(void Function(WalletTransferBuilder) updates) =>
+  Transaction rebuild(void Function(TransactionBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  WalletTransferBuilder toBuilder() =>
-      new WalletTransferBuilder()..replace(this);
+  TransactionBuilder toBuilder() => new TransactionBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is WalletTransfer &&
+    return other is Transaction &&
         errors == other.errors &&
         idTransfer == other.idTransfer &&
         idSender == other.idSender &&
@@ -71,7 +69,7 @@ class _$WalletTransfer extends WalletTransfer {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'WalletTransfer')
+    return (newBuiltValueToStringHelper(r'Transaction')
           ..add('errors', errors)
           ..add('idTransfer', idTransfer)
           ..add('idSender', idSender)
@@ -82,9 +80,8 @@ class _$WalletTransfer extends WalletTransfer {
   }
 }
 
-class WalletTransferBuilder
-    implements Builder<WalletTransfer, WalletTransferBuilder> {
-  _$WalletTransfer? _$v;
+class TransactionBuilder implements Builder<Transaction, TransactionBuilder> {
+  _$Transaction? _$v;
 
   ListBuilder<String>? _errors;
   ListBuilder<String> get errors =>
@@ -111,9 +108,9 @@ class WalletTransferBuilder
   bool? get loading => _$this._loading;
   set loading(bool? loading) => _$this._loading = loading;
 
-  WalletTransferBuilder();
+  TransactionBuilder();
 
-  WalletTransferBuilder get _$this {
+  TransactionBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _errors = $v.errors?.toBuilder();
@@ -128,32 +125,32 @@ class WalletTransferBuilder
   }
 
   @override
-  void replace(WalletTransfer other) {
+  void replace(Transaction other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$WalletTransfer;
+    _$v = other as _$Transaction;
   }
 
   @override
-  void update(void Function(WalletTransferBuilder)? updates) {
+  void update(void Function(TransactionBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  WalletTransfer build() => _build();
+  Transaction build() => _build();
 
-  _$WalletTransfer _build() {
-    _$WalletTransfer _$result;
+  _$Transaction _build() {
+    _$Transaction _$result;
     try {
       _$result = _$v ??
-          new _$WalletTransfer._(
+          new _$Transaction._(
               errors: _errors?.build(),
               idTransfer: idTransfer,
               idSender: idSender,
               idRecipient: idRecipient,
               status: BuiltValueNullFieldError.checkNotNull(
-                  status, r'WalletTransfer', 'status'),
+                  status, r'Transaction', 'status'),
               loading: BuiltValueNullFieldError.checkNotNull(
-                  loading, r'WalletTransfer', 'loading'));
+                  loading, r'Transaction', 'loading'));
     } catch (_) {
       late String _$failedField;
       try {
@@ -161,7 +158,7 @@ class WalletTransferBuilder
         _errors?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'WalletTransfer', _$failedField, e.toString());
+            r'Transaction', _$failedField, e.toString());
       }
       rethrow;
     }
