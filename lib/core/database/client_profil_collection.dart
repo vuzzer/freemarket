@@ -1,25 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:defi/core/database/collection_prod_dev/prod_dev.dart';
+import 'package:defi/core/database/configs/config_prod_dev.dart';
+import 'package:defi/core/error/exception.dart';
+import 'package:defi/data/models/client_profil_model.dart';
 
-class ClientServices {
+class ClientProfilCollection {
+  // Reference to collection of client_profil
   final ref = FirebaseFirestore.instance.collection(clientCollection);
-/*   final clientRef = FirebaseFirestore.instance
-      .collection(clientCollection)
-      .withConverter<Profil>(
-          fromFirestore: (snaphsot, _) =>
-              Profil.fromJson(snaphsot.data() as Map<String, dynamic>),
-          toFirestore: (user, _) => user.toJson()); */
 
-/*   Future<void> saveUser(Profil user) async {
-    await userRef.doc(user.uid).set(user, SetOptions(merge: true));
+  // Reference to collection of client_profil based on model
+  final clientRef = FirebaseFirestore.instance
+      .collection(clientCollection)
+      .withConverter<ClientProfilModel>(
+          fromFirestore: (snaphsot, _) => ClientProfilModel.fromJson(
+              snaphsot.data() as Map<String, dynamic>),
+          toFirestore: (user, _) => user.toJson());
+
+  Future<void> saveUser(ClientProfilModel user) async {
+    await clientRef.doc(user.uid).set(user, SetOptions(merge: true));
   }
 
-  Future<Profil> getUser(String uid) async {
-    return userRef.doc(uid).get().then((snapshot) => snapshot.data()!);
+  Future<ClientProfilModel> getUser(String uid) async {
+    final clientProfil = await clientRef.doc(uid).get();
+    if (clientProfil.exists) {
+      return clientProfil.data() as ClientProfilModel;
+    }
+    throw UserNotExistException();
   }
 
   Future<bool> verifyUserExist(String number) {
-    return userRef
+    return clientRef
         .where("numeroTel", isEqualTo: number)
         .get()
         .timeout(const Duration(seconds: 5))
@@ -31,7 +40,7 @@ class ClientServices {
     });
   }
 
-  List<Profil> contactFromSnapshot(QuerySnapshot<Profil> snapshot) {
+/*   List<Profil> contactFromSnapshot(QuerySnapshot<Profil> snapshot) {
     return snapshot.docs.map((doc) => doc.data()).toList();
   }
 
@@ -61,5 +70,4 @@ class ClientServices {
           "photoUrl": photoUrl
         }).timeout(const Duration(seconds: 5));
   } */
-
 }

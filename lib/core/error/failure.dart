@@ -9,3 +9,9 @@ class InternetFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
+
+
+class UserConnectionFailure extends Failure{
+  @override
+  List<Object?> get props => [];
+}

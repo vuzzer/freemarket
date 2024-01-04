@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:defi/core/error/failure.dart';
-import '../../entities/clientProfil.dart';
+import '../../entities/client_profil.dart';
 
 
 abstract class ClientProfilRepository {
@@ -11,5 +11,5 @@ abstract class ClientProfilRepository {
   Future<Either<Failure, ClientProfil>> register();
 
   // Log out a client
-  Future<Either<Failure, void>> logout();
+  Future<Either<Failure, bool>> logout();
 }

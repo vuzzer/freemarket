@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:defi/core/error/failure.dart';
-import 'package:defi/domain/entities/clientProfil.dart';
+import 'package:defi/domain/entities/client_profil.dart';
 import 'package:defi/domain/repositories/clientProfil/clientProfil_repository.dart';
 
 class ClientProfilUsecase {

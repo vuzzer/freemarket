@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:defi/domain/entities/clientProfil.dart';
+import 'package:defi/domain/entities/client_profil.dart';
 import 'package:defi/domain/repositories/clientProfil/clientProfil_repository.dart';
 import 'package:defi/domain/usecases/clientProfil/clientProfil_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -34,6 +34,7 @@ void main() {
     expect(result, equals(right(clientP)));
   });
 
+
   test("Should return a clientProfil when an user is registered", () async {
     //Arrange
     when(mockClientPRepository.login()).thenAnswer((_) async => Right(clientP));
@@ -42,5 +43,6 @@ void main() {
     //Assert
     expect(result, equals(right(clientP)));
   });
+
 
 }

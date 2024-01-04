@@ -7,7 +7,7 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:defi/core/error/failure.dart' as _i5;
-import 'package:defi/domain/entities/clientProfil.dart' as _i6;
+import 'package:defi/domain/entities/client_profil.dart' as _i6;
 import 'package:defi/domain/repositories/clientProfil/clientProfil_repository.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -77,18 +77,18 @@ class MockClientProfilRepository extends _i1.Mock
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.ClientProfil>>);
   @override
-  _i4.Future<_i2.Either<_i5.Failure, void>> logout() => (super.noSuchMethod(
+  _i4.Future<_i2.Either<_i5.Failure, bool>> logout() => (super.noSuchMethod(
         Invocation.method(
           #logout,
           [],
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, void>>.value(
-            _FakeEither_0<_i5.Failure, void>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, bool>>.value(
+            _FakeEither_0<_i5.Failure, bool>(
           this,
           Invocation.method(
             #logout,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, void>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, bool>>);
 }
