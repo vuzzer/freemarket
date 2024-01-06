@@ -1,6 +1,6 @@
 # defi
 
-A new Flutter project.
+An App to track price of stock market specially for cryptocurrencies.
 
 ## Getting Started
 
