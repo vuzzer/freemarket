@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:defi/constants/app_colors.dart';
-import 'package:defi/helpers/crypto_symbols.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';

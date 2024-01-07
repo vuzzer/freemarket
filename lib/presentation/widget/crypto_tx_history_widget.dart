@@ -1,11 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:defi/presentation/widget/crypto_asset_widget.dart';
 import 'package:defi/presentation/widget/tx_history_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constants/app_colors.dart';
-import '../../helpers/crypto_symbols.dart';
+
 
 class CryptoTxHistoryWidget extends StatelessWidget {
   const CryptoTxHistoryWidget({Key? key}) : super(key: key);

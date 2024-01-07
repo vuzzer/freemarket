@@ -20,8 +20,8 @@ class CreditCardWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             _buildLogosBlock(),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
+            const Padding(
+              padding:  EdgeInsets.only(top: 16.0),
               child: Text(
                 'XXXX-XXXX-XXXX-XXXX',
                 style: TextStyle(

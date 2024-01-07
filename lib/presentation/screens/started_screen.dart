@@ -66,9 +66,9 @@ class StartedScreen extends StatelessWidget {
                         ),
                       ],
                     )), */
-                Column(
+                const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         'Manage your',
                         style: TextStyle(

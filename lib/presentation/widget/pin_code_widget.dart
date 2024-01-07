@@ -1,5 +1,4 @@
 import 'package:defi/constants/app_colors.dart';
-import 'package:defi/helpers/show_dialog_alert.dart';
 import 'package:defi/presentation/provider/user_provider.dart';
 import 'package:defi/presentation/screens/theta_screen.dart';
 import 'package:defi/services/verification_otp/email_otp.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
-import 'package:logger/logger.dart';
 
 class PinCodeWidget extends StatefulWidget {
   final TextEditingController pinCodeController;

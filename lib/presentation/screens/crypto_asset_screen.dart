@@ -5,8 +5,6 @@ import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/bottom_titles_widget.dart';
 import 'package:defi/presentation/widget/crypto_tx_history_widget.dart';
 import 'package:defi/presentation/widget/line_chart_widget.dart';
-import 'package:defi/presentation/widget/theta_body_widget.dart';
-import 'package:defi/presentation/widget/tx_history_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -34,10 +32,10 @@ class CryptoAssetScreen extends StatelessWidget {
                 "\$ 13.54",
                 style: Theme.of(context).textTheme.headline3,
               )),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
-            children: const [
+            children:  [
               Icon(
                 Icons.arrow_drop_up,
                 color: Colors.redAccent,

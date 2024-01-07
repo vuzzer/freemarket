@@ -1,8 +1,6 @@
 import 'package:defi/domain/entities/network_type.dart';
-import 'package:defi/domain/wallet/wallet_provider.dart';
 import 'package:defi/presentation/widget/crypto_asset_widget.dart';
 import 'package:defi/presentation/widget/tx_history_widget.dart';
-import 'package:defi/helpers/crypto_symbols.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -64,9 +62,8 @@ class ThetaBodyWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: greyLight,
                           )),
-                      itemBuilder: (context, index) =>
-                          
-                          CryptoAssetWidget(
+                      itemBuilder: (context, index) => CryptoAssetWidget(
+                              key: ValueKey(networks[index]),
                               network: networks[index],
                             )
                           ),

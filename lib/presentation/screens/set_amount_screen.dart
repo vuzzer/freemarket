@@ -25,7 +25,6 @@ class _SetAmountScreenState extends State<SetAmountScreen> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +34,6 @@ class _SetAmountScreenState extends State<SetAmountScreen> {
         actions: true,
       ),
       body: Column(
-
         children: [
           const SizedBox(
             height: 20,
@@ -50,32 +48,38 @@ class _SetAmountScreenState extends State<SetAmountScreen> {
                   child: Center(
                     child: Form(
                         child: TextFormField(
+                      controller: _controller,
                       keyboardType: TextInputType.none,
                       autocorrect: false,
-                      cursorColor: greyLight,
-                      style: TextStyle(color: greyLight),
+                      cursorColor: Colors.white,
+                      style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        labelText: "Amount",
-                       
+                          labelText: "Amount",
+                          contentPadding: const EdgeInsets.only(bottom: 10),
                           labelStyle: TextStyle(color: greyLight),
-                          suffixIcon:  Row(
+                          suffixIcon: Row(
                             mainAxisSize: MainAxisSize.min,
-                              children: [ const AutoSizeText("ETH", style: TextStyle(color: Colors.white),), Icon(CryptoFontIcons.ETH, color: greyLight)],
-                             
+                            children: [
+                              const AutoSizeText(
+                                "ETH",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              Icon(CryptoFontIcons.ETH, color: greyLight)
+                            ],
                           ),
                           border: InputBorder.none),
                     )),
                   ))),
-                 const Spacer(),
-                 Container(
-                  padding: const EdgeInsets.only(bottom: 30),
-                  decoration: const BoxDecoration(color: blue1),
-                child:
-                 KeyBoardWidget(controller: _controller, routeName: SetAmountScreen.routeName, amount: true,
-                     onPressed: () {
-                  
-                }, )),
-               
+          const Spacer(),
+          Container(
+              padding: const EdgeInsets.only(bottom: 30),
+              decoration: const BoxDecoration(color: blue1),
+              child: KeyBoardWidget(
+                controller: _controller,
+                routeName: SetAmountScreen.routeName,
+                amount: true,
+                onPressed: () {},
+              )),
         ],
       ),
     );

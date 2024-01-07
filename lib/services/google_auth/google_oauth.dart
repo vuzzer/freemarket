@@ -1,7 +1,5 @@
-import 'package:defi/presentation/provider/user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:logger/logger.dart';
 
 class GoogleOAuth {
   static final googleSignIn = GoogleSignIn();

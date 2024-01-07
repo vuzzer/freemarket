@@ -1,9 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/helpers/enum.dart';
-import 'package:defi/presentation/provider/network_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../constants/app_colors.dart';
 
 class CurrencyWidget extends StatelessWidget {

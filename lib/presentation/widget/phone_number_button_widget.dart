@@ -1,5 +1,4 @@
 import 'package:defi/constants/app_colors.dart';
-import 'package:defi/presentation/screens/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -9,15 +8,13 @@ class PhoneNumberButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        Navigator.of(context).pushNamed(OtpScreen.routeName);
-      },
+      onPressed: null,
       style: ElevatedButton.styleFrom(
           minimumSize: Size(MediaQuery.of(context).size.width, 50),
           backgroundColor: blue1),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
+        children:  [
           Icon(
             FontAwesomeIcons.phone,
             color: Colors.white,

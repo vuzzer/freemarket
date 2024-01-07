@@ -1,32 +1,14 @@
-import 'package:built_collection/built_collection.dart';
-import 'package:built_value/built_value.dart';
-import 'package:defi/domain/entities/network_type.dart';
+import 'package:equatable/equatable.dart';
 
+class Wallet extends Equatable {
+  final String address;
+  final String privateKey;
 
-part 'wallet.g.dart';
+  const Wallet(
+      {
+      required this.address,
+      required this.privateKey});
 
-abstract class Wallet implements Built<Wallet, WalletBuilder> {
-  factory Wallet([void Function(WalletBuilder)? updates]) => _$Wallet((b) => b
-    ..tokenBalance = BigInt.from(0)
-    ..ethBalance = BigInt.from(0)
-    ..network = NetworkType.Ethereum
-    ..errors = BuiltList<String>().toBuilder()
-    ..loading = false
-    ..update(updates));
-
-  Wallet._();
-
-  NetworkType get network;
-
-  String? get address;
-
-  String? get privateKey;
-
-  BigInt get tokenBalance;
-
-  BigInt get ethBalance;
-
-  bool get loading;
-
-  BuiltList<String>? get errors;
+  @override
+  List<Object> get props => [address, privateKey];
 }

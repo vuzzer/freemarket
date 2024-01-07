@@ -1,7 +1,9 @@
 import 'dart:async';
-
-import 'package:defi/domain/repositories/contact_service_repository.dart';
+import 'package:defi/core/contracts/contact_service_repository.dart';
 import 'package:web3dart/web3dart.dart';
+import 'package:logger/logger.dart';
+
+var logger = Logger();
 
 class ContractService implements ContractServiceRepository {
   ContractService(this.client, this.contract);
@@ -22,8 +24,10 @@ class ContractService implements ContractServiceRepository {
       String privateKey, EthereumAddress receiver, BigInt amount,
       {TransferEvent? onTransfer, Function(Object exeception)? onError}) async {
     final credentials = getCredentials(privateKey);
-    final from =  credentials.address;
+    final from = credentials.address;
     final networkId = await client.getNetworkId();
+
+    //logger.d();
 
     StreamSubscription? event;
     // Workaround once sendTransacton doesn't return a Promise containing confirmation / receipt
@@ -38,14 +42,14 @@ class ContractService implements ContractServiceRepository {
       final transactionId = await client.sendTransaction(
         credentials,
         Transaction.callContract(
-          contract: contract,
-          function: _sendFunction(),
-          parameters: [receiver, amount],
-          from: from,
-        ),
+            contract: contract,
+            function: _sendFunction(),
+            parameters: [receiver, amount],
+            from: from,
+             ),
         chainId: networkId,
       );
-      print('transact started $transactionId');
+      logger.d('transact started $transactionId');
       return transactionId;
     } catch (ex) {
       if (onError != null) {
@@ -94,9 +98,9 @@ class ContractService implements ContractServiceRepository {
       final to = decoded[1] as EthereumAddress;
       final value = decoded[2] as BigInt;
 
-      print('$from}');
-      print('$to}');
-      print('$value}');
+      logger.d('$from}');
+      logger.d('$to}');
+      logger.d('$value}');
 
       onTransfer(from, to, value);
     });
