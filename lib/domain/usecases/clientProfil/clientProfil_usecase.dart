@@ -15,7 +15,7 @@ class ClientProfilUsecase {
     return clientProfilRepository.login();
   }
 
-    Future<Either<Failure, void>> register() {
+  Future<Either<Failure, void>> register() {
     return clientProfilRepository.register();
   }
 }

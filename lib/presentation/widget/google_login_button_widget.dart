@@ -1,11 +1,13 @@
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/domain/entities/wallet_setup.dart';
 import 'package:defi/domain/usecases/setup/wallet_setup_handler.dart';
+import 'package:defi/presentation/blocs/client/client_profil_bloc.dart';
 import 'package:defi/presentation/provider/user_provider.dart';
 import 'package:defi/presentation/screens/theta_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/services/google_auth/google_oauth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
@@ -30,10 +32,13 @@ class GoogleLoginButtonWidget extends StatelessWidget {
     //final alertBox = showDialogAlert(context);
     return ElevatedButton(
       onPressed: () async {
-        GoogleOAuth.googleLogin().then((data) async {
-          context.loaderOverlay.show();
+        BlocProvider.of<ClientProfilBloc>(context).add(Login() );
+       /*  GoogleOAuth.googleLogin().then((data) async {
+          //context.loaderOverlay.show();
 
-          if (data != null) {
+          
+
+          /* if (data != null) {
             //Logger().d(data.uid);
             user.setUser(data);
 
@@ -53,18 +58,18 @@ class GoogleLoginButtonWidget extends StatelessWidget {
             //alertBox();
           } else {
             context.loaderOverlay.hide();
-          }
+          } */
         }).catchError((e) {
           logger.d(e.toString());
           context.loaderOverlay.hide();
-        });
+        }); */
       },
       style: ElevatedButton.styleFrom(
           minimumSize: Size(MediaQuery.of(context).size.width, 50),
           backgroundColor: blue1),
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children:  [
+        children: [
           Icon(
             FontAwesomeIcons.google,
             color: Colors.red,

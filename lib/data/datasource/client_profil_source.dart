@@ -12,6 +12,12 @@ abstract class ClientProfilDataSource {
 }
 
 class ClientProfilDataSourceImpl implements ClientProfilDataSource {
+  final ClientProfilCollection clientProfilCollection;
+
+  ClientProfilDataSourceImpl(this.clientProfilCollection);
+
+  /// Throws [FailedLoginException] when user abort login
+  /// Throws [UserNotException] when user not exist in firestore
   @override
   Future<ClientProfilModel> login() async {
     // Object to Sign In using google account
@@ -28,10 +34,11 @@ class ClientProfilDataSourceImpl implements ClientProfilDataSource {
 
     // Sign in account into Firebase
     UserCredential userCredential =
-    await FirebaseAuth.instance.signInWithCredential(credential);
+        await FirebaseAuth.instance.signInWithCredential(credential);
 
     // signed-in users info
-    final clientProfil = await ClientProfilCollection().getUser(userCredential.user!.uid);
+    final clientProfil =
+        await clientProfilCollection.getUser(userCredential.user!.uid);
 
     return clientProfil;
   }

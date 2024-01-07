@@ -15,3 +15,13 @@ class UserConnectionFailure extends Failure{
   @override
   List<Object?> get props => [];
 }
+
+class UserNotExistFaillure extends Failure{
+  @override
+  List<Object?> get props => [];
+}
+
+class FailedLoginFailure extends Failure{
+  @override
+  List<Object?> get props => [];
+}

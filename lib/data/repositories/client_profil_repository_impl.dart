@@ -16,9 +16,9 @@ class ClientProfilRepositoryImpl implements ClientProfilRepository {
       final user = await clientProfilDataSource.login();
       return Future.value(Right(user));
     } on FailedLoginException {
-      return Left(UserConnectionFailure());
+      return Left(FailedLoginFailure());
     } on UserNotExistException{
-      return Left(UserConnectionFailure());
+      return Left(UserNotExistFaillure());
     }
   }
 
