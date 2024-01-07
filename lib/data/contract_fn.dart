@@ -1,5 +1,5 @@
 import 'package:defi/data/rpcnode/alchemy.dart';
-import 'package:defi/domain/contracts/payment.dart';
+import 'package:defi/core/contracts/payment.dart';
 import 'package:web3dart/web3dart.dart';
 
 /*

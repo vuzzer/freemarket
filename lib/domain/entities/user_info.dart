@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:defi/domain/entities/serializers.dart';
+import 'package:defi/core/serializer/serializers.dart';
 
 part 'user_info.g.dart';
+
+// Replace User_info by ClientP(ClientProfil)
 
 abstract class UserInfo implements Built<UserInfo, UserInfoBuilder> {
   UserInfo._();

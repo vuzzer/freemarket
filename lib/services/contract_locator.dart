@@ -5,7 +5,7 @@ import 'package:web3dart/web3dart.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-import '../domain/app_config_network.dart';
+import '../core/network/app_config_network.dart';
 import '../domain/entities/network_type.dart';
 import 'contract_service.dart';
 

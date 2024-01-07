@@ -1,0 +1,1 @@
+find . -name "*_test.dart" -exec flutter test {} --debug \; 

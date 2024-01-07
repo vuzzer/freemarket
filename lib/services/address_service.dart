@@ -1,5 +1,5 @@
-import 'package:defi/domain/repositories/address_service_repository.dart';
-import 'package:defi/domain/repositories/configuration_service_repository.dart';
+import 'package:defi/core/address_service_repository.dart';
+import 'package:defi/core/configuration_service_repository.dart';
 import 'package:ed25519_hd_key/ed25519_hd_key.dart';
 import 'package:hex/hex.dart';
 import 'package:web3dart/web3dart.dart';

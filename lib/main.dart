@@ -18,6 +18,8 @@ void main() async {
 
   await setupLocator();
 
+  await injectionBloc();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -62,22 +64,21 @@ class MyApp extends StatelessWidget {
                     scaffoldBackgroundColor: const Color(0XFF171B2F),
                     splashFactory: InkRipple.splashFactory,
                     textTheme: TextTheme(
-                        headline6: const TextStyle(
+                        headlineLarge: const TextStyle(
                           fontFamily: "RobotoCondensed",
                         ),
-                        headline3: const TextStyle(
+                        headlineMedium: const TextStyle(
                             fontSize: 37,
                             fontFamily: "RobotoCondensed",
                             color: Colors.white,
                             fontWeight: FontWeight.w700),
-                        headline4: const TextStyle(
+                        headlineSmall: const TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.w500,
                         ),
-                        bodyText1: const TextStyle(color: Colors.white),
-                        bodyText2:
+                        bodyLarge: const TextStyle(color: Colors.white),
+                        bodyMedium:
                             TextStyle(color: Colors.grey.withOpacity(0.6)))),
-            
                 routes: getRoutes(context))));
   }
 }

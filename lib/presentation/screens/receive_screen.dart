@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:defi/domain/wallet/wallet_handler.dart';
+import 'package:defi/domain/usecases/wallet/wallet_handler.dart';
 import 'package:defi/presentation/context_provider.dart';
 import 'package:defi/presentation/screens/set_amount_screen.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
