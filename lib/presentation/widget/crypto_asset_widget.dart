@@ -17,11 +17,7 @@ class CryptoAssetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //final sizes = MediaQuery.of(context);
-    return ContextProviderWidget<WalletHandler>(
-        onModelReady: (wallet) async {
-          wallet.listenTransfers(wallet.states.address, NetworkType.Ethereum);
-        },
-        builder: (context, value, child) => Material(
+    return Material(
             color: Colors.transparent,
             child: InkWell(
                 splashColor: blueLight,
@@ -51,19 +47,18 @@ class CryptoAssetWidget extends StatelessWidget {
                         child: AutoSizeText("\$21000",
                             style: TextStyle(
                                 color: greyLight, fontFamily: roboto))),
-                    trailing: Padding(
-                        padding: const EdgeInsets.only(right: 10),
+                    trailing: const Padding(
+                        padding: EdgeInsets.only(right: 10),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             //price of token on the market (use chainlink)
-                            // TODO: get price of token on the market
-                            const AutoSizeText("\$16",
+                             AutoSizeText("\$16",
                                 style: TextStyle(
                                     color: Colors.white, fontFamily: roboto)),
                             //Balance token
-                            const SizedBox(
+                             SizedBox(
                               height: 8,
                             ),
                             //ANALYZING ARCHITECTURE WALLET
@@ -72,6 +67,6 @@ class CryptoAssetWidget extends StatelessWidget {
                                 style: TextStyle(
                                     color: greyLight, fontFamily: roboto)), */
                           ],
-                        ))))));
+                        )))));
   }
 }

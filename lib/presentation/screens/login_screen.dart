@@ -20,6 +20,7 @@ class LoginScreen extends StatelessWidget {
             preferredSize: Size.fromHeight(100),
             child: AppBarWidget(
               title: "Se connecter",
+              actions: true,
             )),
         body: SingleChildScrollView(
           child: BlocProvider(
@@ -36,7 +37,6 @@ class LoginScreen extends StatelessWidget {
                   // Display UI according action connexion trigger by the user
                   BlocBuilder<ClientProfilBloc, ClientProfilState>(
                       builder: (context, state) {
-                    print(state);
                     switch (state.runtimeType) {
                       case Loading:
                         context.loaderOverlay.show();

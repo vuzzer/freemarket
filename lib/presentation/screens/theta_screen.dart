@@ -30,11 +30,7 @@ class _ThetaScreenState extends State<ThetaScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ContextProviderWidget<WalletHandler>(
-        onModelReady: (wallet) {
-          wallet.initialise();
-        },
-        builder: (context, wallet, child) => Scaffold(
+    return  Scaffold(
               body: IndexedStack(
                 index: _activeIndex,
                 children: const [HomeScreen(), SwapScreen(), SettingScreen()],
@@ -54,6 +50,6 @@ class _ThetaScreenState extends State<ThetaScreen> {
                       _activeIndex = index;
                     });
                   }),
-            ));
+            );
   }
 }
