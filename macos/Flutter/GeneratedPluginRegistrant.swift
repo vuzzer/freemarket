@@ -8,11 +8,8 @@ import Foundation
 import cloud_firestore
 import firebase_auth
 import firebase_core
-<<<<<<< HEAD
-=======
 import path_provider_foundation
 import share_plus
->>>>>>> superwallet
 import shared_preferences_foundation
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {

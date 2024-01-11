@@ -3,10 +3,6 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-<<<<<<< HEAD
-  firebase_auth
-=======
->>>>>>> superwallet
   firebase_core
   permission_handler_windows
   share_plus
