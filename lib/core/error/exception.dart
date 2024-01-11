@@ -7,3 +7,5 @@ class PrivateKeyExcepiton implements Exception {}
 class FailedLoginException implements Exception {}
 
 class UserNotExistException implements Exception {}
+
+class NetworkException implements Exception {}
