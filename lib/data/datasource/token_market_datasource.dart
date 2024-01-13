@@ -11,17 +11,25 @@ abstract class TokenMarketDataSource {
 }
 
 class TokenMarketDataSourceImpl implements TokenMarketDataSource {
-  final dio = Dio();
+  final Dio dio;
+
+  TokenMarketDataSourceImpl({required this.dio});
+
   @override
   Future<TokenMarketDataModel> getTokenPrice(Params params) async {
-    final options = Options(contentType: "application/json", headers: {
-      "cache-control": "max-age=30,public,must-revalidate,s-maxage=30"
-    });
+    final options = Options(
+        contentType: "application/json",
+        sendTimeout: const Duration(seconds: 3),
+        headers: {
+          "cache-control": "max-age=30,public,must-revalidate,s-maxage=30"
+        });
 
+    // Fetch daily data token
     final response = await dio.get(
-        "https://api.coingecko.com/api/v3/coins/${params.idToken}/market_chart?vs_currency=${params.currentOfMarket}&days=1&interval=daily&precision=2&interval=daily",
+        "https://api.coingecko.com/api/v3/coins/${params.idToken}/market_chart?vs_currency=${params.currentOfMarket}&days=2&precision=2",
         options: options);
 
+    // Succes request so get data
     if (response.statusCode == 200) {
       return TokenMarketDataModel.fromJson(response.data);
     }

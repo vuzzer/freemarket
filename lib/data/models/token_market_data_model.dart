@@ -3,6 +3,7 @@ import 'package:defi/domain/entities/token_market_data.dart';
 class TokenMarketDataModel extends TokenMarketData {
   const TokenMarketDataModel(
       {required super.prices,
+      required super.times,
       required super.marketCapitalization,
       required super.volumeTotal});
 
@@ -15,8 +16,10 @@ class TokenMarketDataModel extends TokenMarketData {
     final marketCaps = rawMarketCaps.last as List;
     final totalVolumes = rawTotalVolumes.last as List;
     final prices = rawPrices.map((data) => data.last as double).toList();
+    final times = rawPrices.map((data) => data.first as int).toList();
 
     return TokenMarketDataModel(
+        times: times,
         prices: prices,
         marketCapitalization: (marketCaps.last as num).toDouble(),
         volumeTotal: (totalVolumes.last as num).toDouble());
@@ -24,6 +27,7 @@ class TokenMarketDataModel extends TokenMarketData {
 
   Map<String, dynamic> toJson() {
     return {
+        "times":  times,
       "prices": prices,
       "market_caps": marketCapitalization,
       "total_volumes": volumeTotal
