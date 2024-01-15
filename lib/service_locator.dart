@@ -1,4 +1,5 @@
 import 'package:defi/core/database/client_profil_collection.dart';
+import 'package:defi/core/network/network_info.dart';
 import 'package:defi/data/datasource/client_profil_source.dart';
 import 'package:defi/data/datasource/token_market_datasource.dart';
 import 'package:defi/data/repositories/client_profil_repository_impl.dart';
@@ -15,6 +16,7 @@ import 'package:defi/services/configuration_service.dart';
 import 'package:defi/services/contract_locator.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'domain/repositories/clientProfil/clientProfil_repository.dart';
@@ -57,8 +59,9 @@ Future<void> injectionBloc() async {
   // Repositories
   sl.registerLazySingleton<ClientProfilRepository>(
       () => ClientProfilRepositoryImpl(sl()));
-  sl.registerLazySingleton<TokenMarketRepository>(
-      () => TokenMarketRepositoryImpl(sl()));
+  sl.registerLazySingleton<TokenMarketRepository>(() =>
+      TokenMarketRepositoryImpl(
+          tokenMarketDataSource: sl(), networkInfo: sl()));
 
   // Data
   sl.registerLazySingleton<ClientProfilDataSource>(
@@ -66,7 +69,11 @@ Future<void> injectionBloc() async {
   sl.registerLazySingleton<TokenMarketDataSource>(
       () => TokenMarketDataSourceImpl(dio: sl()));
 
-  //! Database
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   sl.registerLazySingleton(() => ClientProfilCollection());
+  
+  //! External
+  sl.registerLazySingleton(() => InternetConnectionChecker());
   sl.registerLazySingleton(() => Dio());
+
 }

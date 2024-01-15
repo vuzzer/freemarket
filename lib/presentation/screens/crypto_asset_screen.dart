@@ -10,6 +10,7 @@ import 'package:defi/presentation/widget/line_chart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class CryptoAssetScreen extends StatefulWidget {
   static const routeName = "/cryto-asset";
@@ -20,11 +21,9 @@ class CryptoAssetScreen extends StatefulWidget {
 }
 
 class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
-
   @override
   Widget build(BuildContext context) {
     final size = ScreenUtil();
-
 
     return Scaffold(
       appBar: const AppBarWidget(title: "Ethereum"),
@@ -46,7 +45,7 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
-            children:  [
+            children: [
               Icon(
                 Icons.arrow_drop_up,
                 color: Colors.redAccent,
@@ -64,13 +63,30 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
           ),
           //Chart
           Container(
-            width: size.screenWidth,
-            height: 200,
-            decoration: const BoxDecoration(color: darkBlue),
-            child: const LineChartWidget(),
-          ),
+              width: size.screenWidth,
+              height: 200,
+              decoration: const BoxDecoration(color: darkBlue),
+              child: BlocBuilder<MarketTokenBloc, MarketTokenState>(
+                  builder: (context, state) {
+                if (state is MarketTokenEmpty) {
+                  return const Center(child: Text("Aucune donnée"));
+                } else if (state is MarketTokenLoading) {
+                  context.loaderOverlay.show();
+                  return const SizedBox.shrink();
+                } else if (state is MarketTokenLoaded) {
+                  context.loaderOverlay.hide();
+                  return const LineChartWidget();
+                } else if (state is MarketTokenError) {
+                  context.loaderOverlay.hide();
+                  return Center(child: Text(state.message));
+                } else{
+                  return const SizedBox.shrink();
+                }
+              })),
           const BottomTitlesWidget(),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           const CryptoTxHistoryWidget()
         ],
       ),

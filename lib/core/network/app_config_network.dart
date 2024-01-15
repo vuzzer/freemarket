@@ -14,6 +14,7 @@ class AppConfig {
       enabled: false,
       value: Blockchain.ethereum,
       label: 'Local (Truffle)',
+      id: "local"
     ),
     NetworkType.Ethereum: AppConfigParams(
       'https://goerli.infura.io/v3/628074215a2449eb960b4fe9e95feb09',
@@ -22,8 +23,9 @@ class AppConfig {
       icon: 'eth',
       faucetUrl: 'https://goerlifaucet.com',
       enabled: true,
-        value: Blockchain.ethereum,
+      value: Blockchain.ethereum,
       label: 'Ethereum (Goerli)',
+      id: "ethereum"
     ),
     NetworkType.BSC: AppConfigParams(
       'https://data-seed-prebsc-1-s1.binance.org:8545',
@@ -32,8 +34,9 @@ class AppConfig {
       icon: 'bnb',
       faucetUrl: 'https://testnet.binance.org/faucet-smart',
       enabled: true,
-        value: Blockchain.bsc,
+      value: Blockchain.bsc,
       label: 'Binance Chain (BSC)',
+      id: "binancecoin"
     ),
     NetworkType.Matic: AppConfigParams(
       'https://rpc-mumbai.maticvigil.com',
@@ -45,11 +48,22 @@ class AppConfig {
       enabled: true,
       value: Blockchain.matic,
       label: 'Matic (Mumbai)',
+      id: "aave-polygon-wmatic"
     )
   };
 }
 
 class AppConfigParams {
+  final String? web3RdpUrl;
+  final String web3HttpUrl;
+  final String contractAddress;
+  final String symbol;
+  final String faucetUrl;
+  final bool enabled;
+  final String label;
+  final String icon;
+  final Blockchain value; //use for radio button
+  final String id;
   AppConfigParams(
     this.web3HttpUrl,
     this.contractAddress, {
@@ -60,14 +74,6 @@ class AppConfigParams {
     required this.icon,
     required this.value,
     this.web3RdpUrl,
+    required this.id,
   });
-  final String? web3RdpUrl;
-  final String web3HttpUrl;
-  final String contractAddress;
-  final String symbol;
-  final String faucetUrl;
-  final bool enabled;
-  final String label;
-  final String icon;
-  final Blockchain value; //use for radio button
 }

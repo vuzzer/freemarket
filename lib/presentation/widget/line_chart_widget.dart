@@ -89,11 +89,7 @@ class LineChartWidget extends StatelessWidget {
     return BlocBuilder<MarketTokenBloc, MarketTokenState>(
         builder: (context, state) {
       // Return Token Market Chart
-      if (state is MarketTokenEmpty) {
-        return const Text("Aucune donnée");
-      } else if (state is MarketTokenLoading) {
-        return const SizedBox(width: 50.0, child: CircularProgressIndicator());
-      } else if (state is MarketTokenLoaded) {
+      if (state is MarketTokenLoaded) {
         return LineChart(LineChartData(
           gridData: FlGridData(
             show: true,
@@ -172,9 +168,8 @@ class LineChartWidget extends StatelessWidget {
             ),
           ],
         ));
-      } else if (state is MarketTokenError) {
-        return Text(state.message);
-      } else {
+      }
+       else {
         return const SizedBox.shrink();
       }
     });

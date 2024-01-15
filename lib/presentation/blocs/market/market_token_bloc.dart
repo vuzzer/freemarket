@@ -20,10 +20,10 @@ class MarketTokenBloc extends Bloc<MarketTokenEvent, MarketTokenState> {
                 // Fetch data token
         final market = await tokenMarketUsecase.getTokenPrice(event.params);
         
-        await Future.delayed(const Duration(seconds: 5)).whenComplete(() =>
-            market.fold(
+      
+        market.fold(
                 (error) => emit(const MarketTokenError("Error of loading")),
-                (tokenPrice) => emit(MarketTokenLoaded(tokenPrice))));
+                (tokenPrice) => emit(MarketTokenLoaded(tokenPrice)));
 
       }
     });

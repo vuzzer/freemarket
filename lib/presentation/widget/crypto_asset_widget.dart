@@ -27,7 +27,7 @@ class CryptoAssetWidget extends StatelessWidget {
                 highlightColor: blueLight,
                 onTap: () {
                   //logger.d(store.state.network.name);
-                   BlocProvider.of<MarketTokenBloc>(context).add(const GetTokenPrice(Params(idToken: "ethereum", currentOfMarket: "usd")) );
+                   BlocProvider.of<MarketTokenBloc>(context).add(GetTokenPrice(Params(idToken: network.config.id, currentOfMarket: "usd")) );
                   Navigator.of(context).pushNamed(CryptoAssetScreen.routeName);
                 },
                 child: ListTile(
