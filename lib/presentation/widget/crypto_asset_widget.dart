@@ -1,12 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/constants/app_font.dart';
+import 'package:defi/core/params.dart';
 import 'package:defi/domain/entities/network_type.dart';
-import 'package:defi/domain/usecases/wallet/wallet_handler.dart';
-import 'package:defi/presentation/context_provider.dart';
+import 'package:defi/presentation/blocs/client/client_profil_bloc.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
+
+import '../blocs/market/market_token_bloc.dart';
 
 var logger = Logger();
 
@@ -24,6 +27,7 @@ class CryptoAssetWidget extends StatelessWidget {
                 highlightColor: blueLight,
                 onTap: () {
                   //logger.d(store.state.network.name);
+                   BlocProvider.of<MarketTokenBloc>(context).add(GetTokenPrice(Params(idToken: network.config.id, currentOfMarket: "usd")) );
                   Navigator.of(context).pushNamed(CryptoAssetScreen.routeName);
                 },
                 child: ListTile(

@@ -25,3 +25,4 @@ class FailedLoginFailure extends Failure{
   @override
   List<Object?> get props => [];
 }
+

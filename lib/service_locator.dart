@@ -1,14 +1,22 @@
 import 'package:defi/core/database/client_profil_collection.dart';
+import 'package:defi/core/network/network_info.dart';
 import 'package:defi/data/datasource/client_profil_source.dart';
+import 'package:defi/data/datasource/token_market_datasource.dart';
 import 'package:defi/data/repositories/client_profil_repository_impl.dart';
+import 'package:defi/data/repositories/token_market_repository.dart';
+import 'package:defi/domain/repositories/market/token_market_repo.dart';
 import 'package:defi/domain/usecases/clientProfil/clientProfil_usecase.dart';
+import 'package:defi/domain/usecases/market/token_market_usecase.dart';
 import 'package:defi/domain/usecases/setup/wallet_setup_handler.dart';
 import 'package:defi/domain/usecases/wallet/wallet_handler.dart';
 import 'package:defi/presentation/blocs/client/client_profil_bloc.dart';
+import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/services/address_service.dart';
 import 'package:defi/services/configuration_service.dart';
 import 'package:defi/services/contract_locator.dart';
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'domain/repositories/clientProfil/clientProfil_repository.dart';
@@ -42,16 +50,30 @@ Future<void> setupLocator() async {
 Future<void> injectionBloc() async {
   //! Bloc client
   sl.registerFactory(() => ClientProfilBloc(clientProfilUsecase: sl()));
+  sl.registerFactory(() => MarketTokenBloc(tokenMarketUsecase: sl()));
 
   // Usecases
   sl.registerLazySingleton(() => ClientProfilUsecase(sl()));
+  sl.registerLazySingleton(() => TokenMarketUsecase(sl()));
 
   // Repositories
-  sl.registerLazySingleton<ClientProfilRepository>(() => ClientProfilRepositoryImpl(sl()));
+  sl.registerLazySingleton<ClientProfilRepository>(
+      () => ClientProfilRepositoryImpl(sl()));
+  sl.registerLazySingleton<TokenMarketRepository>(() =>
+      TokenMarketRepositoryImpl(
+          tokenMarketDataSource: sl(), networkInfo: sl()));
 
   // Data
-  sl.registerLazySingleton<ClientProfilDataSource>(() => ClientProfilDataSourceImpl(sl()));
+  sl.registerLazySingleton<ClientProfilDataSource>(
+      () => ClientProfilDataSourceImpl(sl()));
+  sl.registerLazySingleton<TokenMarketDataSource>(
+      () => TokenMarketDataSourceImpl(dio: sl()));
 
-  //! Database
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   sl.registerLazySingleton(() => ClientProfilCollection());
+  
+  //! External
+  sl.registerLazySingleton(() => InternetConnectionChecker());
+  sl.registerLazySingleton(() => Dio());
+
 }
