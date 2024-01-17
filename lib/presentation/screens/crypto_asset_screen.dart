@@ -10,6 +10,7 @@ import 'package:defi/presentation/widget/line_chart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 class CryptoAssetScreen extends StatefulWidget {
@@ -32,15 +33,15 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
           const SizedBox(
             height: 20,
           ),
-          const AutoSizeText(
-            "2022 Nov 12",
-            style: TextStyle(fontFamily: roboto),
+          AutoSizeText(
+            DateFormat.yMMMd().format(DateTime.now()),
+            style: const TextStyle(fontFamily: roboto),
           ),
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 3),
               child: AutoSizeText(
-                "\$ 13.54",
-                style: Theme.of(context).textTheme.headline3,
+                "\$ 50,123.34",
+                style: Theme.of(context).textTheme.headlineMedium,
               )),
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -52,7 +53,7 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                 size: 30,
               ),
               AutoSizeText(
-                "50,123.34 XOF (1.23%)",
+                "\$ 13.54 (1.23%)",
                 style: TextStyle(
                     fontSize: 15, fontFamily: roboto, color: Colors.redAccent),
               ),
