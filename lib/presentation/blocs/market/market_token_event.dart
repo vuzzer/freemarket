@@ -11,3 +11,8 @@ class GetTokenPrice extends MarketTokenEvent {
   final Params params;
   const GetTokenPrice(this.params);
 }
+
+class TokenPriceError extends MarketTokenEvent {
+  final String message;
+  const TokenPriceError(this.message);
+}

@@ -37,26 +37,42 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
             DateFormat.yMMMd().format(DateTime.now()),
             style: const TextStyle(fontFamily: roboto),
           ),
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 3),
-              child: AutoSizeText(
-                "\$ 50,123.34",
-                style: Theme.of(context).textTheme.headlineMedium,
-              )),
-          const Row(
+
+          BlocConsumer<MarketTokenBloc, MarketTokenState>(
+              builder: (context, state) {
+                if (state is MarketTokenLoaded) {
+                  return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 3),
+                      child: AutoSizeText(
+                        "\$ ${state.tokenMarketData.prices.last}",
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ));
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
+              listener: (context, state) {}),
+
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              Icon(
+              const Icon(
                 Icons.arrow_drop_up,
                 color: Colors.redAccent,
                 size: 30,
               ),
-              AutoSizeText(
-                "\$ 13.54 (1.23%)",
-                style: TextStyle(
-                    fontSize: 15, fontFamily: roboto, color: Colors.redAccent),
-              ),
+              BlocConsumer<MarketTokenBloc, MarketTokenState>(
+                  builder: (context, state) {
+                    return const AutoSizeText(
+                      "\$ 13.54 (1.23%)",
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: roboto,
+                          color: Colors.redAccent),
+                    );
+                  },
+                  listener: (context, state) {})
             ],
           ),
           const SizedBox(
@@ -80,7 +96,7 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                 } else if (state is MarketTokenError) {
                   context.loaderOverlay.hide();
                   return Center(child: Text(state.message));
-                } else{
+                } else {
                   return const SizedBox.shrink();
                 }
               })),
