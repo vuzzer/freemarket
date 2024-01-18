@@ -1,9 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/constants/app_font.dart';
-import 'package:defi/core/params.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
-import 'package:defi/presentation/widget/appbar_widget.dart';
+import 'package:defi/presentation/widget/appbar_token_widget.dart';
 import 'package:defi/presentation/widget/bottom_titles_widget.dart';
 import 'package:defi/presentation/widget/crypto_tx_history_widget.dart';
 import 'package:defi/presentation/widget/line_chart_widget.dart';
@@ -27,7 +26,7 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
     final size = ScreenUtil();
 
     return Scaffold(
-      appBar: const AppBarWidget(title: "Ethereum"),
+      appBar: const AppBarTokenWidget(title: "Ethereum"),
       body: Column(
         children: [
           const SizedBox(
