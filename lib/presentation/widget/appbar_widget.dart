@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
-import 'package:defi/presentation/screens/home_screen.dart';
 import 'package:defi/presentation/screens/theta_screen.dart';
 import 'package:flutter/material.dart';
 
