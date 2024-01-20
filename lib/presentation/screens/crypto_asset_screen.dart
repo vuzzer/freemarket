@@ -110,12 +110,15 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                       return const SizedBox.shrink();
                     }
                   })),
+              Container(height: 8, decoration: const BoxDecoration(color: darkBlue),),
               const BottomTitlesWidget(),
                Container(
                 height: 10,
                 decoration: const BoxDecoration(color: darkBlue),
               ),
-              Container(decoration: const BoxDecoration(color: darkBlue), child: const CryptoTxHistoryWidget())
+              Container(
+          
+                decoration: const BoxDecoration(color: darkBlue), child: const CryptoTxHistoryWidget())
             ],
           ),
         )));

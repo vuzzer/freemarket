@@ -6,6 +6,7 @@ import '../../constants/app_colors.dart';
 
 class CryptoTxHistoryWidget extends StatelessWidget {
   const CryptoTxHistoryWidget({Key? key}) : super(key: key);
+  final space = 4.0;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
     final theme = Theme.of(context);
     return Container(
         width: size.screenWidth,
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         decoration: const BoxDecoration(
             color: blue1,
             borderRadius: BorderRadius.only(
@@ -20,154 +22,212 @@ class CryptoTxHistoryWidget extends StatelessWidget {
               topRight: Radius.circular(30),
             )),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-          Text(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed euismod nisi porta lorem mollis aliquam ut porttitor leo.",
-            style: theme.textTheme.bodyMedium,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
             children: [
-              // Label for detail crypto
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed euismod nisi porta lorem mollis aliquam ut porttitor leo.",
+                    style: theme.textTheme.bodyMedium,
+                    textAlign: TextAlign.start,
+                  )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Price",
-                      style: TextStyle(
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontFamily: theme.textTheme.displayMedium!.fontFamily,
-                        color: theme.textTheme.displayMedium!.color,
-                      )),
-                  Text("24 High",
-                      style: TextStyle(
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontFamily: theme.textTheme.displayMedium!.fontFamily,
-                        color: theme.textTheme.displayMedium!.color,
-                      )),
-                  Text("24h Low",
-                      style: TextStyle(
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontFamily: theme.textTheme.displayMedium!.fontFamily,
-                        color: theme.textTheme.displayMedium!.color,
-                      )),
-                  Text("Market Cap Rank",
-                      style: TextStyle(
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontFamily: theme.textTheme.displayMedium!.fontFamily,
-                        color: theme.textTheme.displayMedium!.color,
-                      )),
-                  Text("Market Cap",
-                      style: TextStyle(
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontFamily: theme.textTheme.displayMedium!.fontFamily,
-                        color: theme.textTheme.displayMedium!.color,
-                      )),
-                  Text("Circulating Supply",
-                      style: TextStyle(
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontFamily: theme.textTheme.displayMedium!.fontFamily,
-                        color: theme.textTheme.displayMedium!.color,
-                      )),
-                  Text("Total Supply",
-                      style: TextStyle(
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontFamily: theme.textTheme.displayMedium!.fontFamily,
-                        color: theme.textTheme.displayMedium!.color,
-                      )),
-                  Text("All-Time High",
-                      style: TextStyle(
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontFamily: theme.textTheme.displayMedium!.fontFamily,
-                        color: theme.textTheme.displayMedium!.color,
-                      )),
-                  Text("All-Time Low",
-                      style: TextStyle(
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontFamily: theme.textTheme.displayMedium!.fontFamily,
-                        color: theme.textTheme.displayMedium!.color,
-                      )),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    "\$ 897",
-                    style: TextStyle(
-                        fontFamily: FontFamily.robotoCondensedBold,
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.white),
+                  // Label for detail crypto
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text("Price",
+                          style: TextStyle(
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontFamily:
+                                theme.textTheme.displayMedium!.fontFamily,
+                            color: theme.textTheme.displayMedium!.color,
+                          )),
+                          SizedBox(
+                        height: space,
+                      ),
+                      Text("24 High",
+                          style: TextStyle(
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontFamily:
+                                theme.textTheme.displayMedium!.fontFamily,
+                            color: theme.textTheme.displayMedium!.color,
+                          )),
+                       SizedBox(
+                        height: space,
+                      ),
+                      Text("24h Low",
+                          style: TextStyle(
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontFamily:
+                                theme.textTheme.displayMedium!.fontFamily,
+                            color: theme.textTheme.displayMedium!.color,
+                          )),
+                          SizedBox(
+                        height: space,
+                      ),
+                      Text("Market Cap Rank",
+                          style: TextStyle(
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontFamily:
+                                theme.textTheme.displayMedium!.fontFamily,
+                            color: theme.textTheme.displayMedium!.color,
+                          )),
+                          SizedBox(
+                        height: space,
+                      ),
+                      Text("Market Cap",
+                          style: TextStyle(
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontFamily:
+                                theme.textTheme.displayMedium!.fontFamily,
+                            color: theme.textTheme.displayMedium!.color,
+                          )),
+                          SizedBox(
+                        height: space,
+                      ),
+                      Text("Circulating Supply",
+                          style: TextStyle(
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontFamily:
+                                theme.textTheme.displayMedium!.fontFamily,
+                            color: theme.textTheme.displayMedium!.color,
+                          )),
+                          SizedBox(
+                        height: space,
+                      ),
+                      Text("Total Supply",
+                          style: TextStyle(
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontFamily:
+                                theme.textTheme.displayMedium!.fontFamily,
+                            color: theme.textTheme.displayMedium!.color,
+                          )),
+                          SizedBox(
+                        height: space,
+                      ),
+                      Text("All-Time High",
+                          style: TextStyle(
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontFamily:
+                                theme.textTheme.displayMedium!.fontFamily,
+                            color: theme.textTheme.displayMedium!.color,
+                          )),
+                          SizedBox(
+                        height: space,
+                      ),
+                      Text("All-Time Low",
+                          style: TextStyle(
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontFamily:
+                                theme.textTheme.displayMedium!.fontFamily,
+                            color: theme.textTheme.displayMedium!.color,
+                          )),
+                    ],
                   ),
-                  Text(
-                    "\$ 890",
-                    style: TextStyle(
-                        fontFamily: FontFamily.robotoCondensedBold,
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.white),
-                  ),
-                  Text(
-                    "\$ 89",
-                    style: TextStyle(
-                        fontFamily: FontFamily.robotoCondensedBold,
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.white),
-                  ),
-                  Text(
-                    "3",
-                    style: TextStyle(
-                        fontFamily: FontFamily.robotoCondensedBold,
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.white),
-                  ),
-                  Text("7M",
-                      style: TextStyle(
-                          fontFamily: FontFamily.robotoCondensedBold,
-                          fontSize: theme.textTheme.displayMedium!.fontSize,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.white)),
-                  Text(
-                    "19.7K",
-                    style: TextStyle(
-                        fontFamily: FontFamily.robotoCondensedBold,
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.white),
-                  ),
-                  Text(
-                    "20K",
-                    style: TextStyle(
-                        fontFamily: FontFamily.robotoCondensedBold,
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.white),
-                  ),
-                  Text(
-                    "19.7K",
-                    style: TextStyle(
-                        fontFamily: FontFamily.robotoCondensedBold,
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.white),
-                  ),
-                  Text(
-                    "20K",
-                    style: TextStyle(
-                        fontFamily: FontFamily.robotoCondensedBold,
-                        fontSize: theme.textTheme.displayMedium!.fontSize,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.white),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "\$ 897",
+                        style: TextStyle(
+                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: space,
+                      ),
+                      Text(
+                        "\$ 890",
+                        style: TextStyle(
+                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: space,
+                      ),
+                      Text(
+                        "\$ 89",
+                        style: TextStyle(
+                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: space,
+                      ),
+                      Text(
+                        "3",
+                        style: TextStyle(
+                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: space,
+                      ),
+                      Text("7M",
+                          style: TextStyle(
+                              fontFamily: FontFamily.robotoCondensedBold,
+                              fontSize: theme.textTheme.displayMedium!.fontSize,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white)),
+                      Text(
+                        "19.7K",
+                        style: TextStyle(
+                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: space,
+                      ),
+                      Text(
+                        "20K",
+                        style: TextStyle(
+                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: space,
+                      ),
+                      Text(
+                        "19.7K",
+                        style: TextStyle(
+                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: space,
+                      ),
+                      Text(
+                        "20K",
+                        style: TextStyle(
+                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontSize: theme.textTheme.displayMedium!.fontSize,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white),
+                      )
+                    ],
                   )
                 ],
               )
-            ],
-          )
-        ]));
+            ]));
   }
 }
