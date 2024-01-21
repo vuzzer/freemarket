@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:defi/core/base_url.dart';
 import 'package:defi/core/error/exception.dart';
 import 'package:defi/core/params.dart';
 import 'package:defi/data/models/token_market_data_model.dart';
@@ -26,7 +25,7 @@ class TokenMarketDataSourceImpl implements TokenMarketDataSource {
 
     // Fetch daily data token
     final response = await dio.get(
-        "https://api.coingecko.com/api/v3/coins/${params.idToken}/market_chart?vs_currency=${params.currentOfMarket}&days=2&precision=2",
+        "${baseUrl}coins/${params.idToken}/market_chart?vs_currency=${params.currentOfMarket}&days=2&precision=2",
         options: options);
 
     // Succes request so get data

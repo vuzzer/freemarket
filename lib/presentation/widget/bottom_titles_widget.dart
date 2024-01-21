@@ -13,7 +13,9 @@ class BottomTitlesWidget extends StatelessWidget {
       fontWeight: FontWeight.bold,
       fontSize: 16,
     );
-    return Row(
+    return Container(
+      decoration: const BoxDecoration(color: darkBlue),
+      child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Container(
@@ -45,6 +47,6 @@ class BottomTitlesWidget extends StatelessWidget {
                 color: blue1, borderRadius: BorderRadius.circular(30)),
             child: const AutoSizeText('Year', style: style))
       ],
-    );
+    ));
   }
 }

@@ -116,14 +116,23 @@ flutter:
           weight: 900
 
     - family: RobotoCondensed
-      fonts:
+      fonts: 
         - asset: assets/fonts/RobotoCondensed-Regular.ttf
+    
+    - family: RobotoCondensed-Bold
+      fonts: 
         - asset: assets/fonts/RobotoCondensed-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/RobotoCondensed-Light.ttf
-          weight: 300
+          weight: 900
+
+    - family: RobotoCondensed-Italic
+      fonts:
         - asset: assets/fonts/RobotoCondensed-Italic.ttf
           style: italic
+
+    - family: MonstSerrat
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Weigth.ttf
+          weight: 900
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

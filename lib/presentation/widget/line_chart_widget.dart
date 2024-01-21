@@ -121,7 +121,7 @@ class LineChartWidget extends StatelessWidget {
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: false,
-                reservedSize: 30,
+                reservedSize: 20,
                 interval: 1,
                 getTitlesWidget: bottomTitleWidgets,
               ),
@@ -139,7 +139,7 @@ class LineChartWidget extends StatelessWidget {
             show: false,
           ),
           minX: state.tokenMarketData.times.first.toDouble(),
-          maxX: state.tokenMarketData.times.last.toDouble()+3000,
+          maxX: state.tokenMarketData.times.last.toDouble()+3000.0,
           minY: state.tokenMarketData.prices.reduce(min),
           maxY: state.tokenMarketData.prices.reduce(max),
           lineBarsData: [
@@ -150,7 +150,7 @@ class LineChartWidget extends StatelessWidget {
                       double.parse(state.tokenMarketData.times[p].toString()),
                       state.tokenMarketData.prices[p])),
               isCurved: false,
-              barWidth: 5,
+              barWidth: 1.6,
               isStrokeCapRound: true,
               dotData: FlDotData(
                 show: false,

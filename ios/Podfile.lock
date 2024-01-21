@@ -883,10 +883,6 @@ SPEC CHECKSUMS:
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
   shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
 
-<<<<<<< HEAD
-PODFILE CHECKSUM: 754af90f175e57a5ec6606672b88c69ed66998a1
-=======
-PODFILE CHECKSUM: ead5cb7f751e9497111c444b756ba57e3773ccc8
->>>>>>> tdd_clean_architecture
+PODFILE CHECKSUM: caae844d0c38b45b55aa506a72915aed4529d24b
 
 COCOAPODS: 1.11.3

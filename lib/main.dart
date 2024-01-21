@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:defi/firebase_options.dart';
 import 'package:defi/get_routes.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
@@ -6,6 +5,7 @@ import 'package:defi/presentation/provider/network_provider.dart';
 import 'package:defi/presentation/provider/user_provider.dart';
 import 'package:defi/presentation/screens/verification_screen.dart';
 import 'package:defi/service_locator.dart';
+import 'package:defi/styles/font_family.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,8 +32,6 @@ void main() async {
     statusBarBrightness: Brightness.dark,
   ));
 
-  HttpOverrides.global = MyHttpOverrides();
-
 /*   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
         create: (context) => UserProvider(), child: const VerificationScreen()),
@@ -52,8 +50,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  static String raleway = 'Raleway';
-  static String robotoCondensed = 'RobotoCondensed';
+
+
   const MyApp({super.key});
   // This widget is the root of your application.
 
@@ -79,31 +77,29 @@ class MyApp extends StatelessWidget {
                     fontFamily: 'Raleway',
                     scaffoldBackgroundColor: const Color(0XFF171B2F),
                     splashFactory: InkRipple.splashFactory,
+                    
                     textTheme: TextTheme(
                         headlineLarge: TextStyle(
-                          fontFamily: robotoCondensed,
+                          fontFamily: FontFamily.robotoCondensed,
                         ),
                         headlineMedium: TextStyle(
                             fontSize: 37,
-                            fontFamily: robotoCondensed,
+                            fontFamily: FontFamily.robotoCondensed,
                             color: Colors.white,
                             fontWeight: FontWeight.w700),
                         headlineSmall: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                         ),
-                        bodyLarge: const TextStyle(color: Colors.white),
+                        // For token price details
+                        displayMedium: TextStyle(
+                            color:  Colors.grey.withOpacity(0.6),
+                            fontSize: 20,                      
+                            fontFamily: FontFamily.robotoCondensed),
+                          
+                        bodyLarge:  TextStyle(color: Colors.grey.withOpacity(0.6) ),
                         bodyMedium:
-                            TextStyle(color: Colors.grey.withOpacity(0.6)))),
+                            TextStyle(color: Colors.grey.withOpacity(0.6) ))),
                 routes: getRoutes(context))));
-  }
-}
-
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
   }
 }
