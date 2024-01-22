@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:defi/core/base_url.dart';
 import 'package:defi/core/error/exception.dart';
 import 'package:defi/core/params.dart';
@@ -30,7 +32,8 @@ class TokenMarketDataSourceImpl implements TokenMarketDataSource {
 
     // Succes request so get data
     if (response.statusCode == 200) {
-      return TokenMarketDataModel.fromJson(response.data);
+      final data = jsonDecode(response.data);
+      return TokenMarketDataModel.fromJson(data);
     }
 
     throw NetworkException();

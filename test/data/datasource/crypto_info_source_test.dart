@@ -1,3 +1,4 @@
+import 'package:defi/core/base_url.dart';
 import 'package:defi/data/datasource/crypto_info_source.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,15 +12,18 @@ import 'crypto_info_source_test.mocks.dart';
 void main() {
   late CryptoInfoSourceImpl cryptoInfoSourceImpl;
   late MockDio mockDio;
+
   setUpAll(() {
     mockDio = MockDio();
     cryptoInfoSourceImpl = CryptoInfoSourceImpl(mockDio);
   });
 
-  test("Should return crypto info", () async {
+  test("Should return crypto info list", () async {
     // arrange
-    when(mockDio.get(any))
-        .thenAnswer((_) async => Response( data: fixture("crypto_info.json") , requestOptions: RequestOptions(), statusCode: 200 ));
+    when(mockDio.get(any, options: anyNamed("options"))).thenAnswer((_) async => Response(
+        data: fixture("crypto_info.json"),
+        requestOptions: RequestOptions(),
+        statusCode: 200));
     // act date
     await cryptoInfoSourceImpl.getCryptoInfo();
   });

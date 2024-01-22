@@ -8,7 +8,7 @@ class CryptoInfo extends Equatable {
   final double marketCap;
   final int marketCapRank;
   final double circulatingSupply;
-  final double totalSupply;
+  final num? totalSupply;
   final double allTimeHigh;
   final double allTimeLow;
   final DateTime allTimeHighDate;
