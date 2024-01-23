@@ -2,15 +2,15 @@ import 'package:equatable/equatable.dart';
 
 class CryptoInfo extends Equatable {
   final String image;
-  final double currentPrice;
-  final double priceChange24h;
+  final num? currentPrice;
+  final num? priceChange24h;
   final String name;
-  final double marketCap;
-  final int marketCapRank;
-  final double circulatingSupply;
+  final num? marketCap;
+  final num? marketCapRank;
+  final num? circulatingSupply;
   final num? totalSupply;
-  final double allTimeHigh;
-  final double allTimeLow;
+  final num? allTimeHigh;
+  final num? allTimeLow;
   final DateTime allTimeHighDate;
   final DateTime allTimeLowDate;
 

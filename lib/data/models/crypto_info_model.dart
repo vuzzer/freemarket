@@ -19,15 +19,15 @@ class CryptoInfoModel extends CryptoInfo {
   factory CryptoInfoModel.fromJson(Map<String, dynamic> crypto) {
     return CryptoInfoModel(
         image: crypto["image"],
-        currentPrice: (crypto["current_price"] as num).toDouble(),
-        priceChange24h: (crypto["price_change_percentage_24h"] as num).toDouble(),
+        currentPrice: num.tryParse(crypto["current_price"].toString()),
+        priceChange24h: num.tryParse(crypto["price_change_percentage_24h"].toString()),
         name: crypto["name"],
-        marketCap: (crypto["market_cap"] as num ).toDouble(),
-        marketCapRank: (crypto["market_cap_rank"] as num).toInt(),
-        circulatingSupply: (crypto["circulating_supply"] as num).toDouble(),
+        marketCap: num.tryParse(crypto["market_cap"].toString() ),
+        marketCapRank: num.tryParse(crypto["market_cap_rank"].toString()),
+        circulatingSupply: num.tryParse(crypto["circulating_supply"].toString()),
         totalSupply: num.tryParse(crypto["total_supply"].toString()),
-        allTimeHigh: (crypto["ath"] as num).toDouble(),
-        allTimeLow: (crypto["atl"] as num).toDouble(),
+        allTimeHigh: num.tryParse(crypto["ath"].toString()),
+        allTimeLow: num.tryParse(crypto["atl"].toString()),
         allTimeHighDate: DateTime.parse(crypto["ath_date"]),
         allTimeLowDate: DateTime.parse( crypto["ath_date"]));
   }

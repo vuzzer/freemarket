@@ -100,6 +100,6 @@ class MyApp extends StatelessWidget {
                         bodyLarge:  TextStyle(color: Colors.grey.withOpacity(0.6) ),
                         bodyMedium:
                             TextStyle(color: Colors.grey.withOpacity(0.6) ))),
-                routes: getRoutes(context))));
+                routes:  getRoutes(context) )));
   }
 }
