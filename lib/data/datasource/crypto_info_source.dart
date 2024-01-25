@@ -21,14 +21,14 @@ class CryptoInfoSourceImpl implements CryptoInfoSource {
         headers: {"Content-Type": "Application/json"});
 
     final response = await dio.get(
-        "${baseUrl}coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=fr&precision=2", options: options);
+        "${baseUrl}coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=fr&precision=2",
+        options: options);
 
     if (response.statusCode == 200) {
       // List of market crypto
-      final List<dynamic> data = jsonDecode(response.data);
+      final List<dynamic> data = response.data;
       // Convert data to model
       List<CryptoInfoModel> cryptos = data.map((crypto) {
-
         return CryptoInfoModel.fromJson(crypto);
       }).toList();
       // List of crypto

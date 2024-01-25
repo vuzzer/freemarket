@@ -1,14 +1,15 @@
+import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/screens/deposit_screen.dart';
 import 'package:defi/presentation/screens/send_screen.dart';
 import 'package:defi/presentation/screens/withdraw_screen.dart';
 import 'package:defi/presentation/widget/button_operation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/card_balance.dart';
 import '../widget/theta_body_widget.dart';
 import 'choose_currency_screen.dart';
-
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,23 +17,25 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+        body: BlocBuilder<CryptosBloc, CryptosState>(builder: (context, state) {
+      if (state is CryptosLoaded) {
+      return Column(
         children: [
           SizedBox(
             height: (kFontSizeUnit * 5).h,
           ),
           const Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 18),
+              padding: EdgeInsets.symmetric(horizontal: 18),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                   Icon(
+                  Icon(
                     Icons.person,
                     color: Colors.white,
                     size: 30,
                   ),
                   Row(
-                    children:  [
+                    children: [
                       Icon(
                         Icons.notifications,
                         color: Colors.white,
@@ -113,7 +116,18 @@ class HomeScreen extends StatelessWidget {
           ),
           const ThetaBodyWidget()
         ],
-      ),
-    );
+      );
+      }
+      return const Center(
+          child: SizedBox(
+            width: 50,
+            height: 50,
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
+          ),
+        );
+
+    }));
   }
 }

@@ -1,8 +1,10 @@
 import 'package:defi/firebase_options.dart';
 import 'package:defi/get_routes.dart';
+import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/presentation/provider/network_provider.dart';
 import 'package:defi/presentation/provider/user_provider.dart';
+import 'package:defi/presentation/screens/base_screen.dart';
 import 'package:defi/presentation/screens/verification_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_family.dart';
@@ -45,7 +47,8 @@ void main() async {
     ChangeNotifierProvider(
         create: (context) => UserProvider(), child: const VerificationScreen()),
     Provider(create: (context) => NetworkProvider()),
-    BlocProvider(create: (context) => sl<MarketTokenBloc>())
+    BlocProvider(create: (context) => sl<MarketTokenBloc>()),
+    BlocProvider(create: (context) => sl<CryptosBloc>() )
   ], child: const MyApp()));
 }
 
@@ -71,6 +74,7 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
                 title: 'Flutter Demo',
                 debugShowCheckedModeBanner: false,
+                builder: (context, child) => BaseScreen(child!),
                 theme: ThemeData(
                     primarySwatch: Colors.blue,
                     primaryColor: Colors.white,

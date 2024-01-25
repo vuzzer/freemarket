@@ -1,15 +1,20 @@
 import 'package:defi/core/database/client_profil_collection.dart';
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/data/datasource/client_profil_source.dart';
+import 'package:defi/data/datasource/crypto_info_source.dart';
 import 'package:defi/data/datasource/token_market_datasource.dart';
 import 'package:defi/data/repositories/client_profil_repository_impl.dart';
+import 'package:defi/data/repositories/crypto_info_repo_impl.dart';
 import 'package:defi/data/repositories/token_market_repository.dart';
+import 'package:defi/domain/repositories/crypto-info/crypto_info_repo.dart';
 import 'package:defi/domain/repositories/market/token_market_repo.dart';
 import 'package:defi/domain/usecases/clientProfil/clientProfil_usecase.dart';
+import 'package:defi/domain/usecases/crypto-info/crypto_info_usecases.dart';
 import 'package:defi/domain/usecases/market/token_market_usecase.dart';
 import 'package:defi/domain/usecases/setup/wallet_setup_handler.dart';
 import 'package:defi/domain/usecases/wallet/wallet_handler.dart';
 import 'package:defi/presentation/blocs/client/client_profil_bloc.dart';
+import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/services/address_service.dart';
 import 'package:defi/services/configuration_service.dart';
@@ -51,29 +56,31 @@ Future<void> injectionBloc() async {
   //! Bloc client
   sl.registerFactory(() => ClientProfilBloc(clientProfilUsecase: sl()));
   sl.registerFactory(() => MarketTokenBloc(tokenMarketUsecase: sl()));
+  sl.registerFactory(() => CryptosBloc(cryptoInfoUseCase: sl()));
 
-  // Usecases
+  //! Usecases
   sl.registerLazySingleton(() => ClientProfilUsecase(sl()));
   sl.registerLazySingleton(() => TokenMarketUsecase(sl()));
+  sl.registerLazySingleton(() => CryptoInfoUseCase(sl()));
 
-  // Repositories
+  //! Repositories
   sl.registerLazySingleton<ClientProfilRepository>(
       () => ClientProfilRepositoryImpl(sl()));
   sl.registerLazySingleton<TokenMarketRepository>(() =>
       TokenMarketRepositoryImpl(
           tokenMarketDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<CryptoInfoRepo>(() => CryptoInfoRepoImpl(sl()));
 
-  // Data
+  //! Data
   sl.registerLazySingleton<ClientProfilDataSource>(
       () => ClientProfilDataSourceImpl(sl()));
   sl.registerLazySingleton<TokenMarketDataSource>(
       () => TokenMarketDataSourceImpl(dio: sl()));
-
+  sl.registerLazySingleton<CryptoInfoSource>(() => CryptoInfoSourceImpl(sl()));
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   sl.registerLazySingleton(() => ClientProfilCollection());
-  
+
   //! External
   sl.registerLazySingleton(() => InternetConnectionChecker());
   sl.registerLazySingleton(() => Dio());
-
 }

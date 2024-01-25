@@ -3,10 +3,10 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
 import 'package:defi/core/network/network_info.dart' as _i5;
-import 'package:defi/data/datasource/wallet_data_source.dart' as _i4;
+import 'package:defi/data/datasource/wallet_data_source.dart' as _i3;
 import 'package:defi/data/models/wallet_model.dart' as _i2;
 import 'package:internet_connection_checker/internet_connection_checker.dart'
     as _i6;
@@ -33,78 +33,67 @@ class _FakeWalletModel_0 extends _i1.SmartFake implements _i2.WalletModel {
         );
 }
 
-class _FakeStreamSubscription_1<T> extends _i1.SmartFake
-    implements _i3.StreamSubscription<T> {
-  _FakeStreamSubscription_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [WalletDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockWalletDataSource extends _i1.Mock implements _i4.WalletDataSource {
+class MockWalletDataSource extends _i1.Mock implements _i3.WalletDataSource {
   MockWalletDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<String> generateMnemonic() => (super.noSuchMethod(
+  _i4.Future<String> generateMnemonic() => (super.noSuchMethod(
         Invocation.method(
           #generateMnemonic,
           [],
         ),
-        returnValue: _i3.Future<String>.value(''),
-      ) as _i3.Future<String>);
+        returnValue: _i4.Future<String>.value(''),
+      ) as _i4.Future<String>);
   @override
-  _i3.Future<_i2.WalletModel> createWallet(String? mnemonic) =>
+  _i4.Future<_i2.WalletModel> createWallet(String? mnemonic) =>
       (super.noSuchMethod(
         Invocation.method(
           #createWallet,
           [mnemonic],
         ),
-        returnValue: _i3.Future<_i2.WalletModel>.value(_FakeWalletModel_0(
+        returnValue: _i4.Future<_i2.WalletModel>.value(_FakeWalletModel_0(
           this,
           Invocation.method(
             #createWallet,
             [mnemonic],
           ),
         )),
-      ) as _i3.Future<_i2.WalletModel>);
+      ) as _i4.Future<_i2.WalletModel>);
   @override
-  _i3.Future<_i2.WalletModel> initialiseFromMnemonic(String? mnemonic) =>
+  _i4.Future<_i2.WalletModel> initialiseFromMnemonic(String? mnemonic) =>
       (super.noSuchMethod(
         Invocation.method(
           #initialiseFromMnemonic,
           [mnemonic],
         ),
-        returnValue: _i3.Future<_i2.WalletModel>.value(_FakeWalletModel_0(
+        returnValue: _i4.Future<_i2.WalletModel>.value(_FakeWalletModel_0(
           this,
           Invocation.method(
             #initialiseFromMnemonic,
             [mnemonic],
           ),
         )),
-      ) as _i3.Future<_i2.WalletModel>);
+      ) as _i4.Future<_i2.WalletModel>);
   @override
-  _i3.Future<_i2.WalletModel> initialiseFromPrivateKey(String? privateKey) =>
+  _i4.Future<_i2.WalletModel> initialiseFromPrivateKey(String? privateKey) =>
       (super.noSuchMethod(
         Invocation.method(
           #initialiseFromPrivateKey,
           [privateKey],
         ),
-        returnValue: _i3.Future<_i2.WalletModel>.value(_FakeWalletModel_0(
+        returnValue: _i4.Future<_i2.WalletModel>.value(_FakeWalletModel_0(
           this,
           Invocation.method(
             #initialiseFromPrivateKey,
             [privateKey],
           ),
         )),
-      ) as _i3.Future<_i2.WalletModel>);
+      ) as _i4.Future<_i2.WalletModel>);
 }
 
 /// A class which mocks [NetworkInfo].
@@ -116,22 +105,18 @@ class MockNetworkInfo extends _i1.Mock implements _i5.NetworkInfo {
   }
 
   @override
-  _i3.Future<bool> get isConnected => (super.noSuchMethod(
+  _i4.Future<bool> get isConnected => (super.noSuchMethod(
         Invocation.getter(#isConnected),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
   @override
-  _i3.StreamSubscription<_i6.InternetConnectionStatus> get listener =>
-      (super.noSuchMethod(
+  _i4.Stream<_i6.InternetConnectionStatus> get listener => (super.noSuchMethod(
         Invocation.getter(#listener),
-        returnValue: _FakeStreamSubscription_1<_i6.InternetConnectionStatus>(
-          this,
-          Invocation.getter(#listener),
-        ),
-      ) as _i3.StreamSubscription<_i6.InternetConnectionStatus>);
+        returnValue: _i4.Stream<_i6.InternetConnectionStatus>.empty(),
+      ) as _i4.Stream<_i6.InternetConnectionStatus>);
   @override
-  _i3.Future<void> get dispose => (super.noSuchMethod(
+  _i4.Future<void> get dispose => (super.noSuchMethod(
         Invocation.getter(#dispose),
-        returnValue: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }
