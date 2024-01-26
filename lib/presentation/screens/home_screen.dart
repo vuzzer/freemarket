@@ -1,3 +1,4 @@
+import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/screens/deposit_screen.dart';
 import 'package:defi/presentation/screens/send_screen.dart';
@@ -6,17 +7,47 @@ import 'package:defi/presentation/widget/button_operation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/card_balance.dart';
 import '../widget/theta_body_widget.dart';
 import 'choose_currency_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    CheckConnectivity.checkConnectivity();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    CheckConnectivity.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: StreamBuilder(
+            stream: CheckConnectivity.listener,
+            builder: (context, snapshot) {
+              final status = snapshot.data;
+              if (status == InternetConnectionStatus.disconnected) {
+                return Center(
+                    child: Text(
+                  "Pas de connexion internet",
+                  style: Theme.of(context).textTheme.displayMedium,
+                ));
+              }
+              return  Scaffold(
         body: BlocBuilder<CryptosBloc, CryptosState>(builder: (context, state) {
       if (state is CryptosLoaded) {
       return Column(
@@ -82,11 +113,6 @@ class HomeScreen extends StatelessWidget {
                   Navigator.of(context).pushNamed(DepositScreen.routeName);
                 },
               ),
-              /* ButtonOperation(
-                icon: Icons.wallet,
-                text: "Dépôt",
-                onPressed: () {},
-              ), */
               ButtonOperation(
                 icon: Icons.paid,
                 text: "Retrait",
@@ -94,27 +120,12 @@ class HomeScreen extends StatelessWidget {
                   Navigator.of(context).pushNamed(WithDrawScreen.routeName);
                 },
               ),
-              /*        Flexible(
-                  child: ButtonIconWidget(
-                iconData: Icons.arrow_upward,
-                label: "Send",
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(SendScreen.routeName),
-              )),
-              Flexible(
-                  child: ButtonIconWidget(
-                iconData: Icons.arrow_downward,
-                label: "Receive",
-                onPressed: () => Navigator.of(context).pushNamed(
-                    ChooseCurrencyScreen.routeName,
-                    ),
-              )) */
             ],
           ),
           const SizedBox(
             height: 20,
           ),
-          const ThetaBodyWidget()
+          ThetaBodyWidget(cryptos: state.cryptos)
         ],
       );
       }
@@ -128,6 +139,6 @@ class HomeScreen extends StatelessWidget {
           ),
         );
 
-    }));
+    }));}));
   }
 }

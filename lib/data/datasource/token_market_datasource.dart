@@ -32,7 +32,7 @@ class TokenMarketDataSourceImpl implements TokenMarketDataSource {
 
     // Succes request so get data
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.data);
+      final data = response.data;
       return TokenMarketDataModel.fromJson(data);
     }
 

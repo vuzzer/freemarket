@@ -15,17 +15,33 @@ class StartedScreen extends StatefulWidget {
 }
 
 class _StartedScreenState extends State<StartedScreen> {
-  final internetCheckerStream = sl<NetworkInfo>().listener;
+  @override
+  void initState() {
+    CheckConnectivity.checkConnectivity();
+    super.initState();
+  }
 
   @override
   void dispose() {
+    CheckConnectivity.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
+        body:StreamBuilder(
+            stream: CheckConnectivity.listener,
+            builder: (context, snapshot) {
+              final status = snapshot.data;
+              if(status == InternetConnectionStatus.disconnected){
+                return Center(
+                  child: Text(
+                "Pas de connexion internet",
+                style: Theme.of(context).textTheme.displayMedium,
+              ));
+              }
+              return  Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     decoration: const BoxDecoration(
@@ -117,8 +133,7 @@ class _StartedScreenState extends State<StartedScreen> {
                                         .read<CryptosBloc>()
                                         .add(GetCryptoInfo());
 
-                                    Navigator.of(context)
-                                        .pushNamed(ThetaScreen.routeName);
+                                    Navigator.of(context).pushNamed(ThetaScreen.routeName);
                                   },
                                   style: ElevatedButton.styleFrom(
                                       padding: const EdgeInsets.symmetric(
@@ -135,7 +150,7 @@ class _StartedScreenState extends State<StartedScreen> {
                                   )))
                         ],
                       ),
-                    ))
+                    ));})
           
             );
   }

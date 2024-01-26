@@ -139,7 +139,7 @@ class LineChartWidget extends StatelessWidget {
             show: false,
           ),
           minX: state.tokenMarketData.times.first.toDouble(),
-          maxX: state.tokenMarketData.times.last.toDouble()+3000.0,
+          maxX: state.tokenMarketData.times.last.toDouble(),
           minY: state.tokenMarketData.prices.reduce(min),
           maxY: state.tokenMarketData.prices.reduce(max),
           lineBarsData: [

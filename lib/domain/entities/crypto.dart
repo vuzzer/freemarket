@@ -5,6 +5,7 @@ class CryptoInfo extends Equatable {
   final num? currentPrice;
   final num? priceChange24h;
   final String name;
+  final String id;
   final num? marketCap;
   final num? marketCapRank;
   final num? circulatingSupply;
@@ -15,7 +16,9 @@ class CryptoInfo extends Equatable {
   final DateTime allTimeLowDate;
 
   const CryptoInfo(
-      {required this.image,
+      {
+      required this.id,
+      required this.image,
       required this.currentPrice,
       required this.priceChange24h,
       required this.name,
@@ -27,8 +30,21 @@ class CryptoInfo extends Equatable {
       required this.allTimeLow,
       required this.allTimeHighDate,
       required this.allTimeLowDate});
-      
-        @override
-        // TODO: implement props
-        List<Object?> get props => [image, currentPrice, priceChange24h, name, marketCap, marketCapRank, circulatingSupply, totalSupply, allTimeHigh, allTimeLow, allTimeHighDate, allTimeLowDate];
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        image,
+        currentPrice,
+        priceChange24h,
+        name,
+        marketCap,
+        marketCapRank,
+        circulatingSupply,
+        totalSupply,
+        allTimeHigh,
+        allTimeLow,
+        allTimeHighDate,
+        allTimeLowDate
+      ];
 }

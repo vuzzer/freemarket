@@ -1,9 +1,9 @@
 import 'package:defi/domain/entities/crypto.dart';
-import 'package:intl/intl.dart';
 
 class CryptoInfoModel extends CryptoInfo {
   const CryptoInfoModel(
       {required super.image,
+      required super.id,
       required super.currentPrice,
       required super.priceChange24h,
       required super.name,
@@ -19,6 +19,7 @@ class CryptoInfoModel extends CryptoInfo {
   factory CryptoInfoModel.fromJson(Map<String, dynamic> crypto) {
     return CryptoInfoModel(
         image: crypto["image"],
+        id: crypto["id"],
         currentPrice: num.tryParse(crypto["current_price"].toString()),
         priceChange24h: num.tryParse(crypto["price_change_percentage_24h"].toString()),
         name: crypto["name"],

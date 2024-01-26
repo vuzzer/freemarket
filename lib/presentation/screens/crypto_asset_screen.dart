@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/constants/app_font.dart';
+import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/presentation/widget/appbar_token_widget.dart';
 import 'package:defi/presentation/widget/bottom_titles_widget.dart';
@@ -9,6 +10,7 @@ import 'package:defi/presentation/widget/line_chart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -21,10 +23,34 @@ class CryptoAssetScreen extends StatefulWidget {
 }
 
 class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
+    @override
+  void initState() {
+    CheckConnectivity.checkConnectivity();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    CheckConnectivity.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = ScreenUtil();
     return Scaffold(
+      body: StreamBuilder(
+            stream: CheckConnectivity.listener,
+            builder: (context, snapshot) {
+              final status = snapshot.data;
+              if(status == InternetConnectionStatus.disconnected){
+                return Center(
+                  child: Text(
+                "Pas de connexion internet",
+                style: Theme.of(context).textTheme.displayMedium,
+              ));
+              }
+              return Scaffold(
         backgroundColor: blue1,
         appBar: const AppBarTokenWidget(title: "Ethereum"),
         body: SafeArea(
@@ -121,6 +147,6 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                 decoration: const BoxDecoration(color: darkBlue), child: const CryptoTxHistoryWidget())
             ],
           ),
-        )));
+        )));}));
   }
 }

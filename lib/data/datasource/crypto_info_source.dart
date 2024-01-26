@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:defi/core/base_url.dart';
 import 'package:defi/core/error/exception.dart';
 import 'package:defi/data/models/crypto_info_model.dart';
@@ -21,7 +19,7 @@ class CryptoInfoSourceImpl implements CryptoInfoSource {
         headers: {"Content-Type": "Application/json"});
 
     final response = await dio.get(
-        "${baseUrl}coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=fr&precision=2",
+        "${baseUrl}coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false&locale=fr&precision=2",
         options: options);
 
     if (response.statusCode == 200) {
