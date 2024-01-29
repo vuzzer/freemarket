@@ -1,9 +1,5 @@
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
-import 'package:defi/presentation/screens/deposit_screen.dart';
-import 'package:defi/presentation/screens/send_screen.dart';
-import 'package:defi/presentation/screens/withdraw_screen.dart';
-import 'package:defi/presentation/widget/button_operation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,9 +7,9 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/card_balance.dart';
 import '../widget/theta_body_widget.dart';
-import 'choose_currency_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const routeName = "/home";
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -58,15 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
           const Padding(
               padding: EdgeInsets.symmetric(horizontal: 18),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  Row(
-                    children: [
+               
                       Icon(
                         Icons.notifications,
                         color: Colors.white,
@@ -74,13 +64,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         width: 15,
                       ),
+                      // Icons.dark_mode
                       Icon(
-                        Icons.menu,
+                        Icons.light_mode,
                         color: Colors.white,
                         size: 30,
                       )
-                    ],
-                  )
+               
                 ],
               )),
           const SizedBox(
@@ -89,38 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
           const CardBalance(),
           const SizedBox(
             height: 15,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ButtonOperation(
-                icon: Icons.arrow_upward,
-                text: "Envoyer",
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(SendScreen.routeName),
-              ),
-              ButtonOperation(
-                icon: Icons.arrow_downward,
-                text: "Recevoir",
-                onPressed: () => Navigator.of(context).pushNamed(
-                  ChooseCurrencyScreen.routeName,
-                ),
-              ),
-              ButtonOperation(
-                icon: Icons.payment,
-                text: "Acheter",
-                onPressed: () {
-                  Navigator.of(context).pushNamed(DepositScreen.routeName);
-                },
-              ),
-              ButtonOperation(
-                icon: Icons.paid,
-                text: "Retrait",
-                onPressed: () {
-                  Navigator.of(context).pushNamed(WithDrawScreen.routeName);
-                },
-              ),
-            ],
           ),
           const SizedBox(
             height: 20,

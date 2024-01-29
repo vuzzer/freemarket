@@ -13,7 +13,6 @@ class ThetaBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final networks = NetworkType.enabledValues;
     final size = ScreenUtil();
     return Expanded(
       child: Container(
@@ -42,13 +41,13 @@ class ThetaBodyWidget extends StatelessWidget {
                         tabs: const [
                           Tab(
                             child: Text(
-                              'Currency',
+                              'Cryptos',
                               style: TextStyle(fontWeight: FontWeight.w700),
                             ),
                           ),
                           Tab(
                             child: Text(
-                              'History',
+                              'Favoris',
                               style: TextStyle(fontWeight: FontWeight.w700),
                             ),
                           ),

@@ -40,7 +40,7 @@ class CryptoAssetWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: CircleAvatar(
                     radius: 30,
-                    child: Image.network(crypto.image),
+                    backgroundImage: NetworkImage(crypto.image),
                   ),
                 ),
                 title: AutoSizeText(

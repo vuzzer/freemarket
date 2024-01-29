@@ -1,9 +1,10 @@
+import 'package:defi/domain/entities/crypto.dart';
 import 'package:equatable/equatable.dart';
 
 class Settings extends Equatable {
-  final String visible; // Indicate crypto visible
-  final List<String> favoris; // Favoris crypto of user
-  final List<String> notification;
+  final CryptoInfo visible; // Indicate crypto visible
+  final List<CryptoInfo> favoris; // Favoris crypto of user
+  final List<CryptoInfo> notification;
 
   const Settings(
       {required this.visible,

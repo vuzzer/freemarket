@@ -4,6 +4,7 @@ import 'package:defi/presentation/screens/choose_currency_screen.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
 import 'package:defi/presentation/screens/confirm_deposit_screen.dart';
 import 'package:defi/presentation/screens/deposit_screen.dart';
+import 'package:defi/presentation/screens/home_screen.dart';
 import 'package:defi/presentation/screens/login_screen.dart';
 import 'package:defi/presentation/screens/otp_screen.dart';
 import 'package:defi/presentation/screens/qr_code_reader_screen.dart';
@@ -46,8 +47,8 @@ Map<String, WidgetBuilder> getRoutes(context) {
     SettingScreen.routeName: (context) => const SettingScreen(),
     ConfirmDepositScreen.routeName: (context) => const ConfirmDepositScreen(),
     DepositScreen.routeName: (context) => const DepositScreen(),
-    ThetaScreen.routeName: (BuildContext context) {
-      return const ThetaScreen();
+    HomeScreen.routeName: (BuildContext context) {
+      return const HomeScreen();
     },
   };
 }

@@ -1,7 +1,6 @@
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
-import 'package:defi/presentation/screens/theta_screen.dart';
-import 'package:defi/service_locator.dart';
+import 'package:defi/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -72,33 +71,6 @@ class _StartedScreenState extends State<StartedScreen> {
                           const SizedBox(
                             height: 2,
                           ),
-                          /* SizedBox(
-                    height: 450,
-                    child: Stack(
-                      children: [
-                       
-                        Positioned(
-                            top: 190,
-                            left: 20,
-                            height: 220,
-                            width: 380,
-                            child: Transform.rotate(
-                                angle: -2.03 * pi,
-                                child: const Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: CreditCardWidget()))),
-                        Transform.rotate(
-                            angle: 2.09 * pi,
-                            child: const Padding(
-                                padding: EdgeInsets.all(10),
-                                child: CreditCardWidget())),
-                                 Lottie.asset(
-                          "assets/bitcoin.json",
-                          height: 200,
-                          width: 2000,
-                        ),
-                      ],
-                    )), */
                           const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -133,7 +105,7 @@ class _StartedScreenState extends State<StartedScreen> {
                                         .read<CryptosBloc>()
                                         .add(GetCryptoInfo());
 
-                                    Navigator.of(context).pushNamed(ThetaScreen.routeName);
+                                    Navigator.of(context).pushNamed(HomeScreen.routeName);
                                   },
                                   style: ElevatedButton.styleFrom(
                                       padding: const EdgeInsets.symmetric(
