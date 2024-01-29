@@ -8,6 +8,8 @@ import 'dart:async' as _i4;
 import 'package:defi/core/network/network_info.dart' as _i5;
 import 'package:defi/data/datasource/wallet_data_source.dart' as _i3;
 import 'package:defi/data/models/wallet_model.dart' as _i2;
+import 'package:internet_connection_checker/internet_connection_checker.dart'
+    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -107,4 +109,14 @@ class MockNetworkInfo extends _i1.Mock implements _i5.NetworkInfo {
         Invocation.getter(#isConnected),
         returnValue: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+  @override
+  _i4.Stream<_i6.InternetConnectionStatus> get listener => (super.noSuchMethod(
+        Invocation.getter(#listener),
+        returnValue: _i4.Stream<_i6.InternetConnectionStatus>.empty(),
+      ) as _i4.Stream<_i6.InternetConnectionStatus>);
+  @override
+  _i4.Future<void> get dispose => (super.noSuchMethod(
+        Invocation.getter(#dispose),
+        returnValue: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }

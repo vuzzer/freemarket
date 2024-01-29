@@ -2,20 +2,23 @@ import 'package:equatable/equatable.dart';
 
 class CryptoInfo extends Equatable {
   final String image;
-  final double currentPrice;
-  final double priceChange24h;
+  final num? currentPrice;
+  final num? priceChange24h;
   final String name;
-  final double marketCap;
-  final int marketCapRank;
-  final double circulatingSupply;
-  final double totalSupply;
-  final double allTimeHigh;
-  final double allTimeLow;
+  final String id;
+  final num? marketCap;
+  final num? marketCapRank;
+  final num? circulatingSupply;
+  final num? totalSupply;
+  final num? allTimeHigh;
+  final num? allTimeLow;
   final DateTime allTimeHighDate;
   final DateTime allTimeLowDate;
 
   const CryptoInfo(
-      {required this.image,
+      {
+      required this.id,
+      required this.image,
       required this.currentPrice,
       required this.priceChange24h,
       required this.name,
@@ -27,8 +30,21 @@ class CryptoInfo extends Equatable {
       required this.allTimeLow,
       required this.allTimeHighDate,
       required this.allTimeLowDate});
-      
-        @override
-        // TODO: implement props
-        List<Object?> get props => [image, currentPrice, priceChange24h, name, marketCap, marketCapRank, circulatingSupply, totalSupply, allTimeHigh, allTimeLow, allTimeHighDate, allTimeLowDate];
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        image,
+        currentPrice,
+        priceChange24h,
+        name,
+        marketCap,
+        marketCapRank,
+        circulatingSupply,
+        totalSupply,
+        allTimeHigh,
+        allTimeLow,
+        allTimeHighDate,
+        allTimeLowDate
+      ];
 }

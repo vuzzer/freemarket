@@ -3,6 +3,7 @@ import 'package:defi/domain/entities/crypto.dart';
 class CryptoInfoModel extends CryptoInfo {
   const CryptoInfoModel(
       {required super.image,
+      required super.id,
       required super.currentPrice,
       required super.priceChange24h,
       required super.name,
@@ -18,16 +19,18 @@ class CryptoInfoModel extends CryptoInfo {
   factory CryptoInfoModel.fromJson(Map<String, dynamic> crypto) {
     return CryptoInfoModel(
         image: crypto["image"],
-        currentPrice: crypto["current_price"],
-        priceChange24h: crypto["price_change_percentage_24h"],
+        id: crypto["id"],
+        currentPrice: num.tryParse(crypto["current_price"].toString()),
+        priceChange24h: num.tryParse(crypto["price_change_percentage_24h"].toString()),
         name: crypto["name"],
-        marketCap: crypto["market_cap"],
-        marketCapRank: crypto["market_cap_rank"],
-        circulatingSupply: crypto["circulating_supply"],
-        totalSupply: crypto["total_supply"],
-        allTimeHigh: crypto["ath"],
-        allTimeLow: crypto["atl"],
-        allTimeHighDate: crypto["ath_date"],
-        allTimeLowDate: crypto["ath_date"]);
+        marketCap: num.tryParse(crypto["market_cap"].toString() ),
+        marketCapRank: num.tryParse(crypto["market_cap_rank"].toString()),
+        circulatingSupply: num.tryParse(crypto["circulating_supply"].toString()),
+        totalSupply: num.tryParse(crypto["total_supply"].toString()),
+        allTimeHigh: num.tryParse(crypto["ath"].toString()),
+        allTimeLow: num.tryParse(crypto["atl"].toString()),
+        allTimeHighDate: DateTime.parse(crypto["ath_date"]),
+        allTimeLowDate: DateTime.parse( crypto["ath_date"]));
   }
+
 }

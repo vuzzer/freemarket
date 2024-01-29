@@ -10,6 +10,7 @@ class CardBalance extends StatelessWidget {
       width: 400,
       height: 220,
       padding: const EdgeInsets.only(left: 30),
+      margin: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           gradient: const LinearGradient(colors: [

@@ -1,3 +1,4 @@
+import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/presentation/widget/crypto_asset_widget.dart';
 import 'package:defi/presentation/widget/tx_history_widget.dart';
@@ -7,11 +8,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constants/app_colors.dart';
 
 class ThetaBodyWidget extends StatelessWidget {
-  const ThetaBodyWidget({Key? key}) : super(key: key);
+  final List<CryptoInfo> cryptos;
+  const ThetaBodyWidget({Key? key, required this.cryptos}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final networks = NetworkType.enabledValues;
     final size = ScreenUtil();
     return Expanded(
       child: Container(
@@ -40,13 +41,13 @@ class ThetaBodyWidget extends StatelessWidget {
                         tabs: const [
                           Tab(
                             child: Text(
-                              'Currency',
+                              'Cryptos',
                               style: TextStyle(fontWeight: FontWeight.w700),
                             ),
                           ),
                           Tab(
                             child: Text(
-                              'History',
+                              'Favoris',
                               style: TextStyle(fontWeight: FontWeight.w700),
                             ),
                           ),
@@ -55,7 +56,7 @@ class ThetaBodyWidget extends StatelessWidget {
                     child: TabBarView(children: [
                   ListView.separated(
                       padding: const EdgeInsets.all(0),
-                      itemCount: networks.length,
+                      itemCount: cryptos.length,
                       separatorBuilder: (context, index) => Container(
                           height: 0.2,
                           width: size.screenWidth,
@@ -63,10 +64,9 @@ class ThetaBodyWidget extends StatelessWidget {
                             color: greyLight,
                           )),
                       itemBuilder: (context, index) => CryptoAssetWidget(
-                              key: ValueKey(networks[index]),
-                              network: networks[index],
-                            )
-                          ),
+                            key: ValueKey(cryptos[index].name ),
+                            crypto: cryptos[index],
+                          )),
                   const SingleChildScrollView(child: TxHistoryWidget())
                 ]))
               ],

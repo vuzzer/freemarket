@@ -1,13 +1,9 @@
-import 'package:defi/helpers/enum.dart';
+import 'package:defi/core/network/network_info.dart';
+import 'package:defi/service_locator.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class NetworkProvider extends ChangeNotifier {
-  Blockchain network = Blockchain.initial;
-  Blockchain get getNetwork => network;
-  void setNetwork(Blockchain network) {
-    network = network;
-    notifyListeners();
-  }
+  Stream<InternetConnectionStatus> network = sl<NetworkInfo>().listener;
+  Stream<InternetConnectionStatus> get checkInternet => network;
 }

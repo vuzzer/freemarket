@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:defi/core/base_url.dart';
+import 'package:defi/core/error/exception.dart';
 import 'package:defi/data/models/crypto_info_model.dart';
 import 'package:dio/dio.dart';
 
@@ -17,17 +16,22 @@ class CryptoInfoSourceImpl implements CryptoInfoSource {
     final options = Options(
         contentType: "application/json",
         sendTimeout: const Duration(seconds: 3),
-        headers: {
-          "cache-control": "max-age=30,public,must-revalidate,s-maxage=30"
-        });
+        headers: {"Content-Type": "Application/json"});
 
     final response = await dio.get(
-        "${baseUrl}coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=fr&precision=2");
+        "${baseUrl}coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false&locale=fr&precision=2",
+        options: options);
 
     if (response.statusCode == 200) {
-      final List<dynamic> data = jsonDecode(response.data);
-      print(data);
+      // List of market crypto
+      final List<dynamic> data = response.data;
+      // Convert data to model
+      List<CryptoInfoModel> cryptos = data.map((crypto) {
+        return CryptoInfoModel.fromJson(crypto);
+      }).toList();
+      // List of crypto
+      return cryptos;
     }
-    throw UnimplementedError();
+    throw NetworkException();
   }
 }
