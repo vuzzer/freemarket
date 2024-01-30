@@ -1,0 +1,18 @@
+part of 'favoris_bloc.dart';
+
+class FavorisEvent extends Equatable {
+  const FavorisEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
+class AddFavorisEvent extends FavorisEvent {
+  final CryptoInfo crypto;
+  const AddFavorisEvent(this.crypto);
+}
+
+class RemoveFavorisEvent extends FavorisEvent {
+  final CryptoInfo crypto;
+  const RemoveFavorisEvent(this.crypto);
+}

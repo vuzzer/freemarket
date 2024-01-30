@@ -1,31 +1,33 @@
+import 'package:defi/data/models/favoris_crypto_model.dart';
 import 'package:defi/domain/entities/crypto.dart';
 
 abstract class FavorisCryptoData {
-  Future<CryptoInfo> addCryptoAsFavoris(CryptoInfo crypto);
-
-  Future<bool> removeCryptoFromFavoris(CryptoInfo cryptoInfo);
-
-  Future<List<CryptoInfo>> favorisCryptoList();
+  FavorisCryptoModel addCryptoAsFavoris(CryptoInfo crypto);
+  FavorisCryptoModel getCryptoFavoris();
+  bool removeCryptoFromFavoris(CryptoInfo cryptoInfo);
 }
 
+class FavorisCryptoDataImpl implements FavorisCryptoData {
+  static FavorisCryptoModel favorisCryptoModel = const FavorisCryptoModel();
 
-class FavorisCryptoDataImpl implements FavorisCryptoData{
   @override
-  Future<CryptoInfo> addCryptoAsFavoris(CryptoInfo crypto) {
-    // TODO: implement addCryptoAsFavoris
-    throw UnimplementedError();
+  FavorisCryptoModel addCryptoAsFavoris(CryptoInfo crypto) {
+    favorisCryptoModel.favoris[crypto.id] = crypto;
+    return favorisCryptoModel;
   }
 
   @override
-  Future<List<CryptoInfo>> favorisCryptoList() {
-    // TODO: implement favorisCryptoList
-    throw UnimplementedError();
+  FavorisCryptoModel getCryptoFavoris() {
+    return favorisCryptoModel;
   }
 
   @override
-  Future<bool> removeCryptoFromFavoris(CryptoInfo cryptoInfo) {
-    // TODO: implement removeCryptoFromFavoris
-    throw UnimplementedError();
+  bool removeCryptoFromFavoris(CryptoInfo crypto) {
+    if (favorisCryptoModel.favoris.containsKey(crypto.id)) {
+      favorisCryptoModel.favoris
+          .removeWhere((key, value) => value.id == crypto.id);
+      return true;
+    }
+    return false;
   }
-
 }

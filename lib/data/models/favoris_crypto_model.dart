@@ -2,7 +2,7 @@ import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/favoris_crypto.dart';
 
 class FavorisCryptoModel extends FavorisCrypto {
-  const FavorisCryptoModel({super.favoris = const {}});
+  const FavorisCryptoModel();
 
   CryptoInfo addCrypto(CryptoInfo crypto) {
     favoris[crypto.id] = crypto;
