@@ -5,7 +5,7 @@ class FavorisCrypto extends Equatable {
   final Map<String, CryptoInfo> favoris; // Favoris crypto of user
 
   const FavorisCrypto({
-    required this.favoris,
+    this.favoris = const {},
   });
 
   @override
