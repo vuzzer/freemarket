@@ -26,3 +26,8 @@ class FailedLoginFailure extends Failure{
   List<Object?> get props => [];
 }
 
+// When loading crypto favoris list
+class InterneFailure extends Failure{
+  @override
+  List<Object?> get props => [];
+}

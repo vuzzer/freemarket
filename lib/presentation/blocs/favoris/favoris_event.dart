@@ -1,6 +1,6 @@
 part of 'favoris_bloc.dart';
 
-class FavorisEvent extends Equatable {
+sealed class FavorisEvent extends Equatable {
   const FavorisEvent();
 
   @override
@@ -16,3 +16,4 @@ class RemoveFavorisEvent extends FavorisEvent {
   final CryptoInfo crypto;
   const RemoveFavorisEvent(this.crypto);
 }
+

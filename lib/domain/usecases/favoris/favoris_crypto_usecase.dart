@@ -8,7 +8,7 @@ class FavorisCryptoUsecase {
   final FavorisCryptoRepo favorisCryptoRepo;
   FavorisCryptoUsecase(this.favorisCryptoRepo);
 
-  Future<Either<Failure, FavorisCrypto>> addCryptoAsFavoris(CryptoInfo crypto) {
+  Future<Either<Failure, Map<String, CryptoInfo>>> addCryptoAsFavoris(CryptoInfo crypto) {
     return favorisCryptoRepo.addCryptoAsFavoris(crypto);
   }
 
