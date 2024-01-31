@@ -32,7 +32,7 @@ class CryptoAssetWidget extends StatelessWidget {
                   Params(idToken: crypto.id, currentOfMarket: "usd")));
 
               // Route to Chart Screen
-              Navigator.of(context).pushNamed(CryptoAssetScreen.routeName);
+              Navigator.of(context).pushNamed(CryptoAssetScreen.routeName, arguments: crypto );
             },
             child: ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 0),

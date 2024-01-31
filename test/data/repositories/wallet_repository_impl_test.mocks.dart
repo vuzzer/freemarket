@@ -115,8 +115,19 @@ class MockNetworkInfo extends _i1.Mock implements _i5.NetworkInfo {
         returnValue: _i4.Stream<_i6.InternetConnectionStatus>.empty(),
       ) as _i4.Stream<_i6.InternetConnectionStatus>);
   @override
-  _i4.Future<void> get dispose => (super.noSuchMethod(
-        Invocation.getter(#dispose),
-        returnValue: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  void checkConnectivity() => super.noSuchMethod(
+        Invocation.method(
+          #checkConnectivity,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

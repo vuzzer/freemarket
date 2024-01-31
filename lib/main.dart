@@ -1,12 +1,10 @@
-import 'package:defi/core/network/network_info.dart';
 import 'package:defi/firebase_options.dart';
 import 'package:defi/get_routes.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
+import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/presentation/provider/network_provider.dart';
 import 'package:defi/presentation/provider/user_provider.dart';
-import 'package:defi/presentation/screens/base_screen.dart';
-import 'package:defi/presentation/screens/started_screen.dart';
 import 'package:defi/presentation/screens/verification_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_family.dart';
@@ -16,11 +14,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -54,7 +50,8 @@ void main() async {
             child: const VerificationScreen()),
         Provider(create: (context) => NetworkProvider()),
         BlocProvider(create: (context) => sl<MarketTokenBloc>()),
-        BlocProvider(create: (context) => sl<CryptosBloc>())
+        BlocProvider(create: (context) => sl<CryptosBloc>()),
+        BlocProvider(create: (context) => sl<FavorisBloc>())
       ],
       child:  const MyApp()));
 }
