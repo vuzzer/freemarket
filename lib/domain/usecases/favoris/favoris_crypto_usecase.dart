@@ -12,11 +12,11 @@ class FavorisCryptoUsecase {
     return favorisCryptoRepo.addCryptoAsFavoris(crypto);
   }
 
-  Future<Either<Failure, bool>> removeCryptoFromFavoris(CryptoInfo cryptoInfo) {
+  Future<Either<Failure, Map<String, CryptoInfo>>> removeCryptoFromFavoris(CryptoInfo cryptoInfo) {
     return favorisCryptoRepo.removeCryptoFromFavoris(cryptoInfo);
   }
 
-  Future<Either<Failure, FavorisCrypto>> favorisCryptoList() {
+  Future<Either<Failure, Map<String, CryptoInfo>>> favorisCryptoList() {
     return favorisCryptoRepo.favorisCryptoList();
   }
 }

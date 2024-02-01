@@ -58,10 +58,12 @@ class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
         BlocBuilder<FavorisBloc, FavorisState>(builder: (context, state) {
           final favoris = state.favoris;
           final isFavoris = favoris.containsKey(crypto.id);
-          print(isFavoris);
+
           return IconButton(
               onPressed: isFavoris
-                  ? null
+                  ? () {
+                      context.read<FavorisBloc>().add(RemoveFavorisEvent(crypto));
+                    }
                   : () {
                       context.read<FavorisBloc>().add(AddFavorisEvent(crypto));
                     },

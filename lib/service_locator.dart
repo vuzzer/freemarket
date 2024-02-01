@@ -26,6 +26,7 @@ import 'package:defi/services/configuration_service.dart';
 import 'package:defi/services/contract_locator.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -58,10 +59,13 @@ Future<void> setupLocator() async {
 }
 
 Future<void> injectionBloc() async {
+  //! Local Database
+  await Hive.initFlutter();
+
   //! Bloc client
   sl.registerFactory(() => ClientProfilBloc(clientProfilUsecase: sl()));
   sl.registerFactory(() => MarketTokenBloc(tokenMarketUsecase: sl()));
-  sl.registerFactory(() => CryptosBloc(cryptoInfoUseCase: sl()));
+  sl.registerLazySingleton(() => CryptosBloc(cryptoInfoUseCase: sl()));
   sl.registerFactory(() => FavorisBloc(favorisCryptoUsecase: sl()));
 
   //! Usecases

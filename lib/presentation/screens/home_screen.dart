@@ -1,5 +1,6 @@
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
+import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder(
+        body: StreamBuilder(
             stream: CheckConnectivity.listener,
             builder: (context, snapshot) {
               final status = snapshot.data;
@@ -43,60 +44,62 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: Theme.of(context).textTheme.displayMedium,
                 ));
               }
-              return  Scaffold(
-        body: BlocBuilder<CryptosBloc, CryptosState>(builder: (context, state) {
-      if (state is CryptosLoaded) {
-      return Column(
-        children: [
-          SizedBox(
-            height: (kFontSizeUnit * 5).h,
-          ),
-          const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-               
-                      Icon(
-                        Icons.notifications,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      // Icons.dark_mode
-                      Icon(
-                        Icons.light_mode,
-                        color: Colors.white,
-                        size: 30,
-                      )
-               
-                ],
-              )),
-          const SizedBox(
-            height: 10,
-          ),
-          const CardBalance(),
-          const SizedBox(
-            height: 15,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          ThetaBodyWidget(cryptos: state.cryptos)
-        ],
-      );
-      }
-      return const Center(
-          child: SizedBox(
-            width: 50,
-            height: 50,
-            child: CircularProgressIndicator(
-              color: Colors.white,
-            ),
-          ),
-        );
+              return Scaffold(body: BlocBuilder<CryptosBloc, CryptoState>(
+                  builder: (context, state) {
+                if (!state.loading) {
 
-    }));}));
+                  // Load favoris crypto of users
+                  context.read<FavorisBloc>().add(LoadFavorisEvent());
+
+                  return Column(
+                    children: [
+                      SizedBox(
+                        height: (kFontSizeUnit * 5).h,
+                      ),
+                      const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 18),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Icon(
+                                Icons.notifications,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              // Icons.dark_mode
+                              Icon(
+                                Icons.light_mode,
+                                color: Colors.white,
+                                size: 30,
+                              )
+                            ],
+                          )),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const CardBalance(),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ThetaBodyWidget(cryptos: state.cryptos)
+                    ],
+                  );
+                }
+                return const Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                  ),
+                );
+              }));
+            }));
   }
 }
