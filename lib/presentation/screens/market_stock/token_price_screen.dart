@@ -1,5 +1,5 @@
 import 'package:defi/helpers/crypto_symbols.dart';
-import 'package:defi/presentation/screens/choose_currency_screen.dart';
+import 'package:defi/presentation/screens/choose_alert_screen.dart';
 import 'package:defi/presentation/screens/deposit_screen.dart';
 import 'package:defi/presentation/screens/send_screen.dart';
 import 'package:defi/presentation/screens/withdraw_screen.dart';
@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                 icon: Icons.arrow_downward,
                 text: "Recevoir",
                 onPressed: () => Navigator.of(context).pushNamed(
-                  ChooseCurrencyScreen.routeName,
+                  ChooseAlertScreen.routeName,
                 ),
               ),
               ButtonOperation(

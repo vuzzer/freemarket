@@ -2,8 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
+import 'package:defi/presentation/screens/choose_alert_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -62,7 +64,9 @@ class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
           return IconButton(
               onPressed: isFavoris
                   ? () {
-                      context.read<FavorisBloc>().add(RemoveFavorisEvent(crypto));
+                      context
+                          .read<FavorisBloc>()
+                          .add(RemoveFavorisEvent(crypto));
                     }
                   : () {
                       context.read<FavorisBloc>().add(AddFavorisEvent(crypto));
@@ -77,7 +81,9 @@ class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
               ));
         }),
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(ChooseAlertScreen.routeName);
+            },
             splashRadius: 20,
             padding: EdgeInsets.zero,
             icon: const Icon(
@@ -86,6 +92,18 @@ class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
               size: 30,
             )),
       ],
+    );
+  }
+
+  Widget bodyBottomSheet(BuildContext context) {
+    final size = ScreenUtil();
+    return SizedBox(
+      width: size.screenWidth,
+      height: size.screenHeight * 0.9,
+      child: ElevatedButton(
+          onPressed: () => Navigator.of(context).pop(),
+          style: ElevatedButton.styleFrom(maximumSize: const Size.square(50)),
+          child: const Text("hello")),
     );
   }
 }

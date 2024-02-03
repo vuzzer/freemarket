@@ -7,18 +7,20 @@ class KeyBoardWidget extends StatelessWidget {
   final String routeName;
   final bool amount;
   final VoidCallback onPressed;
+  final bool submit;
   const KeyBoardWidget(
       {Key? key,
       required this.controller,
       required this.routeName,
       required this.onPressed,
+      this.submit = false,
       this.amount = false})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     int key = 0;
-
+    
     return Column(
       children: [
         ...List.generate(
@@ -68,7 +70,8 @@ class KeyBoardWidget extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                         ))
                     : const SizedBox.shrink(),
-                NumberButtonWiget(touch: 0, controller: controller,  amount: amount),
+                NumberButtonWiget(
+                    touch: 0, controller: controller, amount: amount),
                 TextButton(
                     onPressed: () {
                       if (controller.text.isNotEmpty) {
@@ -95,7 +98,7 @@ class KeyBoardWidget extends StatelessWidget {
         const SizedBox(
           height: 25,
         ),
-        ElevatedButton(
+      submit ?  ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
                 padding:
@@ -107,7 +110,7 @@ class KeyBoardWidget extends StatelessWidget {
               'Valider',
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ))
+            )) : const SizedBox.shrink()
       ],
     );
   }

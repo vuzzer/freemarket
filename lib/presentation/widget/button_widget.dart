@@ -21,10 +21,14 @@ class ButtonWidget extends StatelessWidget {
     return ElevatedButton(
       onPressed: disable ? null : () => onPressed(),
       style: ElevatedButton.styleFrom(
+        elevation: 0,
           minimumSize: Size(MediaQuery.of(context).size.width, 50),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(raduis)),
-          backgroundColor: color),
+            side: const BorderSide(color: blue),
+              borderRadius: BorderRadius.circular(raduis),  ),
+          
+          
+          backgroundColor: color ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

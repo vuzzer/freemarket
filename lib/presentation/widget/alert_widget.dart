@@ -1,16 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:defi/domain/entities/network_type.dart';
-import 'package:defi/helpers/enum.dart';
+import 'package:defi/core/alert.dart';
+import 'package:defi/core/enum.dart';
 import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
 
-class CurrencyWidget extends StatelessWidget {
-  final NetworkType network;
-  final Blockchain radio;
+class AlertWidget extends StatelessWidget {
+  final Alert alert;
+  final AlertValue radio;
   final Function update;
-  const CurrencyWidget(
+  const AlertWidget(
       {Key? key,
-      required this.network,
+      required this.alert,
       required this.radio,
       required this.update})
       : super(key: key);
@@ -36,23 +36,44 @@ class CurrencyWidget extends StatelessWidget {
             splashColor: blueLight,
             highlightColor: blueLight,
             onTap: () {
-              update(network.config.value);
+              update(alert);
             },
             child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
                 leading: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: CircleAvatar(
                     radius: 30,
-                    child: Image.asset(
-                        "assets/cryptos/${network.config.icon}.png"),
+                    backgroundColor: blue1,
+                    child: ClipOval(
+                        child: Padding(
+                            padding: const EdgeInsets.all(7),
+                            child: Image.asset(
+                              alert.image,
+                              color: Colors.white,
+                              fit: BoxFit.contain,
+                            ))),
                   ),
                 ),
-                title: AutoSizeText(
-                  network.config.label,
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AutoSizeText(
+                      alert.title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    Visibility(
+                        visible: radio == alert.value,
+                        child: AutoSizeText(
+                          alert.desc,
+                          style:
+                              const TextStyle(color: Colors.white, fontSize: 8),
+                          textAlign: TextAlign.justify,
+                        ))
+                  ],
                 ),
                 trailing: Padding(
                     padding: const EdgeInsets.only(right: 10),
@@ -64,13 +85,15 @@ class CurrencyWidget extends StatelessWidget {
                             fillColor:
                                 MaterialStateProperty.resolveWith(getColor),
                             activeColor: blue,
-                            value: network.config.value,
+                            value: alert.value,
                             groupValue: radio,
                             onChanged: (value) {
-                              update(network.config.value);
+                              update(alert);
                               //select.setNetwork(network.config.value);
                             })
                       ],
                     )))));
   }
 }
+
+

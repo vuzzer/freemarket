@@ -3,7 +3,7 @@ import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/domain/usecases/transfer/wallet_transfer_handle.dart';
 import 'package:defi/presentation/screens/qr_code_reader_screen.dart';
-import 'package:defi/presentation/screens/set_amount_screen.dart';
+import 'package:defi/presentation/screens/set_alert_screen.dart';
 import 'package:defi/presentation/screens/theta_screen.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/button_icon_widget.dart';
@@ -149,7 +149,7 @@ class _SendScreenState extends State<SendScreen> {
                   decoration: const BoxDecoration(color: blue1),
                   child: KeyBoardWidget(
                     controller: amountController,
-                    routeName: SetAmountScreen.routeName,
+                    routeName: SetAlertScreen.routeName,
                     amount: true,
                     onPressed: () async {
                       //amount

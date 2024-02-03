@@ -1,6 +1,6 @@
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/screens/base_screen.dart';
-import 'package:defi/presentation/screens/choose_currency_screen.dart';
+import 'package:defi/presentation/screens/choose_alert_screen.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
 import 'package:defi/presentation/screens/confirm_deposit_screen.dart';
 import 'package:defi/presentation/screens/deposit_screen.dart';
@@ -12,11 +12,10 @@ import 'package:defi/presentation/screens/qr_scan_screen.dart';
 import 'package:defi/presentation/screens/receive_screen.dart';
 import 'package:defi/presentation/screens/secret_code_screen.dart';
 import 'package:defi/presentation/screens/send_screen.dart';
-import 'package:defi/presentation/screens/set_amount_screen.dart';
+import 'package:defi/presentation/screens/set_alert_screen.dart';
 import 'package:defi/presentation/screens/setting_screen.dart';
 import 'package:defi/presentation/screens/started_screen.dart';
 import 'package:defi/presentation/screens/swap_screen.dart';
-import 'package:defi/presentation/screens/theta_screen.dart';
 import 'package:defi/presentation/screens/tx_info_screen.dart';
 import 'package:defi/presentation/screens/verification_screen.dart';
 import 'package:defi/presentation/screens/withdraw_screen.dart';
@@ -38,8 +37,8 @@ Map<String, WidgetBuilder> getRoutes(context) {
     OtpScreen.routeName: (context) => const OtpScreen(),
     TxInfoScreen.routeName: (context) => const TxInfoScreen(),
     CryptoAssetScreen.routeName: (context) => const CryptoAssetScreen(),
-    ChooseCurrencyScreen.routeName: (context) => const ChooseCurrencyScreen(),
-    SetAmountScreen.routeName: (context) => const SetAmountScreen(),
+    ChooseAlertScreen.routeName: (context) => const ChooseAlertScreen(),
+    SetAlertScreen.routeName: (context) => const SetAlertScreen(),
     SendScreen.routeName: (context) => const SendScreen(),
     ReceiveScreen.routeName: (context) => const ReceiveScreen(),
     QrScanScreen.routeName: (context) => const QrScanScreen(),
