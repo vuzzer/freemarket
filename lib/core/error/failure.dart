@@ -31,3 +31,8 @@ class InterneFailure extends Failure{
   @override
   List<Object?> get props => [];
 }
+
+class LoadFavorisFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}

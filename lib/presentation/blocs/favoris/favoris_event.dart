@@ -7,6 +7,8 @@ sealed class FavorisEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class LoadFavorisEvent extends FavorisEvent {}
+
 class AddFavorisEvent extends FavorisEvent {
   final CryptoInfo crypto;
   const AddFavorisEvent(this.crypto);

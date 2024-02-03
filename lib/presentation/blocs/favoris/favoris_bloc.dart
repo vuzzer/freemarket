@@ -26,12 +26,31 @@ class FavorisBloc extends Bloc<FavorisEvent, FavorisState> {
           }, (crypto) {
             //Logger().d(crypto);
             var newState = Map<String, CryptoInfo>.from(crypto);
-            emit(state
-                .copyWith(favoris: newState ,  successOrfail: right(true)));
+            emit(state.copyWith(favoris: newState, successOrfail: right(true)));
             //emit(FavorisAdded(favoris: crypto));
           });
           break;
+
+        case LoadFavorisEvent():
+          final favoris = await favorisCryptoUsecase.favorisCryptoList();
+
+          favoris.fold((e) {
+            emit(state.copyWith(successOrfail: left("Error occured")));
+          }, (crypto) {
+            var newState = Map<String, CryptoInfo>.from(crypto);
+            emit(state.copyWith(favoris: newState, successOrfail: right(true)));
+          });
+          break;
+
         case RemoveFavorisEvent():
+          final favoris = await favorisCryptoUsecase.removeCryptoFromFavoris(event.crypto);
+
+          favoris.fold((e) {
+            emit(state.copyWith(successOrfail: left("Error occured")));
+          }, (crypto) {
+            var newState = Map<String, CryptoInfo>.from(crypto);
+            emit(state.copyWith(favoris: newState, successOrfail: right(true)));
+          });
           break;
       }
     });

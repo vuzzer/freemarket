@@ -9,3 +9,10 @@ class FailedLoginException implements Exception {}
 class UserNotExistException implements Exception {}
 
 class NetworkException implements Exception {}
+
+
+// For favoris
+class FavorisExistException implements Exception {}
+class AddFavorisException implements Exception {}
+class LoadFavorisException implements Exception {}
+class RemoveFavorisException implements Exception {}
