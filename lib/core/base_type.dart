@@ -1,6 +1,7 @@
 import 'package:defi/core/enum.dart';
 import 'package:flutter/material.dart';
 
+// For notification
 class Alert {
   final String title;
   final String desc;
@@ -14,3 +15,12 @@ class Alert {
       required this.value,
       this.icon});
 }
+
+// Indicate message error to user
+class CryptoError {
+  String message;
+  CryptoError(this.message);
+}
+
+// Mark success
+class Success {}

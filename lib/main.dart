@@ -3,6 +3,7 @@ import 'package:defi/get_routes.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
+import 'package:defi/presentation/blocs/primary-crypto/bloc/primary_crypto_bloc.dart';
 import 'package:defi/presentation/provider/network_provider.dart';
 import 'package:defi/presentation/provider/user_provider.dart';
 import 'package:defi/presentation/screens/verification_screen.dart';
@@ -34,13 +35,6 @@ void main() async {
     statusBarBrightness: Brightness.dark,
   ));
 
-/*   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-        create: (context) => UserProvider(), child: const VerificationScreen()),
-    Provider(create: (context) => NetworkProvider())
-  ], child: const MyApp())); */
-
-  // Initialize Locale time
   await initializeDateFormatting(Intl.getCurrentLocale(), null);
 
   runApp(MultiBlocProvider(
@@ -51,7 +45,8 @@ void main() async {
         Provider(create: (context) => NetworkProvider()),
         BlocProvider(create: (context) => sl<MarketTokenBloc>()),
         BlocProvider(create: (context) => sl<CryptosBloc>()),
-        BlocProvider(create: (context) => sl<FavorisBloc>())
+        BlocProvider(create: (context) => sl<FavorisBloc>()),
+        BlocProvider(create: (context) => sl<PrimaryCryptoBloc>())
       ],
       child:  const MyApp()));
 }

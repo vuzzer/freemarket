@@ -32,7 +32,14 @@ class InterneFailure extends Failure{
   List<Object?> get props => [];
 }
 
+// Favoris crypto
 class LoadFavorisFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
+
+// Primary crypto failure
+class GetPrimaryCryptoFailure extends Failure {
   @override
   List<Object?> get props => [];
 }

@@ -7,20 +7,24 @@ import 'package:defi/data/datasource/token_market_datasource.dart';
 import 'package:defi/data/repositories/client_profil_repository_impl.dart';
 import 'package:defi/data/repositories/crypto_info_repo_impl.dart';
 import 'package:defi/data/repositories/favoris_crypto_repo_impl.dart';
+import 'package:defi/data/repositories/primary_crypto_repo_impl.dart';
 import 'package:defi/data/repositories/token_market_repository.dart';
 import 'package:defi/domain/repositories/crypto-info/crypto_info_repo.dart';
 import 'package:defi/domain/repositories/favoris/favoris_crypto_repo.dart';
 import 'package:defi/domain/repositories/market/token_market_repo.dart';
+import 'package:defi/domain/repositories/primary-crypto/primary_crypto_repo.dart';
 import 'package:defi/domain/usecases/clientProfil/clientProfil_usecase.dart';
 import 'package:defi/domain/usecases/crypto-info/crypto_info_usecases.dart';
 import 'package:defi/domain/usecases/favoris/favoris_crypto_usecase.dart';
 import 'package:defi/domain/usecases/market/token_market_usecase.dart';
+import 'package:defi/domain/usecases/primary-crypto/primary_crypto_usecase.dart';
 import 'package:defi/domain/usecases/setup/wallet_setup_handler.dart';
 import 'package:defi/domain/usecases/wallet/wallet_handler.dart';
 import 'package:defi/presentation/blocs/client/client_profil_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
+import 'package:defi/presentation/blocs/primary-crypto/bloc/primary_crypto_bloc.dart';
 import 'package:defi/services/address_service.dart';
 import 'package:defi/services/configuration_service.dart';
 import 'package:defi/services/contract_locator.dart';
@@ -30,6 +34,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'data/datasource/primary_crypto_data.dart';
 import 'domain/repositories/clientProfil/clientProfil_repository.dart';
 import 'domain/usecases/transfer/wallet_transfer_handle.dart';
 
@@ -67,12 +72,14 @@ Future<void> injectionBloc() async {
   sl.registerFactory(() => MarketTokenBloc(tokenMarketUsecase: sl()));
   sl.registerLazySingleton(() => CryptosBloc(cryptoInfoUseCase: sl()));
   sl.registerFactory(() => FavorisBloc(favorisCryptoUsecase: sl()));
+  sl.registerFactory(() => PrimaryCryptoBloc(primaryCryptoUsecase: sl()));
 
   //! Usecases
   sl.registerLazySingleton(() => ClientProfilUsecase(sl()));
   sl.registerLazySingleton(() => TokenMarketUsecase(sl()));
   sl.registerLazySingleton(() => CryptoInfoUseCase(sl()));
   sl.registerLazySingleton(() => FavorisCryptoUsecase(sl()));
+  sl.registerLazySingleton(() => PrimaryCryptoUsecase(sl()));
 
   //! Repositories
   sl.registerLazySingleton<ClientProfilRepository>(
@@ -83,6 +90,8 @@ Future<void> injectionBloc() async {
   sl.registerLazySingleton<CryptoInfoRepo>(() => CryptoInfoRepoImpl(sl()));
   sl.registerLazySingleton<FavorisCryptoRepo>(
       () => FavorisCryptoRepoImpl(sl()));
+  sl.registerLazySingleton<PrimaryCryptoRepo>(
+      () => PrimaryCryptoRepoImpl(sl()));
 
   //! Data
   sl.registerLazySingleton<ClientProfilDataSource>(
@@ -91,6 +100,7 @@ Future<void> injectionBloc() async {
       () => TokenMarketDataSourceImpl(dio: sl()));
   sl.registerLazySingleton<CryptoInfoSource>(() => CryptoInfoSourceImpl(sl()));
   sl.registerLazySingleton<FavorisCryptoData>(() => FavorisCryptoDataImpl());
+  sl.registerLazySingleton<PrimaryCryptoData>(() => PrimaryCryptoDataImpl());
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
