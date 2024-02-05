@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:defi/core/alert.dart';
+import 'package:defi/core/base_type.dart';
+import 'package:defi/core/enum.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/button_widget.dart';
 import 'package:defi/presentation/widget/keyboard_widget.dart';
+import 'package:defi/presentation/widget/schedule_widget.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -49,12 +51,7 @@ class _SetAlertScreenState extends State<SetAlertScreen> {
   @override
   Widget build(BuildContext context) {
     final alert = ModalRoute.of(context)!.settings.arguments as Alert;
-    return Scaffold(
-      appBar: const AppBarWidget(
-        title: "Price Alert",
-        leading: true,
-      ),
-      body: Column(
+    final alertBasedPrice = Column(
         children: [
           const Padding(
               padding: EdgeInsets.symmetric(horizontal: 30),
@@ -162,7 +159,15 @@ class _SetAlertScreenState extends State<SetAlertScreen> {
                         onPressed: () {},
                       )))),
         ],
+      );
+
+
+    return Scaffold(
+      appBar: const AppBarWidget(
+        title: "Price Alert",
+        leading: true,
       ),
+      body: alert.value == AlertValue.schedular ?  const ScheduleWidget() : alertBasedPrice 
     );
   }
 }

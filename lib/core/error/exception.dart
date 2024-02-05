@@ -16,3 +16,6 @@ class FavorisExistException implements Exception {}
 class AddFavorisException implements Exception {}
 class LoadFavorisException implements Exception {}
 class RemoveFavorisException implements Exception {}
+
+// Primary Crypto
+class GetPrimaryException implements Exception {}

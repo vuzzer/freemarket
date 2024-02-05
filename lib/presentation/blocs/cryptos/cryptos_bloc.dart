@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:defi/core/base_type.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/usecases/crypto-info/crypto_info_usecases.dart';
 import 'package:equatable/equatable.dart';
@@ -50,11 +51,3 @@ class CryptoState with _$CryptoState {
       cryptos: [], successOrFailure: right(Success()), loading: false);
 }
 
-// Indicate message error to user
-class CryptoError {
-  String message;
-  CryptoError(this.message);
-}
-
-// Mark success
-class Success {}

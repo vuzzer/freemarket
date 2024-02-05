@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
-import 'package:defi/core/alert.dart';
+import 'package:defi/core/base_type.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/presentation/screens/set_alert_screen.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
@@ -105,7 +105,7 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: ButtonWidget(
               onPressed: () =>
-                  Navigator.of(context).pushNamed(SetAlertScreen.routeName, arguments: {param} ),
+                  Navigator.of(context).pushNamed(SetAlertScreen.routeName, arguments: param ),
               title: "Next",
               raduis: 10,
             ),
