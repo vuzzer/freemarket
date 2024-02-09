@@ -51,11 +51,10 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
 
   //Parameters for set_alert_screen
   Alert param = const Alert(
-      title: "Price",
-      desc: "You'll be notified when the daily price increase",
-      image: "assets/images/price.png",
-      icon: Icons.attach_money,
-      value: AlertValue.price);
+        title: "Calendar",
+        desc: "You'll be notified when the daily price increase",
+        image: "assets/images/calendar.png",
+        value: AlertValue.schedular);
 
   void _update(Alert alert) {
     alertNotifier.value = alert.value;
@@ -95,6 +94,7 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
                 itemBuilder: (context, index) {
                   final alert = alertOptions[index];
                   return AlertWidget(
+                    key: Key(alert.value.name),
                     radio: defaultAlertValue,
                     update: _update,
                     alert: alert,

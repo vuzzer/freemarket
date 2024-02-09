@@ -3,5 +3,6 @@
         "quickfix.add.required": "explicit",
         "quickfix.add.required.multi": "explicit",
         "quickfix.create.constructorForFinalFields": "explicit"
-    }
+    },
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

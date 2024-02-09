@@ -55,17 +55,17 @@ class CheckConnectivity {
   static Future<bool> get isConnected => connectionChecker.hasConnection;
 
   static Stream<InternetConnectionStatus> get listener =>
-      NetworkInfo.internetController.stream;
+      CheckConnectivity.internetController.stream;
 
   static void checkConnectivity() {
     listen = connectionChecker.onStatusChange.listen((status) {
       Logger().d(status);
-      NetworkInfo.internetController.sink.add(status);
+      //if(CheckConnectivity.internetController)
+      CheckConnectivity.internetController.sink.add(status);
     });
   }
 
   static void dispose() {
     listen?.cancel();
-    NetworkInfo.internetController.close();
   }
 }

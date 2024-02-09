@@ -117,7 +117,7 @@ class FavorisCryptoDataImpl implements FavorisCryptoData {
       favoris.removeWhere((id) => id == cryptoInfo.id);
 
       // update box of favoris
-       await box.put(boxKey, favoris);
+      await box.put(boxKey, favoris);
 
       // Convert List<CryptoInfo> to Map<CryptoInfo>
       final mapCrypto = {

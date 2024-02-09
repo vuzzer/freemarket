@@ -8,5 +8,5 @@ class PrimaryCryptoState with _$PrimaryCryptoState {
     required Either<CryptoError, Success> successOrFailure
    }) = _PrimaryCrptoState;
 
-   factory PrimaryCryptoState.initial() => PrimaryCryptoState(crypto: null  , loading: false, successOrFailure: right(Success()) )  ;
+   factory PrimaryCryptoState.initial() => PrimaryCryptoState(crypto: null  , loading: true, successOrFailure: right(Success()) )  ;
 }

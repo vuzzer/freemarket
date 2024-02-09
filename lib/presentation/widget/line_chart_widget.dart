@@ -1,13 +1,11 @@
 import 'dart:math';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
-import 'package:defi/core/params.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
-import 'package:defi/service_locator.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LineChartWidget extends StatelessWidget {
   const LineChartWidget({Key? key}) : super(key: key);
@@ -85,93 +83,105 @@ class LineChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Color> gradientColors = [blue, darkBlue];
-
-    return BlocBuilder<MarketTokenBloc, MarketTokenState>(
-        builder: (context, state) {
-      // Return Token Market Chart
-      if (state is MarketTokenLoaded) {
-        return LineChart(LineChartData(
-          gridData: FlGridData(
-            show: true,
-            drawVerticalLine: false,
-            drawHorizontalLine: false,
-            horizontalInterval: 1,
-            verticalInterval: 1,
-            getDrawingHorizontalLine: (value) {
-              return FlLine(
-                color: const Color(0xff37434d),
-                strokeWidth: 1,
-              );
-            },
-            getDrawingVerticalLine: (value) {
-              return FlLine(
-                color: const Color(0xff37434d),
-                strokeWidth: 1,
-              );
-            },
-          ),
-          titlesData: FlTitlesData(
-            show: true,
-            rightTitles: AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            topTitles: AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            bottomTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: false,
-                reservedSize: 20,
-                interval: 1,
-                getTitlesWidget: bottomTitleWidgets,
-              ),
-            ),
-            leftTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: false,
-                interval: 1,
-                getTitlesWidget: leftTitleWidgets,
-                reservedSize: 42,
-              ),
-            ),
-          ),
-          borderData: FlBorderData(
-            show: false,
-          ),
-          minX: state.tokenMarketData.times.first.toDouble(),
-          maxX: state.tokenMarketData.times.last.toDouble(),
-          minY: state.tokenMarketData.prices.reduce(min),
-          maxY: state.tokenMarketData.prices.reduce(max),
-          lineBarsData: [
-            LineChartBarData(
-              spots: List.generate(
-                  state.tokenMarketData.prices.length,
-                  (p) => FlSpot(
-                      double.parse(state.tokenMarketData.times[p].toString()),
-                      state.tokenMarketData.prices[p])),
-              isCurved: false,
-              barWidth: 1.6,
-              isStrokeCapRound: true,
-              dotData: FlDotData(
-                show: false,
-              ),
-              belowBarData: BarAreaData(
+    final size = ScreenUtil();
+    return Container(
+        width: size.screenWidth,
+        height: 200,
+        decoration: const BoxDecoration(color: darkBlue),
+        child: BlocBuilder<MarketTokenBloc, MarketTokenState>(
+            builder: (context, state) {
+          // Return Token Market Chart
+          if (!state.loading) {
+            return LineChart(LineChartData(
+              gridData: FlGridData(
                 show: true,
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: gradientColors
-                      .map((color) => color.withOpacity(0.3))
-                      .toList(),
+                drawVerticalLine: false,
+                drawHorizontalLine: false,
+                horizontalInterval: 1,
+                verticalInterval: 1,
+                getDrawingHorizontalLine: (value) {
+                  return FlLine(
+                    color: const Color(0xff37434d),
+                    strokeWidth: 1,
+                  );
+                },
+                getDrawingVerticalLine: (value) {
+                  return FlLine(
+                    color: const Color(0xff37434d),
+                    strokeWidth: 1,
+                  );
+                },
+              ),
+              titlesData: FlTitlesData(
+                show: true,
+                rightTitles: AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
+                topTitles: AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
+                bottomTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: false,
+                    reservedSize: 20,
+                    interval: 1,
+                    getTitlesWidget: bottomTitleWidgets,
+                  ),
+                ),
+                leftTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: false,
+                    interval: 1,
+                    getTitlesWidget: leftTitleWidgets,
+                    reservedSize: 42,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ));
-      }
-       else {
-        return const SizedBox.shrink();
-      }
-    });
+              borderData: FlBorderData(
+                show: false,
+              ),
+              minX: state.tokenMarketData!.times.first.toDouble(),
+              maxX: state.tokenMarketData!.times.last.toDouble(),
+              minY: state.tokenMarketData!.prices.reduce(min),
+              maxY: state.tokenMarketData!.prices.reduce(max),
+              lineBarsData: [
+                LineChartBarData(
+                  spots: List.generate(
+                      state.tokenMarketData!.prices.length,
+                      (p) => FlSpot(
+                          double.parse(
+                              state.tokenMarketData!.times[p].toString()),
+                          state.tokenMarketData!.prices[p])),
+                  isCurved: false,
+                  barWidth: 1.6,
+                  isStrokeCapRound: true,
+                  dotData: FlDotData(
+                    show: false,
+                  ),
+                  belowBarData: BarAreaData(
+                    show: true,
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: gradientColors
+                          .map((color) => color.withOpacity(0.3))
+                          .toList(),
+                    ),
+                  ),
+                ),
+              ],
+            ));
+          } else {
+            return const Center(
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ),
+            );
+          }
+        }));
   }
 }

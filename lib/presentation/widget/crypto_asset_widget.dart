@@ -3,7 +3,6 @@ import 'package:defi/constants/app_colors.dart';
 import 'package:defi/constants/app_font.dart';
 import 'package:defi/core/params.dart';
 import 'package:defi/domain/entities/crypto.dart';
-import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +31,7 @@ class CryptoAssetWidget extends StatelessWidget {
                   Params(idToken: crypto.id, currentOfMarket: "usd")));
 
               // Route to Chart Screen
-              Navigator.of(context).pushNamed(CryptoAssetScreen.routeName, arguments: crypto );
+              Navigator.of(context).pushNamed(CryptoAssetScreen.routeName, arguments: crypto.id );
             },
             child: ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 0),

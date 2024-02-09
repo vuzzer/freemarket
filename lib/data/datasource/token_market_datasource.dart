@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:defi/core/base_url.dart';
 import 'package:defi/core/error/exception.dart';
 import 'package:defi/core/params.dart';

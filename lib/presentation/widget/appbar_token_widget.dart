@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
+import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/presentation/screens/choose_alert_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,19 +49,22 @@ class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
                   child: const Icon(Icons.arrow_back_ios)))
           : null,
       actions: [
-        IconButton(
-            onPressed: () {},
-            splashRadius: 20,
-            padding: EdgeInsets.zero,
-            icon: const Icon(
-              Icons.visibility_outlined,
-              weight: 90,
-              size: 30,
-            )),
+        BlocBuilder<PrimaryCryptoBloc, PrimaryCryptoState>(
+            builder: (context, state) {
+          final bool visible = state.crypto?.id == crypto.id;
+          return IconButton(
+              onPressed: visible ? () => context.read<PrimaryCryptoBloc>().add(PrimaryCryptoEvent.removePrimaryCrypto(crypto)) :() => context.read<PrimaryCryptoBloc>().add( PrimaryCryptoEvent.changePrimaryCrypto(crypto)),
+              splashRadius: 20,
+              padding: EdgeInsets.zero,
+              icon:  Icon( visible ? Icons.visibility :
+                Icons.visibility_outlined,
+                weight: 90,
+                size: 30,
+              ));
+        }),
         BlocBuilder<FavorisBloc, FavorisState>(builder: (context, state) {
           final favoris = state.favoris;
           final isFavoris = favoris.containsKey(crypto.id);
-
           return IconButton(
               onPressed: isFavoris
                   ? () {
