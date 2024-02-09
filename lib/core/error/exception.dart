@@ -19,3 +19,6 @@ class RemoveFavorisException implements Exception {}
 
 // Primary Crypto
 class GetPrimaryException implements Exception {}
+class PrimaryCryptoExistException implements Exception {}
+class ChangePrimaryCryptoException implements Exception {}
+class RemovePrimaryCryptoException implements Exception {}

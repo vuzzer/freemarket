@@ -1,5 +1,4 @@
 import 'package:defi/core/error/exception.dart';
-import 'package:defi/core/utils/eth_address_formatter.dart';
 import 'package:defi/data/models/wallet_model.dart';
 import 'package:bip39/bip39.dart' as bip39;
 import 'package:ed25519_hd_key/ed25519_hd_key.dart';

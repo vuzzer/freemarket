@@ -1,5 +1,7 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:defi/core/database/client_profil_collection.dart';
 import 'package:defi/core/network/network_info.dart';
+import 'package:defi/core/notifications/alert_notification.dart';
 import 'package:defi/data/datasource/client_profil_source.dart';
 import 'package:defi/data/datasource/crypto_info_source.dart';
 import 'package:defi/data/datasource/favoris_crypto_data.dart';
@@ -24,7 +26,7 @@ import 'package:defi/presentation/blocs/client/client_profil_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
-import 'package:defi/presentation/blocs/primary-crypto/bloc/primary_crypto_bloc.dart';
+import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/services/address_service.dart';
 import 'package:defi/services/configuration_service.dart';
 import 'package:defi/services/contract_locator.dart';
@@ -103,10 +105,12 @@ Future<void> injectionBloc() async {
   sl.registerLazySingleton<PrimaryCryptoData>(() => PrimaryCryptoDataImpl());
 
   //! Core
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
-  sl.registerLazySingleton(() => ClientProfilCollection());
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl())); // For stream
+  sl.registerLazySingleton(() => ClientProfilCollection()); // For Http Request
+  sl.registerLazySingleton(() => AlertNotification(sl())); // For notification
 
   //! External
+  sl.registerLazySingleton(() => AwesomeNotifications());
   sl.registerLazySingleton(() => InternetConnectionChecker());
   sl.registerLazySingleton(() => Dio());
 }

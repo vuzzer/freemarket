@@ -11,9 +11,14 @@ class PrimaryCryptoRepoImpl implements PrimaryCryptoRepo {
   PrimaryCryptoRepoImpl(this.primaryCryptoData);
 
   @override
-  Future<Either<Failure, CryptoInfo>> changePrimaryCrypto(CryptoInfo info) {
-    // TODO: implement changePrimaryCrypto
-    throw UnimplementedError();
+  Future<Either<Failure, CryptoInfo>> changePrimaryCrypto(
+      CryptoInfo info) async {
+    try {
+      final crypto = await primaryCryptoData.changePrimaryCrypto(info);
+      return right(crypto);
+    } on ChangePrimaryCryptoException {
+      return left(ChangePrimaryCryptoFailure());
+    }
   }
 
   @override
@@ -23,6 +28,16 @@ class PrimaryCryptoRepoImpl implements PrimaryCryptoRepo {
       return right(crypto);
     } on GetPrimaryException {
       return left(GetPrimaryCryptoFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> removePrimaryCrypto(CryptoInfo crypto) async {
+    try {
+      final removed = await primaryCryptoData.removePrimaryCrypto(crypto);
+      return right(removed);
+    } on RemovePrimaryCryptoException {
+      return left(RemovePrimaryCryptoFailure());
     }
   }
 }

@@ -1,7 +1,7 @@
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
-import 'package:defi/presentation/blocs/primary-crypto/bloc/primary_crypto_bloc.dart';
+import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +9,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/card_balance.dart';
 import '../widget/theta_body_widget.dart';
+import 'package:logger/logger.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/home";
@@ -49,7 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (context, state) {
                 if (!state.loading) {
                   // Primary Crypto to display on card
-                  context.read<PrimaryCryptoBloc>().add( const PrimaryCryptoEvent.getPrimaryCrypto() );
+                  context
+                      .read<PrimaryCryptoBloc>()
+                      .add(const PrimaryCryptoEvent.getPrimaryCrypto());
 
                   // Load favoris crypto of users
                   context.read<FavorisBloc>().add(LoadFavorisEvent());

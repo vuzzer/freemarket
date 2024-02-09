@@ -15,4 +15,8 @@ class PrimaryCryptoUsecase {
   Future<Either<Failure, CryptoInfo>> getPrimaryCrypto() {
     return primaryCryptoRepo.getPrimaryCrypto();
   }
+
+  Future<Either<Failure, bool>> removePrimaryCrypto(CryptoInfo crypto) {
+    return primaryCryptoRepo.removePrimaryCrypto(crypto);
+  }
 }

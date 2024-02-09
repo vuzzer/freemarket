@@ -43,3 +43,14 @@ class GetPrimaryCryptoFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
+
+// Change primary crypto failure
+class ChangePrimaryCryptoFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
+
+class RemovePrimaryCryptoFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}

@@ -19,32 +19,44 @@ mixin _$PrimaryCryptoEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getPrimaryCrypto,
+    required TResult Function(CryptoInfo crypto) changePrimaryCrypto,
+    required TResult Function(CryptoInfo crypto) removePrimaryCrypto,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getPrimaryCrypto,
+    TResult? Function(CryptoInfo crypto)? changePrimaryCrypto,
+    TResult? Function(CryptoInfo crypto)? removePrimaryCrypto,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getPrimaryCrypto,
+    TResult Function(CryptoInfo crypto)? changePrimaryCrypto,
+    TResult Function(CryptoInfo crypto)? removePrimaryCrypto,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetPrimaryCrypto value) getPrimaryCrypto,
+    required TResult Function(ChangePrimaryCrypto value) changePrimaryCrypto,
+    required TResult Function(RemovePrimaryCrypto value) removePrimaryCrypto,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetPrimaryCrypto value)? getPrimaryCrypto,
+    TResult? Function(ChangePrimaryCrypto value)? changePrimaryCrypto,
+    TResult? Function(RemovePrimaryCrypto value)? removePrimaryCrypto,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetPrimaryCrypto value)? getPrimaryCrypto,
+    TResult Function(ChangePrimaryCrypto value)? changePrimaryCrypto,
+    TResult Function(RemovePrimaryCrypto value)? removePrimaryCrypto,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +119,8 @@ class _$GetPrimaryCryptoImpl implements GetPrimaryCrypto {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getPrimaryCrypto,
+    required TResult Function(CryptoInfo crypto) changePrimaryCrypto,
+    required TResult Function(CryptoInfo crypto) removePrimaryCrypto,
   }) {
     return getPrimaryCrypto();
   }
@@ -115,6 +129,8 @@ class _$GetPrimaryCryptoImpl implements GetPrimaryCrypto {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getPrimaryCrypto,
+    TResult? Function(CryptoInfo crypto)? changePrimaryCrypto,
+    TResult? Function(CryptoInfo crypto)? removePrimaryCrypto,
   }) {
     return getPrimaryCrypto?.call();
   }
@@ -123,6 +139,8 @@ class _$GetPrimaryCryptoImpl implements GetPrimaryCrypto {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getPrimaryCrypto,
+    TResult Function(CryptoInfo crypto)? changePrimaryCrypto,
+    TResult Function(CryptoInfo crypto)? removePrimaryCrypto,
     required TResult orElse(),
   }) {
     if (getPrimaryCrypto != null) {
@@ -135,6 +153,8 @@ class _$GetPrimaryCryptoImpl implements GetPrimaryCrypto {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetPrimaryCrypto value) getPrimaryCrypto,
+    required TResult Function(ChangePrimaryCrypto value) changePrimaryCrypto,
+    required TResult Function(RemovePrimaryCrypto value) removePrimaryCrypto,
   }) {
     return getPrimaryCrypto(this);
   }
@@ -143,6 +163,8 @@ class _$GetPrimaryCryptoImpl implements GetPrimaryCrypto {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetPrimaryCrypto value)? getPrimaryCrypto,
+    TResult? Function(ChangePrimaryCrypto value)? changePrimaryCrypto,
+    TResult? Function(RemovePrimaryCrypto value)? removePrimaryCrypto,
   }) {
     return getPrimaryCrypto?.call(this);
   }
@@ -151,6 +173,8 @@ class _$GetPrimaryCryptoImpl implements GetPrimaryCrypto {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetPrimaryCrypto value)? getPrimaryCrypto,
+    TResult Function(ChangePrimaryCrypto value)? changePrimaryCrypto,
+    TResult Function(RemovePrimaryCrypto value)? removePrimaryCrypto,
     required TResult orElse(),
   }) {
     if (getPrimaryCrypto != null) {
@@ -162,6 +186,288 @@ class _$GetPrimaryCryptoImpl implements GetPrimaryCrypto {
 
 abstract class GetPrimaryCrypto implements PrimaryCryptoEvent {
   const factory GetPrimaryCrypto() = _$GetPrimaryCryptoImpl;
+}
+
+/// @nodoc
+abstract class _$$ChangePrimaryCryptoImplCopyWith<$Res> {
+  factory _$$ChangePrimaryCryptoImplCopyWith(_$ChangePrimaryCryptoImpl value,
+          $Res Function(_$ChangePrimaryCryptoImpl) then) =
+      __$$ChangePrimaryCryptoImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({CryptoInfo crypto});
+}
+
+/// @nodoc
+class __$$ChangePrimaryCryptoImplCopyWithImpl<$Res>
+    extends _$PrimaryCryptoEventCopyWithImpl<$Res, _$ChangePrimaryCryptoImpl>
+    implements _$$ChangePrimaryCryptoImplCopyWith<$Res> {
+  __$$ChangePrimaryCryptoImplCopyWithImpl(_$ChangePrimaryCryptoImpl _value,
+      $Res Function(_$ChangePrimaryCryptoImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? crypto = null,
+  }) {
+    return _then(_$ChangePrimaryCryptoImpl(
+      null == crypto
+          ? _value.crypto
+          : crypto // ignore: cast_nullable_to_non_nullable
+              as CryptoInfo,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ChangePrimaryCryptoImpl implements ChangePrimaryCrypto {
+  const _$ChangePrimaryCryptoImpl(this.crypto);
+
+  @override
+  final CryptoInfo crypto;
+
+  @override
+  String toString() {
+    return 'PrimaryCryptoEvent.changePrimaryCrypto(crypto: $crypto)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChangePrimaryCryptoImpl &&
+            (identical(other.crypto, crypto) || other.crypto == crypto));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, crypto);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChangePrimaryCryptoImplCopyWith<_$ChangePrimaryCryptoImpl> get copyWith =>
+      __$$ChangePrimaryCryptoImplCopyWithImpl<_$ChangePrimaryCryptoImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getPrimaryCrypto,
+    required TResult Function(CryptoInfo crypto) changePrimaryCrypto,
+    required TResult Function(CryptoInfo crypto) removePrimaryCrypto,
+  }) {
+    return changePrimaryCrypto(crypto);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getPrimaryCrypto,
+    TResult? Function(CryptoInfo crypto)? changePrimaryCrypto,
+    TResult? Function(CryptoInfo crypto)? removePrimaryCrypto,
+  }) {
+    return changePrimaryCrypto?.call(crypto);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getPrimaryCrypto,
+    TResult Function(CryptoInfo crypto)? changePrimaryCrypto,
+    TResult Function(CryptoInfo crypto)? removePrimaryCrypto,
+    required TResult orElse(),
+  }) {
+    if (changePrimaryCrypto != null) {
+      return changePrimaryCrypto(crypto);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetPrimaryCrypto value) getPrimaryCrypto,
+    required TResult Function(ChangePrimaryCrypto value) changePrimaryCrypto,
+    required TResult Function(RemovePrimaryCrypto value) removePrimaryCrypto,
+  }) {
+    return changePrimaryCrypto(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetPrimaryCrypto value)? getPrimaryCrypto,
+    TResult? Function(ChangePrimaryCrypto value)? changePrimaryCrypto,
+    TResult? Function(RemovePrimaryCrypto value)? removePrimaryCrypto,
+  }) {
+    return changePrimaryCrypto?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetPrimaryCrypto value)? getPrimaryCrypto,
+    TResult Function(ChangePrimaryCrypto value)? changePrimaryCrypto,
+    TResult Function(RemovePrimaryCrypto value)? removePrimaryCrypto,
+    required TResult orElse(),
+  }) {
+    if (changePrimaryCrypto != null) {
+      return changePrimaryCrypto(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ChangePrimaryCrypto implements PrimaryCryptoEvent {
+  const factory ChangePrimaryCrypto(final CryptoInfo crypto) =
+      _$ChangePrimaryCryptoImpl;
+
+  CryptoInfo get crypto;
+  @JsonKey(ignore: true)
+  _$$ChangePrimaryCryptoImplCopyWith<_$ChangePrimaryCryptoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$RemovePrimaryCryptoImplCopyWith<$Res> {
+  factory _$$RemovePrimaryCryptoImplCopyWith(_$RemovePrimaryCryptoImpl value,
+          $Res Function(_$RemovePrimaryCryptoImpl) then) =
+      __$$RemovePrimaryCryptoImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({CryptoInfo crypto});
+}
+
+/// @nodoc
+class __$$RemovePrimaryCryptoImplCopyWithImpl<$Res>
+    extends _$PrimaryCryptoEventCopyWithImpl<$Res, _$RemovePrimaryCryptoImpl>
+    implements _$$RemovePrimaryCryptoImplCopyWith<$Res> {
+  __$$RemovePrimaryCryptoImplCopyWithImpl(_$RemovePrimaryCryptoImpl _value,
+      $Res Function(_$RemovePrimaryCryptoImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? crypto = null,
+  }) {
+    return _then(_$RemovePrimaryCryptoImpl(
+      null == crypto
+          ? _value.crypto
+          : crypto // ignore: cast_nullable_to_non_nullable
+              as CryptoInfo,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$RemovePrimaryCryptoImpl implements RemovePrimaryCrypto {
+  const _$RemovePrimaryCryptoImpl(this.crypto);
+
+  @override
+  final CryptoInfo crypto;
+
+  @override
+  String toString() {
+    return 'PrimaryCryptoEvent.removePrimaryCrypto(crypto: $crypto)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RemovePrimaryCryptoImpl &&
+            (identical(other.crypto, crypto) || other.crypto == crypto));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, crypto);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RemovePrimaryCryptoImplCopyWith<_$RemovePrimaryCryptoImpl> get copyWith =>
+      __$$RemovePrimaryCryptoImplCopyWithImpl<_$RemovePrimaryCryptoImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getPrimaryCrypto,
+    required TResult Function(CryptoInfo crypto) changePrimaryCrypto,
+    required TResult Function(CryptoInfo crypto) removePrimaryCrypto,
+  }) {
+    return removePrimaryCrypto(crypto);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getPrimaryCrypto,
+    TResult? Function(CryptoInfo crypto)? changePrimaryCrypto,
+    TResult? Function(CryptoInfo crypto)? removePrimaryCrypto,
+  }) {
+    return removePrimaryCrypto?.call(crypto);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getPrimaryCrypto,
+    TResult Function(CryptoInfo crypto)? changePrimaryCrypto,
+    TResult Function(CryptoInfo crypto)? removePrimaryCrypto,
+    required TResult orElse(),
+  }) {
+    if (removePrimaryCrypto != null) {
+      return removePrimaryCrypto(crypto);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetPrimaryCrypto value) getPrimaryCrypto,
+    required TResult Function(ChangePrimaryCrypto value) changePrimaryCrypto,
+    required TResult Function(RemovePrimaryCrypto value) removePrimaryCrypto,
+  }) {
+    return removePrimaryCrypto(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetPrimaryCrypto value)? getPrimaryCrypto,
+    TResult? Function(ChangePrimaryCrypto value)? changePrimaryCrypto,
+    TResult? Function(RemovePrimaryCrypto value)? removePrimaryCrypto,
+  }) {
+    return removePrimaryCrypto?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetPrimaryCrypto value)? getPrimaryCrypto,
+    TResult Function(ChangePrimaryCrypto value)? changePrimaryCrypto,
+    TResult Function(RemovePrimaryCrypto value)? removePrimaryCrypto,
+    required TResult orElse(),
+  }) {
+    if (removePrimaryCrypto != null) {
+      return removePrimaryCrypto(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RemovePrimaryCrypto implements PrimaryCryptoEvent {
+  const factory RemovePrimaryCrypto(final CryptoInfo crypto) =
+      _$RemovePrimaryCryptoImpl;
+
+  CryptoInfo get crypto;
+  @JsonKey(ignore: true)
+  _$$RemovePrimaryCryptoImplCopyWith<_$RemovePrimaryCryptoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

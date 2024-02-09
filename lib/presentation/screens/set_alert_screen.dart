@@ -52,122 +52,127 @@ class _SetAlertScreenState extends State<SetAlertScreen> {
   Widget build(BuildContext context) {
     final alert = ModalRoute.of(context)!.settings.arguments as Alert;
     final alertBasedPrice = Column(
-        children: [
-          const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  AutoSizeText(
-                    "Enter a percentage amount",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  AutoSizeText(
-                    "Alert will remain active until your target price is reached.",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 8),
-                  ),
-                ],
-              )),
-          const SizedBox(
-            height: 20,
-          ),
-          Center(
-              child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  width: (kSizeUnit * 3).w,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      color: blue1, borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                    child: Form(
-                        child: TextFormField(
-                      focusNode: _alertFocus,
-                      controller: _controller,
-                      keyboardType: TextInputType.none,
-                      autocorrect: false,
-                      cursorColor: Colors.white,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: FontFamily.robotoCondensed),
-                      decoration: InputDecoration(
-                          labelText: alert.title,
-                          prefixIcon: const Icon(
-                            Icons.add,
-                          ),
-                          prefixIconColor: Colors.white,
-                          contentPadding: const EdgeInsets.only(bottom: 10),
-                          labelStyle: TextStyle(color: greyLight),
-                          suffixIcon: const Icon(
-                            Icons.percent,
-                            size: 12,
-                          ),
-                          suffixIconColor: Colors.white,
-                          border: InputBorder.none),
-                    )),
-                  ))),
-          const SizedBox(
-            height: 8,
-          ),
-          const AutoSizeText(
-            "Alert will remain active until your target price is reached.",
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 8),
-          ),
-          const Spacer(),
-          Container(
+      children: [
+        Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: ButtonWidget(
-              onPressed: () =>
-                  Navigator.of(context).pushNamed(SetAlertScreen.routeName),
-              title: "Create alert",
-              raduis: 10,
-            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                const AutoSizeText(
+                  "Enter a percentage amount",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                AutoSizeText(
+                  alert.desc,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 8),
+                ),
+              ],
+            )),
+        const SizedBox(
+          height: 20,
+        ),
+        Center(
+            child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                width: (kSizeUnit * 3).w,
+                height: 50,
+                decoration: BoxDecoration(
+                    color: blue1, borderRadius: BorderRadius.circular(10)),
+                child: Center(
+                  child: Form(
+                      child: TextFormField(
+                    focusNode: _alertFocus,
+                    controller: _controller,
+                    keyboardType: TextInputType.none,
+                    autocorrect: false,
+                    cursorColor: Colors.white,
+                    enableSuggestions: false,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: FontFamily.robotoCondensed),
+                        enableInteractiveSelection: false, // disable paste
+                    
+                    decoration: InputDecoration(
+                
+                        labelText: alert.title,
+                        prefixIcon: Icon(
+                          alert.icon,
+                          size: 15,
+                        ),
+                        prefixIconColor: Colors.white,
+                        contentPadding: const EdgeInsets.only(bottom: 10),
+                        labelStyle: TextStyle(color: greyLight),
+                        suffixIcon: const Icon(
+                          Icons.percent,
+                          size: 12,
+                        ),
+                        suffixIconColor: Colors.white,
+                        border: InputBorder.none),
+                  )),
+                ))),
+        const SizedBox(
+          height: 8,
+        ),
+        const AutoSizeText(
+          "Alert will remain active until your target price is reached.",
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 8),
+        ),
+        const Spacer(),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: ButtonWidget(
+            onPressed: () =>
+                Navigator.of(context).pushNamed(SetAlertScreen.routeName),
+            title: "Create alert",
+            raduis: 10,
           ),
-          Container(
-            padding:
-                const EdgeInsets.only(left: 30, right: 30, bottom: 35, top: 10),
-            child: ButtonWidget(
-              onPressed: () => Navigator.of(context).pop(),
-              color: blue1,
-              title: "Dismiss",
-              raduis: 10,
-            ),
+        ),
+        Container(
+          padding:
+              const EdgeInsets.only(left: 30, right: 30, bottom: 35, top: 10),
+          child: ButtonWidget(
+            onPressed: () => Navigator.of(context).pop(),
+            color: blue1,
+            title: "Dismiss",
+            raduis: 10,
           ),
-          ValueListenableBuilder(
-              valueListenable: focusNotificier,
-              builder: (context, hasFocus, child) => Visibility(
-                  visible: hasFocus,
-                  child: Container(
-                      padding: const EdgeInsets.only(bottom: 30),
-                      decoration: const BoxDecoration(color: blue1),
-                      child: KeyBoardWidget(
-                        controller: _controller,
-                        routeName: SetAlertScreen.routeName,
-                        amount: true,
-                        onPressed: () {},
-                      )))),
-        ],
-      );
-
+        ),
+        ValueListenableBuilder(
+            valueListenable: focusNotificier,
+            builder: (context, hasFocus, child) => Visibility(
+                visible: hasFocus,
+                child: Container(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    decoration: const BoxDecoration(color: blue1),
+                    child: KeyBoardWidget(
+                      controller: _controller,
+                      routeName: SetAlertScreen.routeName,
+                      amount: true,
+                      onPressed: () {},
+                    )))), 
+      ],
+    );
 
     return Scaffold(
-      appBar: const AppBarWidget(
-        title: "Price Alert",
-        leading: true,
-      ),
-      body: alert.value == AlertValue.schedular ?  const ScheduleWidget() : alertBasedPrice 
-    );
+        appBar: const AppBarWidget(
+          title: "Price Alert",
+          leading: true,
+        ),
+        body: alert.value == AlertValue.schedular
+            ? const ScheduleWidget()
+            : alertBasedPrice);
   }
 }

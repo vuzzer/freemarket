@@ -19,10 +19,11 @@ class NumberButtonWiget extends StatelessWidget {
           //If Keyboard is activate for pincode, number is limited to 4
           if (!amount && controller.text.length < 4) {
             controller.text += touch.toString();
-          }else{
+          } else {
             controller.text += touch.toString();
             // Change the cursor position
-controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
+            controller.selection = TextSelection.fromPosition(
+                TextPosition(offset: controller.text.length));
           }
         },
         style: TextButton.styleFrom(

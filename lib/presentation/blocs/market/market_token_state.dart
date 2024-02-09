@@ -1,22 +1,14 @@
 part of 'market_token_bloc.dart';
 
-class MarketTokenState extends Equatable {
-  const MarketTokenState();
+@freezed
+class MarketTokenState with _$MarketTokenState {
+  const factory MarketTokenState(
+          {required TokenMarketData? tokenMarketData,
+          required bool loading,
+          required Either<CryptoError, Success> successOrFailure}) =
+      _MarketTokenState;
 
-  @override
-  List<Object> get props => [];
+  factory MarketTokenState.initial() => MarketTokenState(
+      loading: true, tokenMarketData: null, successOrFailure: right(Success()));
 }
 
-class MarketTokenEmpty extends MarketTokenState {}
-
-class MarketTokenLoading extends MarketTokenState {}
-
-class MarketTokenLoaded extends MarketTokenState {
-  final TokenMarketData tokenMarketData;
-  const MarketTokenLoaded(this.tokenMarketData);
-}
-
-class MarketTokenError extends MarketTokenState {
-  final String message;
-  const MarketTokenError(this.message);
-}

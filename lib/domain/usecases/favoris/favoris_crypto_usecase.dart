@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:defi/core/error/failure.dart';
 import 'package:defi/domain/entities/crypto.dart';
-import 'package:defi/domain/entities/favoris_crypto.dart';
 import 'package:defi/domain/repositories/favoris/favoris_crypto_repo.dart';
 
 class FavorisCryptoUsecase {

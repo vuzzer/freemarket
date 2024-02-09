@@ -24,7 +24,7 @@ class WalletState extends ChangeNotifier {
     }
 
     if (action is UpdatingBalance) {
-      for (NetworkType network in NetworkType.enabledValues) {
+      for (NetworkType _ in NetworkType.enabledValues) {
         /*  state.wallets[network] =
             state.wallets[network]!.rebuild((b) => b..loading = true);
       } */
