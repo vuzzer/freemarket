@@ -48,12 +48,9 @@ class AlertNotification {
 
   // Creation of alert based price of token
   Future<void> createAlertNotificationBasedPrice(CryptoInfo crypto) async {
-    int random = Random().nextInt(1 << 10);
-    int milliseconds = DateTime.now().millisecondsSinceEpoch;
-    int idNotification = (milliseconds & 0x3FF) << 10 | random;
     await awesomeNotifications.createNotification(
         content: NotificationContent(
-            id: idNotification,
+            id: createUniqueId(),
             channelKey: channelKeyPrice,
             color: blue,
             title: "Bitcoin prix",
@@ -65,12 +62,9 @@ class AlertNotification {
 
   // Create alert scheduled
   Future<void> createAlertNotificationScheduled(CryptoInfo crypto) async {
-    int random = Random().nextInt(1 << 10);
-    int milliseconds = DateTime.now().millisecondsSinceEpoch;
-    int idNotification = (milliseconds & 0x3FF) << 10 | random;
     await awesomeNotifications.createNotification(
         content: NotificationContent(
-            id: idNotification,
+            id: createUniqueId(),
             channelKey: channelKeyScheduled,
             color: blue,
             title: "Bitcoin prix",
@@ -84,17 +78,23 @@ class AlertNotification {
   Future<void> createdStrem() async {
     awesomeNotifications.setListeners(
         onNotificationCreatedMethod: onNotificationCreatedMethod,
-        onActionReceivedMethod: onActionReceivedMethod );
+        onActionReceivedMethod: onActionReceivedMethod);
   }
 
   Future<void> onNotificationCreatedMethod(
       ReceivedNotification receivedNotification) async {
-        
-      }
+      // Todo: Ask user to set up notification if it's not, or display fluttertoast to indicate success of alert
+  }
   Future<void> onActionReceivedMethod(
       ReceivedNotification receivedNotification) async {
-        awesomeNotifications.getGlobalBadgeCounter().then((value) =>{
-          awesomeNotifications.setGlobalBadgeCounter(value -1)
-        } );
-      }
+    awesomeNotifications.getGlobalBadgeCounter().then(
+        (value) => {awesomeNotifications.setGlobalBadgeCounter(value - 1)});
+  }
+
+  int createUniqueId() {
+    int random = Random().nextInt(1 << 10);
+    int milliseconds = DateTime.now().millisecondsSinceEpoch;
+    int idNotification = (milliseconds & 0x3FF) << 10 | random;
+    return idNotification;
+  }
 }
