@@ -1,9 +1,10 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/core/notifications/alert_notification.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/screens/home_screen.dart';
+import 'package:defi/presentation/widget/adaptive_dialog.dart';
 import 'package:defi/service_locator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -23,37 +24,7 @@ class _StartedScreenState extends State<StartedScreen> {
 
     sl<AlertNotification>().permissionNotification().then((isAllowed) {
       if (!isAllowed) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Allow Notifications'),
-            content: const Text('Our app would like to send you notifications'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text(
-                  'Don\'t Allow',
-                  style: TextStyle(color: Colors.grey, fontSize: 18),
-                ),
-              ),
-              TextButton(
-                onPressed: () => AwesomeNotifications()
-                    .requestPermissionToSendNotifications()
-                    .then((_) => Navigator.pop(context)),
-                child: const Text(
-                  'Allow',
-                  style: TextStyle(
-                    color: Colors.teal,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
+        adaptiveDialog(context);
       }
     });
 
@@ -141,7 +112,7 @@ class _StartedScreenState extends State<StartedScreen> {
                             child: ElevatedButton(
                                 onPressed: () {
                                   // Get Crpypto lists
-                                 context
+                                  context
                                       .read<CryptosBloc>()
                                       .add(GetCryptoInfo());
 

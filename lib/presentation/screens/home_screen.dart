@@ -9,7 +9,6 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/card_balance.dart';
 import '../widget/theta_body_widget.dart';
-import 'package:logger/logger.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/home";

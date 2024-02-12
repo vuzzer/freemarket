@@ -1,11 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/core/base_type.dart';
 import 'package:defi/core/enum.dart';
+import 'package:defi/presentation/widget/adaptive_textform_widget.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/button_widget.dart';
 import 'package:defi/presentation/widget/keyboard_widget.dart';
 import 'package:defi/presentation/widget/schedule_widget.dart';
-import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -92,36 +92,8 @@ class _SetAlertScreenState extends State<SetAlertScreen> {
                     color: blue1, borderRadius: BorderRadius.circular(10)),
                 child: Center(
                   child: Form(
-                      child: TextFormField(
-                    focusNode: _alertFocus,
-                    controller: _controller,
-                    keyboardType: TextInputType.none,
-                    autocorrect: false,
-                    cursorColor: Colors.white,
-                    enableSuggestions: false,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: FontFamily.robotoCondensed),
-                        enableInteractiveSelection: false, // disable paste
-                    
-                    decoration: InputDecoration(
-                
-                        labelText: alert.title,
-                        prefixIcon: Icon(
-                          alert.icon,
-                          size: 15,
-                        ),
-                        prefixIconColor: Colors.white,
-                        contentPadding: const EdgeInsets.only(bottom: 10),
-                        labelStyle: TextStyle(color: greyLight),
-                        suffixIcon: const Icon(
-                          Icons.percent,
-                          size: 12,
-                        ),
-                        suffixIconColor: Colors.white,
-                        border: InputBorder.none),
-                  )),
-                ))),
+                      child: AdapativeTextFormWidget(alert: alert, controller: _controller, alertFocus: _alertFocus,),
+                )))),
         const SizedBox(
           height: 8,
         ),

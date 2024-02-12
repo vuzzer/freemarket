@@ -4,6 +4,7 @@ import 'package:defi/get_routes.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
+import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/presentation/provider/network_provider.dart';
 import 'package:defi/presentation/provider/user_provider.dart';
@@ -52,6 +53,7 @@ void main() async {
     BlocProvider(create: (context) => sl<MarketTokenBloc>()),
     BlocProvider(create: (context) => sl<CryptosBloc>()),
     BlocProvider(create: (context) => sl<FavorisBloc>()),
+    BlocProvider(create: (context) => sl<NotificationPriceBloc>()),
     BlocProvider(create: (context) => sl<PrimaryCryptoBloc>())
   ], child: const MyApp()));
 }

@@ -1,5 +1,3 @@
-import 'package:defi/core/network/network_info.dart';
-import 'package:defi/presentation/screens/base_screen.dart';
 import 'package:defi/presentation/screens/choose_alert_screen.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
 import 'package:defi/presentation/screens/confirm_deposit_screen.dart';

@@ -19,6 +19,7 @@ import 'package:defi/domain/usecases/clientProfil/clientProfil_usecase.dart';
 import 'package:defi/domain/usecases/crypto-info/crypto_info_usecases.dart';
 import 'package:defi/domain/usecases/favoris/favoris_crypto_usecase.dart';
 import 'package:defi/domain/usecases/market/token_market_usecase.dart';
+import 'package:defi/domain/usecases/notification-price/notification_price_usecase.dart';
 import 'package:defi/domain/usecases/primary-crypto/primary_crypto_usecase.dart';
 import 'package:defi/domain/usecases/setup/wallet_setup_handler.dart';
 import 'package:defi/domain/usecases/wallet/wallet_handler.dart';
@@ -26,6 +27,7 @@ import 'package:defi/presentation/blocs/client/client_profil_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
+import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/services/address_service.dart';
 import 'package:defi/services/configuration_service.dart';
@@ -36,8 +38,11 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'data/datasource/notification/notification_price_data.dart';
 import 'data/datasource/primary_crypto_data.dart';
+import 'data/repositories/notification/notification_repo_impl.dart';
 import 'domain/repositories/clientProfil/clientProfil_repository.dart';
+import 'domain/repositories/notification-price/notification_price_repo.dart';
 import 'domain/usecases/transfer/wallet_transfer_handle.dart';
 
 GetIt sl = GetIt.instance;
@@ -75,6 +80,8 @@ Future<void> injectionBloc() async {
   sl.registerLazySingleton(() => CryptosBloc(cryptoInfoUseCase: sl()));
   sl.registerFactory(() => FavorisBloc(favorisCryptoUsecase: sl()));
   sl.registerFactory(() => PrimaryCryptoBloc(primaryCryptoUsecase: sl()));
+  sl.registerLazySingleton(() => NotificationPriceBloc(
+      notificationPriceUsecase: sl())); // for notification based price
 
   //! Usecases
   sl.registerLazySingleton(() => ClientProfilUsecase(sl()));
@@ -82,6 +89,8 @@ Future<void> injectionBloc() async {
   sl.registerLazySingleton(() => CryptoInfoUseCase(sl()));
   sl.registerLazySingleton(() => FavorisCryptoUsecase(sl()));
   sl.registerLazySingleton(() => PrimaryCryptoUsecase(sl()));
+  // Notification based price usecases
+  sl.registerLazySingleton(() => NotificationPriceUsecase(sl()));
 
   //! Repositories
   sl.registerLazySingleton<ClientProfilRepository>(
@@ -94,6 +103,9 @@ Future<void> injectionBloc() async {
       () => FavorisCryptoRepoImpl(sl()));
   sl.registerLazySingleton<PrimaryCryptoRepo>(
       () => PrimaryCryptoRepoImpl(sl()));
+  // Notification based price repo
+  sl.registerLazySingleton<NotificationPriceRepo>(
+      () => NotificationPriceRepoImpl(notificationPriceData: sl()));
 
   //! Data
   sl.registerLazySingleton<ClientProfilDataSource>(
@@ -103,9 +115,12 @@ Future<void> injectionBloc() async {
   sl.registerLazySingleton<CryptoInfoSource>(() => CryptoInfoSourceImpl(sl()));
   sl.registerLazySingleton<FavorisCryptoData>(() => FavorisCryptoDataImpl());
   sl.registerLazySingleton<PrimaryCryptoData>(() => PrimaryCryptoDataImpl());
+  // Notification based price data
+  sl.registerLazySingleton<NotificationPriceData>(() => NotificationPriceDataImpl());
 
   //! Core
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl())); // For stream
+  sl.registerLazySingleton<NetworkInfo>(
+      () => NetworkInfoImpl(sl())); // For stream
   sl.registerLazySingleton(() => ClientProfilCollection()); // For Http Request
   sl.registerLazySingleton(() => AlertNotification(sl())); // For notification
 

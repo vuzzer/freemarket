@@ -25,7 +25,7 @@ class FavorisCryptoDataImpl implements FavorisCryptoData {
       final cryptoList = sl<CryptosBloc>();
 
       // Get list of favoris
-      var favoris = await box.get(boxKey) ?? [];
+      List favoris = await box.get(boxKey, defaultValue: []);
 
       // Convert List<CryptoInfo> to Map<CryptoInfo>
       final mapCrypto = {
