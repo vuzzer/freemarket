@@ -3,16 +3,13 @@ import 'package:defi/domain/entities/crypto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-
 part 'favoris_state.freezed.dart';
-
 
 @freezed
 class FavorisState with _$FavorisState {
   const factory FavorisState(
       {required Map<String, CryptoInfo> favoris,
       required Either<String, bool> successOrfail}) = _FavorisState;
-
   factory FavorisState.initial() =>
       FavorisState(favoris: {}, successOrfail: right(true));
 }

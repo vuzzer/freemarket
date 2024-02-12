@@ -22,3 +22,7 @@ class GetPrimaryException implements Exception {}
 class PrimaryCryptoExistException implements Exception {}
 class ChangePrimaryCryptoException implements Exception {}
 class RemovePrimaryCryptoException implements Exception {}
+
+
+// Exception about notification
+class NotificationExistException implements Exception {}

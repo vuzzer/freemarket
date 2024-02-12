@@ -1,10 +1,15 @@
 import 'dart:io';
-import 'dart:math';
-
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:defi/constants/app_colors.dart';
+import 'package:defi/core/create_unique_id.dart';
 import 'package:defi/domain/entities/crypto.dart';
+import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
+import 'package:defi/service_locator.dart';
 import 'package:flutter/material.dart';
+
+const priceType = "price";
+const percent_type = "percent";
+const scheduled_type = "scheduled";
 
 class AlertNotification {
   static String channelKeyPrice = "Event Price";
@@ -47,16 +52,23 @@ class AlertNotification {
   }
 
   // Creation of alert based price of token
-  Future<void> createAlertNotificationBasedPrice(CryptoInfo crypto) async {
+  Future<void> createAlertNotificationBasedPrice(
+      CryptoInfo crypto, double price) async {
+    final id = createUniqueId();
     await awesomeNotifications.createNotification(
         content: NotificationContent(
-            id: createUniqueId(),
+            id: id,
             channelKey: channelKeyPrice,
             color: blue,
-            title: "Bitcoin prix",
-            body: "Le prix du bitcoin a grimpé de 10%",
-            bigPicture:
-                "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+            title: "${crypto.name} prix",
+            body: "Le prix du ${crypto.name} a grimpé de 10%",
+            payload: {
+              "typeNotif": priceType,
+              "cryptoId": crypto.id,
+              "id": id.toString(),
+              "price": price.toString()
+            },
+            bigPicture: crypto.image,
             notificationLayout: NotificationLayout.BigPicture));
   }
 
@@ -69,6 +81,7 @@ class AlertNotification {
             color: blue,
             title: "Bitcoin prix",
             body: "Le prix du bitcoin a grimpé de 10%",
+            payload: {"typeNotif": scheduled_type},
             bigPicture:
                 "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
             notificationLayout: NotificationLayout.BigPicture));
@@ -81,20 +94,34 @@ class AlertNotification {
         onActionReceivedMethod: onActionReceivedMethod);
   }
 
+  // Callback when notification is created
   Future<void> onNotificationCreatedMethod(
       ReceivedNotification receivedNotification) async {
-      // Todo: Ask user to set up notification if it's not, or display fluttertoast to indicate success of alert
+    switch (receivedNotification.payload!["typeNotif"]) {
+      case priceType:
+        final cryptoId = receivedNotification.payload!["cryptoId"] as String;
+        final id = int.parse(receivedNotification.payload!["id"] as String);
+        final price =
+            double.parse(receivedNotification.payload!["price"] as String);
+
+        // Trigger createNotificationPrice to persist new notification in Hive
+        sl<NotificationPriceBloc>().add(
+            NotificationPriceEvent.createNotificationPrice(
+                cryptoId: cryptoId,
+                price: price,
+                idNotification: id));
+        break;
+    }
   }
+
   Future<void> onActionReceivedMethod(
       ReceivedNotification receivedNotification) async {
     awesomeNotifications.getGlobalBadgeCounter().then(
         (value) => {awesomeNotifications.setGlobalBadgeCounter(value - 1)});
   }
 
-  int createUniqueId() {
-    int random = Random().nextInt(1 << 10);
-    int milliseconds = DateTime.now().millisecondsSinceEpoch;
-    int idNotification = (milliseconds & 0x3FF) << 10 | random;
-    return idNotification;
+  void dispose() {
+    awesomeNotifications.dispose();
   }
+
 }

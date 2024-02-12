@@ -1,4 +1,3 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/core/notifications/alert_notification.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';

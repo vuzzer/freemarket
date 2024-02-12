@@ -7,16 +7,16 @@ class NotificationPriceUsecase {
   final NotificationPriceRepo notificationPriceRepo;
   NotificationPriceUsecase(this.notificationPriceRepo);
 
-  Future<Either<Failure, NotificationPrice>> createNotificationPrice() {
-    return notificationPriceRepo.createNotificationPrice();
+  Future<Either<Failure, NotificationPrice>> createNotificationPrice({required String cryptoId,required double price, required int idNotificaton }) {
+    return notificationPriceRepo.createNotificationPrice(cryptoId: cryptoId, price: price, idNotificaton: idNotificaton );
   }
 
   Future<Either<Failure, bool>> deleteNotificationPrice(int idNotification) {
     return notificationPriceRepo.deleteNotificationPrice(idNotification);
   }
 
-  Future<Either<Failure, NotificationPrice>> getNotificationPrice(
+  Future<Either<Failure, List<NotificationPrice>>> getNotificationPrice(
       int idNotification) {
-    return notificationPriceRepo.getNotificationPrice(idNotification);
+    return notificationPriceRepo.getNotificationPrice();
   }
 }
