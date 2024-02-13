@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:defi/core/error/exception.dart';
 import 'package:defi/core/error/failure.dart';
 import 'package:defi/data/datasource/notification/notification_price_data.dart';
 import 'package:defi/domain/entities/notification_price.dart';
@@ -13,9 +14,14 @@ class NotificationPriceRepoImpl implements NotificationPriceRepo {
   Future<Either<Failure, NotificationPrice>> createNotificationPrice(
       {required String cryptoId,
       required double price,
-      required int idNotificaton}) {
-    // TODO: implement createNotificationPrice
-    throw UnimplementedError();
+      required int idNotificaton}) async {
+    try {
+      final created = await notificationPriceData.createNotificationPrice(
+          cryptoId: cryptoId, price: price, id: idNotificaton);
+      return right(created);
+    } on NotificationExistException {
+      return left(NotificationExistFailure());
+    }
   }
 
   @override

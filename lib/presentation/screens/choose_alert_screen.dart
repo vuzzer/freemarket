@@ -1,11 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
-import 'package:defi/core/base_type.dart';
+import 'package:defi/core/arguments_screen.dart';
+import 'package:defi/core/utils_type.dart';
 import 'package:defi/core/enum.dart';
+import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/presentation/screens/set_alert_screen.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/button_widget.dart';
-import 'package:defi/presentation/widget/alert_widget.dart';
+import 'package:defi/presentation/widget/categorie_notification_widget.dart';
 import 'package:flutter/material.dart';
 
 class ChooseAlertScreen extends StatefulWidget {
@@ -51,10 +53,10 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
 
   //Parameters for set_alert_screen
   Alert param = const Alert(
-        title: "Calendar",
-        desc: "You'll be notified when the daily price increase",
-        image: "assets/images/calendar.png",
-        value: AlertValue.schedular);
+      title: "Calendar",
+      desc: "You'll be notified when the daily price increase",
+      image: "assets/images/calendar.png",
+      value: AlertValue.schedular);
 
   void _update(Alert alert) {
     alertNotifier.value = alert.value;
@@ -63,6 +65,7 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final crypto = ModalRoute.of(context)!.settings.arguments as CryptoInfo;
     return Scaffold(
       appBar: const AppBarWidget(
         title: "Set an alert for bitcoin",
@@ -93,7 +96,7 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
                     ),
                 itemBuilder: (context, index) {
                   final alert = alertOptions[index];
-                  return AlertWidget(
+                  return CategorieNotificationWidget(
                     key: Key(alert.value.name),
                     radio: defaultAlertValue,
                     update: _update,
@@ -104,8 +107,9 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: ButtonWidget(
-              onPressed: () =>
-                  Navigator.of(context).pushNamed(SetAlertScreen.routeName, arguments: param ),
+              onPressed: () => Navigator.of(context).pushNamed(
+                  SetAlertScreen.routeName,
+                  arguments: ArgumentsScreen(crypto: crypto, alert: param ) ),
               title: "Next",
               raduis: 10,
             ),

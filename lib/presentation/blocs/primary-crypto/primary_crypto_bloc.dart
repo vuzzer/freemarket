@@ -3,7 +3,7 @@ import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/usecases/primary-crypto/primary_crypto_usecase.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:dartz/dartz.dart';
-import 'package:defi/core/base_type.dart';
+import 'package:defi/core/utils_type.dart';
 
 part 'primary_crypto_event.dart';
 part 'primary_crypto_state.dart';

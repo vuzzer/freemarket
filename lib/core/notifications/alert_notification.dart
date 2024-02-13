@@ -6,6 +6,7 @@ import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/service_locator.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 const priceType = "price";
 const percent_type = "percent";
@@ -95,10 +96,14 @@ class AlertNotification {
   }
 
   // Callback when notification is created
-  Future<void> onNotificationCreatedMethod(
+  static Future<void> onNotificationCreatedMethod(
       ReceivedNotification receivedNotification) async {
     switch (receivedNotification.payload!["typeNotif"]) {
       case priceType:
+      
+        // Log display payload
+        Logger().d(receivedNotification.payload);
+
         final cryptoId = receivedNotification.payload!["cryptoId"] as String;
         final id = int.parse(receivedNotification.payload!["id"] as String);
         final price =
@@ -107,21 +112,20 @@ class AlertNotification {
         // Trigger createNotificationPrice to persist new notification in Hive
         sl<NotificationPriceBloc>().add(
             NotificationPriceEvent.createNotificationPrice(
-                cryptoId: cryptoId,
-                price: price,
-                idNotification: id));
+                cryptoId: cryptoId, price: price, idNotification: id));
         break;
     }
   }
 
-  Future<void> onActionReceivedMethod(
+  static Future<void> onActionReceivedMethod(
       ReceivedNotification receivedNotification) async {
-    awesomeNotifications.getGlobalBadgeCounter().then(
-        (value) => {awesomeNotifications.setGlobalBadgeCounter(value - 1)});
+    if (Platform.isIOS) {
+      AwesomeNotifications().getGlobalBadgeCounter().then(
+          (value) => {AwesomeNotifications().setGlobalBadgeCounter(value - 1)});
+    }
   }
 
   void dispose() {
     awesomeNotifications.dispose();
   }
-
 }

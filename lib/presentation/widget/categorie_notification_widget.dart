@@ -1,14 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:defi/core/base_type.dart';
+import 'package:defi/core/utils_type.dart';
 import 'package:defi/core/enum.dart';
 import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
 
-class AlertWidget extends StatelessWidget {
+class CategorieNotificationWidget extends StatelessWidget {
   final Alert alert;
   final AlertValue radio;
   final Function update;
-  const AlertWidget(
+  const CategorieNotificationWidget(
       {Key? key,
       required this.alert,
       required this.radio,

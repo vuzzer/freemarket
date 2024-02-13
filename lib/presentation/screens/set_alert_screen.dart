@@ -1,16 +1,20 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:defi/core/base_type.dart';
+import 'package:defi/core/arguments_screen.dart';
+import 'package:defi/core/utils_type.dart';
 import 'package:defi/core/enum.dart';
+import 'package:defi/core/notifications/alert_notification.dart';
 import 'package:defi/presentation/widget/adaptive_textform_widget.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/button_widget.dart';
 import 'package:defi/presentation/widget/keyboard_widget.dart';
 import 'package:defi/presentation/widget/schedule_widget.dart';
+import 'package:defi/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constants/app_colors.dart';
 import '../../helpers/crypto_symbols.dart';
+import 'crypto_asset_screen.dart';
 
 class SetAlertScreen extends StatefulWidget {
   static const routeName = "/set-amount";
@@ -36,6 +40,10 @@ class _SetAlertScreenState extends State<SetAlertScreen> {
     _alertFocus.addListener(() {
       focusNotificier.value = _alertFocus.hasFocus;
     });
+
+    // Stream notification created
+    sl<AlertNotification>().createdStrem();
+
     super.initState();
   }
 
@@ -50,7 +58,11 @@ class _SetAlertScreenState extends State<SetAlertScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final alert = ModalRoute.of(context)!.settings.arguments as Alert;
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as ArgumentsScreen;
+    final crypto = arguments.crypto; // Crypto argument
+    final alert = arguments.alert; // Alert argument
+
     final alertBasedPrice = Column(
       children: [
         Padding(
@@ -91,8 +103,12 @@ class _SetAlertScreenState extends State<SetAlertScreen> {
                 decoration: BoxDecoration(
                     color: blue1, borderRadius: BorderRadius.circular(10)),
                 child: Center(
-                  child: Form(
-                      child: AdapativeTextFormWidget(alert: alert, controller: _controller, alertFocus: _alertFocus,),
+                    child: Form(
+                  child: AdapativeTextFormWidget(
+                    alert: alert,
+                    controller: _controller,
+                    alertFocus: _alertFocus,
+                  ),
                 )))),
         const SizedBox(
           height: 8,
@@ -106,8 +122,13 @@ class _SetAlertScreenState extends State<SetAlertScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: ButtonWidget(
-            onPressed: () =>
-                Navigator.of(context).pushNamed(SetAlertScreen.routeName),
+            onPressed: () {
+              // Created Notification
+              sl<AlertNotification>()
+                  .createAlertNotificationBasedPrice(crypto, 20.0);
+
+              Navigator.of(context).popUntil( ModalRoute.withName(CryptoAssetScreen.routeName) );
+            },
             title: "Create alert",
             raduis: 10,
           ),
@@ -134,7 +155,7 @@ class _SetAlertScreenState extends State<SetAlertScreen> {
                       routeName: SetAlertScreen.routeName,
                       amount: true,
                       onPressed: () {},
-                    )))), 
+                    )))),
       ],
     );
 

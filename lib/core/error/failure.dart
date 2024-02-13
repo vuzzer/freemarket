@@ -54,3 +54,10 @@ class RemovePrimaryCryptoFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
+
+
+// Notification failures
+class NotificationExistFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}

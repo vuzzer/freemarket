@@ -5,7 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class NotificationPriceData {
   Future<NotificationPrice> createNotificationPrice(
-      {required String cryptoId, required double price});
+      {required String cryptoId, required double price, required int id});
   Future<bool> deleteNotificationPrice(int idNotification);
   Future<List<NotificationPrice>> getNotificationPrice();
 }
@@ -16,13 +16,13 @@ class NotificationPriceDataImpl implements NotificationPriceData {
 
   @override
   Future<NotificationPrice> createNotificationPrice(
-      {required String cryptoId, required double price}) async {
+      {required String cryptoId, required double price, required int id }) async {
     // Open Box favoris
     var box = await Hive.openLazyBox(boxFavoris);
 
     // Get list of favoris
-    List<NotificationPrice> notifications =
-        await box.get(boxKey, defaultValue: []);
+    List notifications =
+        await box.get(boxKey) ?? [];
 
     // Search if notification to set already exist
     final notification = notifications
@@ -34,7 +34,7 @@ class NotificationPriceDataImpl implements NotificationPriceData {
     // Otherwise, Exception is raised
     if (notification.isEmpty) {
       final notifCreated = NotificationPrice(
-          idNotification: createUniqueId(),
+          idNotification: id,
           cryptoId: cryptoId,
           futurePrice: price);
 

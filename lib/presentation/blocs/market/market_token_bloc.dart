@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:defi/core/base_type.dart';
+import 'package:defi/core/utils_type.dart';
 import 'package:defi/core/params.dart';
 import 'package:defi/domain/entities/token_market_data.dart';
 import 'package:defi/domain/usecases/market/token_market_usecase.dart';

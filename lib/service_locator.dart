@@ -122,6 +122,8 @@ Future<void> injectionBloc() async {
   sl.registerLazySingleton<NetworkInfo>(
       () => NetworkInfoImpl(sl())); // For stream
   sl.registerLazySingleton(() => ClientProfilCollection()); // For Http Request
+
+  //! Notification
   sl.registerLazySingleton(() => AlertNotification(sl())); // For notification
 
   //! External

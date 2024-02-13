@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:defi/core/base_type.dart';
+import 'package:defi/core/utils_type.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/usecases/crypto-info/crypto_info_usecases.dart';
 import 'package:equatable/equatable.dart';

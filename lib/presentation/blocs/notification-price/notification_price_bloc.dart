@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:defi/core/base_type.dart';
+import 'package:defi/core/utils_type.dart';
 import 'package:defi/domain/entities/notification_price.dart';
 import 'package:defi/domain/usecases/notification-price/notification_price_usecase.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -40,5 +40,5 @@ class NotificationPriceBloc
     });
 
   }
-  
+
 }

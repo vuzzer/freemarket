@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:defi/constants/app_colors.dart';
-import 'package:defi/core/base_type.dart';
+import 'package:defi/core/utils_type.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
