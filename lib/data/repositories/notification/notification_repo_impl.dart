@@ -25,14 +25,24 @@ class NotificationPriceRepoImpl implements NotificationPriceRepo {
   }
 
   @override
-  Future<Either<Failure, bool>> deleteNotificationPrice(int idNotification) {
-    // TODO: implement deleteNotificationPrice
-    throw UnimplementedError();
+  Future<Either<Failure, bool>> deleteNotificationPrice(
+      int idNotification) async {
+    try {
+      final removed = await notificationPriceData.deleteNotificationPrice(idNotification);
+      return right(removed);
+    } on DeleteNotificationPriceException {
+      return left(DeleteNotificationPriceFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, List<NotificationPrice>>> getNotificationPrice() {
-    // TODO: implement getNotificationPrice
-    throw UnimplementedError();
+  Future<Either<Failure, List<NotificationPrice>>>
+      getNotificationPrice() async {
+    try {
+      final notifications = await notificationPriceData.getNotificationPrice();
+      return right(notifications);
+    } on GetNotificationPriceException {
+      return left(GetNotificationPriceFailure());
+    }
   }
 }

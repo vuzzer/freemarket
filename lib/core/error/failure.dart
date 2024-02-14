@@ -61,3 +61,13 @@ class NotificationExistFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
+
+class GetNotificationPriceFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
+
+class DeleteNotificationPriceFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}

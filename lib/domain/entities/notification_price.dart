@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+
 class NotificationPrice extends Equatable {
   final int idNotification;
   final String cryptoId;

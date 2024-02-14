@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
-import 'package:defi/presentation/screens/theta_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
@@ -48,7 +47,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             ? Container(
                 margin: const EdgeInsets.only(right: 5),
                 child: TextButton(
-                    onPressed: () => Navigator.of(context).pushNamed(ThetaScreen.routeName ),
+                    onPressed:null,
                     style: TextButton.styleFrom(
                         minimumSize: const Size.square(40),
                         backgroundColor: blueLight,

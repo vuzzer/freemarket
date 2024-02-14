@@ -4,7 +4,6 @@ import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/screens/home_screen.dart';
 import 'package:defi/presentation/widget/adaptive_dialog.dart';
 import 'package:defi/service_locator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -117,7 +116,7 @@ class _StartedScreenState extends State<StartedScreen> {
                                       .add(GetCryptoInfo());
 
                                   Navigator.of(context)
-                                      .pushNamed(HomeScreen.routeName);
+                                      .pushNamed(HomeScreen.routeName); 
                                 },
                                 style: ElevatedButton.styleFrom(
                                     padding: const EdgeInsets.symmetric(

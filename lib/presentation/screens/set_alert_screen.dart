@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/core/arguments_screen.dart';
-import 'package:defi/core/utils_type.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/core/notifications/alert_notification.dart';
 import 'package:defi/presentation/widget/adaptive_textform_widget.dart';

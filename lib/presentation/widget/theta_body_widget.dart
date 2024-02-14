@@ -1,8 +1,6 @@
 import 'package:defi/domain/entities/crypto.dart';
-import 'package:defi/domain/entities/network_type.dart';
 import 'package:defi/presentation/widget/crypto_asset_widget.dart';
 import 'package:defi/presentation/widget/favoris_list_widget.dart';
-import 'package:defi/presentation/widget/tx_history_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

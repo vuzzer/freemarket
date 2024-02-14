@@ -7,8 +7,6 @@ import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/presentation/provider/network_provider.dart';
-import 'package:defi/presentation/provider/user_provider.dart';
-import 'package:defi/presentation/screens/verification_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -47,8 +45,6 @@ void main() async {
 
   // Running app
   runApp(MultiBlocProvider(providers: [
-    ChangeNotifierProvider(
-        create: (context) => UserProvider(), child: const VerificationScreen()),
     Provider(create: (context) => NetworkProvider()),
     BlocProvider(create: (context) => sl<MarketTokenBloc>()),
     BlocProvider(create: (context) => sl<CryptosBloc>()),
