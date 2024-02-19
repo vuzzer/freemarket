@@ -18,9 +18,6 @@ class AdapativeTextFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'^[1-9]\d*(\.\d{2})?$'))
-      ],
       focusNode: alertFocus,
       controller: controller,
       onChanged: (value) {
