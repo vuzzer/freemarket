@@ -1,3 +1,4 @@
+import 'package:defi/presentation/widget/display_notification_setup.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -227,7 +228,8 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                     ],
                   )
                 ],
-              )
+              ),
+              const DisplayNotificationSetup()
             ]));
   }
 }

@@ -26,3 +26,5 @@ class RemovePrimaryCryptoException implements Exception {}
 
 // Exception about notification
 class NotificationExistException implements Exception {}
+class GetNotificationPriceException implements Exception {} 
+class DeleteNotificationPriceException implements Exception {}

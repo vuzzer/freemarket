@@ -5,7 +5,7 @@ import 'package:defi/domain/usecases/favoris/favoris_crypto_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:logger/logger.dart';
+
 
 part 'favoris_event.dart';
 part 'favoris_bloc.freezed.dart';

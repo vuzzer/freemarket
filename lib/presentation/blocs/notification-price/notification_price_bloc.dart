@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:defi/core/base_type.dart';
-import 'package:defi/domain/entities/notification_price.dart';
+import 'package:defi/core/utils_type.dart';
+import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:defi/domain/usecases/notification-price/notification_price_usecase.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -16,7 +16,7 @@ class NotificationPriceBloc
       : super(NotificationPriceState.initial()) {
     on<NotificationPriceEvent>((event, emit) async {
       await event.map(
-          createNotificationPrice: (value) => _createNotificaitonPrice(emit: emit, cryptoId: value.cryptoId, price: value.price, idNotification: value.idNotification ),
+          createNotificationPrice: (value) => _createNotificaitonPrice(emit: emit, createNotif: value.notification ),
           deleteNotificationPrice: (value) {},
           getNotificationPrice: (value) {});
     });
@@ -24,12 +24,10 @@ class NotificationPriceBloc
 
   Future<void> _createNotificaitonPrice(
       {required Emitter<NotificationPriceState> emit,
-      required String cryptoId,
-      required double price,
-      required int idNotification}) async {
+      required NotificationCrypto createNotif}) async {
 
     final notificatons = await notificationPriceUsecase.createNotificationPrice(
-        cryptoId: cryptoId, price: price, idNotificaton: idNotification);
+        createNotif);
 
     // fold
     notificatons.fold(
@@ -40,5 +38,5 @@ class NotificationPriceBloc
     });
 
   }
-  
+
 }

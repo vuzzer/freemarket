@@ -1,12 +1,9 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:defi/core/database/client_profil_collection.dart';
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/core/notifications/alert_notification.dart';
-import 'package:defi/data/datasource/client_profil_source.dart';
 import 'package:defi/data/datasource/crypto_info_source.dart';
 import 'package:defi/data/datasource/favoris_crypto_data.dart';
 import 'package:defi/data/datasource/token_market_datasource.dart';
-import 'package:defi/data/repositories/client_profil_repository_impl.dart';
 import 'package:defi/data/repositories/crypto_info_repo_impl.dart';
 import 'package:defi/data/repositories/favoris_crypto_repo_impl.dart';
 import 'package:defi/data/repositories/primary_crypto_repo_impl.dart';
@@ -22,7 +19,6 @@ import 'package:defi/domain/usecases/market/token_market_usecase.dart';
 import 'package:defi/domain/usecases/notification-price/notification_price_usecase.dart';
 import 'package:defi/domain/usecases/primary-crypto/primary_crypto_usecase.dart';
 import 'package:defi/domain/usecases/setup/wallet_setup_handler.dart';
-import 'package:defi/domain/usecases/wallet/wallet_handler.dart';
 import 'package:defi/presentation/blocs/client/client_profil_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
@@ -31,7 +27,6 @@ import 'package:defi/presentation/blocs/notification-price/notification_price_bl
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/services/address_service.dart';
 import 'package:defi/services/configuration_service.dart';
-import 'package:defi/services/contract_locator.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -41,9 +36,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'data/datasource/notification/notification_price_data.dart';
 import 'data/datasource/primary_crypto_data.dart';
 import 'data/repositories/notification/notification_repo_impl.dart';
-import 'domain/repositories/clientProfil/clientProfil_repository.dart';
-import 'domain/repositories/notification-price/notification_price_repo.dart';
-import 'domain/usecases/transfer/wallet_transfer_handle.dart';
+import 'domain/repositories/notification-crypto/notification_price_repo.dart';
 
 GetIt sl = GetIt.instance;
 
@@ -51,19 +44,11 @@ Future<void> setupLocator() async {
   final sharedPrefs = await SharedPreferences.getInstance();
   final configurationService = ConfigurationService(sharedPrefs);
   final addressService = AddressService(configurationService);
-  final contractLocator = await ContractLocator.setup();
 
   //INJECT CONFIGURATIONSERVICE
   sl.registerLazySingleton<ConfigurationService>(
       () => ConfigurationService(sharedPrefs));
 
-  //INJECT WalletHandler
-  sl.registerLazySingleton<WalletHandler>(() =>
-      WalletHandler(addressService, contractLocator, configurationService));
-
-  //INJECT WalletTransferHandler
-  sl.registerLazySingleton<WalletTransferHandler>(
-      () => WalletTransferHandler(contractLocator, configurationService));
 
   //INJECT WalletSetupHandler
   sl.registerLazySingleton<WalletSetupHandler>(
@@ -93,8 +78,6 @@ Future<void> injectionBloc() async {
   sl.registerLazySingleton(() => NotificationPriceUsecase(sl()));
 
   //! Repositories
-  sl.registerLazySingleton<ClientProfilRepository>(
-      () => ClientProfilRepositoryImpl(sl()));
   sl.registerLazySingleton<TokenMarketRepository>(() =>
       TokenMarketRepositoryImpl(
           tokenMarketDataSource: sl(), networkInfo: sl()));
@@ -108,8 +91,6 @@ Future<void> injectionBloc() async {
       () => NotificationPriceRepoImpl(notificationPriceData: sl()));
 
   //! Data
-  sl.registerLazySingleton<ClientProfilDataSource>(
-      () => ClientProfilDataSourceImpl(sl()));
   sl.registerLazySingleton<TokenMarketDataSource>(
       () => TokenMarketDataSourceImpl(dio: sl()));
   sl.registerLazySingleton<CryptoInfoSource>(() => CryptoInfoSourceImpl(sl()));
@@ -121,7 +102,8 @@ Future<void> injectionBloc() async {
   //! Core
   sl.registerLazySingleton<NetworkInfo>(
       () => NetworkInfoImpl(sl())); // For stream
-  sl.registerLazySingleton(() => ClientProfilCollection()); // For Http Request
+
+  //! Notification
   sl.registerLazySingleton(() => AlertNotification(sl())); // For notification
 
   //! External

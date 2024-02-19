@@ -86,7 +86,7 @@ class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
         }),
         IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(ChooseAlertScreen.routeName);
+              Navigator.of(context).pushNamed(ChooseAlertScreen.routeName, arguments: crypto );
             },
             splashRadius: 20,
             padding: EdgeInsets.zero,

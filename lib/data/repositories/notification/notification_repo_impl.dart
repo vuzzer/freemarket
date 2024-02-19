@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
+import 'package:defi/core/error/exception.dart';
 import 'package:defi/core/error/failure.dart';
 import 'package:defi/data/datasource/notification/notification_price_data.dart';
-import 'package:defi/domain/entities/notification_price.dart';
-import 'package:defi/domain/repositories/notification-price/notification_price_repo.dart';
+import 'package:defi/domain/entities/notification_crypto.dart';
+import 'package:defi/domain/repositories/notification-crypto/notification_price_repo.dart';
 
 class NotificationPriceRepoImpl implements NotificationPriceRepo {
   final NotificationPriceData notificationPriceData;
@@ -10,23 +11,36 @@ class NotificationPriceRepoImpl implements NotificationPriceRepo {
   NotificationPriceRepoImpl({required this.notificationPriceData});
 
   @override
-  Future<Either<Failure, NotificationPrice>> createNotificationPrice(
-      {required String cryptoId,
-      required double price,
-      required int idNotificaton}) {
-    // TODO: implement createNotificationPrice
-    throw UnimplementedError();
+  Future<Either<Failure, NotificationCrypto>> createNotificationPrice(
+      NotificationCrypto createNotif) async {
+    try {
+      final created = await notificationPriceData.createNotificationPrice(
+          createNotif);
+      return right(created);
+    } on NotificationExistException {
+      return left(NotificationExistFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, bool>> deleteNotificationPrice(int idNotification) {
-    // TODO: implement deleteNotificationPrice
-    throw UnimplementedError();
+  Future<Either<Failure, bool>> deleteNotificationPrice(
+      int idNotification) async {
+    try {
+      final removed = await notificationPriceData.deleteNotificationPrice(idNotification);
+      return right(removed);
+    } on DeleteNotificationPriceException {
+      return left(DeleteNotificationPriceFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, List<NotificationPrice>>> getNotificationPrice() {
-    // TODO: implement getNotificationPrice
-    throw UnimplementedError();
+  Future<Either<Failure, List<NotificationCrypto>>>
+      getNotificationPrice() async {
+    try {
+      final notifications = await notificationPriceData.getNotificationPrice();
+      return right(notifications);
+    } on GetNotificationPriceException {
+      return left(GetNotificationPriceFailure());
+    }
   }
 }

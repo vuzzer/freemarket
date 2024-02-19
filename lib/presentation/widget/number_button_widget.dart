@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
 
 class NumberButtonWiget extends StatelessWidget {
-  final int touch;
+  final String touch;
   final TextEditingController controller;
   final bool amount;
   const NumberButtonWiget(
