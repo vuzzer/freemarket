@@ -1,7 +1,7 @@
 import 'package:defi/core/enum.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
+
 
 // Validate Value typed by user
 bool validateInput(AlertValue typeAlert, CryptoInfo crypto, String value) {
