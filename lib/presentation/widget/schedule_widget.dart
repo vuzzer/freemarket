@@ -80,7 +80,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
                             children: [
                               Switch.adaptive(
                                   value: timeFrame[index].value,
-                                  activeColor: blue,
+                                  activeColor: const Color(0xFF508D69),
                                   onChanged: (value) {
                                     setState(() {
                                       timeFrame[index].value = value;

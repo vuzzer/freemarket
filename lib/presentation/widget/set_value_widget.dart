@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/create_unique_id.dart';
-import 'package:defi/core/enum.dart';
+import 'package:defi/core/utils_process.dart';
 import 'package:defi/core/utils_type.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
@@ -16,8 +16,6 @@ import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 
 class SetValueWidget extends StatefulWidget {
   final CryptoInfo crypto;
@@ -60,7 +58,8 @@ class _SetValueWidgetState extends State<SetValueWidget> {
 
     // Check if text controller is not empty
     if (text.isNotEmpty) {
-      if (!regExp.hasMatch(text)) {
+      const maxLength = 10;
+      if (!regExp.hasMatch(text) || _controller.text.length >= maxLength) {
         _controller.text = text.substring(0, text.length - 1);
 
         //Change the cursor position
@@ -70,41 +69,6 @@ class _SetValueWidgetState extends State<SetValueWidget> {
     }
     // Change value of notifier checker
     checkPriceNotifier.value = _controller.text;
-  }
-
-  bool validateInput(AlertValue typeAlert, CryptoInfo crypto) {
-    double constant =
-        500000; // Constant use to calculate the max price of crypto
-
-    double predictionMaxPrice = (2 * crypto.currentPrice! + constant);
-
-    bool success = false;
-
-    if (_controller.text.isNotEmpty) {
-      switch (typeAlert) {
-        case AlertValue.price:
-          final price = double.parse(_controller.text);
-          success = price < predictionMaxPrice;
-          break;
-        case AlertValue.decrease:
-          // If percent precise a price that is low
-          // of current price, it's true otherwise it's false
-          // future price that doesn't exceed currentPrice
-          final percent = double.parse(_controller.text);
-          success =
-              crypto.currentPrice! > (crypto.currentPrice! * (percent / 100));
-          break;
-        case AlertValue.increase:
-          final percent = double.parse(_controller.text);
-          success =
-              (crypto.currentPrice! * (percent / 100)) < predictionMaxPrice;
-          break;
-        case AlertValue.schedular:
-          break;
-      }
-    }
-
-    return success;
   }
 
   @override
@@ -129,9 +93,9 @@ class _SetValueWidgetState extends State<SetValueWidget> {
                 const SizedBox(
                   height: 20,
                 ),
-                const AutoSizeText(
-                  "Enter a percentage amount",
-                  style: TextStyle(
+                AutoSizeText(
+                  alert.title,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 20),
@@ -173,14 +137,32 @@ class _SetValueWidgetState extends State<SetValueWidget> {
         ValueListenableBuilder(
             valueListenable: checkPriceNotifier,
             builder: (context, value, child) {
-              final date = DateFormat.Hm().format(DateTime.now());
-              return AutoSizeText(
-                "Last update price: \$${crypto.currentPrice} of $date",
-                style:  TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: FontFamily.montSerrat,
-                    fontSize: 8),
+              final message =
+                  messageCalcul(alert.value, crypto, _controller.text);
+              final error = messageError(alert.value, crypto, value);
+              return Column(
+                children: [
+                  AutoSizeText(
+                    message,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: FontFamily.montSerrat,
+                        fontSize: 8),
+                    textAlign: TextAlign.center,
+                  ),
+                  if (_controller.text.isNotEmpty &&
+                      !validateInput(alert.value, crypto, value))
+                    AutoSizeText(
+                      error,
+                      style: TextStyle(
+                          color: const Color(0xFFD24545),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: FontFamily.montSerrat,
+                          fontSize: 8),
+                      textAlign: TextAlign.center,
+                    )
+                ],
               );
             }),
         const Spacer(),
@@ -189,7 +171,10 @@ class _SetValueWidgetState extends State<SetValueWidget> {
             builder: (context, value, child) => Container(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: ButtonWidget(
-                    disable: validateInput(alert.value, crypto) ? false : true,
+                    disable:
+                        validateInput(alert.value, crypto, _controller.text)
+                            ? false
+                            : true,
                     onPressed: () {
                       final notification = NotificationCrypto(
                           idNotification: createUniqueId(),
