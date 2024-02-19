@@ -75,17 +75,19 @@ class AlertNotification {
 
   // Create alert scheduled
   Future<void> createAlertNotificationScheduled(CryptoInfo crypto) async {
+
     await awesomeNotifications.createNotification(
-        content: NotificationContent(
-            id: createUniqueId(),
-            channelKey: channelKeyScheduled,
-            color: blue,
-            title: "Bitcoin prix",
-            body: "Le prix du bitcoin a grimpé de 10%",
-            payload: {"typeNotif": scheduled_type},
-            bigPicture:
-                "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
-            notificationLayout: NotificationLayout.BigPicture));
+      content: NotificationContent(
+          id: createUniqueId(),
+          channelKey: channelKeyScheduled,
+          color: blue,
+          title: "Bitcoin prix",
+          body: "Le prix du bitcoin a grimpé de 10%",
+          payload: {"typeNotif": scheduled_type},
+          bigPicture:
+              "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+          notificationLayout: NotificationLayout.BigPicture),
+    );
   }
 
   // Create to capture user action and notification created
@@ -98,23 +100,7 @@ class AlertNotification {
   // Callback when notification is created
   static Future<void> onNotificationCreatedMethod(
       ReceivedNotification receivedNotification) async {
-    switch (receivedNotification.payload!["typeNotif"]) {
-      case priceType:
-      
-        // Log display payload
-        Logger().d(receivedNotification.payload);
 
-        final cryptoId = receivedNotification.payload!["cryptoId"] as String;
-        final id = int.parse(receivedNotification.payload!["id"] as String);
-        final price =
-            double.parse(receivedNotification.payload!["price"] as String);
-
-        // Trigger createNotificationPrice to persist new notification in Hive
-        sl<NotificationPriceBloc>().add(
-            NotificationPriceEvent.createNotificationPrice(
-                cryptoId: cryptoId, price: price, idNotification: id));
-        break;
-    }
   }
 
   static Future<void> onActionReceivedMethod(
@@ -127,5 +113,37 @@ class AlertNotification {
 
   void dispose() {
     awesomeNotifications.dispose();
+  }
+}
+
+
+class NotificationController {
+    /// Use this method to detect when a new notification or a schedule is created
+  @pragma("vm:entry-point")
+  static Future <void> onNotificationCreatedMethod(ReceivedNotification receivedNotification) async {
+    // Your code goes here
+  }
+
+  /// Use this method to detect every time that a new notification is displayed
+  @pragma("vm:entry-point")
+  static Future <void> onNotificationDisplayedMethod(ReceivedNotification receivedNotification) async {
+    // Your code goes here
+  }
+
+  /// Use this method to detect if the user dismissed a notification
+  @pragma("vm:entry-point")
+  static Future <void> onDismissActionReceivedMethod(ReceivedAction receivedAction) async {
+    // Your code goes here
+  }
+
+  /// Use this method to detect when the user taps on a notification or action button
+  @pragma("vm:entry-point")
+  static Future <void> onActionReceivedMethod(ReceivedAction receivedAction) async {
+    // Your code goes here
+
+    // Navigate into pages, avoiding to open the notification details page over another details page already opened
+/*     MyApp.navigatorKey.currentState?.pushNamedAndRemoveUntil('/notification-page',
+            (route) => (route.settings.name != '/notification-page') || route.isFirst,
+        arguments: receivedAction); */
   }
 }

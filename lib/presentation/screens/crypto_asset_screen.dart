@@ -61,8 +61,7 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                       backgroundColor: blue1,
                       appBar:
                           AppBarTokenWidget(title: crypto.id, crypto: crypto),
-                      body: SafeArea(
-                          child: SingleChildScrollView(
+                      body:SingleChildScrollView(
                         child: Column(
                           children: [
                             Container(
@@ -132,7 +131,7 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                                 child: const CryptoTxHistoryWidget())
                           ],
                         ),
-                      )));
+                      ));
                 }
                 return const Center(
                   child: SizedBox(

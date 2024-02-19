@@ -24,3 +24,4 @@ class CryptoError {
 
 // Mark success
 class Success {}
+

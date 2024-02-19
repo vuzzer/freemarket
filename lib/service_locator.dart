@@ -36,7 +36,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'data/datasource/notification/notification_price_data.dart';
 import 'data/datasource/primary_crypto_data.dart';
 import 'data/repositories/notification/notification_repo_impl.dart';
-import 'domain/repositories/notification-price/notification_price_repo.dart';
+import 'domain/repositories/notification-crypto/notification_price_repo.dart';
 
 GetIt sl = GetIt.instance;
 

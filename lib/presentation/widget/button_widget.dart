@@ -1,4 +1,5 @@
 import 'package:defi/constants/app_colors.dart';
+import 'package:defi/styles/font_size.dart';
 import 'package:flutter/material.dart';
 
 class ButtonWidget extends StatelessWidget {
@@ -37,9 +38,9 @@ class ButtonWidget extends StatelessWidget {
             child: Text(
               title,
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style:  TextStyle(
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: FontSize.medium,
                 fontWeight: FontWeight.w700,
               ),
             ),

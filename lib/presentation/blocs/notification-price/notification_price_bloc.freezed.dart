@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$NotificationPriceEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String cryptoId, double price, int idNotification)
+    required TResult Function(NotificationCrypto notification)
         createNotificationPrice,
     required TResult Function(int idNotification) deleteNotificationPrice,
     required TResult Function() getNotificationPrice,
@@ -26,16 +26,14 @@ mixin _$NotificationPriceEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String cryptoId, double price, int idNotification)?
-        createNotificationPrice,
+    TResult? Function(NotificationCrypto notification)? createNotificationPrice,
     TResult? Function(int idNotification)? deleteNotificationPrice,
     TResult? Function()? getNotificationPrice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String cryptoId, double price, int idNotification)?
-        createNotificationPrice,
+    TResult Function(NotificationCrypto notification)? createNotificationPrice,
     TResult Function(int idNotification)? deleteNotificationPrice,
     TResult Function()? getNotificationPrice,
     required TResult orElse(),
@@ -93,7 +91,7 @@ abstract class _$$CreateNotificationPriceImplCopyWith<$Res> {
           $Res Function(_$CreateNotificationPriceImpl) then) =
       __$$CreateNotificationPriceImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String cryptoId, double price, int idNotification});
+  $Res call({NotificationCrypto notification});
 }
 
 /// @nodoc
@@ -109,23 +107,13 @@ class __$$CreateNotificationPriceImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cryptoId = null,
-    Object? price = null,
-    Object? idNotification = null,
+    Object? notification = null,
   }) {
     return _then(_$CreateNotificationPriceImpl(
-      cryptoId: null == cryptoId
-          ? _value.cryptoId
-          : cryptoId // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
-      idNotification: null == idNotification
-          ? _value.idNotification
-          : idNotification // ignore: cast_nullable_to_non_nullable
-              as int,
+      null == notification
+          ? _value.notification
+          : notification // ignore: cast_nullable_to_non_nullable
+              as NotificationCrypto,
     ));
   }
 }
@@ -133,21 +121,14 @@ class __$$CreateNotificationPriceImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
-  const _$CreateNotificationPriceImpl(
-      {required this.cryptoId,
-      required this.price,
-      required this.idNotification});
+  const _$CreateNotificationPriceImpl(this.notification);
 
   @override
-  final String cryptoId;
-  @override
-  final double price;
-  @override
-  final int idNotification;
+  final NotificationCrypto notification;
 
   @override
   String toString() {
-    return 'NotificationPriceEvent.createNotificationPrice(cryptoId: $cryptoId, price: $price, idNotification: $idNotification)';
+    return 'NotificationPriceEvent.createNotificationPrice(notification: $notification)';
   }
 
   @override
@@ -155,15 +136,12 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateNotificationPriceImpl &&
-            (identical(other.cryptoId, cryptoId) ||
-                other.cryptoId == cryptoId) &&
-            (identical(other.price, price) || other.price == price) &&
-            (identical(other.idNotification, idNotification) ||
-                other.idNotification == idNotification));
+            (identical(other.notification, notification) ||
+                other.notification == notification));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, cryptoId, price, idNotification);
+  int get hashCode => Object.hash(runtimeType, notification);
 
   @JsonKey(ignore: true)
   @override
@@ -175,36 +153,34 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String cryptoId, double price, int idNotification)
+    required TResult Function(NotificationCrypto notification)
         createNotificationPrice,
     required TResult Function(int idNotification) deleteNotificationPrice,
     required TResult Function() getNotificationPrice,
   }) {
-    return createNotificationPrice(cryptoId, price, idNotification);
+    return createNotificationPrice(notification);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String cryptoId, double price, int idNotification)?
-        createNotificationPrice,
+    TResult? Function(NotificationCrypto notification)? createNotificationPrice,
     TResult? Function(int idNotification)? deleteNotificationPrice,
     TResult? Function()? getNotificationPrice,
   }) {
-    return createNotificationPrice?.call(cryptoId, price, idNotification);
+    return createNotificationPrice?.call(notification);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String cryptoId, double price, int idNotification)?
-        createNotificationPrice,
+    TResult Function(NotificationCrypto notification)? createNotificationPrice,
     TResult Function(int idNotification)? deleteNotificationPrice,
     TResult Function()? getNotificationPrice,
     required TResult orElse(),
   }) {
     if (createNotificationPrice != null) {
-      return createNotificationPrice(cryptoId, price, idNotification);
+      return createNotificationPrice(notification);
     }
     return orElse();
   }
@@ -247,14 +223,10 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
 }
 
 abstract class CreateNotificationPrice implements NotificationPriceEvent {
-  const factory CreateNotificationPrice(
-      {required final String cryptoId,
-      required final double price,
-      required final int idNotification}) = _$CreateNotificationPriceImpl;
+  const factory CreateNotificationPrice(final NotificationCrypto notification) =
+      _$CreateNotificationPriceImpl;
 
-  String get cryptoId;
-  double get price;
-  int get idNotification;
+  NotificationCrypto get notification;
   @JsonKey(ignore: true)
   _$$CreateNotificationPriceImplCopyWith<_$CreateNotificationPriceImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -329,7 +301,7 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String cryptoId, double price, int idNotification)
+    required TResult Function(NotificationCrypto notification)
         createNotificationPrice,
     required TResult Function(int idNotification) deleteNotificationPrice,
     required TResult Function() getNotificationPrice,
@@ -340,8 +312,7 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String cryptoId, double price, int idNotification)?
-        createNotificationPrice,
+    TResult? Function(NotificationCrypto notification)? createNotificationPrice,
     TResult? Function(int idNotification)? deleteNotificationPrice,
     TResult? Function()? getNotificationPrice,
   }) {
@@ -351,8 +322,7 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String cryptoId, double price, int idNotification)?
-        createNotificationPrice,
+    TResult Function(NotificationCrypto notification)? createNotificationPrice,
     TResult Function(int idNotification)? deleteNotificationPrice,
     TResult Function()? getNotificationPrice,
     required TResult orElse(),
@@ -450,7 +420,7 @@ class _$GetNotificationPriceImpl implements GetNotificationPrice {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String cryptoId, double price, int idNotification)
+    required TResult Function(NotificationCrypto notification)
         createNotificationPrice,
     required TResult Function(int idNotification) deleteNotificationPrice,
     required TResult Function() getNotificationPrice,
@@ -461,8 +431,7 @@ class _$GetNotificationPriceImpl implements GetNotificationPrice {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String cryptoId, double price, int idNotification)?
-        createNotificationPrice,
+    TResult? Function(NotificationCrypto notification)? createNotificationPrice,
     TResult? Function(int idNotification)? deleteNotificationPrice,
     TResult? Function()? getNotificationPrice,
   }) {
@@ -472,8 +441,7 @@ class _$GetNotificationPriceImpl implements GetNotificationPrice {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String cryptoId, double price, int idNotification)?
-        createNotificationPrice,
+    TResult Function(NotificationCrypto notification)? createNotificationPrice,
     TResult Function(int idNotification)? deleteNotificationPrice,
     TResult Function()? getNotificationPrice,
     required TResult orElse(),
@@ -527,7 +495,7 @@ abstract class GetNotificationPrice implements NotificationPriceEvent {
 
 /// @nodoc
 mixin _$NotificationPriceState {
-  List<NotificationPrice> get notifications =>
+  List<NotificationCrypto> get notifications =>
       throw _privateConstructorUsedError;
   Either<CryptoError, Success> get successOrFail =>
       throw _privateConstructorUsedError;
@@ -544,7 +512,7 @@ abstract class $NotificationPriceStateCopyWith<$Res> {
       _$NotificationPriceStateCopyWithImpl<$Res, NotificationPriceState>;
   @useResult
   $Res call(
-      {List<NotificationPrice> notifications,
+      {List<NotificationCrypto> notifications,
       Either<CryptoError, Success> successOrFail});
 }
 
@@ -569,7 +537,7 @@ class _$NotificationPriceStateCopyWithImpl<$Res,
       notifications: null == notifications
           ? _value.notifications
           : notifications // ignore: cast_nullable_to_non_nullable
-              as List<NotificationPrice>,
+              as List<NotificationCrypto>,
       successOrFail: null == successOrFail
           ? _value.successOrFail
           : successOrFail // ignore: cast_nullable_to_non_nullable
@@ -588,7 +556,7 @@ abstract class _$$NotificationPriceStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<NotificationPrice> notifications,
+      {List<NotificationCrypto> notifications,
       Either<CryptoError, Success> successOrFail});
 }
 
@@ -612,7 +580,7 @@ class __$$NotificationPriceStateImplCopyWithImpl<$Res>
       notifications: null == notifications
           ? _value._notifications
           : notifications // ignore: cast_nullable_to_non_nullable
-              as List<NotificationPrice>,
+              as List<NotificationCrypto>,
       successOrFail: null == successOrFail
           ? _value.successOrFail
           : successOrFail // ignore: cast_nullable_to_non_nullable
@@ -625,13 +593,13 @@ class __$$NotificationPriceStateImplCopyWithImpl<$Res>
 
 class _$NotificationPriceStateImpl implements _NotificationPriceState {
   const _$NotificationPriceStateImpl(
-      {required final List<NotificationPrice> notifications,
+      {required final List<NotificationCrypto> notifications,
       required this.successOrFail})
       : _notifications = notifications;
 
-  final List<NotificationPrice> _notifications;
+  final List<NotificationCrypto> _notifications;
   @override
-  List<NotificationPrice> get notifications {
+  List<NotificationCrypto> get notifications {
     if (_notifications is EqualUnmodifiableListView) return _notifications;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_notifications);
@@ -670,12 +638,12 @@ class _$NotificationPriceStateImpl implements _NotificationPriceState {
 
 abstract class _NotificationPriceState implements NotificationPriceState {
   const factory _NotificationPriceState(
-          {required final List<NotificationPrice> notifications,
+          {required final List<NotificationCrypto> notifications,
           required final Either<CryptoError, Success> successOrFail}) =
       _$NotificationPriceStateImpl;
 
   @override
-  List<NotificationPrice> get notifications;
+  List<NotificationCrypto> get notifications;
   @override
   Either<CryptoError, Success> get successOrFail;
   @override

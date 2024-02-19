@@ -1,13 +1,14 @@
+import 'package:defi/core/enum.dart';
 import 'package:defi/core/error/exception.dart';
-import 'package:defi/domain/entities/notification_price.dart';
+import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';
 
 abstract class NotificationPriceData {
-  Future<NotificationPrice> createNotificationPrice(
-      {required String cryptoId, required double price, required int id});
+  Future<NotificationCrypto> createNotificationPrice(
+      NotificationCrypto createNotification);
   Future<bool> deleteNotificationPrice(int idNotification);
-  Future<List<NotificationPrice>> getNotificationPrice();
+  Future<List<NotificationCrypto>> getNotificationPrice();
 }
 
 class NotificationPriceDataImpl implements NotificationPriceData {
@@ -15,30 +16,17 @@ class NotificationPriceDataImpl implements NotificationPriceData {
   static String boxKey = "notifications";
 
   @override
-  Future<NotificationPrice> createNotificationPrice(
-      {required String cryptoId,
-      required double price,
-      required int id}) async {
-    // Open Box favoris
-    var box = await Hive.openLazyBox(boxFavoris);
+  Future<NotificationCrypto> createNotificationPrice(
+      NotificationCrypto createNotification) async {
+    try {
+      // Open Box favoris
+      var box = await Hive.openLazyBox(boxFavoris);
 
-    // Get list of favoris
-    List notifications = await box.get(boxKey) ?? [];
-
-    // Search if notification to set already exist
-    final notification = notifications
-        .where((value) =>
-            value["cryptoId"] == cryptoId && value["futurePrice"] == price)
-        .toList();
-
-    // If notification not exist, it is created.
-    // Otherwise, Exception is raised
-    if (notification.isEmpty) {
-      final notifCreated = NotificationPrice(
-          idNotification: id, cryptoId: cryptoId, futurePrice: price);
+      // Get list of favoris
+      List notifications = await box.get(boxKey) ?? [];
 
       // Add to list of notification
-      notifications.add(notifCreated.props[0]);
+      notifications.add(createNotification.props[0]);
 
       // Persist data to Hive
       await box.put(boxKey, notifications);
@@ -46,9 +34,10 @@ class NotificationPriceDataImpl implements NotificationPriceData {
       // Close box and
       await box.close();
 
-      return notifCreated;
+      return createNotification;
+    } catch (e) {
+      throw NotificationExistException();
     }
-    throw NotificationExistException();
   }
 
   @override
@@ -83,7 +72,7 @@ class NotificationPriceDataImpl implements NotificationPriceData {
   }
 
   @override
-  Future<List<NotificationPrice>> getNotificationPrice() async {
+  Future<List<NotificationCrypto>> getNotificationPrice() async {
     // Open Box favoris
     var box = await Hive.openLazyBox(boxFavoris);
 
@@ -95,9 +84,11 @@ class NotificationPriceDataImpl implements NotificationPriceData {
 
       // Format data into NotificationPrice
       final notificationsEntities = notifications
-          .map((notif) => NotificationPrice(
+          .map((notif) => NotificationCrypto(
               idNotification: notif["idNotification"],
               cryptoId: notif["cryptoId"],
+              percent: notif['percent'],
+              typeNotification: AlertValue.values[notif['typeNotification']],
               futurePrice: notif["futurePrice"]))
           .toList();
 
