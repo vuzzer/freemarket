@@ -6,6 +6,6 @@ abstract class NotificationPriceRepo {
   Future<Either<Failure, NotificationCrypto>> createNotificationPrice(NotificationCrypto createdNotif);
   Future<Either<Failure, bool>> deleteNotificationPrice(
       int idNotification);
-  Future<Either<Failure, List<NotificationCrypto>>> getNotificationPrice(
+  Future<Either<Failure, List<NotificationCrypto>>> getNotificationPrice(String cryptoId
      );
 }

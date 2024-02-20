@@ -20,22 +20,25 @@ mixin _$NotificationPriceEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(NotificationCrypto notification)
         createNotificationPrice,
-    required TResult Function(int idNotification) deleteNotificationPrice,
-    required TResult Function() getNotificationPrice,
+    required TResult Function(String cryptoId, int idNotification)
+        deleteNotificationPrice,
+    required TResult Function(String cryptoId) getNotificationPrice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(NotificationCrypto notification)? createNotificationPrice,
-    TResult? Function(int idNotification)? deleteNotificationPrice,
-    TResult? Function()? getNotificationPrice,
+    TResult? Function(String cryptoId, int idNotification)?
+        deleteNotificationPrice,
+    TResult? Function(String cryptoId)? getNotificationPrice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(NotificationCrypto notification)? createNotificationPrice,
-    TResult Function(int idNotification)? deleteNotificationPrice,
-    TResult Function()? getNotificationPrice,
+    TResult Function(String cryptoId, int idNotification)?
+        deleteNotificationPrice,
+    TResult Function(String cryptoId)? getNotificationPrice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -155,8 +158,9 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
   TResult when<TResult extends Object?>({
     required TResult Function(NotificationCrypto notification)
         createNotificationPrice,
-    required TResult Function(int idNotification) deleteNotificationPrice,
-    required TResult Function() getNotificationPrice,
+    required TResult Function(String cryptoId, int idNotification)
+        deleteNotificationPrice,
+    required TResult Function(String cryptoId) getNotificationPrice,
   }) {
     return createNotificationPrice(notification);
   }
@@ -165,8 +169,9 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(NotificationCrypto notification)? createNotificationPrice,
-    TResult? Function(int idNotification)? deleteNotificationPrice,
-    TResult? Function()? getNotificationPrice,
+    TResult? Function(String cryptoId, int idNotification)?
+        deleteNotificationPrice,
+    TResult? Function(String cryptoId)? getNotificationPrice,
   }) {
     return createNotificationPrice?.call(notification);
   }
@@ -175,8 +180,9 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(NotificationCrypto notification)? createNotificationPrice,
-    TResult Function(int idNotification)? deleteNotificationPrice,
-    TResult Function()? getNotificationPrice,
+    TResult Function(String cryptoId, int idNotification)?
+        deleteNotificationPrice,
+    TResult Function(String cryptoId)? getNotificationPrice,
     required TResult orElse(),
   }) {
     if (createNotificationPrice != null) {
@@ -239,7 +245,7 @@ abstract class _$$DeleteNotificationPriceImplCopyWith<$Res> {
           $Res Function(_$DeleteNotificationPriceImpl) then) =
       __$$DeleteNotificationPriceImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int idNotification});
+  $Res call({String cryptoId, int idNotification});
 }
 
 /// @nodoc
@@ -255,9 +261,14 @@ class __$$DeleteNotificationPriceImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? cryptoId = null,
     Object? idNotification = null,
   }) {
     return _then(_$DeleteNotificationPriceImpl(
+      null == cryptoId
+          ? _value.cryptoId
+          : cryptoId // ignore: cast_nullable_to_non_nullable
+              as String,
       null == idNotification
           ? _value.idNotification
           : idNotification // ignore: cast_nullable_to_non_nullable
@@ -269,14 +280,16 @@ class __$$DeleteNotificationPriceImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
-  const _$DeleteNotificationPriceImpl(this.idNotification);
+  const _$DeleteNotificationPriceImpl(this.cryptoId, this.idNotification);
 
+  @override
+  final String cryptoId;
   @override
   final int idNotification;
 
   @override
   String toString() {
-    return 'NotificationPriceEvent.deleteNotificationPrice(idNotification: $idNotification)';
+    return 'NotificationPriceEvent.deleteNotificationPrice(cryptoId: $cryptoId, idNotification: $idNotification)';
   }
 
   @override
@@ -284,12 +297,14 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteNotificationPriceImpl &&
+            (identical(other.cryptoId, cryptoId) ||
+                other.cryptoId == cryptoId) &&
             (identical(other.idNotification, idNotification) ||
                 other.idNotification == idNotification));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, idNotification);
+  int get hashCode => Object.hash(runtimeType, cryptoId, idNotification);
 
   @JsonKey(ignore: true)
   @override
@@ -303,32 +318,35 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
   TResult when<TResult extends Object?>({
     required TResult Function(NotificationCrypto notification)
         createNotificationPrice,
-    required TResult Function(int idNotification) deleteNotificationPrice,
-    required TResult Function() getNotificationPrice,
+    required TResult Function(String cryptoId, int idNotification)
+        deleteNotificationPrice,
+    required TResult Function(String cryptoId) getNotificationPrice,
   }) {
-    return deleteNotificationPrice(idNotification);
+    return deleteNotificationPrice(cryptoId, idNotification);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(NotificationCrypto notification)? createNotificationPrice,
-    TResult? Function(int idNotification)? deleteNotificationPrice,
-    TResult? Function()? getNotificationPrice,
+    TResult? Function(String cryptoId, int idNotification)?
+        deleteNotificationPrice,
+    TResult? Function(String cryptoId)? getNotificationPrice,
   }) {
-    return deleteNotificationPrice?.call(idNotification);
+    return deleteNotificationPrice?.call(cryptoId, idNotification);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(NotificationCrypto notification)? createNotificationPrice,
-    TResult Function(int idNotification)? deleteNotificationPrice,
-    TResult Function()? getNotificationPrice,
+    TResult Function(String cryptoId, int idNotification)?
+        deleteNotificationPrice,
+    TResult Function(String cryptoId)? getNotificationPrice,
     required TResult orElse(),
   }) {
     if (deleteNotificationPrice != null) {
-      return deleteNotificationPrice(idNotification);
+      return deleteNotificationPrice(cryptoId, idNotification);
     }
     return orElse();
   }
@@ -371,9 +389,11 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
 }
 
 abstract class DeleteNotificationPrice implements NotificationPriceEvent {
-  const factory DeleteNotificationPrice(final int idNotification) =
+  const factory DeleteNotificationPrice(
+          final String cryptoId, final int idNotification) =
       _$DeleteNotificationPriceImpl;
 
+  String get cryptoId;
   int get idNotification;
   @JsonKey(ignore: true)
   _$$DeleteNotificationPriceImplCopyWith<_$DeleteNotificationPriceImpl>
@@ -385,6 +405,8 @@ abstract class _$$GetNotificationPriceImplCopyWith<$Res> {
   factory _$$GetNotificationPriceImplCopyWith(_$GetNotificationPriceImpl value,
           $Res Function(_$GetNotificationPriceImpl) then) =
       __$$GetNotificationPriceImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String cryptoId});
 }
 
 /// @nodoc
@@ -395,59 +417,88 @@ class __$$GetNotificationPriceImplCopyWithImpl<$Res>
   __$$GetNotificationPriceImplCopyWithImpl(_$GetNotificationPriceImpl _value,
       $Res Function(_$GetNotificationPriceImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cryptoId = null,
+  }) {
+    return _then(_$GetNotificationPriceImpl(
+      null == cryptoId
+          ? _value.cryptoId
+          : cryptoId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GetNotificationPriceImpl implements GetNotificationPrice {
-  const _$GetNotificationPriceImpl();
+  const _$GetNotificationPriceImpl(this.cryptoId);
+
+  @override
+  final String cryptoId;
 
   @override
   String toString() {
-    return 'NotificationPriceEvent.getNotificationPrice()';
+    return 'NotificationPriceEvent.getNotificationPrice(cryptoId: $cryptoId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetNotificationPriceImpl);
+            other is _$GetNotificationPriceImpl &&
+            (identical(other.cryptoId, cryptoId) ||
+                other.cryptoId == cryptoId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, cryptoId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetNotificationPriceImplCopyWith<_$GetNotificationPriceImpl>
+      get copyWith =>
+          __$$GetNotificationPriceImplCopyWithImpl<_$GetNotificationPriceImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(NotificationCrypto notification)
         createNotificationPrice,
-    required TResult Function(int idNotification) deleteNotificationPrice,
-    required TResult Function() getNotificationPrice,
+    required TResult Function(String cryptoId, int idNotification)
+        deleteNotificationPrice,
+    required TResult Function(String cryptoId) getNotificationPrice,
   }) {
-    return getNotificationPrice();
+    return getNotificationPrice(cryptoId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(NotificationCrypto notification)? createNotificationPrice,
-    TResult? Function(int idNotification)? deleteNotificationPrice,
-    TResult? Function()? getNotificationPrice,
+    TResult? Function(String cryptoId, int idNotification)?
+        deleteNotificationPrice,
+    TResult? Function(String cryptoId)? getNotificationPrice,
   }) {
-    return getNotificationPrice?.call();
+    return getNotificationPrice?.call(cryptoId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(NotificationCrypto notification)? createNotificationPrice,
-    TResult Function(int idNotification)? deleteNotificationPrice,
-    TResult Function()? getNotificationPrice,
+    TResult Function(String cryptoId, int idNotification)?
+        deleteNotificationPrice,
+    TResult Function(String cryptoId)? getNotificationPrice,
     required TResult orElse(),
   }) {
     if (getNotificationPrice != null) {
-      return getNotificationPrice();
+      return getNotificationPrice(cryptoId);
     }
     return orElse();
   }
@@ -490,7 +541,13 @@ class _$GetNotificationPriceImpl implements GetNotificationPrice {
 }
 
 abstract class GetNotificationPrice implements NotificationPriceEvent {
-  const factory GetNotificationPrice() = _$GetNotificationPriceImpl;
+  const factory GetNotificationPrice(final String cryptoId) =
+      _$GetNotificationPriceImpl;
+
+  String get cryptoId;
+  @JsonKey(ignore: true)
+  _$$GetNotificationPriceImplCopyWith<_$GetNotificationPriceImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

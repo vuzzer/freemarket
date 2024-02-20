@@ -1,10 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
-import 'package:defi/core/create_unique_id.dart';
 import 'package:defi/core/utils_process.dart';
 import 'package:defi/core/utils_type.dart';
 import 'package:defi/domain/entities/crypto.dart';
-import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:defi/helpers/crypto_symbols.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
@@ -16,6 +14,7 @@ import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:logger/logger.dart';
 
 class SetValueWidget extends StatefulWidget {
   final CryptoInfo crypto;
@@ -176,15 +175,14 @@ class _SetValueWidgetState extends State<SetValueWidget> {
                             ? false
                             : true,
                     onPressed: () {
-                      final notification = NotificationCrypto(
-                          idNotification: createUniqueId(),
-                          cryptoId: crypto.id,
-                          typeNotification: alert.value);
+                      final notificationCreate =
+                          createNotification(alert.value, crypto, value);
+                      Logger().d(notificationCreate);
 
                       // Created Notification
                       context
                           .read<NotificationPriceBloc>()
-                          .add(CreateNotificationPrice(notification));
+                          .add(CreateNotificationPrice(notificationCreate));
 
                       Navigator.of(context).popUntil(
                           ModalRoute.withName(CryptoAssetScreen.routeName));

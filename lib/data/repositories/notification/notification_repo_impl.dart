@@ -35,9 +35,9 @@ class NotificationPriceRepoImpl implements NotificationPriceRepo {
 
   @override
   Future<Either<Failure, List<NotificationCrypto>>>
-      getNotificationPrice() async {
+      getNotificationPrice(String cryptoId) async {
     try {
-      final notifications = await notificationPriceData.getNotificationPrice();
+      final notifications = await notificationPriceData.getNotificationPrice(cryptoId);
       return right(notifications);
     } on GetNotificationPriceException {
       return left(GetNotificationPriceFailure());

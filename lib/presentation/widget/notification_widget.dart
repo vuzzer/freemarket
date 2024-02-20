@@ -4,6 +4,7 @@ import 'package:defi/core/crontab.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
+import 'package:defi/presentation/widget/custom_bottom_sheet.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 
@@ -38,13 +39,13 @@ class NotificationWidget extends StatelessWidget {
     String message = "";
     switch (notification.typeNotification) {
       case AlertValue.decrease:
-        message = '\$${notification.futurePrice}';
+        message = '\$${notification.futurePrice.toStringAsFixed(2)}';
         break;
       case AlertValue.increase:
-        message = '\$${notification.futurePrice}';
+        message = '\$${notification.futurePrice.toStringAsFixed(2)}';
         break;
       case AlertValue.price:
-        message = 'Price crosses';
+        message = '\$${notification.futurePrice.toStringAsFixed(2)}';
         break;
       case AlertValue.schedular:
         switch (notification.cron) {
@@ -58,7 +59,7 @@ class NotificationWidget extends StatelessWidget {
             message = 'Mid-day';
             break;
         }
-      break;
+        break;
     }
     return message;
   }
@@ -76,6 +77,7 @@ class NotificationWidget extends StatelessWidget {
                 leading: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: CircleAvatar(
+                    backgroundColor: blue1,
                     radius: 20,
                     backgroundImage: NetworkImage(crypto.image),
                   ),
@@ -100,13 +102,22 @@ class NotificationWidget extends StatelessWidget {
                       children: [
                         //price of token on the market (use chainlink)
                         AutoSizeText(target(notification),
-                            style:  TextStyle(
-                                color: Colors.white, fontFamily: FontFamily.montSerrat )),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: FontFamily.montSerrat)),
                         //Balance token
                         const SizedBox(
                           height: 8,
                         ),
-                        IconButton(onPressed: (){}, icon: const Icon(Icons.more_horiz) )
+                        IconButton(
+                            onPressed: () {
+                              customBottomSheet(context, notification.idNotification, crypto.id );
+                            },
+                            splashRadius: 20,
+                            icon: const Icon(
+                              Icons.more_horiz,
+                              color: Colors.white,
+                            ))
                       ],
                     )))));
   }

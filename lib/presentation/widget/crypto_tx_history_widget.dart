@@ -1,3 +1,4 @@
+import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/presentation/widget/display_notification_setup.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constants/app_colors.dart';
 
 class CryptoTxHistoryWidget extends StatelessWidget {
-  const CryptoTxHistoryWidget({Key? key}) : super(key: key);
+  final CryptoInfo crypto;
+  const CryptoTxHistoryWidget({Key? key, required this.crypto}) : super(key: key);
   final space = 4.0;
 
   @override
@@ -48,7 +50,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                                 theme.textTheme.displayMedium!.fontFamily,
                             color: theme.textTheme.displayMedium!.color,
                           )),
-                          SizedBox(
+                      SizedBox(
                         height: space,
                       ),
                       Text("24 High",
@@ -58,7 +60,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                                 theme.textTheme.displayMedium!.fontFamily,
                             color: theme.textTheme.displayMedium!.color,
                           )),
-                       SizedBox(
+                      SizedBox(
                         height: space,
                       ),
                       Text("24h Low",
@@ -68,7 +70,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                                 theme.textTheme.displayMedium!.fontFamily,
                             color: theme.textTheme.displayMedium!.color,
                           )),
-                          SizedBox(
+                      SizedBox(
                         height: space,
                       ),
                       Text("Market Cap Rank",
@@ -78,7 +80,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                                 theme.textTheme.displayMedium!.fontFamily,
                             color: theme.textTheme.displayMedium!.color,
                           )),
-                          SizedBox(
+                      SizedBox(
                         height: space,
                       ),
                       Text("Market Cap",
@@ -88,7 +90,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                                 theme.textTheme.displayMedium!.fontFamily,
                             color: theme.textTheme.displayMedium!.color,
                           )),
-                          SizedBox(
+                      SizedBox(
                         height: space,
                       ),
                       Text("Circulating Supply",
@@ -98,7 +100,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                                 theme.textTheme.displayMedium!.fontFamily,
                             color: theme.textTheme.displayMedium!.color,
                           )),
-                          SizedBox(
+                      SizedBox(
                         height: space,
                       ),
                       Text("Total Supply",
@@ -108,7 +110,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                                 theme.textTheme.displayMedium!.fontFamily,
                             color: theme.textTheme.displayMedium!.color,
                           )),
-                          SizedBox(
+                      SizedBox(
                         height: space,
                       ),
                       Text("All-Time High",
@@ -118,7 +120,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                                 theme.textTheme.displayMedium!.fontFamily,
                             color: theme.textTheme.displayMedium!.color,
                           )),
-                          SizedBox(
+                      SizedBox(
                         height: space,
                       ),
                       Text("All-Time Low",
@@ -229,7 +231,9 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                   )
                 ],
               ),
-              const DisplayNotificationSetup()
+               DisplayNotificationSetup(
+                crypto: crypto,
+              )
             ]));
   }
 }

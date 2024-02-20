@@ -1,7 +1,8 @@
+import 'package:defi/core/create_unique_id.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/domain/entities/crypto.dart';
+import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 
 // Validate Value typed by user
 bool validateInput(AlertValue typeAlert, CryptoInfo crypto, String value) {
@@ -78,4 +79,46 @@ String messageError(AlertValue typeAlert, CryptoInfo crypto, String value) {
     }
   }
   return "Target price is too high";
+}
+
+// Return correct Notification accordin
+// type of notification
+NotificationCrypto createNotification(
+    AlertValue typeAlert, CryptoInfo crypto, String value) {
+  final id = createUniqueId();
+  switch (typeAlert) {
+    case AlertValue.price:
+      final futurePrice = double.parse(value);
+      return NotificationCrypto(
+          idNotification: id,
+          cryptoId: crypto.id,
+          typeNotification: typeAlert,
+          futurePrice: futurePrice);
+    case AlertValue.decrease:
+      final percent = double.parse(value);
+      final reduction = crypto.currentPrice! * (percent / 100);
+      final futurePrice = crypto.currentPrice! - reduction;
+      return NotificationCrypto(
+          idNotification: id,
+          cryptoId: crypto.id,
+          typeNotification: typeAlert,
+          percent: percent,
+          futurePrice: futurePrice);
+    case AlertValue.increase:
+      final percent = double.parse(value);
+      final increase = crypto.currentPrice! * (percent / 100);
+      final futurePrice = crypto.currentPrice! + increase;
+      return NotificationCrypto(
+          idNotification: id,
+          cryptoId: crypto.id,
+          typeNotification: typeAlert,
+          percent: percent,
+          futurePrice: futurePrice);
+    case AlertValue.schedular:
+      return NotificationCrypto(
+          idNotification: id,
+          cryptoId: crypto.id,
+          typeNotification: typeAlert,
+          cron: value,);
+  }
 }
