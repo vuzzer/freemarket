@@ -21,21 +21,21 @@ mixin _$NotificationPriceEvent {
     required TResult Function(NotificationCrypto notification)
         createNotificationPrice,
     required TResult Function(int idNotification) deleteNotificationPrice,
-    required TResult Function() getNotificationPrice,
+    required TResult Function(String cryptoId) getNotificationPrice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(NotificationCrypto notification)? createNotificationPrice,
     TResult? Function(int idNotification)? deleteNotificationPrice,
-    TResult? Function()? getNotificationPrice,
+    TResult? Function(String cryptoId)? getNotificationPrice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(NotificationCrypto notification)? createNotificationPrice,
     TResult Function(int idNotification)? deleteNotificationPrice,
-    TResult Function()? getNotificationPrice,
+    TResult Function(String cryptoId)? getNotificationPrice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -156,7 +156,7 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
     required TResult Function(NotificationCrypto notification)
         createNotificationPrice,
     required TResult Function(int idNotification) deleteNotificationPrice,
-    required TResult Function() getNotificationPrice,
+    required TResult Function(String cryptoId) getNotificationPrice,
   }) {
     return createNotificationPrice(notification);
   }
@@ -166,7 +166,7 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(NotificationCrypto notification)? createNotificationPrice,
     TResult? Function(int idNotification)? deleteNotificationPrice,
-    TResult? Function()? getNotificationPrice,
+    TResult? Function(String cryptoId)? getNotificationPrice,
   }) {
     return createNotificationPrice?.call(notification);
   }
@@ -176,7 +176,7 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(NotificationCrypto notification)? createNotificationPrice,
     TResult Function(int idNotification)? deleteNotificationPrice,
-    TResult Function()? getNotificationPrice,
+    TResult Function(String cryptoId)? getNotificationPrice,
     required TResult orElse(),
   }) {
     if (createNotificationPrice != null) {
@@ -304,7 +304,7 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
     required TResult Function(NotificationCrypto notification)
         createNotificationPrice,
     required TResult Function(int idNotification) deleteNotificationPrice,
-    required TResult Function() getNotificationPrice,
+    required TResult Function(String cryptoId) getNotificationPrice,
   }) {
     return deleteNotificationPrice(idNotification);
   }
@@ -314,7 +314,7 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(NotificationCrypto notification)? createNotificationPrice,
     TResult? Function(int idNotification)? deleteNotificationPrice,
-    TResult? Function()? getNotificationPrice,
+    TResult? Function(String cryptoId)? getNotificationPrice,
   }) {
     return deleteNotificationPrice?.call(idNotification);
   }
@@ -324,7 +324,7 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(NotificationCrypto notification)? createNotificationPrice,
     TResult Function(int idNotification)? deleteNotificationPrice,
-    TResult Function()? getNotificationPrice,
+    TResult Function(String cryptoId)? getNotificationPrice,
     required TResult orElse(),
   }) {
     if (deleteNotificationPrice != null) {
@@ -385,6 +385,8 @@ abstract class _$$GetNotificationPriceImplCopyWith<$Res> {
   factory _$$GetNotificationPriceImplCopyWith(_$GetNotificationPriceImpl value,
           $Res Function(_$GetNotificationPriceImpl) then) =
       __$$GetNotificationPriceImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String cryptoId});
 }
 
 /// @nodoc
@@ -395,27 +397,53 @@ class __$$GetNotificationPriceImplCopyWithImpl<$Res>
   __$$GetNotificationPriceImplCopyWithImpl(_$GetNotificationPriceImpl _value,
       $Res Function(_$GetNotificationPriceImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cryptoId = null,
+  }) {
+    return _then(_$GetNotificationPriceImpl(
+      null == cryptoId
+          ? _value.cryptoId
+          : cryptoId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GetNotificationPriceImpl implements GetNotificationPrice {
-  const _$GetNotificationPriceImpl();
+  const _$GetNotificationPriceImpl(this.cryptoId);
+
+  @override
+  final String cryptoId;
 
   @override
   String toString() {
-    return 'NotificationPriceEvent.getNotificationPrice()';
+    return 'NotificationPriceEvent.getNotificationPrice(cryptoId: $cryptoId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetNotificationPriceImpl);
+            other is _$GetNotificationPriceImpl &&
+            (identical(other.cryptoId, cryptoId) ||
+                other.cryptoId == cryptoId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, cryptoId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetNotificationPriceImplCopyWith<_$GetNotificationPriceImpl>
+      get copyWith =>
+          __$$GetNotificationPriceImplCopyWithImpl<_$GetNotificationPriceImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -423,9 +451,9 @@ class _$GetNotificationPriceImpl implements GetNotificationPrice {
     required TResult Function(NotificationCrypto notification)
         createNotificationPrice,
     required TResult Function(int idNotification) deleteNotificationPrice,
-    required TResult Function() getNotificationPrice,
+    required TResult Function(String cryptoId) getNotificationPrice,
   }) {
-    return getNotificationPrice();
+    return getNotificationPrice(cryptoId);
   }
 
   @override
@@ -433,9 +461,9 @@ class _$GetNotificationPriceImpl implements GetNotificationPrice {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(NotificationCrypto notification)? createNotificationPrice,
     TResult? Function(int idNotification)? deleteNotificationPrice,
-    TResult? Function()? getNotificationPrice,
+    TResult? Function(String cryptoId)? getNotificationPrice,
   }) {
-    return getNotificationPrice?.call();
+    return getNotificationPrice?.call(cryptoId);
   }
 
   @override
@@ -443,11 +471,11 @@ class _$GetNotificationPriceImpl implements GetNotificationPrice {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(NotificationCrypto notification)? createNotificationPrice,
     TResult Function(int idNotification)? deleteNotificationPrice,
-    TResult Function()? getNotificationPrice,
+    TResult Function(String cryptoId)? getNotificationPrice,
     required TResult orElse(),
   }) {
     if (getNotificationPrice != null) {
-      return getNotificationPrice();
+      return getNotificationPrice(cryptoId);
     }
     return orElse();
   }
@@ -490,7 +518,13 @@ class _$GetNotificationPriceImpl implements GetNotificationPrice {
 }
 
 abstract class GetNotificationPrice implements NotificationPriceEvent {
-  const factory GetNotificationPrice() = _$GetNotificationPriceImpl;
+  const factory GetNotificationPrice(final String cryptoId) =
+      _$GetNotificationPriceImpl;
+
+  String get cryptoId;
+  @JsonKey(ignore: true)
+  _$$GetNotificationPriceImplCopyWith<_$GetNotificationPriceImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

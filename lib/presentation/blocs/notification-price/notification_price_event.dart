@@ -6,6 +6,6 @@ class NotificationPriceEvent with _$NotificationPriceEvent {
       NotificationCrypto notification) = CreateNotificationPrice;
   const factory NotificationPriceEvent.deleteNotificationPrice(
       int idNotification) = DeleteNotificationPrice;
-  const factory NotificationPriceEvent.getNotificationPrice() =
+  const factory NotificationPriceEvent.getNotificationPrice(String cryptoId) =
       GetNotificationPrice;
 }

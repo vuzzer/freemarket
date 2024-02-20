@@ -16,7 +16,7 @@ class NotificationPriceUsecase {
   }
 
   Future<Either<Failure, List<NotificationCrypto>>> getNotificationPrice(
-      int idNotification) {
-    return notificationPriceRepo.getNotificationPrice();
+      String cryptoId) {
+    return notificationPriceRepo.getNotificationPrice(cryptoId);
   }
 }

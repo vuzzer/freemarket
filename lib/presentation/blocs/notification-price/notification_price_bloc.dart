@@ -16,27 +16,39 @@ class NotificationPriceBloc
       : super(NotificationPriceState.initial()) {
     on<NotificationPriceEvent>((event, emit) async {
       await event.map(
-          createNotificationPrice: (value) => _createNotificaitonPrice(emit: emit, createNotif: value.notification ),
+          createNotificationPrice: (value) => _createNotificaitonPrice(
+              emit: emit, createNotif: value.notification),
           deleteNotificationPrice: (value) {},
-          getNotificationPrice: (value) {});
+          getNotificationPrice: (value) => _getNotification(emit: emit, cryptoId: value.cryptoId) );
     });
   }
 
   Future<void> _createNotificaitonPrice(
       {required Emitter<NotificationPriceState> emit,
       required NotificationCrypto createNotif}) async {
-
-    final notificatons = await notificationPriceUsecase.createNotificationPrice(
-        createNotif);
+    final notificatons =
+        await notificationPriceUsecase.createNotificationPrice(createNotif);
 
     // fold
     notificatons.fold(
         (error) => emit(state.copyWith(
             successOrFail: left(CryptoError("Erreur lors du chargement")))),
         (response) {
-      add(const NotificationPriceEvent.getNotificationPrice());
+      add(NotificationPriceEvent.getNotificationPrice(createNotif.cryptoId));
     });
-
   }
 
+  Future<void> _getNotification(
+      {required Emitter<NotificationPriceState> emit,
+      required String cryptoId}) async {
+    final notification =
+        await notificationPriceUsecase.getNotificationPrice(cryptoId);
+
+    //fold
+    notification.fold(
+        (e) => emit(state.copyWith(
+            successOrFail: left(CryptoError("Erreur lors du chargement")))),
+        (listNotif) => emit(state.copyWith(
+            notifications: listNotif, successOrFail: right(Success()))));
+  }
 }

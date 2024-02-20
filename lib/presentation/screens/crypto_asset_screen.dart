@@ -128,7 +128,7 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                             Container(
                                 decoration:
                                     const BoxDecoration(color: darkBlue),
-                                child: const CryptoTxHistoryWidget())
+                                child: CryptoTxHistoryWidget(crypto: crypto))
                           ],
                         ),
                       ));

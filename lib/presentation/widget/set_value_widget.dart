@@ -16,6 +16,7 @@ import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:logger/logger.dart';
 
 class SetValueWidget extends StatefulWidget {
   final CryptoInfo crypto;
@@ -176,15 +177,14 @@ class _SetValueWidgetState extends State<SetValueWidget> {
                             ? false
                             : true,
                     onPressed: () {
-                      final notification = NotificationCrypto(
-                          idNotification: createUniqueId(),
-                          cryptoId: crypto.id,
-                          typeNotification: alert.value);
-
+                      final notificationCreate =
+                          createNotification(alert.value, crypto, value);
+                      Logger().d(notificationCreate);
+                      
                       // Created Notification
                       context
                           .read<NotificationPriceBloc>()
-                          .add(CreateNotificationPrice(notification));
+                          .add(CreateNotificationPrice(notificationCreate));
 
                       Navigator.of(context).popUntil(
                           ModalRoute.withName(CryptoAssetScreen.routeName));

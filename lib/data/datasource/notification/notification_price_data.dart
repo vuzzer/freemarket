@@ -8,7 +8,7 @@ abstract class NotificationPriceData {
   Future<NotificationCrypto> createNotificationPrice(
       NotificationCrypto createNotification);
   Future<bool> deleteNotificationPrice(int idNotification);
-  Future<List<NotificationCrypto>> getNotificationPrice();
+  Future<List<NotificationCrypto>> getNotificationPrice(String cryptoId);
 }
 
 class NotificationPriceDataImpl implements NotificationPriceData {
@@ -72,15 +72,13 @@ class NotificationPriceDataImpl implements NotificationPriceData {
   }
 
   @override
-  Future<List<NotificationCrypto>> getNotificationPrice() async {
+  Future<List<NotificationCrypto>> getNotificationPrice(String cryptoId) async {
     // Open Box favoris
     var box = await Hive.openLazyBox(boxFavoris);
 
     try {
       // Get list of favoris
       List notifications = await box.get(boxKey) ?? [];
-
-      Logger().d(notifications);
 
       // Format data into NotificationPrice
       final notificationsEntities = notifications
@@ -92,11 +90,16 @@ class NotificationPriceDataImpl implements NotificationPriceData {
               futurePrice: notif["futurePrice"]))
           .toList();
 
+      // Filter notification according id crypto passed as arguments
+      final filterNotif = notificationsEntities
+          .where((element) => element.cryptoId == cryptoId)
+          .toList().reversed.toList();
+
       // Close box and
       await box.close();
 
       // List of notificaition setup by an user
-      return notificationsEntities;
+      return filterNotif;
     } catch (e) {
       throw GetNotificationPriceException();
     }

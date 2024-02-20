@@ -2,7 +2,6 @@ import 'package:defi/core/create_unique_id.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
-import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:intl/intl.dart';
 
 // Validate Value typed by user
