@@ -1,10 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
-import 'package:defi/core/create_unique_id.dart';
 import 'package:defi/core/utils_process.dart';
 import 'package:defi/core/utils_type.dart';
 import 'package:defi/domain/entities/crypto.dart';
-import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:defi/helpers/crypto_symbols.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
@@ -180,7 +178,7 @@ class _SetValueWidgetState extends State<SetValueWidget> {
                       final notificationCreate =
                           createNotification(alert.value, crypto, value);
                       Logger().d(notificationCreate);
-                      
+
                       // Created Notification
                       context
                           .read<NotificationPriceBloc>()

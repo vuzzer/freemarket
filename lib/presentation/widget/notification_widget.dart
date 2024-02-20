@@ -39,13 +39,13 @@ class NotificationWidget extends StatelessWidget {
     String message = "";
     switch (notification.typeNotification) {
       case AlertValue.decrease:
-        message = '\$${notification.futurePrice}';
+        message = '\$${notification.futurePrice.toStringAsFixed(2)}';
         break;
       case AlertValue.increase:
-        message = '\$${notification.futurePrice}';
+        message = '\$${notification.futurePrice.toStringAsFixed(2)}';
         break;
       case AlertValue.price:
-        message = '\$${notification.futurePrice}';
+        message = '\$${notification.futurePrice.toStringAsFixed(2)}';
         break;
       case AlertValue.schedular:
         switch (notification.cron) {
@@ -111,7 +111,7 @@ class NotificationWidget extends StatelessWidget {
                         ),
                         IconButton(
                             onPressed: () {
-                              customBottomSheet(context);
+                              customBottomSheet(context, notification.idNotification, crypto.id );
                             },
                             splashRadius: 20,
                             icon: const Icon(

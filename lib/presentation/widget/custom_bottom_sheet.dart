@@ -1,10 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
+import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
+import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void customBottomSheet(BuildContext context) {
+void customBottomSheet(
+    BuildContext context, int idNotification, String cryptoId) {
   final size = ScreenUtil();
 
   showModalBottomSheet(
@@ -42,14 +46,12 @@ void customBottomSheet(BuildContext context) {
                   ))
             ],
           ),
-        Material(
+          Material(
               color: Colors.transparent,
               child: InkWell(
                   splashColor: blueLight,
                   highlightColor: blueLight,
-                  onTap: () {
-                    
-                  },
+                  onTap: () {},
                   child: ListTile(
                       contentPadding: const EdgeInsets.only(left: 15, right: 5),
                       title: const AutoSizeText(
@@ -59,52 +61,54 @@ void customBottomSheet(BuildContext context) {
                         ),
                       ),
                       trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              IconButton(
-                                
-                                  onPressed: () {
-                                    customBottomSheet(context);
-                                  },
-                                  splashRadius: 20,
-                                  icon: const Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.white,
-                                  ))
-                            ],
-                          )))),
-                           Divider(color: greyLight,),
-                          Material(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          IconButton(
+                              onPressed: () {},
+                              splashRadius: 20,
+                              icon: const Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.white,
+                              ))
+                        ],
+                      )))),
+          Divider(
+            color: greyLight,
+          ),
+          Material(
               color: Colors.transparent,
               child: InkWell(
                   splashColor: blueLight,
                   highlightColor: blueLight,
-                  onTap: () {},
+                  onTap: () {
+                    // delete notification
+                    sl<NotificationPriceBloc>()
+                        .add(DeleteNotificationPrice(cryptoId, idNotification));
+                    // Close bottomSheet
+                    Navigator.of(context).pop();
+                  },
                   child: ListTile(
                       contentPadding: const EdgeInsets.only(left: 15, right: 5),
                       title: const AutoSizeText(
                         'Delete Alert',
                         style: TextStyle(
-                          color:  FontColor.red,
+                          color: FontColor.red,
                         ),
                       ),
                       trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              IconButton(
-                                
-                                  onPressed: () {
-                                    customBottomSheet(context);
-                                  },
-                                  splashRadius: 20,
-                                  icon: const Icon(
-                                    Icons.delete_forever_outlined,
-                                    color:  FontColor.red,
-                                  ))
-                            ],
-                          ))))
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          IconButton(
+                              onPressed: () {},
+                              splashRadius: 20,
+                              icon: const Icon(
+                                Icons.delete_forever_outlined,
+                                color: FontColor.red,
+                              ))
+                        ],
+                      ))))
         ],
       ),
     ),
