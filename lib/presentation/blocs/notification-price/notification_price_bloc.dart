@@ -20,7 +20,8 @@ class NotificationPriceBloc
               emit: emit, createNotif: value.notification),
           deleteNotificationPrice: (value) => _deleteNotification(emit: emit, cryptoId: value.cryptoId, idNotification: value.idNotification),
           getNotificationPrice: (value) =>
-              _getNotification(emit: emit, cryptoId: value.cryptoId));
+              _getNotification(emit: emit, cryptoId: value.cryptoId), 
+              updateNotificationPrice: (UpdateNotificationPrice value) => _updateNotificaiton(emit: emit, updateNotif: value.notification) );
     });
   }
 
@@ -67,4 +68,21 @@ class NotificationPriceBloc
         (success) => add(
             NotificationPriceEvent.getNotificationPrice(cryptoId)));
   }
+
+    Future<void> _updateNotificaiton(
+      {required Emitter<NotificationPriceState> emit,
+      required NotificationCrypto updateNotif}) async {
+    
+    final notificatons =
+        await notificationPriceUsecase.updateNotification(updateNotif);
+
+    // fold
+    notificatons.fold(
+        (error) => emit(state.copyWith(
+            successOrFail: left(CryptoError("Erreur lors du chargement")))),
+        (response) {
+      add(NotificationPriceEvent.getNotificationPrice(updateNotif.cryptoId));
+    });
+  }
+
 }

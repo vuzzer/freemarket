@@ -24,10 +24,10 @@ class _SetAlertScreenState extends State<SetAlertScreen> {
         ModalRoute.of(context)!.settings.arguments as ArgumentsScreen;
     final crypto = arguments.crypto; // Crypto argument
     final alert = arguments.alert; // Alert argument
+    final notification = arguments.notification; // Notification possible null
 
     return Scaffold(
         appBar: const AppBarWidget(
-        
           title: "Price Alert",
           leading: true,
         ),
@@ -36,6 +36,7 @@ class _SetAlertScreenState extends State<SetAlertScreen> {
             : SetValueWidget(
                 alert: alert,
                 crypto: crypto,
+                notification: notification,
               ));
   }
 }

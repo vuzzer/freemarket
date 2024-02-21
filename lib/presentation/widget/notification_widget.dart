@@ -1,9 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
+import 'package:defi/core/arguments_screen.dart';
 import 'package:defi/core/crontab.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
+import 'package:defi/presentation/screens/choose_alert_screen.dart';
 import 'package:defi/presentation/widget/custom_bottom_sheet.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +73,11 @@ class NotificationWidget extends StatelessWidget {
         child: InkWell(
             splashColor: blueLight,
             highlightColor: blueLight,
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed(ChooseAlertScreen.routeName,
+                  arguments: ArgumentNotif(
+                      crypto: crypto, notification: notification));
+            },
             child: ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 0),
                 leading: Padding(
@@ -111,7 +117,8 @@ class NotificationWidget extends StatelessWidget {
                         ),
                         IconButton(
                             onPressed: () {
-                              customBottomSheet(context, notification.idNotification, crypto.id );
+                              customBottomSheet(context,
+                                  notification.idNotification, crypto.id);
                             },
                             splashRadius: 20,
                             icon: const Icon(

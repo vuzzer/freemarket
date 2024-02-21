@@ -122,3 +122,43 @@ NotificationCrypto createNotification(
           cron: value,);
   }
 }
+
+
+NotificationCrypto updateNotification(
+    AlertValue typeAlert, CryptoInfo crypto, String value, int id) {
+  switch (typeAlert) {
+    case AlertValue.price:
+      final futurePrice = double.parse(value);
+      return NotificationCrypto(
+          idNotification: id,
+          cryptoId: crypto.id,
+          typeNotification: typeAlert,
+          futurePrice: futurePrice);
+    case AlertValue.decrease:
+      final percent = double.parse(value);
+      final reduction = crypto.currentPrice! * (percent / 100);
+      final futurePrice = crypto.currentPrice! - reduction;
+      return NotificationCrypto(
+          idNotification: id,
+          cryptoId: crypto.id,
+          typeNotification: typeAlert,
+          percent: percent,
+          futurePrice: futurePrice);
+    case AlertValue.increase:
+      final percent = double.parse(value);
+      final increase = crypto.currentPrice! * (percent / 100);
+      final futurePrice = crypto.currentPrice! + increase;
+      return NotificationCrypto(
+          idNotification: id,
+          cryptoId: crypto.id,
+          typeNotification: typeAlert,
+          percent: percent,
+          futurePrice: futurePrice);
+    case AlertValue.schedular:
+      return NotificationCrypto(
+          idNotification: id,
+          cryptoId: crypto.id,
+          typeNotification: typeAlert,
+          cron: value,);
+  }
+}

@@ -8,4 +8,5 @@ abstract class NotificationPriceRepo {
       int idNotification);
   Future<Either<Failure, List<NotificationCrypto>>> getNotificationPrice(String cryptoId
      );
+     Future<Either<Failure, bool>> updateNotification(NotificationCrypto updateNotification);
 }
