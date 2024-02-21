@@ -7,7 +7,8 @@ class NotificationPriceUsecase {
   final NotificationPriceRepo notificationPriceRepo;
   NotificationPriceUsecase(this.notificationPriceRepo);
 
-  Future<Either<Failure, NotificationCrypto>> createNotificationPrice(NotificationCrypto createNotif) {
+  Future<Either<Failure, NotificationCrypto>> createNotificationPrice(
+      NotificationCrypto createNotif) {
     return notificationPriceRepo.createNotificationPrice(createNotif);
   }
 
@@ -18,5 +19,10 @@ class NotificationPriceUsecase {
   Future<Either<Failure, List<NotificationCrypto>>> getNotificationPrice(
       String cryptoId) {
     return notificationPriceRepo.getNotificationPrice(cryptoId);
+  }
+
+  Future<Either<Failure, bool>> updateNotification(
+      NotificationCrypto updateNotification) {
+    return notificationPriceRepo.updateNotification(updateNotification);
   }
 }

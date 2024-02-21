@@ -43,4 +43,17 @@ class NotificationPriceRepoImpl implements NotificationPriceRepo {
       return left(GetNotificationPriceFailure());
     }
   }
+  
+  @override
+  Future<Either<Failure, bool>> updateNotification(NotificationCrypto updateNotification) async {
+    try {
+      final updated = await notificationPriceData.updateNotification(
+          updateNotification);
+      return right(updated);
+    } on NotificationExistException {
+      return left(NotificationUpdateFailure());
+    }
+  }
+
+  
 }

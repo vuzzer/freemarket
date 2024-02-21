@@ -4,11 +4,14 @@ import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';
 
+var logger = Logger();
+
 abstract class NotificationPriceData {
   Future<NotificationCrypto> createNotificationPrice(
       NotificationCrypto createNotification);
   Future<bool> deleteNotificationPrice(int idNotification);
   Future<List<NotificationCrypto>> getNotificationPrice(String cryptoId);
+  Future<bool> updateNotification(NotificationCrypto createNotification);
 }
 
 class NotificationPriceDataImpl implements NotificationPriceData {
@@ -93,7 +96,9 @@ class NotificationPriceDataImpl implements NotificationPriceData {
       // Filter notification according id crypto passed as arguments
       final filterNotif = notificationsEntities
           .where((element) => element.cryptoId == cryptoId)
-          .toList().reversed.toList();
+          .toList()
+          .reversed
+          .toList();
 
       // Close box and
       await box.close();
@@ -102,6 +107,39 @@ class NotificationPriceDataImpl implements NotificationPriceData {
       return filterNotif;
     } catch (e) {
       throw GetNotificationPriceException();
+    }
+  }
+
+  @override
+  Future<bool> updateNotification(NotificationCrypto updateNotification) async {
+    try {
+      // Open Box favoris
+      var box = await Hive.openLazyBox(boxFavoris);
+
+      // Get list of favoris
+      List notifications = await box.get(boxKey) ?? [];
+
+      // find notification
+      for (var p = 0; p < notifications.length; p++) {
+
+        if (notifications[p]["idNotification"] ==
+            updateNotification.idNotification) {
+          logger.d('Before update ${notifications[p]}');
+          notifications[p] = updateNotification.props[0];
+          logger.d('After update ${notifications[p]}');
+          break;
+        }
+      }
+
+      // Persist data to Hive
+      await box.put(boxKey, notifications);
+
+      // Close box and
+      await box.close();
+
+      return true;
+    } catch (e) {
+      throw NotificationUpdateException();
     }
   }
 }

@@ -3,6 +3,7 @@ import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/utils_process.dart';
 import 'package:defi/core/utils_type.dart';
 import 'package:defi/domain/entities/crypto.dart';
+import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:defi/helpers/crypto_symbols.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
@@ -19,7 +20,12 @@ import 'package:logger/logger.dart';
 class SetValueWidget extends StatefulWidget {
   final CryptoInfo crypto;
   final Alert alert;
-  const SetValueWidget({super.key, required this.crypto, required this.alert});
+  final NotificationCrypto? notification;
+  const SetValueWidget(
+      {super.key,
+      required this.crypto,
+      required this.alert,
+      this.notification});
 
   @override
   State<SetValueWidget> createState() => _SetValueWidgetState();
@@ -82,6 +88,7 @@ class _SetValueWidgetState extends State<SetValueWidget> {
   Widget build(BuildContext context) {
     final CryptoInfo crypto = widget.crypto;
     final Alert alert = widget.alert;
+    final updated = widget.notification == null;
     return Column(
       children: [
         Padding(
@@ -175,19 +182,35 @@ class _SetValueWidgetState extends State<SetValueWidget> {
                             ? false
                             : true,
                     onPressed: () {
-                      final notificationCreate =
-                          createNotification(alert.value, crypto, value);
-                      Logger().d(notificationCreate);
+                      final isUpdate = widget.notification == null;
+                      if (isUpdate) {
+                        final notificationCreate =
+                            createNotification(alert.value, crypto, value);
+                        Logger().d(notificationCreate);
 
-                      // Created Notification
-                      context
-                          .read<NotificationPriceBloc>()
-                          .add(CreateNotificationPrice(notificationCreate));
+                        // Created Notification
+                        context
+                            .read<NotificationPriceBloc>()
+                            .add(CreateNotificationPrice(notificationCreate));
+                      } else {
+                        final id =
+                            widget.notification!.idNotification;
+
+                        Logger().d('update id $id');
+
+                        final notificationUpdate =
+                            updateNotification(alert.value, crypto, value, id);
+
+                        // Update notification
+                        context
+                            .read<NotificationPriceBloc>()
+                            .add(UpdateNotificationPrice(notificationUpdate));
+                      }
 
                       Navigator.of(context).popUntil(
                           ModalRoute.withName(CryptoAssetScreen.routeName));
                     },
-                    title: "Create alert",
+                    title: updated ? "Create alert" : "Update alert",
                     raduis: 10,
                   ),
                 )),

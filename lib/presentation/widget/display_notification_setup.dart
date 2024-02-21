@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
+import 'package:defi/core/arguments_screen.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/screens/choose_alert_screen.dart';
@@ -54,7 +55,8 @@ class DisplayNotificationSetup extends StatelessWidget {
           padding:
               const EdgeInsets.only(left: 20, right: 20, bottom: 35, top: 10),
           child: ButtonWidget(
-            onPressed: () =>  Navigator.of(context).pushNamed(ChooseAlertScreen.routeName, arguments: crypto ),
+            onPressed: () => Navigator.of(context)
+                .pushNamed(ChooseAlertScreen.routeName, arguments: ArgumentNotif(crypto: crypto) ),
             color: blue1,
             title: "Create Alert",
             raduis: 10,

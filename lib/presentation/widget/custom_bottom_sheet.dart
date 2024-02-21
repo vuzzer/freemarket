@@ -4,7 +4,6 @@ import 'package:defi/presentation/blocs/notification-price/notification_price_bl
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void customBottomSheet(

@@ -4,6 +4,7 @@ import 'package:defi/constants/app_font.dart';
 import 'package:defi/core/params.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
+import 'package:defi/styles/font_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
@@ -53,7 +54,7 @@ class CryptoAssetWidget extends StatelessWidget {
                     child: price24h != null
                         ? AutoSizeText(price24h.toStringAsFixed(2),
                             style: TextStyle(
-                              color: price24h > 0.0 ? Colors.green : Colors.red,
+                              color: price24h > 0.0 ? Colors.green : FontColor.red,
                               fontFamily: roboto,
                             ))
                         : const SizedBox.shrink()),
@@ -71,11 +72,6 @@ class CryptoAssetWidget extends StatelessWidget {
                         const SizedBox(
                           height: 8,
                         ),
-                        //ANALYZING ARCHITECTURE WALLET
-                        /*  AutoSizeText(
-                                "${EthAmountFormatter(value.states.wallets[network]!.tokenBalance).format()} ${network.config.symbol}",
-                                style: TextStyle(
-                                    color: greyLight, fontFamily: roboto)), */
                       ],
                     )))));
   }

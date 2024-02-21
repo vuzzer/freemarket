@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dartz/dartz_unsafe.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/arguments_screen.dart';
 import 'package:defi/core/utils_type.dart';
@@ -21,7 +22,7 @@ class ChooseAlertScreen extends StatefulWidget {
 
 class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
   // ValueNotifier : listen to change of option
-  final ValueNotifier<AlertValue> alertNotifier =
+  final ValueNotifier<AlertValue> alertNotifierDefaultValue =
       ValueNotifier<AlertValue>(AlertValue.schedular);
 
   //Definition of alert options
@@ -59,13 +60,29 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
       value: AlertValue.schedular);
 
   void _update(Alert alert) {
-    alertNotifier.value = alert.value;
+    alertNotifierDefaultValue.value = alert.value;
     param = alert;
   }
 
   @override
   Widget build(BuildContext context) {
-    final crypto = ModalRoute.of(context)!.settings.arguments as CryptoInfo;
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as ArgumentNotif;
+    final crypto = arguments.crypto;
+    final notifExist = arguments.notification == null;
+
+    // Check if notification exist or not
+    // for modification
+    if (!notifExist) {
+      alertNotifierDefaultValue.value =
+          arguments.notification!.typeNotification;
+      for(final option in  alertOptions){
+        if (arguments.notification!.typeNotification == option.value) {
+          param = option;
+        }
+      }
+    }
+
     return Scaffold(
       appBar: const AppBarWidget(
         title: "Set an alert for bitcoin",
@@ -86,7 +103,7 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
           ),
           Expanded(
               child: ValueListenableBuilder(
-            valueListenable: alertNotifier,
+            valueListenable: alertNotifierDefaultValue,
             builder: (context, defaultAlertValue, child) => ListView.separated(
                 padding: const EdgeInsets.all(0),
                 itemCount: alertOptions.length,
@@ -109,7 +126,10 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
             child: ButtonWidget(
               onPressed: () => Navigator.of(context).pushNamed(
                   SetAlertScreen.routeName,
-                  arguments: ArgumentsScreen(crypto: crypto, alert: param ) ),
+                  arguments: ArgumentsScreen(
+                      crypto: crypto,
+                      alert: param,
+                      notification: arguments.notification)),
               title: "Next",
               raduis: 10,
             ),
