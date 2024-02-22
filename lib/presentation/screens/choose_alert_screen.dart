@@ -1,10 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dartz/dartz_unsafe.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/arguments_screen.dart';
 import 'package:defi/core/utils_type.dart';
 import 'package:defi/core/enum.dart';
-import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/presentation/screens/set_alert_screen.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/button_widget.dart';

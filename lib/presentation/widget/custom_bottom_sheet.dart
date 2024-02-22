@@ -1,13 +1,20 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
+import 'package:defi/core/arguments_screen.dart';
+import 'package:defi/core/cron_expression.dart';
+import 'package:defi/core/enum.dart';
+import 'package:defi/domain/entities/crypto.dart';
+import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
+import 'package:defi/presentation/screens/choose_alert_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_color.dart';
+import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void customBottomSheet(
-    BuildContext context, int idNotification, String cryptoId) {
+    BuildContext context, NotificationCrypto notification, CryptoInfo crypto) {
   final size = ScreenUtil();
 
   showModalBottomSheet(
@@ -29,10 +36,10 @@ void customBottomSheet(
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Flexible(
-                  flex: 2,
+              const SizedBox(width: 35,),
+               Expanded(
                   child: Center(
-                    child: Text("Target price"),
+                    child: AutoSizeText(titleCustom(notification), style: TextStyle(color: Colors.white, fontFamily: FontFamily.montSerrat, fontWeight: FontWeight.bold ),)
                   )),
               IconButton(
                   onPressed: () {
@@ -50,12 +57,19 @@ void customBottomSheet(
               child: InkWell(
                   splashColor: blueLight,
                   highlightColor: blueLight,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pushNamed(ChooseAlertScreen.routeName,
+                        arguments: ArgumentNotif(
+                            crypto: crypto, notification: notification));
+                  },
                   child: ListTile(
                       contentPadding: const EdgeInsets.only(left: 15, right: 5),
-                      title: const AutoSizeText(
+                      title: AutoSizeText(
                         'Update',
                         style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: FontFamily.montSerrat,
                           color: Colors.white,
                         ),
                       ),
@@ -72,9 +86,11 @@ void customBottomSheet(
                               ))
                         ],
                       )))),
-          Divider(
-            color: greyLight,
-          ),
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Divider(
+                color: greyLight,
+              )),
           Material(
               color: Colors.transparent,
               child: InkWell(
@@ -82,16 +98,18 @@ void customBottomSheet(
                   highlightColor: blueLight,
                   onTap: () {
                     // delete notification
-                    sl<NotificationPriceBloc>()
-                        .add(DeleteNotificationPrice(cryptoId, idNotification));
+                    sl<NotificationPriceBloc>().add(DeleteNotificationPrice(
+                        crypto.id, notification.idNotification));
                     // Close bottomSheet
                     Navigator.of(context).pop();
                   },
                   child: ListTile(
                       contentPadding: const EdgeInsets.only(left: 15, right: 5),
-                      title: const AutoSizeText(
+                      title: AutoSizeText(
                         'Delete Alert',
                         style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: FontFamily.montSerrat,
                           color: FontColor.red,
                         ),
                       ),
@@ -112,4 +130,18 @@ void customBottomSheet(
       ),
     ),
   );
+}
+
+String titleCustom(NotificationCrypto notification) {
+  if (notification.typeNotification == AlertValue.schedular) {
+    switch (notification.cron) {
+      case CronExpression.morning:
+        return 'Market Open';
+      case CronExpression.noon:
+        return 'Mid-day';
+      default:
+        return 'Market close';
+    }
+  }
+  return 'Target price ${notification.futurePrice.toStringAsFixed(2)}';
 }

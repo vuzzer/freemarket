@@ -1,3 +1,4 @@
+import 'package:defi/core/cron_expression.dart';
 import 'package:defi/core/enum.dart';
 import 'package:flutter/material.dart';
 
@@ -25,3 +26,12 @@ class CryptoError {
 // Mark success
 class Success {}
 
+
+// TimeFrame expression
+class TimeFrame {
+  final String title;
+  final String desc;
+  bool value = false;
+  final String cron;
+  TimeFrame({required this.title, required this.desc, required this.cron});
+}

@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
+import 'package:defi/core/arguments_screen.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
@@ -86,7 +87,7 @@ class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
         }),
         IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(ChooseAlertScreen.routeName, arguments: crypto );
+              Navigator.of(context).pushNamed(ChooseAlertScreen.routeName, arguments: ArgumentNotif(crypto: crypto)  );
             },
             splashRadius: 20,
             padding: EdgeInsets.zero,
