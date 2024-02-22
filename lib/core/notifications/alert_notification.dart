@@ -3,8 +3,6 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/create_unique_id.dart';
 import 'package:defi/domain/entities/crypto.dart';
-import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
-import 'package:defi/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 

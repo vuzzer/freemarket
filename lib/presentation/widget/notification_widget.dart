@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/arguments_screen.dart';
-import 'package:defi/core/crontab.dart';
+import 'package:defi/core/cron_expression.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
@@ -51,13 +51,13 @@ class NotificationWidget extends StatelessWidget {
         break;
       case AlertValue.schedular:
         switch (notification.cron) {
-          case CronTabStock.morning:
+          case CronExpression.morning:
             message = 'Market Open';
             break;
-          case CronTabStock.night:
+          case CronExpression.night:
             message = 'Market close';
             break;
-          case CronTabStock.noon:
+          case CronExpression.noon:
             message = 'Mid-day';
             break;
         }
@@ -118,7 +118,7 @@ class NotificationWidget extends StatelessWidget {
                         IconButton(
                             onPressed: () {
                               customBottomSheet(context,
-                                  notification.idNotification, crypto.id);
+                                  notification, crypto);
                             },
                             splashRadius: 20,
                             icon: const Icon(
