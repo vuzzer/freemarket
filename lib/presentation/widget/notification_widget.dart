@@ -9,6 +9,7 @@ import 'package:defi/presentation/screens/choose_alert_screen.dart';
 import 'package:defi/presentation/widget/custom_bottom_sheet.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 class NotificationWidget extends StatelessWidget {
   final NotificationCrypto notification;
@@ -57,7 +58,7 @@ class NotificationWidget extends StatelessWidget {
           case CronExpression.night:
             message = 'Market close';
             break;
-          case CronExpression.noon:
+          case CronExpression.noon: 
             message = 'Mid-day';
             break;
         }
@@ -117,8 +118,7 @@ class NotificationWidget extends StatelessWidget {
                         ),
                         IconButton(
                             onPressed: () {
-                              customBottomSheet(context,
-                                  notification, crypto);
+                              customBottomSheet(context, notification, crypto);
                             },
                             splashRadius: 20,
                             icon: const Icon(

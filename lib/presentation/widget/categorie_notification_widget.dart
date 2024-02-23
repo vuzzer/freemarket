@@ -8,11 +8,12 @@ class CategorieNotificationWidget extends StatelessWidget {
   final Alert alert;
   final AlertValue radio;
   final Function update;
+  final bool disable;
   const CategorieNotificationWidget(
       {Key? key,
       required this.alert,
       required this.radio,
-      required this.update})
+      required this.update, this.disable = false})
       : super(key: key);
 
   Color getColor(Set<MaterialState> states) {
@@ -31,11 +32,11 @@ class CategorieNotificationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: Colors.transparent,
+        color: disable ? blueLight : Colors.transparent,
         child: InkWell(
             splashColor: blueLight,
             highlightColor: blueLight,
-            onTap: () {
+            onTap: disable ? null : () {
               update(alert);
             },
             child: ListTile(
@@ -87,7 +88,7 @@ class CategorieNotificationWidget extends StatelessWidget {
                             activeColor: blue,
                             value: alert.value,
                             groupValue: radio,
-                            onChanged: (value) {
+                            onChanged: disable ? null : (value) {
                               update(alert);
                               //select.setNetwork(network.config.value);
                             })
@@ -95,5 +96,3 @@ class CategorieNotificationWidget extends StatelessWidget {
                     )))));
   }
 }
-
-

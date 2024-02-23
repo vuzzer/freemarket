@@ -12,6 +12,9 @@ abstract class NotificationPriceData {
   Future<bool> deleteNotificationPrice(int idNotification);
   Future<List<NotificationCrypto>> getNotificationPrice(String cryptoId);
   Future<bool> updateNotification(NotificationCrypto createNotification);
+  Future<bool> createNotificationFromList(
+      List<NotificationCrypto> createNotification);
+  Future<bool> allDailyNotificationIsCreated(String cryptoId);
 }
 
 class NotificationPriceDataImpl implements NotificationPriceData {
@@ -90,6 +93,7 @@ class NotificationPriceDataImpl implements NotificationPriceData {
               cryptoId: notif["cryptoId"],
               percent: notif['percent'],
               typeNotification: AlertValue.values[notif['typeNotification']],
+              cron: notif["cron"],
               futurePrice: notif["futurePrice"]))
           .toList();
 
@@ -106,7 +110,7 @@ class NotificationPriceDataImpl implements NotificationPriceData {
       // List of notificaition setup by an user
       return filterNotif;
     } catch (e) {
-      throw GetNotificationPriceException();
+      throw GetNotificationException();
     }
   }
 
@@ -121,7 +125,6 @@ class NotificationPriceDataImpl implements NotificationPriceData {
 
       // find notification
       for (var p = 0; p < notifications.length; p++) {
-
         if (notifications[p]["idNotification"] ==
             updateNotification.idNotification) {
           logger.d('Before update ${notifications[p]}');
@@ -141,5 +144,73 @@ class NotificationPriceDataImpl implements NotificationPriceData {
     } catch (e) {
       throw NotificationUpdateException();
     }
+  }
+
+  // Create notification from list
+  @override
+  Future<bool> createNotificationFromList(
+      List<NotificationCrypto> createNotification) async {
+    try {
+      // Open Box favoris
+      var box = await Hive.openLazyBox(boxFavoris);
+
+      // Get list of favoris
+      List notifications = await box.get(boxKey) ?? [];
+
+      // Add to list of notification
+      for (var notif in createNotification) {
+        notifications.add(notif.props[0]);
+      }
+
+      // Persist data to Hive
+      await box.put(boxKey, notifications);
+
+      // Close box and
+      await box.close();
+
+      return true;
+    } catch (e) {
+      throw NotificationCreateException();
+    }
+  }
+
+  @override
+  Future<bool> allDailyNotificationIsCreated(String cryptoId) async {
+    // Open Box favoris
+    var box = await Hive.openLazyBox(boxFavoris);
+    const allDailyNotif = 3;
+    try {
+      // Get list of favoris
+      List notifications = await box.get(boxKey) ?? [];
+
+      // Format data into NotificationPrice
+      final notificationsEntities = notifications
+          .map((notif) => NotificationCrypto(
+              idNotification: notif["idNotification"],
+              cryptoId: notif["cryptoId"],
+              percent: notif['percent'],
+              typeNotification: AlertValue.values[notif['typeNotification']],
+              cron: notif["cron"],
+              futurePrice: notif["futurePrice"]))
+          .toList();
+
+      // Filter notification according id crypto passed as arguments
+      final filterNotif = notificationsEntities
+          .where((element) =>
+              element.cryptoId == cryptoId &&
+              element.typeNotification == AlertValue.schedular)
+          .toList()
+          .reversed
+          .toList();
+
+      // Close box and
+      await box.close();
+
+      // We check if all daily notification is created
+      return filterNotif.length == allDailyNotif;
+    } catch (e) {
+      throw GetNotificationException();
+    }
+
   }
 }

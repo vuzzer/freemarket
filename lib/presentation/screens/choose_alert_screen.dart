@@ -3,11 +3,17 @@ import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/arguments_screen.dart';
 import 'package:defi/core/utils_type.dart';
 import 'package:defi/core/enum.dart';
+import 'package:defi/data/datasource/notification/notification_price_data.dart';
+import 'package:defi/domain/entities/crypto.dart';
+import 'package:defi/domain/entities/notification_crypto.dart';
+import 'package:defi/domain/usecases/notification-price/notification_price_usecase.dart';
 import 'package:defi/presentation/screens/set_alert_screen.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/button_widget.dart';
 import 'package:defi/presentation/widget/categorie_notification_widget.dart';
+import 'package:defi/service_locator.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 class ChooseAlertScreen extends StatefulWidget {
   static const routeName = "/choose-currency";
@@ -20,6 +26,7 @@ class ChooseAlertScreen extends StatefulWidget {
 
 class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
   // ValueNotifier : listen to change of option
+
   final ValueNotifier<AlertValue> alertNotifierDefaultValue =
       ValueNotifier<AlertValue>(AlertValue.schedular);
 
@@ -62,24 +69,50 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
     param = alert;
   }
 
+  Future<void> allDailyNotificationIsCreated(
+      CryptoInfo crypto, NotificationCrypto? notification) async {
+    // Verify if all daily notif is created
+    final allDailyNotif = await sl<NotificationPriceData>()
+        .allDailyNotificationIsCreated(crypto.id);
+
+
+    if (allDailyNotif) {
+      alertOptions[alertOptions.length - 1] =
+          alertOptions[alertOptions.length - 1].copyWith(disable: true);
+      // Default value become option before schedular
+      param = alertOptions[2];
+    }
+
+    // Get all option notification except schedular
+    final tmpAlertOptions = alertOptions
+        .where((alert) => alert.value != AlertValue.schedular)
+        .toList();
+
+    // If all notification is created, we skip schedular option
+    final selectAlertOptions = allDailyNotif ? tmpAlertOptions : alertOptions;
+
+    // notification exist in order to select AlertValue of this notification
+    final notifExist = notification == null;
+
+    // Check if notification exist to activate update process
+    if (!notifExist) {
+      for (final option in selectAlertOptions) {
+        if (notification.typeNotification == option.value) {
+          param = option;
+        }
+      }
+    }
+    alertNotifierDefaultValue.value = param.value;
+  }
+
   @override
   Widget build(BuildContext context) {
     final arguments =
         ModalRoute.of(context)!.settings.arguments as ArgumentNotif;
     final crypto = arguments.crypto;
-    final notifExist = arguments.notification == null;
+    final notification = arguments.notification;
 
-    // Check if notification exist or not
-    // for modification
-    if (!notifExist) {
-      alertNotifierDefaultValue.value =
-          arguments.notification!.typeNotification;
-      for(final option in  alertOptions){
-        if (arguments.notification!.typeNotification == option.value) {
-          param = option;
-        }
-      }
-    }
+    allDailyNotificationIsCreated(crypto, notification);
 
     return Scaffold(
       appBar: const AppBarWidget(
@@ -112,6 +145,7 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
                 itemBuilder: (context, index) {
                   final alert = alertOptions[index];
                   return CategorieNotificationWidget(
+                    disable: alert.disable,
                     key: Key(alert.value.name),
                     radio: defaultAlertValue,
                     update: _update,
