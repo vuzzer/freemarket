@@ -8,7 +8,6 @@ import 'package:defi/presentation/widget/button_widget.dart';
 import 'package:defi/presentation/widget/notification_widget.dart';
 import 'package:defi/styles/font_size.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DisplayNotificationSetup extends StatelessWidget {

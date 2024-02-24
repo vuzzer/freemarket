@@ -41,7 +41,7 @@ class _SetValueWidgetState extends State<SetValueWidget> {
   final ValueNotifier<bool> focusNotifier =
       ValueNotifier<bool>(false); // Check if field amount has focus
 
-  // Notifier to check price
+  // Notifier to check if price alert is correct
   final ValueNotifier<String> checkPriceNotifier = ValueNotifier<String>("");
 
   @override
@@ -81,6 +81,7 @@ class _SetValueWidgetState extends State<SetValueWidget> {
     _controller.dispose();
     focusNotifier.dispose();
     _alertFocus.dispose();
+    checkPriceNotifier.dispose();
     super.dispose();
   }
 
@@ -193,8 +194,7 @@ class _SetValueWidgetState extends State<SetValueWidget> {
                             .read<NotificationPriceBloc>()
                             .add(CreateNotificationPrice(notificationCreate));
                       } else {
-                        final id =
-                            widget.notification!.idNotification;
+                        final id = widget.notification!.idNotification;
 
                         Logger().d('update id $id');
 

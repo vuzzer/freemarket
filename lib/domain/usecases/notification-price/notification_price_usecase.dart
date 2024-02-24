@@ -25,4 +25,13 @@ class NotificationPriceUsecase {
       NotificationCrypto updateNotification) {
     return notificationPriceRepo.updateNotification(updateNotification);
   }
+
+  Future<Either<Failure, bool>> createNotificationFromList(
+      List<NotificationCrypto> createNotification) {
+    return notificationPriceRepo.createNotificationFromList(createNotification);
+  }
+
+  Future<Either<Failure, bool>> allDailyNotificationIsCreated(String cryptoId) {
+    return notificationPriceRepo.allDailyNotificationIsCreated(cryptoId);
+  }
 }

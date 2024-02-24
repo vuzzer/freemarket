@@ -25,6 +25,8 @@ mixin _$NotificationPriceEvent {
     required TResult Function(String cryptoId, int idNotification)
         deleteNotificationPrice,
     required TResult Function(String cryptoId) getNotificationPrice,
+    required TResult Function(List<NotificationCrypto> createNotification)
+        createNotificationFromList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +36,8 @@ mixin _$NotificationPriceEvent {
     TResult? Function(String cryptoId, int idNotification)?
         deleteNotificationPrice,
     TResult? Function(String cryptoId)? getNotificationPrice,
+    TResult? Function(List<NotificationCrypto> createNotification)?
+        createNotificationFromList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,6 +47,8 @@ mixin _$NotificationPriceEvent {
     TResult Function(String cryptoId, int idNotification)?
         deleteNotificationPrice,
     TResult Function(String cryptoId)? getNotificationPrice,
+    TResult Function(List<NotificationCrypto> createNotification)?
+        createNotificationFromList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +61,8 @@ mixin _$NotificationPriceEvent {
     required TResult Function(DeleteNotificationPrice value)
         deleteNotificationPrice,
     required TResult Function(GetNotificationPrice value) getNotificationPrice,
+    required TResult Function(CreateNotificationFromList value)
+        createNotificationFromList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +71,8 @@ mixin _$NotificationPriceEvent {
     TResult? Function(UpdateNotificationPrice value)? updateNotificationPrice,
     TResult? Function(DeleteNotificationPrice value)? deleteNotificationPrice,
     TResult? Function(GetNotificationPrice value)? getNotificationPrice,
+    TResult? Function(CreateNotificationFromList value)?
+        createNotificationFromList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +81,8 @@ mixin _$NotificationPriceEvent {
     TResult Function(UpdateNotificationPrice value)? updateNotificationPrice,
     TResult Function(DeleteNotificationPrice value)? deleteNotificationPrice,
     TResult Function(GetNotificationPrice value)? getNotificationPrice,
+    TResult Function(CreateNotificationFromList value)?
+        createNotificationFromList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -171,6 +183,8 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
     required TResult Function(String cryptoId, int idNotification)
         deleteNotificationPrice,
     required TResult Function(String cryptoId) getNotificationPrice,
+    required TResult Function(List<NotificationCrypto> createNotification)
+        createNotificationFromList,
   }) {
     return createNotificationPrice(notification);
   }
@@ -183,6 +197,8 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
     TResult? Function(String cryptoId, int idNotification)?
         deleteNotificationPrice,
     TResult? Function(String cryptoId)? getNotificationPrice,
+    TResult? Function(List<NotificationCrypto> createNotification)?
+        createNotificationFromList,
   }) {
     return createNotificationPrice?.call(notification);
   }
@@ -195,6 +211,8 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
     TResult Function(String cryptoId, int idNotification)?
         deleteNotificationPrice,
     TResult Function(String cryptoId)? getNotificationPrice,
+    TResult Function(List<NotificationCrypto> createNotification)?
+        createNotificationFromList,
     required TResult orElse(),
   }) {
     if (createNotificationPrice != null) {
@@ -213,6 +231,8 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
     required TResult Function(DeleteNotificationPrice value)
         deleteNotificationPrice,
     required TResult Function(GetNotificationPrice value) getNotificationPrice,
+    required TResult Function(CreateNotificationFromList value)
+        createNotificationFromList,
   }) {
     return createNotificationPrice(this);
   }
@@ -224,6 +244,8 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
     TResult? Function(UpdateNotificationPrice value)? updateNotificationPrice,
     TResult? Function(DeleteNotificationPrice value)? deleteNotificationPrice,
     TResult? Function(GetNotificationPrice value)? getNotificationPrice,
+    TResult? Function(CreateNotificationFromList value)?
+        createNotificationFromList,
   }) {
     return createNotificationPrice?.call(this);
   }
@@ -235,6 +257,8 @@ class _$CreateNotificationPriceImpl implements CreateNotificationPrice {
     TResult Function(UpdateNotificationPrice value)? updateNotificationPrice,
     TResult Function(DeleteNotificationPrice value)? deleteNotificationPrice,
     TResult Function(GetNotificationPrice value)? getNotificationPrice,
+    TResult Function(CreateNotificationFromList value)?
+        createNotificationFromList,
     required TResult orElse(),
   }) {
     if (createNotificationPrice != null) {
@@ -330,6 +354,8 @@ class _$UpdateNotificationPriceImpl implements UpdateNotificationPrice {
     required TResult Function(String cryptoId, int idNotification)
         deleteNotificationPrice,
     required TResult Function(String cryptoId) getNotificationPrice,
+    required TResult Function(List<NotificationCrypto> createNotification)
+        createNotificationFromList,
   }) {
     return updateNotificationPrice(notification);
   }
@@ -342,6 +368,8 @@ class _$UpdateNotificationPriceImpl implements UpdateNotificationPrice {
     TResult? Function(String cryptoId, int idNotification)?
         deleteNotificationPrice,
     TResult? Function(String cryptoId)? getNotificationPrice,
+    TResult? Function(List<NotificationCrypto> createNotification)?
+        createNotificationFromList,
   }) {
     return updateNotificationPrice?.call(notification);
   }
@@ -354,6 +382,8 @@ class _$UpdateNotificationPriceImpl implements UpdateNotificationPrice {
     TResult Function(String cryptoId, int idNotification)?
         deleteNotificationPrice,
     TResult Function(String cryptoId)? getNotificationPrice,
+    TResult Function(List<NotificationCrypto> createNotification)?
+        createNotificationFromList,
     required TResult orElse(),
   }) {
     if (updateNotificationPrice != null) {
@@ -372,6 +402,8 @@ class _$UpdateNotificationPriceImpl implements UpdateNotificationPrice {
     required TResult Function(DeleteNotificationPrice value)
         deleteNotificationPrice,
     required TResult Function(GetNotificationPrice value) getNotificationPrice,
+    required TResult Function(CreateNotificationFromList value)
+        createNotificationFromList,
   }) {
     return updateNotificationPrice(this);
   }
@@ -383,6 +415,8 @@ class _$UpdateNotificationPriceImpl implements UpdateNotificationPrice {
     TResult? Function(UpdateNotificationPrice value)? updateNotificationPrice,
     TResult? Function(DeleteNotificationPrice value)? deleteNotificationPrice,
     TResult? Function(GetNotificationPrice value)? getNotificationPrice,
+    TResult? Function(CreateNotificationFromList value)?
+        createNotificationFromList,
   }) {
     return updateNotificationPrice?.call(this);
   }
@@ -394,6 +428,8 @@ class _$UpdateNotificationPriceImpl implements UpdateNotificationPrice {
     TResult Function(UpdateNotificationPrice value)? updateNotificationPrice,
     TResult Function(DeleteNotificationPrice value)? deleteNotificationPrice,
     TResult Function(GetNotificationPrice value)? getNotificationPrice,
+    TResult Function(CreateNotificationFromList value)?
+        createNotificationFromList,
     required TResult orElse(),
   }) {
     if (updateNotificationPrice != null) {
@@ -498,6 +534,8 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
     required TResult Function(String cryptoId, int idNotification)
         deleteNotificationPrice,
     required TResult Function(String cryptoId) getNotificationPrice,
+    required TResult Function(List<NotificationCrypto> createNotification)
+        createNotificationFromList,
   }) {
     return deleteNotificationPrice(cryptoId, idNotification);
   }
@@ -510,6 +548,8 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
     TResult? Function(String cryptoId, int idNotification)?
         deleteNotificationPrice,
     TResult? Function(String cryptoId)? getNotificationPrice,
+    TResult? Function(List<NotificationCrypto> createNotification)?
+        createNotificationFromList,
   }) {
     return deleteNotificationPrice?.call(cryptoId, idNotification);
   }
@@ -522,6 +562,8 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
     TResult Function(String cryptoId, int idNotification)?
         deleteNotificationPrice,
     TResult Function(String cryptoId)? getNotificationPrice,
+    TResult Function(List<NotificationCrypto> createNotification)?
+        createNotificationFromList,
     required TResult orElse(),
   }) {
     if (deleteNotificationPrice != null) {
@@ -540,6 +582,8 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
     required TResult Function(DeleteNotificationPrice value)
         deleteNotificationPrice,
     required TResult Function(GetNotificationPrice value) getNotificationPrice,
+    required TResult Function(CreateNotificationFromList value)
+        createNotificationFromList,
   }) {
     return deleteNotificationPrice(this);
   }
@@ -551,6 +595,8 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
     TResult? Function(UpdateNotificationPrice value)? updateNotificationPrice,
     TResult? Function(DeleteNotificationPrice value)? deleteNotificationPrice,
     TResult? Function(GetNotificationPrice value)? getNotificationPrice,
+    TResult? Function(CreateNotificationFromList value)?
+        createNotificationFromList,
   }) {
     return deleteNotificationPrice?.call(this);
   }
@@ -562,6 +608,8 @@ class _$DeleteNotificationPriceImpl implements DeleteNotificationPrice {
     TResult Function(UpdateNotificationPrice value)? updateNotificationPrice,
     TResult Function(DeleteNotificationPrice value)? deleteNotificationPrice,
     TResult Function(GetNotificationPrice value)? getNotificationPrice,
+    TResult Function(CreateNotificationFromList value)?
+        createNotificationFromList,
     required TResult orElse(),
   }) {
     if (deleteNotificationPrice != null) {
@@ -658,6 +706,8 @@ class _$GetNotificationPriceImpl implements GetNotificationPrice {
     required TResult Function(String cryptoId, int idNotification)
         deleteNotificationPrice,
     required TResult Function(String cryptoId) getNotificationPrice,
+    required TResult Function(List<NotificationCrypto> createNotification)
+        createNotificationFromList,
   }) {
     return getNotificationPrice(cryptoId);
   }
@@ -670,6 +720,8 @@ class _$GetNotificationPriceImpl implements GetNotificationPrice {
     TResult? Function(String cryptoId, int idNotification)?
         deleteNotificationPrice,
     TResult? Function(String cryptoId)? getNotificationPrice,
+    TResult? Function(List<NotificationCrypto> createNotification)?
+        createNotificationFromList,
   }) {
     return getNotificationPrice?.call(cryptoId);
   }
@@ -682,6 +734,8 @@ class _$GetNotificationPriceImpl implements GetNotificationPrice {
     TResult Function(String cryptoId, int idNotification)?
         deleteNotificationPrice,
     TResult Function(String cryptoId)? getNotificationPrice,
+    TResult Function(List<NotificationCrypto> createNotification)?
+        createNotificationFromList,
     required TResult orElse(),
   }) {
     if (getNotificationPrice != null) {
@@ -700,6 +754,8 @@ class _$GetNotificationPriceImpl implements GetNotificationPrice {
     required TResult Function(DeleteNotificationPrice value)
         deleteNotificationPrice,
     required TResult Function(GetNotificationPrice value) getNotificationPrice,
+    required TResult Function(CreateNotificationFromList value)
+        createNotificationFromList,
   }) {
     return getNotificationPrice(this);
   }
@@ -711,6 +767,8 @@ class _$GetNotificationPriceImpl implements GetNotificationPrice {
     TResult? Function(UpdateNotificationPrice value)? updateNotificationPrice,
     TResult? Function(DeleteNotificationPrice value)? deleteNotificationPrice,
     TResult? Function(GetNotificationPrice value)? getNotificationPrice,
+    TResult? Function(CreateNotificationFromList value)?
+        createNotificationFromList,
   }) {
     return getNotificationPrice?.call(this);
   }
@@ -722,6 +780,8 @@ class _$GetNotificationPriceImpl implements GetNotificationPrice {
     TResult Function(UpdateNotificationPrice value)? updateNotificationPrice,
     TResult Function(DeleteNotificationPrice value)? deleteNotificationPrice,
     TResult Function(GetNotificationPrice value)? getNotificationPrice,
+    TResult Function(CreateNotificationFromList value)?
+        createNotificationFromList,
     required TResult orElse(),
   }) {
     if (getNotificationPrice != null) {
@@ -738,6 +798,187 @@ abstract class GetNotificationPrice implements NotificationPriceEvent {
   String get cryptoId;
   @JsonKey(ignore: true)
   _$$GetNotificationPriceImplCopyWith<_$GetNotificationPriceImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CreateNotificationFromListImplCopyWith<$Res> {
+  factory _$$CreateNotificationFromListImplCopyWith(
+          _$CreateNotificationFromListImpl value,
+          $Res Function(_$CreateNotificationFromListImpl) then) =
+      __$$CreateNotificationFromListImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<NotificationCrypto> createNotification});
+}
+
+/// @nodoc
+class __$$CreateNotificationFromListImplCopyWithImpl<$Res>
+    extends _$NotificationPriceEventCopyWithImpl<$Res,
+        _$CreateNotificationFromListImpl>
+    implements _$$CreateNotificationFromListImplCopyWith<$Res> {
+  __$$CreateNotificationFromListImplCopyWithImpl(
+      _$CreateNotificationFromListImpl _value,
+      $Res Function(_$CreateNotificationFromListImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? createNotification = null,
+  }) {
+    return _then(_$CreateNotificationFromListImpl(
+      null == createNotification
+          ? _value._createNotification
+          : createNotification // ignore: cast_nullable_to_non_nullable
+              as List<NotificationCrypto>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CreateNotificationFromListImpl implements CreateNotificationFromList {
+  const _$CreateNotificationFromListImpl(
+      final List<NotificationCrypto> createNotification)
+      : _createNotification = createNotification;
+
+  final List<NotificationCrypto> _createNotification;
+  @override
+  List<NotificationCrypto> get createNotification {
+    if (_createNotification is EqualUnmodifiableListView)
+      return _createNotification;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_createNotification);
+  }
+
+  @override
+  String toString() {
+    return 'NotificationPriceEvent.createNotificationFromList(createNotification: $createNotification)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateNotificationFromListImpl &&
+            const DeepCollectionEquality()
+                .equals(other._createNotification, _createNotification));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_createNotification));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateNotificationFromListImplCopyWith<_$CreateNotificationFromListImpl>
+      get copyWith => __$$CreateNotificationFromListImplCopyWithImpl<
+          _$CreateNotificationFromListImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(NotificationCrypto notification)
+        createNotificationPrice,
+    required TResult Function(NotificationCrypto notification)
+        updateNotificationPrice,
+    required TResult Function(String cryptoId, int idNotification)
+        deleteNotificationPrice,
+    required TResult Function(String cryptoId) getNotificationPrice,
+    required TResult Function(List<NotificationCrypto> createNotification)
+        createNotificationFromList,
+  }) {
+    return createNotificationFromList(createNotification);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(NotificationCrypto notification)? createNotificationPrice,
+    TResult? Function(NotificationCrypto notification)? updateNotificationPrice,
+    TResult? Function(String cryptoId, int idNotification)?
+        deleteNotificationPrice,
+    TResult? Function(String cryptoId)? getNotificationPrice,
+    TResult? Function(List<NotificationCrypto> createNotification)?
+        createNotificationFromList,
+  }) {
+    return createNotificationFromList?.call(createNotification);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(NotificationCrypto notification)? createNotificationPrice,
+    TResult Function(NotificationCrypto notification)? updateNotificationPrice,
+    TResult Function(String cryptoId, int idNotification)?
+        deleteNotificationPrice,
+    TResult Function(String cryptoId)? getNotificationPrice,
+    TResult Function(List<NotificationCrypto> createNotification)?
+        createNotificationFromList,
+    required TResult orElse(),
+  }) {
+    if (createNotificationFromList != null) {
+      return createNotificationFromList(createNotification);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CreateNotificationPrice value)
+        createNotificationPrice,
+    required TResult Function(UpdateNotificationPrice value)
+        updateNotificationPrice,
+    required TResult Function(DeleteNotificationPrice value)
+        deleteNotificationPrice,
+    required TResult Function(GetNotificationPrice value) getNotificationPrice,
+    required TResult Function(CreateNotificationFromList value)
+        createNotificationFromList,
+  }) {
+    return createNotificationFromList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(CreateNotificationPrice value)? createNotificationPrice,
+    TResult? Function(UpdateNotificationPrice value)? updateNotificationPrice,
+    TResult? Function(DeleteNotificationPrice value)? deleteNotificationPrice,
+    TResult? Function(GetNotificationPrice value)? getNotificationPrice,
+    TResult? Function(CreateNotificationFromList value)?
+        createNotificationFromList,
+  }) {
+    return createNotificationFromList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CreateNotificationPrice value)? createNotificationPrice,
+    TResult Function(UpdateNotificationPrice value)? updateNotificationPrice,
+    TResult Function(DeleteNotificationPrice value)? deleteNotificationPrice,
+    TResult Function(GetNotificationPrice value)? getNotificationPrice,
+    TResult Function(CreateNotificationFromList value)?
+        createNotificationFromList,
+    required TResult orElse(),
+  }) {
+    if (createNotificationFromList != null) {
+      return createNotificationFromList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CreateNotificationFromList implements NotificationPriceEvent {
+  const factory CreateNotificationFromList(
+          final List<NotificationCrypto> createNotification) =
+      _$CreateNotificationFromListImpl;
+
+  List<NotificationCrypto> get createNotification;
+  @JsonKey(ignore: true)
+  _$$CreateNotificationFromListImplCopyWith<_$CreateNotificationFromListImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
