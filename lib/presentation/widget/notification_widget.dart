@@ -77,7 +77,7 @@ class NotificationWidget extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushNamed(ChooseAlertScreen.routeName,
                   arguments: ArgumentNotif(
-                      crypto: crypto, notification: notification));
+                      crypto: crypto, notification: notification, isUpdate: true));
             },
             child: ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 0),
