@@ -71,46 +71,44 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
     final notification = argument.notification;
     final isUpdate = argument.isUpdate;
 
+    // Verify if all daily notif is created
+    final allDailyNotif = await sl<NotificationPriceData>()
+        .allDailyNotificationIsCreated(crypto.id);
 
-      // Verify if all daily notif is created
-      final allDailyNotif = await sl<NotificationPriceData>()
-          .allDailyNotificationIsCreated(crypto.id);
+    if (allDailyNotif) {
+      alertOptions[alertOptions.length - 1] =
+          alertOptions[alertOptions.length - 1].copyWith(disable: true);
+      // Default value become option before schedular
+      param = alertOptions[2];
+    }
 
-      if (allDailyNotif) {
-        alertOptions[alertOptions.length - 1] =
-            alertOptions[alertOptions.length - 1].copyWith(disable: true);
-        // Default value become option before schedular
-        param = alertOptions[2];
-      }
+    // Get all option notification except schedular
+    final tmpAlertOptions = alertOptions
+        .where((alert) => alert.value != AlertValue.schedular)
+        .toList();
 
-      // Get all option notification except schedular
-      final tmpAlertOptions = alertOptions
-          .where((alert) => alert.value != AlertValue.schedular)
-          .toList();
+    // If all notification is created, we skip schedular option
+    // We want update, initial array is use
+    final selectAlertOptions = isUpdate ? alertOptions : tmpAlertOptions;
 
-      // If all notification is created, we skip schedular option
-      // We want update, initial array is use
-      final selectAlertOptions = isUpdate ? alertOptions  : tmpAlertOptions;
+    // notification exist in order to select AlertValue of this notification
+    final notifExist = notification == null;
 
-      // notification exist in order to select AlertValue of this notification
-      final notifExist = notification == null;
-
-      // Check if notification exist to activate update process
-      if (!notifExist) {
-        for (final option in selectAlertOptions) {
-          if (notification.typeNotification == option.value) {
-            param = option;
-          }
+    // Check if notification exist to activate update process
+    if (!notifExist) {
+      for (final option in selectAlertOptions) {
+        if (notification.typeNotification == option.value) {
+          param = option;
         }
       }
-      alertNotifierDefaultValue.value = param.value;
-    
+    }
+    alertNotifierDefaultValue.value = param.value;
   }
 
   @override
   Widget build(BuildContext context) {
-    final arguments =
-        ModalRoute.of(context)!.settings.arguments as ArgumentNotif;
+    final arguments = ModalRoute.of(context)!.settings.arguments as ArgumentNotif;
+    final isUpdate = arguments.isUpdate;
     final crypto = arguments.crypto;
 
     allDailyNotificationIsCreated(arguments);
@@ -162,6 +160,7 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
                   arguments: ArgumentsScreen(
                       crypto: crypto,
                       alert: param,
+                      isUpdate: isUpdate,
                       notification: arguments.notification)),
               title: "Next",
               raduis: 10,

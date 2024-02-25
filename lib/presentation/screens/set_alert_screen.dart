@@ -20,7 +20,9 @@ class SetAlertScreen extends StatefulWidget {
 class _SetAlertScreenState extends State<SetAlertScreen> {
   @override
   Widget build(BuildContext context) {
-    final arguments = ModalRoute.of(context)!.settings.arguments as ArgumentsScreen;
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as ArgumentsScreen;
+    final isUpdate = arguments.isUpdate;
     final crypto = arguments.crypto; // Crypto argument
     final alert = arguments.alert; // Alert argument
     final notification = arguments.notification; // Notification possible null
@@ -31,7 +33,7 @@ class _SetAlertScreenState extends State<SetAlertScreen> {
           leading: true,
         ),
         body: alert.value == AlertValue.schedular
-            ?  ScheduleWidget(alert: alert, crypto:crypto)
+            ? ScheduleWidget(alert: alert, crypto: crypto, isUpdate: isUpdate)
             : SetValueWidget(
                 alert: alert,
                 crypto: crypto,
