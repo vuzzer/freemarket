@@ -2,21 +2,21 @@ import 'dart:io';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/create_unique_id.dart';
+import 'package:defi/core/notifications/notification_controller.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 
 const priceType = "price";
 const percent_type = "percent";
 const scheduled_type = "scheduled";
 
-class AlertNotification {
+class SetupNotification {
   static String channelKeyPrice = "Event Price";
   static String channelKeyScheduled = "Event Scheduled";
   static String channelName = "Price Alert";
   final AwesomeNotifications awesomeNotifications;
 
-  AlertNotification(this.awesomeNotifications);
+  SetupNotification(this.awesomeNotifications);
 
   Future<void> initialize() async {
     await awesomeNotifications.initialize(
@@ -91,7 +91,7 @@ class AlertNotification {
   // Create to capture user action and notification created
   Future<void> createdStrem() async {
     awesomeNotifications.setListeners(
-        onNotificationCreatedMethod: onNotificationCreatedMethod,
+        onNotificationCreatedMethod: NotificationController.onNotificationCreatedMethod,
         onActionReceivedMethod: onActionReceivedMethod);
   }
 
@@ -100,7 +100,7 @@ class AlertNotification {
       ReceivedNotification receivedNotification) async {
 
   }
-
+  
   static Future<void> onActionReceivedMethod(
       ReceivedNotification receivedNotification) async {
     if (Platform.isIOS) {
@@ -111,37 +111,5 @@ class AlertNotification {
 
   void dispose() {
     awesomeNotifications.dispose();
-  }
-}
-
-
-class NotificationController {
-    /// Use this method to detect when a new notification or a schedule is created
-  @pragma("vm:entry-point")
-  static Future <void> onNotificationCreatedMethod(ReceivedNotification receivedNotification) async {
-    // Your code goes here
-  }
-
-  /// Use this method to detect every time that a new notification is displayed
-  @pragma("vm:entry-point")
-  static Future <void> onNotificationDisplayedMethod(ReceivedNotification receivedNotification) async {
-    // Your code goes here
-  }
-
-  /// Use this method to detect if the user dismissed a notification
-  @pragma("vm:entry-point")
-  static Future <void> onDismissActionReceivedMethod(ReceivedAction receivedAction) async {
-    // Your code goes here
-  }
-
-  /// Use this method to detect when the user taps on a notification or action button
-  @pragma("vm:entry-point")
-  static Future <void> onActionReceivedMethod(ReceivedAction receivedAction) async {
-    // Your code goes here
-
-    // Navigate into pages, avoiding to open the notification details page over another details page already opened
-/*     MyApp.navigatorKey.currentState?.pushNamedAndRemoveUntil('/notification-page',
-            (route) => (route.settings.name != '/notification-page') || route.isFirst,
-        arguments: receivedAction); */
   }
 }

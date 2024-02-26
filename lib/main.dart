@@ -1,4 +1,4 @@
-import 'package:defi/core/notifications/alert_notification.dart';
+import 'package:defi/core/notifications/setup_notification.dart';
 import 'package:defi/firebase_options.dart';
 import 'package:defi/get_routes.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
@@ -41,7 +41,7 @@ void main() async {
   await initializeDateFormatting(Intl.getCurrentLocale(), null);
 
   // Notification configuration
-  await sl<AlertNotification>().initialize();
+  await sl<SetupNotification>().initialize();
 
   // Running app
   runApp(MultiBlocProvider(providers: [
