@@ -1,5 +1,5 @@
 import 'package:defi/core/network/network_info.dart';
-import 'package:defi/core/notifications/alert_notification.dart';
+import 'package:defi/core/notifications/setup_notification.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/screens/home_screen.dart';
 import 'package:defi/presentation/widget/adaptive_dialog.dart';
@@ -21,7 +21,7 @@ class _StartedScreenState extends State<StartedScreen> {
   void initState() {
     CheckConnectivity.checkConnectivity();
 
-    sl<AlertNotification>().permissionNotification().then((isAllowed) {
+    sl<SetupNotification>().permissionNotification().then((isAllowed) {
       if (!isAllowed) {
         adaptiveDialog(context);
       }

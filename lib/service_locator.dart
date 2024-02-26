@@ -1,6 +1,6 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:defi/core/network/network_info.dart';
-import 'package:defi/core/notifications/alert_notification.dart';
+import 'package:defi/core/notifications/setup_notification.dart';
 import 'package:defi/data/datasource/crypto_info_source.dart';
 import 'package:defi/data/datasource/favoris_crypto_data.dart';
 import 'package:defi/data/datasource/token_market_datasource.dart';
@@ -104,7 +104,7 @@ Future<void> injectionBloc() async {
       () => NetworkInfoImpl(sl())); // For stream
 
   //! Notification
-  sl.registerLazySingleton(() => AlertNotification(sl())); // For notification
+  sl.registerLazySingleton(() => SetupNotification(sl())); // For notification
 
   //! External
   sl.registerLazySingleton(() => AwesomeNotifications());

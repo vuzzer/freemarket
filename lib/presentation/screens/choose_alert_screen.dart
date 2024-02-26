@@ -10,7 +10,7 @@ import 'package:defi/presentation/widget/button_widget.dart';
 import 'package:defi/presentation/widget/categorie_notification_widget.dart';
 import 'package:defi/service_locator.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
+
 
 class ChooseAlertScreen extends StatefulWidget {
   static const routeName = "/choose-currency";
