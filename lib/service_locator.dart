@@ -1,4 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:defi/core/background_service.dart';
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/core/notifications/setup_notification.dart';
 import 'package:defi/data/datasource/crypto_info_source.dart';
@@ -49,13 +50,12 @@ Future<void> setupLocator() async {
   sl.registerLazySingleton<ConfigurationService>(
       () => ConfigurationService(sharedPrefs));
 
-
   //INJECT WalletSetupHandler
   sl.registerLazySingleton<WalletSetupHandler>(
       () => WalletSetupHandler(addressService));
 }
 
-Future<void> injectionBloc() async {
+Future<void> configApp() async {
   //! Local Database
   await Hive.initFlutter();
 
@@ -97,7 +97,8 @@ Future<void> injectionBloc() async {
   sl.registerLazySingleton<FavorisCryptoData>(() => FavorisCryptoDataImpl());
   sl.registerLazySingleton<PrimaryCryptoData>(() => PrimaryCryptoDataImpl());
   // Notification based price data
-  sl.registerLazySingleton<NotificationPriceData>(() => NotificationPriceDataImpl());
+  sl.registerLazySingleton<NotificationPriceData>(
+      () => NotificationPriceDataImpl());
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(
@@ -110,4 +111,5 @@ Future<void> injectionBloc() async {
   sl.registerLazySingleton(() => AwesomeNotifications());
   sl.registerLazySingleton(() => InternetConnectionChecker());
   sl.registerLazySingleton(() => Dio());
+
 }

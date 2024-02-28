@@ -38,6 +38,11 @@ class _StartedScreenState extends State<StartedScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Register workmanager
+    /* Workmanager().registerOneOffTask(
+        "dev.flutter.background.workmanager.refresh", "test", // Ignored on iOS
+        initialDelay: const Duration(minutes: 30)); */
+
     return Scaffold(
         body: StreamBuilder(
             stream: CheckConnectivity.listener,
@@ -116,7 +121,7 @@ class _StartedScreenState extends State<StartedScreen> {
                                       .add(GetCryptoInfo());
 
                                   Navigator.of(context)
-                                      .pushNamed(HomeScreen.routeName); 
+                                      .pushNamed(HomeScreen.routeName);
                                 },
                                 style: ElevatedButton.styleFrom(
                                     padding: const EdgeInsets.symmetric(
