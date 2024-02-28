@@ -1,3 +1,4 @@
+import 'package:defi/core/background_service.dart';
 import 'package:defi/core/notifications/setup_notification.dart';
 import 'package:defi/firebase_options.dart';
 import 'package:defi/get_routes.dart';
@@ -25,14 +26,18 @@ void main() async {
 
   await setupLocator();
 
-  await injectionBloc();
+  // Create bloc and service
+  await configApp();
+
+  //! Background service
+  await BackgroundService.initialize();
 
   // Firebase configuration
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Dark therme for mobile app
+  // Dark therme for mobile app 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarBrightness: Brightness.dark,
   ));
