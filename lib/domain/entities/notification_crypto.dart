@@ -7,12 +7,14 @@ class NotificationCrypto extends Equatable {
   final double futurePrice;
   final AlertValue typeNotification;
   final double percent;
+  final String? image;
   final String? cron;
 
   const NotificationCrypto(
       {required this.idNotification,
       required this.cryptoId,
       required this.typeNotification,
+      required this.image,
       this.percent = 0,
       this.cron,
       this.futurePrice = 0});
@@ -25,6 +27,7 @@ class NotificationCrypto extends Equatable {
           'futurePrice': futurePrice,
           'percent': percent,
           'typeNotification': typeNotification.index,
+          'image': image,
           'cron': cron
         }
       ];

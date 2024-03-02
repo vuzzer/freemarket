@@ -93,6 +93,7 @@ NotificationCrypto createNotification(
           idNotification: id,
           cryptoId: crypto.id,
           typeNotification: typeAlert,
+          image:  crypto.image,
           futurePrice: futurePrice);
     case AlertValue.decrease:
       final percent = double.parse(value);
@@ -103,6 +104,7 @@ NotificationCrypto createNotification(
           cryptoId: crypto.id,
           typeNotification: typeAlert,
           percent: percent,
+          image: crypto.image,
           futurePrice: futurePrice);
     case AlertValue.increase:
       final percent = double.parse(value);
@@ -113,11 +115,13 @@ NotificationCrypto createNotification(
           cryptoId: crypto.id,
           typeNotification: typeAlert,
           percent: percent,
+           image: crypto.image,
           futurePrice: futurePrice);
     case AlertValue.schedular:
       return NotificationCrypto(
           idNotification: id,
           cryptoId: crypto.id,
+           image: crypto.image,
           typeNotification: typeAlert,
           cron: value,);
   }
@@ -133,6 +137,7 @@ NotificationCrypto updateNotification(
           idNotification: id,
           cryptoId: crypto.id,
           typeNotification: typeAlert,
+           image: crypto.image,
           futurePrice: futurePrice);
     case AlertValue.decrease:
       final percent = double.parse(value);
@@ -143,6 +148,7 @@ NotificationCrypto updateNotification(
           cryptoId: crypto.id,
           typeNotification: typeAlert,
           percent: percent,
+           image: crypto.image,
           futurePrice: futurePrice);
     case AlertValue.increase:
       final percent = double.parse(value);
@@ -153,11 +159,13 @@ NotificationCrypto updateNotification(
           cryptoId: crypto.id,
           typeNotification: typeAlert,
           percent: percent,
+           image: crypto.image,
           futurePrice: futurePrice);
     case AlertValue.schedular:
       return NotificationCrypto(
           idNotification: id,
           cryptoId: crypto.id,
+           image: crypto.image,
           typeNotification: typeAlert,
           cron: value,);
   }

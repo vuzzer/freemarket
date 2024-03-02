@@ -13,7 +13,7 @@ import 'package:defi/presentation/widget/switch_widget.dart';
 import 'package:defi/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
+
 
 class ScheduleWidget extends StatefulWidget {
   final CryptoInfo crypto;
@@ -164,6 +164,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
             idNotification: id,
             cryptoId: widget.crypto.id,
             cron: timeFrame.cron,
+            image: widget.crypto.image,
             typeNotification: widget.alert.value));
       }
     }
@@ -282,6 +283,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
             idNotification: id,
             cryptoId: widget.crypto.id,
             cron: timeFrame.cron,
+             image: widget.crypto.image,
             typeNotification: widget.alert.value));
       }
     }

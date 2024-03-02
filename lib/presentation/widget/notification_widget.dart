@@ -9,7 +9,7 @@ import 'package:defi/presentation/screens/choose_alert_screen.dart';
 import 'package:defi/presentation/widget/custom_bottom_sheet.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
+
 
 class NotificationWidget extends StatelessWidget {
   final NotificationCrypto notification;
