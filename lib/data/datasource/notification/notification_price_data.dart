@@ -96,6 +96,7 @@ class NotificationPriceDataImpl implements NotificationPriceData {
               percent: notif['percent'],
               typeNotification: AlertValue.values[notif['typeNotification']],
               cron: notif["cron"],
+               image: notif["image"],
               futurePrice: notif["futurePrice"]))
           .toList();
 
@@ -193,6 +194,7 @@ class NotificationPriceDataImpl implements NotificationPriceData {
               percent: notif['percent'],
               typeNotification: AlertValue.values[notif['typeNotification']],
               cron: notif["cron"],
+             image: notif["image"],
               futurePrice: notif["futurePrice"]))
           .toList();
 
@@ -232,6 +234,7 @@ class NotificationPriceDataImpl implements NotificationPriceData {
               percent: notif['percent'],
               typeNotification: AlertValue.values[notif['typeNotification']],
               cron: notif["cron"],
+              image: notif["image"],
               futurePrice: notif["futurePrice"]))
           .toList();
 

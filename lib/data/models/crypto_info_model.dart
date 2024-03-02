@@ -33,4 +33,5 @@ class CryptoInfoModel extends CryptoInfo {
         allTimeLowDate: DateTime.parse( crypto["ath_date"]));
   }
 
+
 }

@@ -4,6 +4,7 @@ import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/create_unique_id.dart';
 import 'package:defi/core/notifications/notification_controller.dart';
 import 'package:defi/domain/entities/crypto.dart';
+import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:flutter/material.dart';
 
 const priceType = "price";
@@ -52,22 +53,22 @@ class SetupNotification {
 
   // Creation of alert based price of token
   Future<void> createAlertNotificationBasedPrice(
-      CryptoInfo crypto, double price) async {
+      NotificationCrypto notification) async {
     final id = createUniqueId();
     await awesomeNotifications.createNotification(
         content: NotificationContent(
             id: id,
             channelKey: channelKeyPrice,
             color: blue,
-            title: "${crypto.name} prix",
-            body: "Le prix du ${crypto.name} a grimpé de 10%",
+            title: "${notification.cryptoId} prix",
+            body: "Le prix du ${notification.cryptoId} a grimpé de 10%",
             payload: {
               "typeNotif": priceType,
-              "cryptoId": crypto.id,
+              "cryptoId": notification.cryptoId,
               "id": id.toString(),
-              "price": price.toString()
+              "price": notification.futurePrice.toString()
             },
-            bigPicture: crypto.image,
+            bigPicture: notification.image,
             notificationLayout: NotificationLayout.BigPicture));
   }
 

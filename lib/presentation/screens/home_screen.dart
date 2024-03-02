@@ -1,11 +1,14 @@
+import 'package:defi/core/background_service.dart';
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:logger/logger.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/card_balance.dart';
 import '../widget/theta_body_widget.dart';
@@ -48,6 +51,15 @@ class _HomeScreenState extends State<HomeScreen> {
               return Scaffold(body: BlocBuilder<CryptosBloc, CryptoState>(
                   builder: (context, state) {
                 if (!state.loading) {
+                  // Transfer list of token data to background task
+                  //Logger().d(state.cryptos);
+                  final cryptoData = state.cryptos
+                      .map(
+                          (data) => {'id': data.id, 'price': data.currentPrice})
+                      .toList();
+                  FlutterBackgroundService().invoke(
+                      BackgroundService.notificationEvent, {'tokens': cryptoData});
+
                   // Primary Crypto to display on card
                   context
                       .read<PrimaryCryptoBloc>()
