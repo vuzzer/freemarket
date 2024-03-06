@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:defi/core/background_service.dart';
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
+import 'package:defi/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,16 +25,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late Timer timer;
   @override
   void initState() {
     CheckConnectivity.checkConnectivity();
     super.initState();
+    timer = Timer.periodic(const Duration(seconds: 60), (timer) {
+      refreshData();
+    });
   }
 
   @override
   void dispose() {
     CheckConnectivity.dispose();
+    timer.cancel();
     super.dispose();
+  }
+
+  void refreshData() {
+    sl<CryptosBloc>().add(const UpdateCryptoInfo());
   }
 
   @override
@@ -57,8 +69,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       .map(
                           (data) => {'id': data.id, 'price': data.currentPrice})
                       .toList();
+                  
+                  // background check notification
                   FlutterBackgroundService().invoke(
-                      BackgroundService.notificationEvent, {'tokens': cryptoData});
+                      BackgroundService.notificationEvent,
+                      {'tokens': cryptoData});
 
                   // Primary Crypto to display on card
                   context

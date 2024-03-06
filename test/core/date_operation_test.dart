@@ -9,5 +9,12 @@ void main() {
     final twelve = time.copyWith(hour: 13, minute: 0, second: 0);
     logger.d(twelve.hour == time.hour);
     logger.d(DateFormat.Hm().format(twelve));
+    logger.d(DateFormat.yMd().format(twelve));
+  });
+
+  test('Date should return this format `yMd` ', () async {
+    final time = DateTime.now();
+    logger.d(time.timeZoneName);
+    logger.d(DateFormat.yMd().format(time));
   });
 }

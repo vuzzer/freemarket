@@ -1,22 +1,12 @@
 part of 'cryptos_bloc.dart';
 
-class CryptosState extends Equatable {
-  const CryptosState();
-
-  @override
-  List<Object> get props => [];
+@freezed
+class CryptoState with _$CryptoState {
+  const factory CryptoState(
+      {required bool loading,
+      required List<CryptoInfo> cryptos,
+      required Either<CryptoError, Success> successOrFailure}) = _CryptoState;
+  factory CryptoState.initial() => CryptoState(
+      cryptos: [], successOrFailure: right(Success()), loading: false);
 }
 
-class CryptosInitial extends CryptosState {}
-
-class CryptosLoading extends CryptosState {}
-
-class CryptosLoaded extends CryptosState {
-  final List<CryptoInfo> cryptos;
-  const CryptosLoaded(this.cryptos);
-}
-
-class CryptosError extends CryptosState {
-  final String message;
-  const CryptosError(this.message);
-}

@@ -1,10 +1,7 @@
 part of 'cryptos_bloc.dart';
 
-class CryptosEvent extends Equatable {
-  const CryptosEvent();
-
-  @override
-  List<Object> get props => [];
+@freezed
+class CryptosEvent with _$CryptosEvent {
+  const factory CryptosEvent.getCryptoInfo() = GetCryptoInfo;
+  const factory CryptosEvent.updateCryptoInfo() = UpdateCryptoInfo;
 }
-
-class GetCryptoInfo extends CryptosEvent{}
