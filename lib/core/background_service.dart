@@ -122,7 +122,7 @@ class BackgroundService {
           await createHistoryNotification(notification.idNotification);
         }
       } else {
-        Logger().d('Notification not created');
+        //Logger().d('Notification not created');
       }
     }
   }

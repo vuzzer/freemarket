@@ -195,3 +195,284 @@ abstract class _CryptoState implements CryptoState {
   _$$CryptoStateImplCopyWith<_$CryptoStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$CryptosEvent {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getCryptoInfo,
+    required TResult Function() updateCryptoInfo,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getCryptoInfo,
+    TResult? Function()? updateCryptoInfo,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getCryptoInfo,
+    TResult Function()? updateCryptoInfo,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetCryptoInfo value) getCryptoInfo,
+    required TResult Function(UpdateCryptoInfo value) updateCryptoInfo,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetCryptoInfo value)? getCryptoInfo,
+    TResult? Function(UpdateCryptoInfo value)? updateCryptoInfo,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetCryptoInfo value)? getCryptoInfo,
+    TResult Function(UpdateCryptoInfo value)? updateCryptoInfo,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CryptosEventCopyWith<$Res> {
+  factory $CryptosEventCopyWith(
+          CryptosEvent value, $Res Function(CryptosEvent) then) =
+      _$CryptosEventCopyWithImpl<$Res, CryptosEvent>;
+}
+
+/// @nodoc
+class _$CryptosEventCopyWithImpl<$Res, $Val extends CryptosEvent>
+    implements $CryptosEventCopyWith<$Res> {
+  _$CryptosEventCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$GetCryptoInfoImplCopyWith<$Res> {
+  factory _$$GetCryptoInfoImplCopyWith(
+          _$GetCryptoInfoImpl value, $Res Function(_$GetCryptoInfoImpl) then) =
+      __$$GetCryptoInfoImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetCryptoInfoImplCopyWithImpl<$Res>
+    extends _$CryptosEventCopyWithImpl<$Res, _$GetCryptoInfoImpl>
+    implements _$$GetCryptoInfoImplCopyWith<$Res> {
+  __$$GetCryptoInfoImplCopyWithImpl(
+      _$GetCryptoInfoImpl _value, $Res Function(_$GetCryptoInfoImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$GetCryptoInfoImpl
+    with DiagnosticableTreeMixin
+    implements GetCryptoInfo {
+  const _$GetCryptoInfoImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'CryptosEvent.getCryptoInfo()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'CryptosEvent.getCryptoInfo'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GetCryptoInfoImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getCryptoInfo,
+    required TResult Function() updateCryptoInfo,
+  }) {
+    return getCryptoInfo();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getCryptoInfo,
+    TResult? Function()? updateCryptoInfo,
+  }) {
+    return getCryptoInfo?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getCryptoInfo,
+    TResult Function()? updateCryptoInfo,
+    required TResult orElse(),
+  }) {
+    if (getCryptoInfo != null) {
+      return getCryptoInfo();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetCryptoInfo value) getCryptoInfo,
+    required TResult Function(UpdateCryptoInfo value) updateCryptoInfo,
+  }) {
+    return getCryptoInfo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetCryptoInfo value)? getCryptoInfo,
+    TResult? Function(UpdateCryptoInfo value)? updateCryptoInfo,
+  }) {
+    return getCryptoInfo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetCryptoInfo value)? getCryptoInfo,
+    TResult Function(UpdateCryptoInfo value)? updateCryptoInfo,
+    required TResult orElse(),
+  }) {
+    if (getCryptoInfo != null) {
+      return getCryptoInfo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetCryptoInfo implements CryptosEvent {
+  const factory GetCryptoInfo() = _$GetCryptoInfoImpl;
+}
+
+/// @nodoc
+abstract class _$$UpdateCryptoInfoImplCopyWith<$Res> {
+  factory _$$UpdateCryptoInfoImplCopyWith(_$UpdateCryptoInfoImpl value,
+          $Res Function(_$UpdateCryptoInfoImpl) then) =
+      __$$UpdateCryptoInfoImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UpdateCryptoInfoImplCopyWithImpl<$Res>
+    extends _$CryptosEventCopyWithImpl<$Res, _$UpdateCryptoInfoImpl>
+    implements _$$UpdateCryptoInfoImplCopyWith<$Res> {
+  __$$UpdateCryptoInfoImplCopyWithImpl(_$UpdateCryptoInfoImpl _value,
+      $Res Function(_$UpdateCryptoInfoImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$UpdateCryptoInfoImpl
+    with DiagnosticableTreeMixin
+    implements UpdateCryptoInfo {
+  const _$UpdateCryptoInfoImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'CryptosEvent.updateCryptoInfo()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'CryptosEvent.updateCryptoInfo'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$UpdateCryptoInfoImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getCryptoInfo,
+    required TResult Function() updateCryptoInfo,
+  }) {
+    return updateCryptoInfo();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getCryptoInfo,
+    TResult? Function()? updateCryptoInfo,
+  }) {
+    return updateCryptoInfo?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getCryptoInfo,
+    TResult Function()? updateCryptoInfo,
+    required TResult orElse(),
+  }) {
+    if (updateCryptoInfo != null) {
+      return updateCryptoInfo();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetCryptoInfo value) getCryptoInfo,
+    required TResult Function(UpdateCryptoInfo value) updateCryptoInfo,
+  }) {
+    return updateCryptoInfo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetCryptoInfo value)? getCryptoInfo,
+    TResult? Function(UpdateCryptoInfo value)? updateCryptoInfo,
+  }) {
+    return updateCryptoInfo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetCryptoInfo value)? getCryptoInfo,
+    TResult Function(UpdateCryptoInfo value)? updateCryptoInfo,
+    required TResult orElse(),
+  }) {
+    if (updateCryptoInfo != null) {
+      return updateCryptoInfo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateCryptoInfo implements CryptosEvent {
+  const factory UpdateCryptoInfo() = _$UpdateCryptoInfoImpl;
+}

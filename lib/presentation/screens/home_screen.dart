@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void refreshData() {
-    sl<CryptosBloc>().add(GetCryptoInfo());
+    sl<CryptosBloc>().add(const UpdateCryptoInfo());
   }
 
   @override
@@ -69,6 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       .map(
                           (data) => {'id': data.id, 'price': data.currentPrice})
                       .toList();
+                  
+                  // background check notification
                   FlutterBackgroundService().invoke(
                       BackgroundService.notificationEvent,
                       {'tokens': cryptoData});
