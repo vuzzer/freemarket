@@ -28,7 +28,8 @@ class CardBalance extends StatelessWidget {
             if (!state.loading) {
               final price24h =
                   double.tryParse(state.crypto!.priceChange24h.toString());
-              final currentPrice = double.tryParse(state.crypto!.currentPrice.toString());
+              final currentPrice =
+                  double.tryParse(state.crypto!.currentPrice.toString());
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,15 +48,22 @@ class CardBalance extends StatelessWidget {
                   const SizedBox(
                     height: 60,
                   ),
-                  TweenAnimationBuilder(tween: Tween<double>(begin: 0, end: currentPrice ), duration: const Duration(seconds: 2), builder: (context, double value, child) =>
-                  AutoSizeText(
-                    "\$${value.toStringAsFixed(2)}",
-                    style: TextStyle(
-                        color: Theme.of(context).textTheme.headline3!.color,
-                        fontSize:
-                            Theme.of(context).textTheme.headline3!.fontSize,
-                        fontFamily: FontFamily.montSerrat),
-                  )),
+                  TweenAnimationBuilder(
+                      tween: Tween<double>(begin: 0, end: currentPrice),
+                      duration: const Duration(seconds: 2),
+                      builder: (context, double value, child) => AutoSizeText(
+                            "\$${value.toStringAsFixed(2)}",
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .headline3!
+                                    .color,
+                                fontSize: Theme.of(context)
+                                    .textTheme
+                                    .headline3!
+                                    .fontSize,
+                                fontFamily: FontFamily.montSerrat),
+                          )),
                   const SizedBox(
                     height: 2,
                   ),
@@ -72,7 +80,6 @@ class CardBalance extends StatelessWidget {
                               size: 30,
                             )
                           : const SizedBox.shrink(),
-                          
                       AutoSizeText(
                         "${state.crypto?.priceChange24h?.toStringAsFixed(2)}%",
                         style: TextStyle(

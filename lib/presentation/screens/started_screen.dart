@@ -113,7 +113,7 @@ class _StartedScreenState extends State<StartedScreen> {
                                   // Get Crpypto lists
                                   context
                                       .read<CryptosBloc>()
-                                      .add(GetCryptoInfo());
+                                      .add(const GetCryptoInfo());
 
                                   Navigator.of(context)
                                       .pushNamed(HomeScreen.routeName);

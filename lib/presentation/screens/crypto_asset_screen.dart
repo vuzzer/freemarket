@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/constants/app_font.dart';
@@ -8,6 +9,7 @@ import 'package:defi/presentation/widget/appbar_token_widget.dart';
 import 'package:defi/presentation/widget/bottom_titles_widget.dart';
 import 'package:defi/presentation/widget/crypto_tx_history_widget.dart';
 import 'package:defi/presentation/widget/line_chart_widget.dart';
+import 'package:defi/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -22,16 +24,31 @@ class CryptoAssetScreen extends StatefulWidget {
 }
 
 class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
+  late Timer timer;
   @override
   void initState() {
     CheckConnectivity.checkConnectivity();
+
+    // Refresh data
+    timer = Timer.periodic(const Duration(seconds: 60), (timer) async {
+      if(await CheckConnectivity.isConnected){
+        refreshData();
+      }
+      
+    });
+
     super.initState();
   }
 
   @override
   void dispose() {
     CheckConnectivity.dispose();
+    timer.cancel();
     super.dispose();
+  }
+
+  void refreshData() {
+    sl<CryptosBloc>().add(const UpdateCryptoInfo());
   }
 
   @override
@@ -61,7 +78,7 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                       backgroundColor: blue1,
                       appBar:
                           AppBarTokenWidget(title: crypto.id, crypto: crypto),
-                      body:SingleChildScrollView(
+                      body: SingleChildScrollView(
                         child: Column(
                           children: [
                             Container(

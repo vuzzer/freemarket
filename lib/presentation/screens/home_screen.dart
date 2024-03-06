@@ -1,11 +1,12 @@
 import 'dart:async';
-
 import 'package:defi/core/background_service.dart';
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/service_locator.dart';
+import 'package:defi/styles/font_color.dart';
+import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,8 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     CheckConnectivity.checkConnectivity();
     super.initState();
-    timer = Timer.periodic(const Duration(seconds: 60), (timer) {
-      refreshData();
+    timer = Timer.periodic(const Duration(seconds: 60), (timer) async {
+      if (await CheckConnectivity.isConnected) {
+        refreshData();
+      }
     });
   }
 
@@ -69,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       .map(
                           (data) => {'id': data.id, 'price': data.currentPrice})
                       .toList();
-                  
+
                   // background check notification
                   FlutterBackgroundService().invoke(
                       BackgroundService.notificationEvent,
@@ -88,26 +91,49 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         height: (kFontSizeUnit * 5).h,
                       ),
-                      const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 18),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Icon(
-                                Icons.notifications,
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              // Icons.dark_mode
-                              Icon(
-                                Icons.light_mode,
-                                color: Colors.white,
-                                size: 30,
-                              )
-                            ],
-                          )),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 18),
+                          child: Stack(children: [
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Icon(
+                                  Icons.notifications,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                // Icons.dark_mode
+                                Icon(
+                                  Icons.light_mode,
+                                  color: Colors.white,
+                                  size: 30,
+                                )
+                              ],
+                            ),
+                            Positioned(
+                                bottom: 12,
+                                right: 35,
+                                child: Container(
+                                  padding: const EdgeInsets.only(bottom: 2),
+                                  width: 30,
+                                  decoration: const BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      color: FontColor.red),
+                                  child: Align(
+                                      child: Text(
+                                    '+99',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: FontFamily.raleway,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  )),
+                                ))
+                          ])),
                       const SizedBox(
                         height: 10,
                       ),
