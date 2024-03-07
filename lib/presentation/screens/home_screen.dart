@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:defi/core/background_service.dart';
+import 'package:defi/core/hive_box_name.dart';
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
 import '../../helpers/crypto_symbols.dart';
@@ -30,12 +32,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     CheckConnectivity.checkConnectivity();
-    super.initState();
+    Hive.openBox(HiveBoxName.countNotificationBox);
     timer = Timer.periodic(const Duration(seconds: 60), (timer) async {
       if (await CheckConnectivity.isConnected) {
         refreshData();
       }
     });
+    super.initState();
   }
 
   @override
@@ -112,27 +115,39 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )
                               ],
                             ),
-                            Positioned(
-                                bottom: 12,
-                                right: 35,
-                                child: Container(
-                                  padding: const EdgeInsets.only(bottom: 2),
-                                  width: 30,
-                                  decoration: const BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      color: FontColor.red),
-                                  child: Align(
-                                      child: Text(
-                                    '+99',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: FontFamily.raleway,
-                                      fontWeight: FontWeight.bold
-                                    ),
-                                  )),
-                                ))
+                            // Display notification create but not read
+                            ValueListenableBuilder<Box>(
+                                valueListenable:
+                                    Hive.box(HiveBoxName.countNotificationBox)
+                                        .listenable(keys: ['activeNotification']),
+                                builder: (context, box, widget) {
+                                  int numberActiveNotification = box.get('activeNotification') ?? 0;
+                                  
+                                  return numberActiveNotification > 0
+                                      ? Positioned(
+                                          bottom: 12,
+                                          right: 35,
+                                          child: Container(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 2),
+                                            width: 30,
+                                            decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10)),
+                                                color: FontColor.red),
+                                            child: Align(
+                                                child: Text(
+                                              '$numberActiveNotification',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily:
+                                                      FontFamily.raleway,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                          ))
+                                      : const SizedBox.shrink();
+                                })
                           ])),
                       const SizedBox(
                         height: 10,

@@ -49,7 +49,7 @@ class CardBalance extends StatelessWidget {
                     height: 60,
                   ),
                   TweenAnimationBuilder(
-                      tween: Tween<double>(begin: 0, end: currentPrice),
+                      tween: Tween<double>(begin: 68000, end: currentPrice),
                       duration: const Duration(seconds: 2),
                       builder: (context, double value, child) => AutoSizeText(
                             "\$${value.toStringAsFixed(2)}",
