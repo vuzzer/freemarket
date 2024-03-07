@@ -2,8 +2,11 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:defi/core/enum.dart';
+import 'package:defi/core/hive_box_name.dart';
 import 'package:defi/core/notifications/setup_notification.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
+import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
+import 'package:defi/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
@@ -36,7 +39,11 @@ class BackgroundService {
   static void onStart(ServiceInstance instance) async {
     DartPluginRegistrant.ensureInitialized();
 
+    // Initialization of Hive Flutter
     await Hive.initFlutter();
+    /* var boxHistoryNotification =
+        await Hive.openBox(HiveBoxName.notificationHistoryBox);
+    boxHistoryNotification.clear(); */
 
     // Android configuration
     if (instance is AndroidServiceInstance) {
@@ -59,8 +66,9 @@ class BackgroundService {
     DartPluginRegistrant.ensureInitialized();
     Logger().d('Background activate');
 
-    //TODO : create process to verify if notification can be created
-
+    //TODO1 : create process to verify if notification can be created
+    //TODO2 : Create Scheduled notification
+    
     // Listen to fetch data crypto
     instance.on(notificationEvent).listen((event) async {
       List tokensData = event!['tokens'];
@@ -96,7 +104,6 @@ class BackgroundService {
             notification.typeNotification != AlertValue.schedular)
         .toList();
 
-
     // create notification
     for (var notification in notificationNotScheduled) {
       final cryptoCurrentPrice = cryptoMarketPrice
@@ -112,9 +119,9 @@ class BackgroundService {
         final createdThisDay =
             await notificationIsTriggerThisDay(notification.idNotification);
         if (!createdThisDay) {
-          
           // Display notification to screen
-          if(await configNotification.awesomeNotifications.isNotificationAllowed() ){
+          if (await configNotification.awesomeNotifications
+              .isNotificationAllowed()) {
             configNotification.createAlertNotificationBasedPrice(notification);
           }
 
@@ -128,27 +135,41 @@ class BackgroundService {
   }
 
   static Future<bool> notificationIsTriggerThisDay(int idNotification) async {
-    var boxHistoryNotification = await Hive.openBox('notificationHistoryBox');
+    var boxHistoryNotification =
+        await Hive.openBox(HiveBoxName.notificationHistoryBox);
     List history = await boxHistoryNotification.get(idNotification) ?? [];
     await boxHistoryNotification.close();
 
     if (history.isNotEmpty) {
       // Format date is y/M/d
       final currentDate = DateFormat.yMd().format(DateTime.now());
-      final lastNotificationDate = DateFormat.yMd().format(history.last);
+      final lastNotificationDate =
+          DateFormat.yMd().format(history.last['date']);
       return currentDate == lastNotificationDate;
     }
     return false;
   }
 
   static Future<void> createHistoryNotification(int idNotification) async {
-    var boxHistoryNotification = await Hive.openBox('notificationHistoryBox');
+    var boxHistoryNotification =
+        await Hive.openBox(HiveBoxName.notificationHistoryBox);
     List history = await boxHistoryNotification.get(idNotification) ?? [];
-
-    history.add(DateTime.now());
 
     // insert to box
     boxHistoryNotification.put(idNotification, history);
+
+    //Update Notification trigger not read
+    int numberActiveNotification = 0;
+    for (var history in boxHistoryNotification.values) {
+      for (var logs in history) {
+        if (!logs['open']) {
+          numberActiveNotification += 1;
+        }
+      }
+    }
+    var boxCountNotificationBox =
+        await Hive.openBox(HiveBoxName.countNotificationBox);
+    boxCountNotificationBox.put('activeNotification', numberActiveNotification);
 
     await boxHistoryNotification.close();
   }
