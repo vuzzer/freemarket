@@ -43,6 +43,7 @@ class ActiveNotificationDataImpl implements ActiveNotificationData {
     await boxCountNotificationBox.close();
     await boxHistoryNotification.close();
 
+
     return numberActiveNotification;
   }
 }
