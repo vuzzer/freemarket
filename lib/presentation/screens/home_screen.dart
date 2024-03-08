@@ -37,6 +37,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     CheckConnectivity.checkConnectivity();
     Hive.openBox(HiveBoxName.countNotificationBox);
+
+    // Background check notification
+    flutterBackgroundService.invoke(BackgroundService.notificationEvent, {'tokens': []});
+
     timer = Timer.periodic(const Duration(seconds: 60), (timer) async {
       if (await CheckConnectivity.isConnected) {
         refreshData();
