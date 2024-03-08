@@ -2,6 +2,7 @@ import 'package:defi/core/background_service.dart';
 import 'package:defi/core/notifications/setup_notification.dart';
 import 'package:defi/firebase_options.dart';
 import 'package:defi/get_routes.dart';
+import 'package:defi/presentation/blocs/active-notification/active_notification_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
@@ -52,6 +53,7 @@ void main() async {
   runApp(MultiBlocProvider(providers: [
     Provider(create: (context) => NetworkProvider()),
     BlocProvider(create: (context) => sl<MarketTokenBloc>()),
+    BlocProvider(create: (context) => sl<ActiveNotificationBloc>()),
     BlocProvider(create: (context) => sl<CryptosBloc>()),
     BlocProvider(create: (context) => sl<FavorisBloc>()),
     BlocProvider(create: (context) => sl<NotificationPriceBloc>()),

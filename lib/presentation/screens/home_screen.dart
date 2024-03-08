@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:defi/core/background_service.dart';
 import 'package:defi/core/hive_box_name.dart';
 import 'package:defi/core/network/network_info.dart';
+import 'package:defi/presentation/blocs/active-notification/active_notification_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
@@ -29,6 +30,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late Timer timer;
+  ValueNotifier<int> activeNotificationNotifier = ValueNotifier(0);
+  FlutterBackgroundService flutterBackgroundService =
+      FlutterBackgroundService();
   @override
   void initState() {
     CheckConnectivity.checkConnectivity();
@@ -38,6 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
         refreshData();
       }
     });
+
+    flutterBackgroundService.on('count').listen((event) {
+      activeNotificationNotifier.value = event!['count'];
+    });
+
     super.initState();
   }
 
@@ -50,6 +59,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void refreshData() {
     sl<CryptosBloc>().add(const UpdateCryptoInfo());
+    final cryptoData = sl<CryptosBloc>()
+        .state
+        .cryptos
+        .map((data) => {'id': data.id, 'price': data.currentPrice})
+        .toList();
+
+    // background check notification
+    flutterBackgroundService
+        .invoke(BackgroundService.notificationEvent, {'tokens': cryptoData});
   }
 
   @override
@@ -69,17 +87,6 @@ class _HomeScreenState extends State<HomeScreen> {
               return Scaffold(body: BlocBuilder<CryptosBloc, CryptoState>(
                   builder: (context, state) {
                 if (!state.loading) {
-                  // Transfer list of token data to background task
-                  //Logger().d(state.cryptos);
-                  final cryptoData = state.cryptos
-                      .map(
-                          (data) => {'id': data.id, 'price': data.currentPrice})
-                      .toList();
-
-                  // background check notification
-                  FlutterBackgroundService().invoke(
-                      BackgroundService.notificationEvent,
-                      {'tokens': cryptoData});
 
                   // Primary Crypto to display on card
                   context
@@ -116,38 +123,36 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                             // Display notification create but not read
-                            ValueListenableBuilder<Box>(
-                                valueListenable:
-                                    Hive.box(HiveBoxName.countNotificationBox)
-                                        .listenable(keys: ['activeNotification']),
-                                builder: (context, box, widget) {
-                                  int numberActiveNotification = box.get('activeNotification') ?? 0;
-                                  
-                                  return numberActiveNotification > 0
-                                      ? Positioned(
-                                          bottom: 12,
-                                          right: 35,
-                                          child: Container(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 2),
-                                            width: 30,
-                                            decoration: const BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10)),
-                                                color: FontColor.red),
-                                            child: Align(
-                                                child: Text(
-                                              '$numberActiveNotification',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily:
-                                                      FontFamily.raleway,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                          ))
-                                      : const SizedBox.shrink();
-                                })
+                            ValueListenableBuilder(
+                              valueListenable: activeNotificationNotifier,
+                              builder: (context, value, child) {
+                                int countNotification =
+                                    activeNotificationNotifier.value;
+                                return countNotification > 0
+                                    ? Positioned(
+                                        bottom: 12,
+                                        right: 35,
+                                        child: Container(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 2),
+                                          width: 30,
+                                          decoration: const BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              color: FontColor.red),
+                                          child: Align(
+                                              child: Text(
+                                            '$countNotification',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: FontFamily.raleway,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                        ))
+                                    : const SizedBox.shrink();
+                              },
+                            )
                           ])),
                       const SizedBox(
                         height: 10,

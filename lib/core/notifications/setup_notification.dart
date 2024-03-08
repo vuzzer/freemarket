@@ -54,6 +54,7 @@ class SetupNotification {
   // Creation of alert based price of token
   Future<void> createAlertNotificationBasedPrice(
       NotificationCrypto notification) async {
+
     final id = createUniqueId();
     await awesomeNotifications.createNotification(
         content: NotificationContent(
