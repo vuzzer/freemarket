@@ -9,6 +9,7 @@ import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/presentation/provider/network_provider.dart';
+import 'package:defi/presentation/screens/notification_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -79,7 +80,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             child: MaterialApp(
-                title: 'Flutter Demo',
+                title: 'Freemarket',
                 debugShowCheckedModeBanner: false,
                 theme: ThemeData(
                     primarySwatch: Colors.blue,
@@ -101,6 +102,7 @@ class MyApp extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
                         // For token price details
+                        bodySmall: const TextStyle(color: Colors.white),
                         displayMedium: TextStyle(
                             color: Colors.grey.withOpacity(0.6),
                             fontSize: 20,

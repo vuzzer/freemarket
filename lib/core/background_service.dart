@@ -33,7 +33,6 @@ class BackgroundService {
             AndroidConfiguration(onStart: onStart, isForegroundMode: true));
   }
 
-
   // Foreground task runner Ios|Android
   @pragma('vm:entry-point')
   static void onStart(ServiceInstance instance) async {
@@ -59,7 +58,6 @@ class BackgroundService {
           await Hive.openBox(HiveBoxName.countNotificationBox);
       int numberActiveNotification =
           boxCountNotificationBox.get('activeNotification') ?? 0;
-      Logger().d('number notification $numberActiveNotification');
       instance.invoke('count', {'count': numberActiveNotification});
     });
   }
