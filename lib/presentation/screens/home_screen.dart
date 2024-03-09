@@ -2,10 +2,10 @@ import 'dart:async';
 import 'package:defi/core/background_service.dart';
 import 'package:defi/core/hive_box_name.dart';
 import 'package:defi/core/network/network_info.dart';
-import 'package:defi/presentation/blocs/active-notification/active_notification_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
+import 'package:defi/presentation/screens/notification_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_color.dart';
 import 'package:defi/styles/font_family.dart';
@@ -39,7 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Hive.openBox(HiveBoxName.countNotificationBox);
 
     // Background check notification
-    flutterBackgroundService.invoke(BackgroundService.notificationEvent, {'tokens': []});
+    flutterBackgroundService
+        .invoke(BackgroundService.notificationEvent, {'tokens': []});
 
     timer = Timer.periodic(const Duration(seconds: 60), (timer) async {
       if (await CheckConnectivity.isConnected) {
@@ -91,7 +92,6 @@ class _HomeScreenState extends State<HomeScreen> {
               return Scaffold(body: BlocBuilder<CryptosBloc, CryptoState>(
                   builder: (context, state) {
                 if (!state.loading) {
-
                   // Primary Crypto to display on card
                   context
                       .read<PrimaryCryptoBloc>()
@@ -108,18 +108,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 18),
                           child: Stack(children: [
-                            const Row(
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Icon(
-                                  Icons.notifications,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 20,
+                                IconButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pushNamed(
+                                          NotificationScreen.routeName);
+                                    },
+                                    splashRadius: 20,
+                                    padding: EdgeInsets.zero,
+                                    icon: const Icon(
+                                      Icons.notifications,
+                                      color: Colors.white,
+                                    )),
+                                const SizedBox(
+                                  width: 12,
                                 ),
                                 // Icons.dark_mode
-                                Icon(
+                                const Icon(
                                   Icons.light_mode,
                                   color: Colors.white,
                                   size: 30,
@@ -134,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     activeNotificationNotifier.value;
                                 return countNotification > 0
                                     ? Positioned(
-                                        bottom: 12,
+                                        bottom: 19,
                                         right: 35,
                                         child: Container(
                                           padding:
