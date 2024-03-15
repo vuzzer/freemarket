@@ -73,19 +73,6 @@ class SetupNotification {
             notificationLayout: NotificationLayout.BigPicture));
   }
 
-    // Creation of alert based price of token
-  Future<void> test() async {
-    final id = createUniqueId();
-    await awesomeNotifications.createNotification(
-        content: NotificationContent(
-            id: id,
-            channelKey: channelKeyPrice,
-            color: blue,
-            title: "Bitcoin prix",
-            body: "Le prix du 1000 a grimpé de 10%",
-            notificationLayout: NotificationLayout.BigPicture));
-  }
-
   // Create alert scheduled
   Future<void> createAlertNotificationScheduled(CryptoInfo crypto) async {
 

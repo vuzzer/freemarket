@@ -138,6 +138,8 @@ class BackgroundService {
     }
   }
 
+  
+
   // Check if notification has already triggered this day
   static Future<bool> notificationIsTriggerThisDay(int idNotification) async {
     var boxHistoryNotification =

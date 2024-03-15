@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:defi/core/background_service.dart';
+import 'package:defi/core/background/background_service.dart';
 import 'package:defi/core/hive_box_name.dart';
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
