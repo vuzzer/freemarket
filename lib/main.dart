@@ -1,4 +1,4 @@
-import 'package:defi/core/background_service.dart';
+import 'package:defi/core/background/background_service.dart';
 import 'package:defi/core/notifications/setup_notification.dart';
 import 'package:defi/firebase_options.dart';
 import 'package:defi/get_routes.dart';
@@ -9,7 +9,6 @@ import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/presentation/provider/network_provider.dart';
-import 'package:defi/presentation/screens/notification_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:firebase_core/firebase_core.dart';
