@@ -2,6 +2,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/core/hive_box_name.dart';
 import 'package:defi/core/notifications/setup_notification.dart';
+import 'package:defi/data/datasource/notification/notification_price_data.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:hive/hive.dart';
@@ -90,6 +91,11 @@ class BackgroundTask {
         await Hive.openBox(HiveBoxName.notificationHistoryBox);
     List history = await boxHistoryNotification.get(idNotification) ?? [];
 
+    // Get
+    final notificationRegistered =
+        await NotificationPriceDataImpl().getNotificationById(idNotification);
+    var objNotification = notificationRegistered.props[0];
+
     // Open box that hold all notification triggered
     var allNotificationTriggeredBox =
         await Hive.openBox(HiveBoxName.allNotificationTriggeredBox);
@@ -101,9 +107,12 @@ class BackgroundTask {
     history.add({'date': createdAt, 'open': false});
     boxHistoryNotification.put(idNotification, history);
 
+    // add date and notification statut
+    objNotification['date'] = createdAt;
+    objNotification['open'] = false;
+    
     // add notification to history
-    allNotificationTriggered
-        .add({'id': idNotification, 'date': createdAt, 'open': false});
+    allNotificationTriggered.add(objNotification);
     allNotificationTriggeredBox.put('all', allNotificationTriggered);
 
     //Update number of notification active

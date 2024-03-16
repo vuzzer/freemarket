@@ -29,6 +29,7 @@ import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
+import 'package:defi/presentation/blocs/notification-triggered/notification_triggered_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/services/address_service.dart';
 import 'package:defi/services/configuration_service.dart';
@@ -73,6 +74,7 @@ Future<void> configApp() async {
       notificationPriceUsecase: sl())); // for notification based price
   sl.registerLazySingleton(
       () => ActiveNotificationBloc(activeNotificationUsecase: sl()));
+  sl.registerLazySingleton(() => NotificationTriggeredBloc());
 
   //! Usecases
   sl.registerLazySingleton(() => ClientProfilUsecase(sl()));

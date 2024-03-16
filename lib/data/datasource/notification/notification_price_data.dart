@@ -11,6 +11,9 @@ abstract class NotificationPriceData {
       NotificationCrypto createNotification);
   Future<bool> deleteNotificationPrice(int idNotification);
   Future<List<NotificationCrypto>> getNotificationPrice(String cryptoId);
+
+  Future<NotificationCrypto> getNotificationById(int idNotification);
+
   Future<bool> updateNotification(NotificationCrypto createNotification);
   Future<bool> createNotificationFromList(
       List<NotificationCrypto> createNotification);
@@ -80,6 +83,40 @@ class NotificationPriceDataImpl implements NotificationPriceData {
   }
 
   @override
+  Future<NotificationCrypto> getNotificationById(int idNotification) async {
+    try {
+      // Open Box favoris
+      var box = await Hive.openLazyBox(boxFavoris);
+
+      // Get list of favoris
+      List notifications = await box.get(boxKey) ?? [];
+
+      // Remove notification of idNotification
+      final notif = notifications
+          .where((notification) =>
+              notification["idNotification"] == idNotification)
+          .toList()[0];
+
+      final notificationCrypto = NotificationCrypto(
+          idNotification: notif["idNotification"],
+          cryptoId: notif["cryptoId"],
+          percent: notif['percent'],
+          typeNotification: AlertValue.values[notif['typeNotification']],
+          cron: notif["cron"],
+          image: notif["image"],
+          futurePrice: notif["futurePrice"]);
+
+      // Close box and
+      await box.close();
+
+      return notificationCrypto;
+    } catch (e) {
+      Logger().d(e.toString());
+      throw GetNotificationException();
+    }
+  }
+
+  @override
   Future<List<NotificationCrypto>> getNotificationPrice(String cryptoId) async {
     // Open Box favoris
     var box = await Hive.openLazyBox(boxFavoris);
@@ -96,7 +133,7 @@ class NotificationPriceDataImpl implements NotificationPriceData {
               percent: notif['percent'],
               typeNotification: AlertValue.values[notif['typeNotification']],
               cron: notif["cron"],
-               image: notif["image"],
+              image: notif["image"],
               futurePrice: notif["futurePrice"]))
           .toList();
 
@@ -194,7 +231,7 @@ class NotificationPriceDataImpl implements NotificationPriceData {
               percent: notif['percent'],
               typeNotification: AlertValue.values[notif['typeNotification']],
               cron: notif["cron"],
-             image: notif["image"],
+              image: notif["image"],
               futurePrice: notif["futurePrice"]))
           .toList();
 
