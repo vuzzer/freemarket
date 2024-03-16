@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 
 class BackgroundTask {
   static final configNotification = SetupNotification(AwesomeNotifications());
-  
+
   // Create notification not scheduled
   static Future<void> createNotificationNotScheduled(
       List cryptoMarketPrice, ServiceInstance instance) async {
@@ -66,8 +66,6 @@ class BackgroundTask {
     }
   }
 
-  
-
   // Check if notification has already triggered this day
   static Future<bool> notificationIsTriggerThisDay(int idNotification) async {
     var boxHistoryNotification =
@@ -92,9 +90,21 @@ class BackgroundTask {
         await Hive.openBox(HiveBoxName.notificationHistoryBox);
     List history = await boxHistoryNotification.get(idNotification) ?? [];
 
+    // Open box that hold all notification triggered
+    var allNotificationTriggeredBox =
+        await Hive.openBox(HiveBoxName.allNotificationTriggeredBox);
+    List allNotificationTriggered =
+        await allNotificationTriggeredBox.get('all') ?? [];
+
     // insert to box
-    history.add({'date': DateTime.now(), 'open': false});
+    final createdAt = DateTime.now();
+    history.add({'date': createdAt, 'open': false});
     boxHistoryNotification.put(idNotification, history);
+
+    // add notification to history
+    allNotificationTriggered
+        .add({'id': idNotification, 'date': createdAt, 'open': false});
+    allNotificationTriggeredBox.put('all', allNotificationTriggered);
 
     //Update number of notification active
     int numberActiveNotification = 0;
@@ -114,5 +124,6 @@ class BackgroundTask {
 
     await boxCountNotificationBox.close();
     await boxHistoryNotification.close();
+    await allNotificationTriggeredBox.close();
   }
 }

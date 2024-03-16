@@ -142,24 +142,32 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ? Positioned(
                                         bottom: 19,
                                         right: 35,
-                                        child: Container(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 2),
-                                          width: 30,
-                                          decoration: const BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
-                                              color: FontColor.red),
-                                          child: Align(
-                                              child: Text(
-                                            '$countNotification',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: FontFamily.raleway,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                        ))
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context).pushNamed(
+                                                  NotificationScreen.routeName);
+                                            },
+                                            child: Container(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 2),
+                                              width: 30,
+                                              decoration: const BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                  color: FontColor.red),
+                                              child: Align(
+                                                  child: Text(
+                                                '$countNotification',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily:
+                                                        FontFamily.raleway,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                            )))
                                     : const SizedBox.shrink();
                               },
                             )
