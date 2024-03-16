@@ -15,7 +15,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:logger/logger.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/card_balance.dart';
 import '../widget/theta_body_widget.dart';
@@ -143,24 +142,32 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ? Positioned(
                                         bottom: 19,
                                         right: 35,
-                                        child: Container(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 2),
-                                          width: 30,
-                                          decoration: const BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
-                                              color: FontColor.red),
-                                          child: Align(
-                                              child: Text(
-                                            '$countNotification',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: FontFamily.raleway,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                        ))
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context).pushNamed(
+                                                  NotificationScreen.routeName);
+                                            },
+                                            child: Container(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 2),
+                                              width: 30,
+                                              decoration: const BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                  color: FontColor.red),
+                                              child: Align(
+                                                  child: Text(
+                                                '$countNotification',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily:
+                                                        FontFamily.raleway,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                            )))
                                     : const SizedBox.shrink();
                               },
                             )

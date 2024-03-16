@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
+import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatelessWidget {
@@ -17,10 +18,12 @@ class NotificationScreen extends StatelessWidget {
       body: SafeArea(
           child: ListView.separated(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              separatorBuilder: (context, index) => Divider(
+              separatorBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Divider(
                     height: 0,
                     color: greyLight,
-                  ),
+                  )),
               itemCount: 2,
               itemBuilder: (context, index) {
                 return Material(
@@ -30,24 +33,45 @@ class NotificationScreen extends StatelessWidget {
                       splashColor: blueLight,
                       highlightColor: blueLight,
                       onTap: () {},
-                      child: const ListTile(
+                      child: ListTile(
                           title: Row(
                             children: [
-                              Icon(
-                                Icons.notification_add,
-                                color: Colors.white,
+                              const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 0),
+                  child: CircleAvatar(
+                    radius: 10,
+                    backgroundImage: NetworkImage("https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400"),
+                  ),
+                ),
+                              const SizedBox(
+                                width: 4,
                               ),
                               AutoSizeText(
                                 "Bitcoin",
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: FontFamily.montSerrat),
                               )
                             ],
                           ),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              AutoSizeText("Le bitcoin a atteint 5%"),
-                              AutoSizeText("03/08/2024 16:00")
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              AutoSizeText(
+                                "Le bitcoin a atteint 5%",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontFamily: FontFamily.montSerrat),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              AutoSizeText("03/08/2024 16:00",
+                                  style: TextStyle(
+                                      fontFamily: FontFamily.montSerrat))
                             ],
                           ))),
                 );
