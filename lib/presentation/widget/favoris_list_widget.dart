@@ -13,13 +13,13 @@ class FavorisListWidget extends StatelessWidget {
     final size = ScreenUtil();
 
     return BlocBuilder<FavorisBloc, FavorisState>(builder: (context, state) {
-      
       final favorisMap = state.favoris;
       if (favorisMap.isEmpty) {
         return const Center(child: Text("You have no favoris crypto"));
       }
-      final favorisList =
+      var favorisList =
           favorisMap.entries.map((crypto) => crypto.value).toList();
+      favorisList = List.from(favorisList.reversed);
       return ListView.separated(
           padding: const EdgeInsets.all(0),
           itemCount: favorisList.length,
@@ -35,5 +35,4 @@ class FavorisListWidget extends StatelessWidget {
               ));
     });
   }
-
 }
