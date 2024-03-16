@@ -7,7 +7,7 @@ import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
+import 'package:intl/intl.dart';
 
 class NotificationScreen extends StatefulWidget {
   static const routeName = "/notification";
@@ -18,11 +18,11 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
-
   @override
   Widget build(BuildContext context) {
-        // Get all notification
-    sl<NotificationTriggeredBloc>().add(const NotificationTriggeredEvent.getAll());
+    // Get all notification
+    sl<NotificationTriggeredBloc>()
+        .add(const NotificationTriggeredEvent.getAll());
     return Scaffold(
       appBar: const AppBarWidget(
         title: "Mes Notifications",
@@ -52,6 +52,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
             itemCount: state.all.length,
             itemBuilder: (context, index) {
               final triggered = state.all[index];
+              final date = DateFormat.yMd().format(triggered["date"]);
+              final time = DateFormat.Hm().format(triggered["date"]);
               return Material(
                 borderRadius: BorderRadius.circular(10),
                 color: blue1,
@@ -62,19 +64,20 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: ListTile(
                         title: Row(
                           children: [
-                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 0),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 0),
                               child: CircleAvatar(
                                 radius: 10,
-                                backgroundImage: NetworkImage(
-                                    triggered["image"]),
+                                backgroundImage:
+                                    NetworkImage(triggered["image"]),
                               ),
                             ),
                             const SizedBox(
                               width: 4,
                             ),
                             AutoSizeText(
-                              "Bitcoin",
+                              triggered["cryptoId"],
                               style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: FontFamily.montSerrat),
@@ -96,7 +99,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             const SizedBox(
                               height: 8,
                             ),
-                            AutoSizeText("03/08/2024 16:00",
+                            AutoSizeText("$date $time",
                                 style: TextStyle(
                                     fontFamily: FontFamily.montSerrat))
                           ],
