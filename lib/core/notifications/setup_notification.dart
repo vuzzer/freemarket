@@ -3,6 +3,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/create_unique_id.dart';
 import 'package:defi/core/notifications/notification_controller.dart';
+import 'package:defi/core/notifications/notification_message.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:flutter/material.dart';
@@ -54,15 +55,29 @@ class SetupNotification {
   // Creation of alert based price of token
   Future<void> createAlertNotificationBasedPrice(
       NotificationCrypto notification) async {
-
     final id = createUniqueId();
+
+    // title of notification
+    final header = NotificationMessage.header(
+        value: notification.typeNotification,
+        cryptoId: notification.cryptoId,
+        percent: notification.percent,
+        futurePrice: notification.futurePrice);
+
+    // body of notification
+    final body = NotificationMessage.body(
+        value: notification.typeNotification,
+        cryptoId: notification.cryptoId,
+        percent: notification.percent,
+        futurePrice: notification.futurePrice);
+
     await awesomeNotifications.createNotification(
         content: NotificationContent(
             id: id,
             channelKey: channelKeyPrice,
             color: blue,
-            title: "${notification.cryptoId} prix",
-            body: "Le prix du ${notification.cryptoId} a grimpé de 10%",
+            title: header,
+            body: body,
             payload: {
               "typeNotif": priceType,
               "cryptoId": notification.cryptoId,
@@ -75,7 +90,6 @@ class SetupNotification {
 
   // Create alert scheduled
   Future<void> createAlertNotificationScheduled(CryptoInfo crypto) async {
-
     await awesomeNotifications.createNotification(
       content: NotificationContent(
           id: createUniqueId(),
@@ -93,16 +107,15 @@ class SetupNotification {
   // Create to capture user action and notification created
   Future<void> createdStrem() async {
     awesomeNotifications.setListeners(
-        onNotificationCreatedMethod: NotificationController.onNotificationCreatedMethod,
+        onNotificationCreatedMethod:
+            NotificationController.onNotificationCreatedMethod,
         onActionReceivedMethod: onActionReceivedMethod);
   }
 
   // Callback when notification is created
   static Future<void> onNotificationCreatedMethod(
-      ReceivedNotification receivedNotification) async {
+      ReceivedNotification receivedNotification) async {}
 
-  }
-  
   static Future<void> onActionReceivedMethod(
       ReceivedNotification receivedNotification) async {
     if (Platform.isIOS) {

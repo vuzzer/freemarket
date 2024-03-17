@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
+import 'package:defi/core/enum.dart';
+import 'package:defi/core/notifications/notification_message.dart';
 import 'package:defi/presentation/blocs/notification-triggered/notification_triggered_bloc.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/loading_widget.dart';
@@ -54,6 +56,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
               final triggered = state.all[index];
               final date = DateFormat.yMd().format(triggered["date"]);
               final time = DateFormat.Hm().format(triggered["date"]);
+              final value = AlertValue.values[triggered["typeNotification"]];
+              final body = NotificationMessage.body(
+                  value: value,
+                  cryptoId: triggered["cryptoId"],
+                  percent: triggered["percent"],
+                  futurePrice: triggered["futurePrice"]);
+
+              final header =  NotificationMessage.header(
+                  value: value,
+                  cryptoId: triggered["cryptoId"],
+                  percent: triggered["percent"],
+                  futurePrice: triggered["futurePrice"]);
+
               return Material(
                 borderRadius: BorderRadius.circular(10),
                 color: blue1,
@@ -77,9 +92,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               width: 4,
                             ),
                             AutoSizeText(
-                              triggered["cryptoId"],
+                              header,
                               style: TextStyle(
                                   color: Colors.white,
+                                  fontWeight: FontWeight.bold,
                                   fontFamily: FontFamily.montSerrat),
                             )
                           ],
@@ -91,7 +107,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               height: 8,
                             ),
                             AutoSizeText(
-                              "Le bitcoin a atteint 5%",
+                              body,
                               overflow: TextOverflow.ellipsis,
                               style:
                                   TextStyle(fontFamily: FontFamily.montSerrat),
