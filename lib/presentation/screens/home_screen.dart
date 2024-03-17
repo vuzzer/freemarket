@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     flutterBackgroundService
         .invoke(BackgroundService.notificationEvent, {'tokens': []});
 
-    timer = Timer.periodic(const Duration(seconds: 60), (timer) async {
+    timer = Timer.periodic(const Duration(seconds: 60), (timer) async {        
       if (await CheckConnectivity.isConnected) {
         refreshData();
       }
