@@ -69,10 +69,10 @@ class BackgroundTask {
 
   // Check if notification has already triggered this day
   static Future<bool> notificationIsTriggerThisDay(int idNotification) async {
-    var boxHistoryNotification =
+    var historyNotificationBox =
         await Hive.openBox(HiveBoxName.notificationHistoryBox);
-    List history = await boxHistoryNotification.get(idNotification) ?? [];
-    await boxHistoryNotification.close();
+    List history = await historyNotificationBox.get(idNotification) ?? [];
+    await historyNotificationBox.close();
 
     if (history.isNotEmpty) {
       // Format date is y/M/d
@@ -87,11 +87,11 @@ class BackgroundTask {
   // Log notification triggered
   static Future<void> createHistoryNotification(
       int idNotification, ServiceInstance instance) async {
-    var boxHistoryNotification =
+    var historyNotificationBox =
         await Hive.openBox(HiveBoxName.notificationHistoryBox);
-    List history = await boxHistoryNotification.get(idNotification) ?? [];
+    List history = await historyNotificationBox.get(idNotification) ?? [];
 
-    // Get
+    // Get history of specific notification
     final notificationRegistered =
         await NotificationPriceDataImpl().getNotificationById(idNotification);
     var objNotification = notificationRegistered.props[0];
@@ -102,22 +102,22 @@ class BackgroundTask {
     List allNotificationTriggered =
         await allNotificationTriggeredBox.get('all') ?? [];
 
-    // insert to box
+    // insert to box for this specific notification
     final createdAt = DateTime.now();
     history.add({'date': createdAt, 'open': false});
-    boxHistoryNotification.put(idNotification, history);
+    historyNotificationBox.put(idNotification, history);
 
     // add date and notification statut
     objNotification['date'] = createdAt;
     objNotification['open'] = false;
-    
+
     // add notification to history
     allNotificationTriggered.add(objNotification);
     allNotificationTriggeredBox.put('all', allNotificationTriggered);
 
-    //Update number of notification active
+/*     //Update number of notification active
     int numberActiveNotification = 0;
-    for (var history in boxHistoryNotification.values) {
+    for (var history in historyNotificationBox.values) {
       for (var logs in history) {
         if (!logs['open']) {
           numberActiveNotification += 1;
@@ -131,8 +131,30 @@ class BackgroundTask {
     // Send number active notification to UI
     instance.invoke('count', {'count': numberActiveNotification});
 
-    await boxCountNotificationBox.close();
-    await boxHistoryNotification.close();
+    await boxCountNotificationBox.close(); */
+    await historyNotificationBox.close();
+    await allNotificationTriggeredBox.close();
+  }
+
+  static Future<void> clearBoxNotification() async {
+    // clean all notification history for notification_screen
+    var allNotificationTriggeredBox =
+        await Hive.openBox(HiveBoxName.allNotificationTriggeredBox);
+    await allNotificationTriggeredBox.clear();
+
+    // clean all notification triggered for specific notifications
+    var historyNotificationBox =
+        await Hive.openBox(HiveBoxName.notificationHistoryBox);
+    await historyNotificationBox.clear();
+
+    // clean count for notification
+    var countNotificationBox =
+        await Hive.openBox(HiveBoxName.countNotificationBox);
+    await countNotificationBox.clear();
+
+    //close box
+    await countNotificationBox.close();
+    await historyNotificationBox.close();
     await allNotificationTriggeredBox.close();
   }
 }

@@ -12,13 +12,13 @@ import 'package:logger/logger.dart';
 
 class BackgroundService {
   // Listen data fetch from UI
-  static const notificationEvent = "notification"; 
+  static const notificationEvent = "notification";
 
   // Name event that activate background mode for android
-  static const backgroundEvent ="background"; 
+  static const backgroundEvent = "background";
 
   // Name event that activate background mode for android
-  static const foregroundEvent ="forground"; 
+  static const foregroundEvent = "forground";
 
   static final service = FlutterBackgroundService();
 
@@ -27,7 +27,7 @@ class BackgroundService {
   static Future<void> initialize() async {
     // listen notification actions
     configNotification.createdStrem();
-    
+
     await service.configure(
         iosConfiguration: IosConfiguration(
             // auto start service
@@ -56,13 +56,22 @@ class BackgroundService {
     instance.on(notificationEvent).listen((event) async {
       List tokensData = event!['tokens'];
       if (tokensData.isNotEmpty) {
-        await BackgroundTask.createNotificationNotScheduled(tokensData, instance);
+        await BackgroundTask.createNotificationNotScheduled(
+            tokensData, instance);
       }
       // get number of notification to send to UI
-      var boxCountNotificationBox =
-          await Hive.openBox(HiveBoxName.countNotificationBox);
-      int numberActiveNotification =
-          boxCountNotificationBox.get('activeNotification') ?? 0;
+      var historyNotificationBox =
+          await Hive.openBox(HiveBoxName.notificationHistoryBox);
+      int numberActiveNotification = 0;
+      for (var history in historyNotificationBox.values) {
+        for (var logs in history) {
+          if (!logs['open']) {
+            numberActiveNotification += 1;
+          }
+        }
+      }
+      historyNotificationBox.close();
+
       instance.invoke('count', {'count': numberActiveNotification});
     });
   }
@@ -81,10 +90,10 @@ class BackgroundService {
     instance.on(notificationEvent).listen((event) async {
       List tokensData = event!['tokens'];
       if (tokensData.isNotEmpty) {
-        await BackgroundTask.createNotificationNotScheduled(tokensData, instance);
+        await BackgroundTask.createNotificationNotScheduled(
+            tokensData, instance);
       }
     });
     return true;
   }
-
 }

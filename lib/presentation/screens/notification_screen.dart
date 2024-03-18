@@ -3,6 +3,7 @@ import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/core/notifications/notification_message.dart';
 import 'package:defi/presentation/blocs/notification-triggered/notification_triggered_bloc.dart';
+import 'package:defi/presentation/screens/crypto_asset_screen.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/loading_widget.dart';
 import 'package:defi/service_locator.dart';
@@ -10,6 +11,7 @@ import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 
 class NotificationScreen extends StatefulWidget {
   static const routeName = "/notification";
@@ -63,7 +65,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   percent: triggered["percent"],
                   futurePrice: triggered["futurePrice"]);
 
-              final header =  NotificationMessage.header(
+              final header = NotificationMessage.header(
                   value: value,
                   cryptoId: triggered["cryptoId"],
                   percent: triggered["percent"],
@@ -71,11 +73,21 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
               return Material(
                 borderRadius: BorderRadius.circular(10),
-                color: blue1,
+                color: triggered["open"] ? Colors.transparent : blue1,
                 child: InkWell(
                     splashColor: blueLight,
                     highlightColor: blueLight,
-                    onTap: () {},
+                    onTap: () {
+                      // update specific notification
+                      context.read<NotificationTriggeredBloc>().add(
+                          NotificationTriggeredEvent.openNotification(
+                              triggered, index));
+
+                      // Change route
+                      Navigator.of(context).pushNamed(
+                          CryptoAssetScreen.routeName,
+                          arguments: triggered["cryptoId"]);
+                    },
                     child: ListTile(
                         title: Row(
                           children: [

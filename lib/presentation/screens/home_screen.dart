@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:defi/core/background/background_service.dart';
+import 'package:defi/core/background/background_task.dart';
 import 'package:defi/core/hive_box_name.dart';
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
@@ -37,11 +38,13 @@ class _HomeScreenState extends State<HomeScreen> {
     CheckConnectivity.checkConnectivity();
     Hive.openBox(HiveBoxName.countNotificationBox);
 
+    //BackgroundTask.clearBoxNotification();
+
     // Background check notification
     flutterBackgroundService
         .invoke(BackgroundService.notificationEvent, {'tokens': []});
 
-    timer = Timer.periodic(const Duration(seconds: 60), (timer) async {        
+    timer = Timer.periodic(const Duration(seconds: 60), (timer) async {
       if (await CheckConnectivity.isConnected) {
         refreshData();
       }
