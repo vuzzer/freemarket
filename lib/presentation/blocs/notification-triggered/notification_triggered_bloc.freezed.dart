@@ -19,32 +19,39 @@ mixin _$NotificationTriggeredEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
+    required TResult Function(Map<dynamic, dynamic> data, int index)
+        openNotification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
+    TResult? Function(Map<dynamic, dynamic> data, int index)? openNotification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
+    TResult Function(Map<dynamic, dynamic> data, int index)? openNotification,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetAll value) getAll,
+    required TResult Function(OpenNotification value) openNotification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetAll value)? getAll,
+    TResult? Function(OpenNotification value)? openNotification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetAll value)? getAll,
+    TResult Function(OpenNotification value)? openNotification,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -109,6 +116,8 @@ class _$GetAllImpl implements GetAll {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAll,
+    required TResult Function(Map<dynamic, dynamic> data, int index)
+        openNotification,
   }) {
     return getAll();
   }
@@ -117,6 +126,7 @@ class _$GetAllImpl implements GetAll {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAll,
+    TResult? Function(Map<dynamic, dynamic> data, int index)? openNotification,
   }) {
     return getAll?.call();
   }
@@ -125,6 +135,7 @@ class _$GetAllImpl implements GetAll {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAll,
+    TResult Function(Map<dynamic, dynamic> data, int index)? openNotification,
     required TResult orElse(),
   }) {
     if (getAll != null) {
@@ -137,6 +148,7 @@ class _$GetAllImpl implements GetAll {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetAll value) getAll,
+    required TResult Function(OpenNotification value) openNotification,
   }) {
     return getAll(this);
   }
@@ -145,6 +157,7 @@ class _$GetAllImpl implements GetAll {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetAll value)? getAll,
+    TResult? Function(OpenNotification value)? openNotification,
   }) {
     return getAll?.call(this);
   }
@@ -153,6 +166,7 @@ class _$GetAllImpl implements GetAll {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetAll value)? getAll,
+    TResult Function(OpenNotification value)? openNotification,
     required TResult orElse(),
   }) {
     if (getAll != null) {
@@ -164,6 +178,161 @@ class _$GetAllImpl implements GetAll {
 
 abstract class GetAll implements NotificationTriggeredEvent {
   const factory GetAll() = _$GetAllImpl;
+}
+
+/// @nodoc
+abstract class _$$OpenNotificationImplCopyWith<$Res> {
+  factory _$$OpenNotificationImplCopyWith(_$OpenNotificationImpl value,
+          $Res Function(_$OpenNotificationImpl) then) =
+      __$$OpenNotificationImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Map<dynamic, dynamic> data, int index});
+}
+
+/// @nodoc
+class __$$OpenNotificationImplCopyWithImpl<$Res>
+    extends _$NotificationTriggeredEventCopyWithImpl<$Res,
+        _$OpenNotificationImpl>
+    implements _$$OpenNotificationImplCopyWith<$Res> {
+  __$$OpenNotificationImplCopyWithImpl(_$OpenNotificationImpl _value,
+      $Res Function(_$OpenNotificationImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+    Object? index = null,
+  }) {
+    return _then(_$OpenNotificationImpl(
+      null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Map<dynamic, dynamic>,
+      null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OpenNotificationImpl implements OpenNotification {
+  const _$OpenNotificationImpl(final Map<dynamic, dynamic> data, this.index)
+      : _data = data;
+
+  final Map<dynamic, dynamic> _data;
+  @override
+  Map<dynamic, dynamic> get data {
+    if (_data is EqualUnmodifiableMapView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_data);
+  }
+
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'NotificationTriggeredEvent.openNotification(data: $data, index: $index)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OpenNotificationImpl &&
+            const DeepCollectionEquality().equals(other._data, _data) &&
+            (identical(other.index, index) || other.index == index));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_data), index);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OpenNotificationImplCopyWith<_$OpenNotificationImpl> get copyWith =>
+      __$$OpenNotificationImplCopyWithImpl<_$OpenNotificationImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAll,
+    required TResult Function(Map<dynamic, dynamic> data, int index)
+        openNotification,
+  }) {
+    return openNotification(data, index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getAll,
+    TResult? Function(Map<dynamic, dynamic> data, int index)? openNotification,
+  }) {
+    return openNotification?.call(data, index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAll,
+    TResult Function(Map<dynamic, dynamic> data, int index)? openNotification,
+    required TResult orElse(),
+  }) {
+    if (openNotification != null) {
+      return openNotification(data, index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetAll value) getAll,
+    required TResult Function(OpenNotification value) openNotification,
+  }) {
+    return openNotification(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetAll value)? getAll,
+    TResult? Function(OpenNotification value)? openNotification,
+  }) {
+    return openNotification?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetAll value)? getAll,
+    TResult Function(OpenNotification value)? openNotification,
+    required TResult orElse(),
+  }) {
+    if (openNotification != null) {
+      return openNotification(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OpenNotification implements NotificationTriggeredEvent {
+  const factory OpenNotification(
+          final Map<dynamic, dynamic> data, final int index) =
+      _$OpenNotificationImpl;
+
+  Map<dynamic, dynamic> get data;
+  int get index;
+  @JsonKey(ignore: true)
+  _$$OpenNotificationImplCopyWith<_$OpenNotificationImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
