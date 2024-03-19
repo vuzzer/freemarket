@@ -2,12 +2,12 @@ import 'package:defi/core/enum.dart';
 import 'package:defi/core/hive_box_name.dart';
 import 'package:hive/hive.dart';
 
-abstract class AppearenceData {
+abstract class BrightnessData {
   Future<Mode> getBrightness();
   Future<void> changeBrightness();
 }
 
-class AppearenceDataImpl implements AppearenceData {
+class BrightnessDataImpl implements BrightnessData {
   static String keyBox = "darkMode";
   @override
   Future<Mode> getBrightness() async {
