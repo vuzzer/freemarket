@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     splashRadius: 20,
                                     padding: EdgeInsets.zero,
                                     icon: const Icon(
-                                      Icons.light_mode,
+                                      Icons.dark_mode,
                                       color: Colors.white,
                                       size: 30,
                                     ))
