@@ -11,7 +11,6 @@ import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 
 class NotificationScreen extends StatefulWidget {
   static const routeName = "/notification";

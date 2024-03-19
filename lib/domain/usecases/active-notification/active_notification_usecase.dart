@@ -11,7 +11,7 @@ class ActiveNotificationUsecase {
     return activeNotificationRepo.getActiveNotification();
   }
 
-  Future<Either<Failure, int>> updateActiveNotification() {
-    return activeNotificationRepo.updateActiveNotification();
+  Future<Either<Failure, int>> updateActiveNotification(int activeNotification) {
+    return activeNotificationRepo.updateActiveNotification(activeNotification);
   }
 }

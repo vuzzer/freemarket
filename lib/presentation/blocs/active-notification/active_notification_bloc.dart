@@ -16,13 +16,14 @@ class ActiveNotificationBloc
         final result = await activeNotificationUsecase.getActiveNotification();
 
         result.fold((l) => null,
-            (result) => state.copyWith(activeNotification: result));
+            (activeNotification) => emit(state.copyWith(activeNotification: activeNotification)) );
       }, updateActiveNotification: (value) async {
+        int activeNotification = value.activeNotification;
         final result =
-            await activeNotificationUsecase.updateActiveNotification();
+            await activeNotificationUsecase.updateActiveNotification(activeNotification);
 
         result.fold((l) => null,
-            (result) => state.copyWith(activeNotification: result));
+            (active) => emit(state.copyWith(activeNotification: active)));
       });
     });
   }

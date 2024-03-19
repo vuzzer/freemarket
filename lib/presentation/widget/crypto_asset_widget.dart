@@ -27,10 +27,6 @@ class CryptoAssetWidget extends StatelessWidget {
             splashColor: blueLight,
             highlightColor: blueLight,
             onTap: () {
-              //logger.d(store.state.network.name);
-              context.read<MarketTokenBloc>().add(GetTokenPrice(
-                  Params(idToken: crypto.id, currentOfMarket: "usd")));
-
               // Route to Chart Screen
               Navigator.of(context).pushNamed(CryptoAssetScreen.routeName, arguments: crypto.id );
             },

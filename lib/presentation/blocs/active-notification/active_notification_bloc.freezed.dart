@@ -19,19 +19,19 @@ mixin _$ActiveNotificationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getActiveNotification,
-    required TResult Function() updateActiveNotification,
+    required TResult Function(int activeNotification) updateActiveNotification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getActiveNotification,
-    TResult? Function()? updateActiveNotification,
+    TResult? Function(int activeNotification)? updateActiveNotification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getActiveNotification,
-    TResult Function()? updateActiveNotification,
+    TResult Function(int activeNotification)? updateActiveNotification,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,7 +119,7 @@ class _$GetActiveNotificationImpl implements GetActiveNotification {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getActiveNotification,
-    required TResult Function() updateActiveNotification,
+    required TResult Function(int activeNotification) updateActiveNotification,
   }) {
     return getActiveNotification();
   }
@@ -128,7 +128,7 @@ class _$GetActiveNotificationImpl implements GetActiveNotification {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getActiveNotification,
-    TResult? Function()? updateActiveNotification,
+    TResult? Function(int activeNotification)? updateActiveNotification,
   }) {
     return getActiveNotification?.call();
   }
@@ -137,7 +137,7 @@ class _$GetActiveNotificationImpl implements GetActiveNotification {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getActiveNotification,
-    TResult Function()? updateActiveNotification,
+    TResult Function(int activeNotification)? updateActiveNotification,
     required TResult orElse(),
   }) {
     if (getActiveNotification != null) {
@@ -190,6 +190,8 @@ abstract class _$$UpdateActiveNotificationImplCopyWith<$Res> {
           _$UpdateActiveNotificationImpl value,
           $Res Function(_$UpdateActiveNotificationImpl) then) =
       __$$UpdateActiveNotificationImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int activeNotification});
 }
 
 /// @nodoc
@@ -201,55 +203,80 @@ class __$$UpdateActiveNotificationImplCopyWithImpl<$Res>
       _$UpdateActiveNotificationImpl _value,
       $Res Function(_$UpdateActiveNotificationImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? activeNotification = null,
+  }) {
+    return _then(_$UpdateActiveNotificationImpl(
+      null == activeNotification
+          ? _value.activeNotification
+          : activeNotification // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$UpdateActiveNotificationImpl implements UpdateActiveNotification {
-  const _$UpdateActiveNotificationImpl();
+  const _$UpdateActiveNotificationImpl(this.activeNotification);
+
+  @override
+  final int activeNotification;
 
   @override
   String toString() {
-    return 'ActiveNotificationEvent.updateActiveNotification()';
+    return 'ActiveNotificationEvent.updateActiveNotification(activeNotification: $activeNotification)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdateActiveNotificationImpl);
+            other is _$UpdateActiveNotificationImpl &&
+            (identical(other.activeNotification, activeNotification) ||
+                other.activeNotification == activeNotification));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, activeNotification);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateActiveNotificationImplCopyWith<_$UpdateActiveNotificationImpl>
+      get copyWith => __$$UpdateActiveNotificationImplCopyWithImpl<
+          _$UpdateActiveNotificationImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getActiveNotification,
-    required TResult Function() updateActiveNotification,
+    required TResult Function(int activeNotification) updateActiveNotification,
   }) {
-    return updateActiveNotification();
+    return updateActiveNotification(activeNotification);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getActiveNotification,
-    TResult? Function()? updateActiveNotification,
+    TResult? Function(int activeNotification)? updateActiveNotification,
   }) {
-    return updateActiveNotification?.call();
+    return updateActiveNotification?.call(activeNotification);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getActiveNotification,
-    TResult Function()? updateActiveNotification,
+    TResult Function(int activeNotification)? updateActiveNotification,
     required TResult orElse(),
   }) {
     if (updateActiveNotification != null) {
-      return updateActiveNotification();
+      return updateActiveNotification(activeNotification);
     }
     return orElse();
   }
@@ -289,7 +316,13 @@ class _$UpdateActiveNotificationImpl implements UpdateActiveNotification {
 }
 
 abstract class UpdateActiveNotification implements ActiveNotificationEvent {
-  const factory UpdateActiveNotification() = _$UpdateActiveNotificationImpl;
+  const factory UpdateActiveNotification(final int activeNotification) =
+      _$UpdateActiveNotificationImpl;
+
+  int get activeNotification;
+  @JsonKey(ignore: true)
+  _$$UpdateActiveNotificationImplCopyWith<_$UpdateActiveNotificationImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

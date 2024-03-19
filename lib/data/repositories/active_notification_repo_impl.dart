@@ -18,10 +18,10 @@ class ActiveNotificationRepoImpl implements ActiveNotificationRepo {
   }
 
   @override
-  Future<Either<Failure, int>> updateActiveNotification() async {
+  Future<Either<Failure, int>> updateActiveNotification(int activeNotification) async {
     try {
       final numberActiveNotification =
-          await activeNotificationData.updateActiveNotification();
+          await activeNotificationData.updateActiveNotification(activeNotification);
       return right(numberActiveNotification);
     } catch (e) {
       return left(InterneFailure());

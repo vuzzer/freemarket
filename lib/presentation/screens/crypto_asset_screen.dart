@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/constants/app_font.dart';
 import 'package:defi/core/network/network_info.dart';
+import 'package:defi/core/params.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/presentation/widget/appbar_token_widget.dart';
@@ -55,6 +56,7 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
   Widget build(BuildContext context) {
     // Get crypto passed as argument
     final id = ModalRoute.of(context)!.settings.arguments as String;
+    context.read<MarketTokenBloc>().add(GetTokenPrice( Params(idToken: id, currentOfMarket: "usd")));
     return Scaffold(
         body: StreamBuilder(
             stream: CheckConnectivity.listener,
