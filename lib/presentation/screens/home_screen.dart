@@ -33,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ValueNotifier<int> activeNotificationNotifier = ValueNotifier(0);
   FlutterBackgroundService flutterBackgroundService =
       FlutterBackgroundService();
+
   @override
   void initState() {
     CheckConnectivity.checkConnectivity();
@@ -49,8 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     flutterBackgroundService.on('count').listen((event) {
-      sl<ActiveNotificationBloc>().add(UpdateActiveNotification(event!['count']));
-      //activeNotificationNotifier.value = event!['count'];
+      sl<ActiveNotificationBloc>()
+          .add(UpdateActiveNotification(event!['count']));
     });
 
     super.initState();
@@ -78,8 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-          sl<ActiveNotificationBloc>()
-          .add(const GetActiveNotification());
+    sl<ActiveNotificationBloc>().add(const GetActiveNotification());
     return Scaffold(
         body: StreamBuilder(
             stream: CheckConnectivity.listener,
@@ -129,11 +129,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 12,
                                 ),
                                 // Icons.dark_mode
-                                const Icon(
-                                  Icons.light_mode,
-                                  color: Colors.white,
-                                  size: 30,
-                                )
+                                IconButton(
+                                    onPressed: () {},
+                                    splashRadius: 20,
+                                    padding: EdgeInsets.zero,
+                                    icon: const Icon(
+                                      Icons.light_mode,
+                                      color: Colors.white,
+                                      size: 30,
+                                    ))
                               ],
                             ),
                             // Display notification create but not read
