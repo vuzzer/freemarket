@@ -1,4 +1,6 @@
+import 'package:defi/core/enum.dart';
+
 abstract class BrightnessRepo {
-  Future<int> getActiveNotification();
-  Future<int> updateActiveNotification(int activeNotification);
+  Future<Mode> getBrightness();
+  Future<void> changeBrightness();
 }
