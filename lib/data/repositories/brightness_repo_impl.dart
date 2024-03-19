@@ -1,5 +1,5 @@
 import 'package:defi/core/enum.dart';
-import 'package:defi/data/datasource/appearence_data.dart';
+import 'package:defi/data/datasource/brightness_data.dart';
 import 'package:defi/domain/repositories/brightness/brightness_repo.dart';
 
 class BrightnessRepoImpl implements BrightnessRepo {
