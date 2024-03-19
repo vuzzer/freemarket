@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:defi/core/hive_box_name.dart';
+import 'package:defi/presentation/blocs/active-notification/active_notification_bloc.dart';
+import 'package:defi/service_locator.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-import 'package:logger/logger.dart';
 
 part 'notification_triggered_event.dart';
 part 'notification_triggered_state.dart';
@@ -63,6 +64,7 @@ class NotificationTriggeredBloc
         await boxHistoryNotification.close();
 
         // Refresh notification data
+        sl<ActiveNotificationBloc>().add(const GetActiveNotification());
         add(const GetAll());
       });
     });

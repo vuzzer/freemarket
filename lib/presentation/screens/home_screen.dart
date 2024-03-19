@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:defi/core/background/background_service.dart';
-import 'package:defi/core/background/background_task.dart';
 import 'package:defi/core/hive_box_name.dart';
 import 'package:defi/core/network/network_info.dart';
+import 'package:defi/presentation/blocs/active-notification/active_notification_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
@@ -38,8 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
     CheckConnectivity.checkConnectivity();
     Hive.openBox(HiveBoxName.countNotificationBox);
 
-    //BackgroundTask.clearBoxNotification();
-
     // Background check notification
     flutterBackgroundService
         .invoke(BackgroundService.notificationEvent, {'tokens': []});
@@ -51,7 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     flutterBackgroundService.on('count').listen((event) {
-      activeNotificationNotifier.value = event!['count'];
+      sl<ActiveNotificationBloc>().add(UpdateActiveNotification(event!['count']));
+      //activeNotificationNotifier.value = event!['count'];
     });
 
     super.initState();
@@ -79,6 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+          sl<ActiveNotificationBloc>()
+          .add(const GetActiveNotification());
     return Scaffold(
         body: StreamBuilder(
             stream: CheckConnectivity.listener,
@@ -136,44 +137,40 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                             // Display notification create but not read
-                            ValueListenableBuilder(
-                              valueListenable: activeNotificationNotifier,
-                              builder: (context, value, child) {
-                                int countNotification =
-                                    activeNotificationNotifier.value;
-                                return countNotification > 0
-                                    ? Positioned(
-                                        bottom: 19,
-                                        right: 35,
-                                        child: GestureDetector(
-                                            onTap: () {
-                                              Navigator.of(context).pushNamed(
-                                                  NotificationScreen.routeName);
-                                            },
-                                            child: Container(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 2),
-                                              width: 30,
-                                              decoration: const BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  color: FontColor.red),
-                                              child: Align(
-                                                  child: Text(
-                                                '$countNotification',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily:
-                                                        FontFamily.raleway,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                            )))
-                                    : const SizedBox.shrink();
-                              },
-                            )
+                            BlocBuilder<ActiveNotificationBloc,
+                                    ActiveNotificationState>(
+                                builder: (context, state) {
+                              int countNotification = state.activeNotification;
+                              return countNotification > 0
+                                  ? Positioned(
+                                      bottom: 19,
+                                      right: 35,
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).pushNamed(
+                                                NotificationScreen.routeName);
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 2),
+                                            width: 30,
+                                            decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10)),
+                                                color: FontColor.red),
+                                            child: Align(
+                                                child: Text(
+                                              '$countNotification',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily:
+                                                      FontFamily.raleway,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                          )))
+                                  : const SizedBox.shrink();
+                            })
                           ])),
                       const SizedBox(
                         height: 10,

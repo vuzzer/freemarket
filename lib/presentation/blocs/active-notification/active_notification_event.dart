@@ -4,6 +4,6 @@ part of 'active_notification_bloc.dart';
 class ActiveNotificationEvent with _$ActiveNotificationEvent {
   const factory ActiveNotificationEvent.getActiveNotification() =
       GetActiveNotification;
-  const factory ActiveNotificationEvent.updateActiveNotification() =
+  const factory ActiveNotificationEvent.updateActiveNotification(int activeNotification) =
       UpdateActiveNotification;
 }
