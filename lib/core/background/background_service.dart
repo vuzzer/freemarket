@@ -70,7 +70,7 @@ class BackgroundService {
           }
         }
       }
-      historyNotificationBox.close();
+      await historyNotificationBox.close();
 
       instance.invoke('count', {'count': numberActiveNotification});
     });

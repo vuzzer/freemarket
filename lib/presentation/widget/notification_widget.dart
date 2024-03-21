@@ -5,11 +5,13 @@ import 'package:defi/core/cron_expression.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
+import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/screens/choose_alert_screen.dart';
 import 'package:defi/presentation/widget/custom_bottom_sheet.dart';
+import 'package:defi/styles/font_color.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NotificationWidget extends StatelessWidget {
   final NotificationCrypto notification;
@@ -58,7 +60,7 @@ class NotificationWidget extends StatelessWidget {
           case CronExpression.night:
             message = 'Market close';
             break;
-          case CronExpression.noon: 
+          case CronExpression.noon:
             message = 'Mid-day';
             break;
         }
@@ -69,15 +71,19 @@ class NotificationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode =
+        context.select((BrightnessBloc b) => b.state.brightness == Mode.dark);
     return Material(
         color: Colors.transparent,
         child: InkWell(
-            splashColor: blueLight,
-            highlightColor: blueLight,
+            splashColor: darkMode ? blueLight : FontColor.white1,
+            highlightColor: darkMode ? blueLight : FontColor.white1,
             onTap: () {
               Navigator.of(context).pushNamed(ChooseAlertScreen.routeName,
                   arguments: ArgumentNotif(
-                      crypto: crypto, notification: notification, isUpdate: true));
+                      crypto: crypto,
+                      notification: notification,
+                      isUpdate: true));
             },
             child: ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 0),
@@ -91,16 +97,11 @@ class NotificationWidget extends StatelessWidget {
                 ),
                 title: AutoSizeText(
                   crypto.name,
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
                 ),
                 subtitle: Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: AutoSizeText(subtitle(notification),
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: FontFamily.montSerrat))),
+                        style: TextStyle(fontFamily: FontFamily.montSerrat))),
                 trailing: Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Row(
@@ -109,21 +110,22 @@ class NotificationWidget extends StatelessWidget {
                       children: [
                         //price of token on the market (use chainlink)
                         AutoSizeText(target(notification),
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: FontFamily.montSerrat)),
+                            style:
+                                TextStyle(fontFamily: FontFamily.montSerrat)),
                         //Balance token
                         const SizedBox(
                           height: 8,
                         ),
                         IconButton(
                             onPressed: () {
-                              customBottomSheet(context, notification, crypto);
+                              customBottomSheet(
+                                  context, notification, crypto, darkMode);
                             },
                             splashRadius: 20,
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.more_horiz,
-                              color: Colors.white,
+                              color:
+                                  darkMode ? FontColor.white : FontColor.black,
                             ))
                       ],
                     )))));

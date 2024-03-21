@@ -19,7 +19,7 @@ class ActiveNotificationDataImpl implements ActiveNotificationData {
           }
         }
       }
-      historyNotificationBox.close();
+      await historyNotificationBox.close();
 
     return numberActiveNotification;
   }

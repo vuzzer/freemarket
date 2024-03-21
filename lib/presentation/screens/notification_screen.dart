@@ -2,11 +2,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/core/notifications/notification_message.dart';
+import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/notification-triggered/notification_triggered_bloc.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/loading_widget.dart';
 import 'package:defi/service_locator.dart';
+import 'package:defi/styles/font_color.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +25,8 @@ class NotificationScreen extends StatefulWidget {
 class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
+    final darkMode =
+        context.select((BrightnessBloc b) => b.state.brightness == Mode.dark);
     // Get all notification
     sl<NotificationTriggeredBloc>()
         .add(const NotificationTriggeredEvent.getAll());
@@ -31,6 +35,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         title: "Mes Notifications",
         leading: true,
       ),
+      backgroundColor: darkMode ? FontColor.darkBlue : FontColor.white,
       body: SafeArea(child:
           BlocBuilder<NotificationTriggeredBloc, NotificationTriggeredState>(
               builder: (context, state) {
@@ -72,10 +77,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
               return Material(
                 borderRadius: BorderRadius.circular(10),
-                color: triggered["open"] ? Colors.transparent : blue1,
+                color: activeColor(
+                    darkMode: darkMode, triggered: triggered['open']),
                 child: InkWell(
-                    splashColor: blueLight,
-                    highlightColor: blueLight,
+                    splashColor: darkMode ? blueLight : FontColor.white1,
+                    highlightColor: darkMode ? blueLight : FontColor.white1,
                     onTap: () {
                       // update specific notification
                       context.read<NotificationTriggeredBloc>().add(
@@ -105,7 +111,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             AutoSizeText(
                               header,
                               style: TextStyle(
-                                  color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: FontFamily.montSerrat),
                             )
@@ -135,5 +140,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
             });
       })),
     );
+  }
+
+  Color activeColor({required bool darkMode, required bool triggered}) {
+    if (darkMode) {
+      return triggered ? Colors.transparent : blue1;
+    }
+    return triggered ? FontColor.white : FontColor.white1.withOpacity(0.4);
   }
 }

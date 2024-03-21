@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 class SwitchWidget extends StatelessWidget {
   final TimeFrame timeFrame;
   final Function onChange;
-  const SwitchWidget({super.key, required this.timeFrame, required this.onChange});
+  const SwitchWidget(
+      {super.key, required this.timeFrame, required this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,6 @@ class SwitchWidget extends StatelessWidget {
                     AutoSizeText(
                       timeFrame.title,
                       style: TextStyle(
-                          color: Colors.white,
                           fontFamily: FontFamily.montSerrat,
                           fontWeight: FontWeight.bold),
                     ),
@@ -37,7 +37,7 @@ class SwitchWidget extends StatelessWidget {
                     ),
                     AutoSizeText(
                       timeFrame.desc,
-                      style: const TextStyle(color: Colors.white, fontSize: 8),
+                      style: const TextStyle(fontSize: 8),
                       textAlign: TextAlign.justify,
                     )
                   ],
@@ -51,7 +51,7 @@ class SwitchWidget extends StatelessWidget {
                         Switch.adaptive(
                             value: timeFrame.value,
                             activeColor: const Color(0xFF508D69),
-                            onChanged: (value) => onChange(value) )
+                            onChanged: (value) => onChange(value))
                       ],
                     )))));
   }

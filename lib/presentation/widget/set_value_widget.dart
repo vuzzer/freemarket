@@ -1,16 +1,19 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
+import 'package:defi/core/enum.dart';
 import 'package:defi/core/utils_process.dart';
 import 'package:defi/core/utils_type.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:defi/helpers/crypto_symbols.dart';
+import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
 import 'package:defi/presentation/screens/set_alert_screen.dart';
 import 'package:defi/presentation/widget/adaptive_textform_widget.dart';
 import 'package:defi/presentation/widget/button_widget.dart';
 import 'package:defi/presentation/widget/keyboard_widget.dart';
+import 'package:defi/styles/font_color.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,6 +93,8 @@ class _SetValueWidgetState extends State<SetValueWidget> {
     final CryptoInfo crypto = widget.crypto;
     final Alert alert = widget.alert;
     final updated = widget.notification == null;
+    final darkMode =
+        context.select((BrightnessBloc b) => b.state.brightness == Mode.dark);
     return Column(
       children: [
         Padding(
@@ -103,19 +108,15 @@ class _SetValueWidgetState extends State<SetValueWidget> {
                 AutoSizeText(
                   alert.title,
                   style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
+                      fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 const SizedBox(
                   height: 8,
                 ),
                 AutoSizeText(
                   alert.desc,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 8),
+                  style:
+                      const TextStyle(fontWeight: FontWeight.bold, fontSize: 8),
                 ),
               ],
             )),
@@ -128,7 +129,8 @@ class _SetValueWidgetState extends State<SetValueWidget> {
                 width: (kSizeUnit * 3).w,
                 height: 50,
                 decoration: BoxDecoration(
-                    color: blue1, borderRadius: BorderRadius.circular(10)),
+                    color: darkMode ? blue1 : FontColor.white1.withOpacity(0.4),
+                    borderRadius: BorderRadius.circular(10)),
                 child: Center(
                     child: Form(
                   key: _formKey,
@@ -152,7 +154,6 @@ class _SetValueWidgetState extends State<SetValueWidget> {
                   AutoSizeText(
                     message,
                     style: TextStyle(
-                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontFamily: FontFamily.montSerrat,
                         fontSize: 8),
@@ -163,7 +164,7 @@ class _SetValueWidgetState extends State<SetValueWidget> {
                     AutoSizeText(
                       error,
                       style: TextStyle(
-                          color: const Color(0xFFD24545),
+                          color: FontColor.red,
                           fontWeight: FontWeight.bold,
                           fontFamily: FontFamily.montSerrat,
                           fontSize: 8),
@@ -230,7 +231,10 @@ class _SetValueWidgetState extends State<SetValueWidget> {
                 visible: hasFocus,
                 child: Container(
                     padding: const EdgeInsets.only(bottom: 30),
-                    decoration: const BoxDecoration(color: blue1),
+                    decoration: BoxDecoration(
+                        color: darkMode
+                            ? blue1
+                            : FontColor.white1.withOpacity(0.3)),
                     child: KeyBoardWidget(
                       controller: _controller,
                       routeName: SetAlertScreen.routeName,

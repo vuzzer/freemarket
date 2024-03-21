@@ -14,7 +14,6 @@ import 'package:defi/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class ScheduleWidget extends StatefulWidget {
   final CryptoInfo crypto;
   final Alert alert;
@@ -70,8 +69,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
           ),
           const AutoSizeText(
             "When would you like to receive daily Bitcoin alerts ?",
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           const SizedBox(
             height: 10,
@@ -283,7 +281,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
             idNotification: id,
             cryptoId: widget.crypto.id,
             cron: timeFrame.cron,
-             image: widget.crypto.image,
+            image: widget.crypto.image,
             typeNotification: widget.alert.value));
       }
     }

@@ -2,20 +2,24 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/core/notifications/setup_notification.dart';
 import 'package:defi/data/datasource/active_notification_data.dart';
+import 'package:defi/data/datasource/brightness_data.dart';
 import 'package:defi/data/datasource/crypto_info_source.dart';
 import 'package:defi/data/datasource/favoris_crypto_data.dart';
 import 'package:defi/data/datasource/token_market_datasource.dart';
 import 'package:defi/data/repositories/active_notification_repo_impl.dart';
+import 'package:defi/data/repositories/brightness_repo_impl.dart';
 import 'package:defi/data/repositories/crypto_info_repo_impl.dart';
 import 'package:defi/data/repositories/favoris_crypto_repo_impl.dart';
 import 'package:defi/data/repositories/primary_crypto_repo_impl.dart';
 import 'package:defi/data/repositories/token_market_repository.dart';
 import 'package:defi/domain/repositories/active-notification/active_notification_repo.dart';
+import 'package:defi/domain/repositories/brightness/brightness_repo.dart';
 import 'package:defi/domain/repositories/crypto-info/crypto_info_repo.dart';
 import 'package:defi/domain/repositories/favoris/favoris_crypto_repo.dart';
 import 'package:defi/domain/repositories/market/token_market_repo.dart';
 import 'package:defi/domain/repositories/primary-crypto/primary_crypto_repo.dart';
 import 'package:defi/domain/usecases/active-notification/active_notification_usecase.dart';
+import 'package:defi/domain/usecases/brightness/brightness_usecases.dart';
 import 'package:defi/domain/usecases/clientProfil/clientProfil_usecase.dart';
 import 'package:defi/domain/usecases/crypto-info/crypto_info_usecases.dart';
 import 'package:defi/domain/usecases/favoris/favoris_crypto_usecase.dart';
@@ -24,6 +28,7 @@ import 'package:defi/domain/usecases/notification-price/notification_price_useca
 import 'package:defi/domain/usecases/primary-crypto/primary_crypto_usecase.dart';
 import 'package:defi/domain/usecases/setup/wallet_setup_handler.dart';
 import 'package:defi/presentation/blocs/active-notification/active_notification_bloc.dart';
+import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/client/client_profil_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
@@ -75,6 +80,7 @@ Future<void> configApp() async {
   sl.registerLazySingleton(
       () => ActiveNotificationBloc(activeNotificationUsecase: sl()));
   sl.registerLazySingleton(() => NotificationTriggeredBloc());
+  sl.registerLazySingleton(() => BrightnessBloc(sl()));
 
   //! Usecases
   sl.registerLazySingleton(() => ClientProfilUsecase(sl()));
@@ -85,6 +91,7 @@ Future<void> configApp() async {
   // Notification based price usecases
   sl.registerLazySingleton(() => NotificationPriceUsecase(sl()));
   sl.registerLazySingleton(() => ActiveNotificationUsecase(sl()));
+   sl.registerLazySingleton(() => BrightnessUsecases(sl()));
 
   //! Repositories
   sl.registerLazySingleton<TokenMarketRepository>(() =>
@@ -100,6 +107,8 @@ Future<void> configApp() async {
       () => NotificationPriceRepoImpl(notificationPriceData: sl()));
   sl.registerLazySingleton<ActiveNotificationRepo>(
       () => ActiveNotificationRepoImpl(sl()));
+    sl.registerLazySingleton<BrightnessRepo>(
+      () => BrightnessRepoImpl(sl()));
 
   //! Data
   sl.registerLazySingleton<TokenMarketDataSource>(
@@ -112,6 +121,8 @@ Future<void> configApp() async {
       () => NotificationPriceDataImpl());
   sl.registerLazySingleton<ActiveNotificationData>(
       () => ActiveNotificationDataImpl());
+    sl.registerLazySingleton<BrightnessData>(
+      () => BrightnessDataImpl());
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(

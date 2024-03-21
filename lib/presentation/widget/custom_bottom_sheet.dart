@@ -13,8 +13,8 @@ import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void customBottomSheet(
-    BuildContext context, NotificationCrypto notification, CryptoInfo crypto) {
+void customBottomSheet(BuildContext context, NotificationCrypto notification,
+    CryptoInfo crypto, bool darkMode) {
   final size = ScreenUtil();
 
   showModalBottomSheet(
@@ -26,9 +26,9 @@ void customBottomSheet(
     builder: (context) => Container(
       width: size.screenWidth,
       height: 200,
-      decoration: const BoxDecoration(
-          color: blue1,
-          borderRadius: BorderRadius.horizontal(
+      decoration: BoxDecoration(
+          color: darkMode ? blue1 : FontColor.white,
+          borderRadius: const BorderRadius.horizontal(
               left: Radius.circular(30), right: Radius.circular(30))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,11 +36,17 @@ void customBottomSheet(
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(width: 35,),
-               Expanded(
+              const SizedBox(
+                width: 35,
+              ),
+              Expanded(
                   child: Center(
-                    child: AutoSizeText(titleCustom(notification), style: TextStyle(color: Colors.white, fontFamily: FontFamily.montSerrat, fontWeight: FontWeight.bold ),)
-                  )),
+                      child: AutoSizeText(
+                titleCustom(notification),
+                style: TextStyle(
+                    fontFamily: FontFamily.montSerrat,
+                    fontWeight: FontWeight.bold),
+              ))),
               IconButton(
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -48,7 +54,6 @@ void customBottomSheet(
                   splashRadius: 20,
                   icon: const Icon(
                     Icons.close,
-                    color: Colors.white,
                   ))
             ],
           ),
@@ -70,7 +75,6 @@ void customBottomSheet(
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontFamily: FontFamily.montSerrat,
-                          color: Colors.white,
                         ),
                       ),
                       trailing: Row(
@@ -80,9 +84,11 @@ void customBottomSheet(
                           IconButton(
                               onPressed: () {},
                               splashRadius: 20,
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.arrow_forward_ios,
-                                color: Colors.white,
+                                color: darkMode
+                                    ? FontColor.white
+                                    : FontColor.black,
                               ))
                         ],
                       )))),

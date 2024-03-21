@@ -1,7 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/core/utils_type.dart';
 import 'package:defi/core/enum.dart';
+import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
+import 'package:defi/styles/font_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../constants/app_colors.dart';
 
 class CategorieNotificationWidget extends StatelessWidget {
@@ -13,7 +16,8 @@ class CategorieNotificationWidget extends StatelessWidget {
       {Key? key,
       required this.alert,
       required this.radio,
-      required this.update, this.disable = false})
+      required this.update,
+      this.disable = false})
       : super(key: key);
 
   Color getColor(Set<MaterialState> states) {
@@ -31,14 +35,18 @@ class CategorieNotificationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode =
+        context.select((BrightnessBloc b) => b.state.brightness == Mode.dark);
     return Material(
-        color: disable ? blueLight : Colors.transparent,
+        color: disableColor(darkMode: darkMode, disable: disable),
         child: InkWell(
-            splashColor: blueLight,
-            highlightColor: blueLight,
-            onTap: disable ? null : () {
-              update(alert);
-            },
+            splashColor: darkMode ? blueLight : greyLight,
+            highlightColor: darkMode ? blueLight : greyLight,
+            onTap: disable
+                ? null
+                : () {
+                    update(alert);
+                  },
             child: ListTile(
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
@@ -62,16 +70,12 @@ class CategorieNotificationWidget extends StatelessWidget {
                   children: [
                     AutoSizeText(
                       alert.title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
                     ),
                     Visibility(
                         visible: radio == alert.value,
                         child: AutoSizeText(
                           alert.desc,
-                          style:
-                              const TextStyle(color: Colors.white, fontSize: 8),
+                          style: const TextStyle(fontSize: 8),
                           textAlign: TextAlign.justify,
                         ))
                   ],
@@ -88,11 +92,20 @@ class CategorieNotificationWidget extends StatelessWidget {
                             activeColor: blue,
                             value: alert.value,
                             groupValue: radio,
-                            onChanged: disable ? null : (value) {
-                              update(alert);
-                              //select.setNetwork(network.config.value);
-                            })
+                            onChanged: disable
+                                ? null
+                                : (value) {
+                                    update(alert);
+                                    //select.setNetwork(network.config.value);
+                                  })
                       ],
                     )))));
+  }
+
+  Color disableColor({required bool darkMode, required bool disable}) {
+    if (darkMode) {
+      return disable ? blueLight : Colors.transparent;
+    }
+    return disable ? FontColor.white1.withOpacity(0.4) : Colors.transparent;
   }
 }
