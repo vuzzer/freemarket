@@ -11,7 +11,6 @@ import 'package:defi/presentation/widget/categorie_notification_widget.dart';
 import 'package:defi/service_locator.dart';
 import 'package:flutter/material.dart';
 
-
 class ChooseAlertScreen extends StatefulWidget {
   static const routeName = "/choose-currency";
 
@@ -107,7 +106,8 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = ModalRoute.of(context)!.settings.arguments as ArgumentNotif;
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as ArgumentNotif;
     final isUpdate = arguments.isUpdate;
     final crypto = arguments.crypto;
 
@@ -126,7 +126,7 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
           ),
           const AutoSizeText(
             "Receive AlertValues for price changes and more",
-            style: TextStyle(color: Colors.white, fontSize: 8),
+            style: TextStyle(fontSize: 8),
           ),
           const SizedBox(
             height: 20,

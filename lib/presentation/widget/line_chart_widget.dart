@@ -1,7 +1,10 @@
 import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
+import 'package:defi/core/enum.dart';
+import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
+import 'package:defi/styles/font_color.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -82,12 +85,15 @@ class LineChartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Color> gradientColors = [blue, darkBlue];
+    final darkMode =
+        context.select((BrightnessBloc b) => b.state.brightness == Mode.dark);
+    List<Color> gradientColors =
+        darkMode ? [blue, darkBlue] : [FontColor.white1, FontColor.white];
     final size = ScreenUtil();
     return Container(
         width: size.screenWidth,
         height: 200,
-        decoration: const BoxDecoration(color: darkBlue),
+        decoration: BoxDecoration(color: darkMode ? darkBlue : FontColor.white),
         child: BlocBuilder<MarketTokenBloc, MarketTokenState>(
             builder: (context, state) {
           // Return Token Market Chart
@@ -154,6 +160,7 @@ class LineChartWidget extends StatelessWidget {
                           state.tokenMarketData!.prices[p])),
                   isCurved: false,
                   barWidth: 1.6,
+                  color: darkMode ? blue : FontColor.black,
                   isStrokeCapRound: true,
                   dotData: FlDotData(
                     show: false,
@@ -176,9 +183,7 @@ class LineChartWidget extends StatelessWidget {
               child: SizedBox(
                 width: 50,
                 height: 50,
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                ),
+                child: CircularProgressIndicator(),
               ),
             );
           }

@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:defi/core/background/background_service.dart';
+import 'package:defi/core/enum.dart';
 import 'package:defi/core/hive_box_name.dart';
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/active-notification/active_notification_bloc.dart';
+import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
-import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
-import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/presentation/screens/notification_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_color.dart';
@@ -79,7 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    sl<ActiveNotificationBloc>().add(const GetActiveNotification());
+    final darkMode =
+        context.select((BrightnessBloc b) => b.state.brightness == Mode.dark);
     return Scaffold(
         body: StreamBuilder(
             stream: CheckConnectivity.listener,
@@ -92,114 +93,132 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: Theme.of(context).textTheme.displayMedium,
                 ));
               }
-              return Scaffold(body: BlocBuilder<CryptosBloc, CryptoState>(
-                  builder: (context, state) {
-                if (!state.loading) {
-                  // Primary Crypto to display on card
-                  context
-                      .read<PrimaryCryptoBloc>()
-                      .add(const PrimaryCryptoEvent.getPrimaryCrypto());
-
-                  // Load favoris crypto of users
-                  context.read<FavorisBloc>().add(LoadFavorisEvent());
-
-                  return Column(
-                    children: [
-                      SizedBox(
-                        height: (kFontSizeUnit * 5).h,
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 18),
-                          child: Stack(children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushNamed(
-                                          NotificationScreen.routeName);
-                                    },
-                                    splashRadius: 20,
-                                    padding: EdgeInsets.zero,
-                                    icon: const Icon(
-                                      Icons.notifications,
-                                      color: Colors.white,
-                                    )),
-                                const SizedBox(
-                                  width: 12,
-                                ),
-                                // Icons.dark_mode
-                                IconButton(
-                                    onPressed: () {},
-                                    splashRadius: 20,
-                                    padding: EdgeInsets.zero,
-                                    icon: const Icon(
-                                      Icons.dark_mode,
-                                      color: Colors.white,
-                                      size: 30,
-                                    ))
-                              ],
-                            ),
-                            // Display notification create but not read
-                            BlocBuilder<ActiveNotificationBloc,
-                                    ActiveNotificationState>(
-                                builder: (context, state) {
-                              int countNotification = state.activeNotification;
-                              return countNotification > 0
-                                  ? Positioned(
-                                      bottom: 19,
-                                      right: 35,
-                                      child: GestureDetector(
-                                          onTap: () {
+              return Scaffold(
+                  backgroundColor:
+                      darkMode ? FontColor.darkBlue : FontColor.white1,
+                  body: BlocBuilder<CryptosBloc, CryptoState>(
+                      builder: (context, state) {
+                    if (!state.loading) {
+                      return Column(
+                        children: [
+                          SizedBox(
+                            height: (kFontSizeUnit * 5).h,
+                          ),
+                          Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 18),
+                              child: Stack(children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    BlocBuilder<BrightnessBloc,
+                                            BrightnessState>(
+                                        builder: (context, state) {
+                                      final darkMode =
+                                          state.brightness == Mode.dark;
+                                      return IconButton(
+                                          onPressed: () {
                                             Navigator.of(context).pushNamed(
                                                 NotificationScreen.routeName);
                                           },
-                                          child: Container(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 2),
-                                            width: 30,
-                                            decoration: const BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10)),
-                                                color: FontColor.red),
-                                            child: Align(
-                                                child: Text(
-                                              '$countNotification',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily:
-                                                      FontFamily.raleway,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                          )))
-                                  : const SizedBox.shrink();
-                            })
-                          ])),
-                      const SizedBox(
-                        height: 10,
+                                          splashRadius: 20,
+                                          padding: EdgeInsets.zero,
+                                          icon: Icon(
+                                            darkMode
+                                                ? Icons.notifications
+                                                : Icons.notifications_outlined,
+                                          ));
+                                    }),
+                                    const SizedBox(
+                                      width: 12,
+                                    ),
+                                    // Icons.dark_mode
+                                    BlocBuilder<BrightnessBloc,
+                                            BrightnessState>(
+                                        builder: (context, state) {
+                                      final brightness = state.brightness;
+                                      return IconButton(
+                                          onPressed: () {
+                                            context.read<BrightnessBloc>().add(
+                                                const BrightnessEvent
+                                                    .changeBrightness());
+                                          },
+                                          splashRadius: 20,
+                                          padding: EdgeInsets.zero,
+                                          icon: Icon(
+                                            brightness == Mode.dark
+                                                ? Icons.light_mode
+                                                : Icons.dark_mode_outlined,
+                                            size: 30,
+                                          ));
+                                    })
+                                  ],
+                                ),
+                                // Display notification create but not read
+                                BlocBuilder<ActiveNotificationBloc,
+                                        ActiveNotificationState>(
+                                    builder: (context, state) {
+                                  int countNotification =
+                                      state.activeNotification;
+                                  return countNotification > 0
+                                      ? Positioned(
+                                          bottom: 19,
+                                          right: 55,
+                                          child: GestureDetector(
+                                              onTap: () {
+                                                Navigator.of(context).pushNamed(
+                                                    NotificationScreen
+                                                        .routeName);
+                                              },
+                                              child: Container(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 2),
+                                                width: 30,
+                                                decoration: const BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10)),
+                                                    color: FontColor.red),
+                                                child: Align(
+                                                    child: Text(
+                                                  '$countNotification',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontFamily:
+                                                          FontFamily.raleway,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                              )))
+                                      : const SizedBox.shrink();
+                                })
+                              ])),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const CardBalance(),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ThetaBodyWidget(cryptos: state.cryptos)
+                        ],
+                      );
+                    }
+                    return const Center(
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
                       ),
-                      const CardBalance(),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ThetaBodyWidget(cryptos: state.cryptos)
-                    ],
-                  );
-                }
-                return const Center(
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
-                    ),
-                  ),
-                );
-              }));
+                    );
+                  }));
             }));
   }
 }

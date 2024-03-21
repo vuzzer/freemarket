@@ -16,7 +16,7 @@ class DisplayNotificationSetup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get list of Notification
+    // Brightness
     context.read<NotificationPriceBloc>().add(GetNotificationPrice(crypto.id));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,29 +34,30 @@ class DisplayNotificationSetup extends StatelessWidget {
           height: 8,
         ),
         BlocBuilder<NotificationPriceBloc, NotificationPriceState>(
-            builder: (context, state) {
-          if (state.notifications.isNotEmpty) {
-            // List of notification setup
-            return Column(
-              children: [
-                ...state.notifications
-                    .map((notification) => NotificationWidget(
-                          notification: notification,
-                          crypto: crypto,
-                        ))
-                    .toList()
-              ],
-            );
-          }
-          return const AutoSizeText(
-              "Receive a one-time notification for this stocks when your conditions are mets.");
-        }),
+                builder: (context, state) {
+              if (state.notifications.isNotEmpty) {
+                // List of notification setup
+                return Column(
+                  children: [
+                    ...state.notifications
+                        .map((notification) => NotificationWidget(
+                              notification: notification,
+                              crypto: crypto,
+                            ))
+                        .toList()
+                  ],
+                );
+              }
+              return const AutoSizeText(
+                  "Receive a one-time notification for this stocks when your conditions are mets.");
+            }),
         Container(
           padding:
               const EdgeInsets.only(left: 20, right: 20, bottom: 35, top: 10),
           child: ButtonWidget(
-            onPressed: () => Navigator.of(context)
-                .pushNamed(ChooseAlertScreen.routeName, arguments: ArgumentNotif(crypto: crypto) ),
+            onPressed: () => Navigator.of(context).pushNamed(
+                ChooseAlertScreen.routeName,
+                arguments: ArgumentNotif(crypto: crypto)),
             color: blue1,
             title: "Create Alert",
             raduis: 10,

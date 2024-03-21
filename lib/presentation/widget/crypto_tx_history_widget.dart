@@ -1,26 +1,34 @@
+import 'package:defi/core/enum.dart';
 import 'package:defi/domain/entities/crypto.dart';
+import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/widget/display_notification_setup.dart';
+import 'package:defi/styles/font_color.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constants/app_colors.dart';
 
 class CryptoTxHistoryWidget extends StatelessWidget {
   final CryptoInfo crypto;
-  const CryptoTxHistoryWidget({Key? key, required this.crypto}) : super(key: key);
+  const CryptoTxHistoryWidget({Key? key, required this.crypto})
+      : super(key: key);
   final space = 4.0;
 
   @override
   Widget build(BuildContext context) {
     final size = ScreenUtil();
     final theme = Theme.of(context);
+    final darkMode =
+        context.select((BrightnessBloc b) => b.state.brightness == Mode.dark);
+    final color = darkMode ? Colors.white : FontColor.black;
     return Container(
         width: size.screenWidth,
         padding: const EdgeInsets.symmetric(horizontal: 30),
-        decoration: const BoxDecoration(
-            color: blue1,
-            borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+            color: darkMode ? blue1 : FontColor.white,
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30),
               topRight: Radius.circular(30),
             )),
@@ -32,7 +40,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Text(
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed euismod nisi porta lorem mollis aliquam ut porttitor leo.",
-                    style: theme.textTheme.bodyMedium,
+                    style: TextStyle(color: darkMode ? Colors.grey.withOpacity(0.6) : FontColor.black ),
                     textAlign: TextAlign.start,
                   )),
               Row(
@@ -142,7 +150,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                             fontFamily: FontFamily.robotoCondensedBold,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
-                            color: Colors.white),
+                            color: color),
                       ),
                       SizedBox(
                         height: space,
@@ -153,7 +161,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                             fontFamily: FontFamily.robotoCondensedBold,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
-                            color: Colors.white),
+                            color: color),
                       ),
                       SizedBox(
                         height: space,
@@ -164,7 +172,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                             fontFamily: FontFamily.robotoCondensedBold,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
-                            color: Colors.white),
+                            color: color),
                       ),
                       SizedBox(
                         height: space,
@@ -175,7 +183,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                             fontFamily: FontFamily.robotoCondensedBold,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
-                            color: Colors.white),
+                            color: color),
                       ),
                       SizedBox(
                         height: space,
@@ -185,14 +193,14 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                               fontFamily: FontFamily.robotoCondensedBold,
                               fontSize: theme.textTheme.displayMedium!.fontSize,
                               fontWeight: FontWeight.w900,
-                              color: Colors.white)),
+                              color: color)),
                       Text(
                         "19.7K",
                         style: TextStyle(
                             fontFamily: FontFamily.robotoCondensedBold,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
-                            color: Colors.white),
+                            color: color),
                       ),
                       SizedBox(
                         height: space,
@@ -203,7 +211,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                             fontFamily: FontFamily.robotoCondensedBold,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
-                            color: Colors.white),
+                            color: color),
                       ),
                       SizedBox(
                         height: space,
@@ -214,7 +222,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                             fontFamily: FontFamily.robotoCondensedBold,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
-                            color: Colors.white),
+                            color: color),
                       ),
                       SizedBox(
                         height: space,
@@ -225,13 +233,13 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                             fontFamily: FontFamily.robotoCondensedBold,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
-                            color: Colors.white),
+                            color: color),
                       )
                     ],
                   )
                 ],
               ),
-               DisplayNotificationSetup(
+              DisplayNotificationSetup(
                 crypto: crypto,
               )
             ]));

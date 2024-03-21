@@ -12,7 +12,7 @@ class BrightnessDataImpl implements BrightnessData {
   @override
   Future<Mode> getBrightness() async {
     var settingBox = await Hive.openBox(HiveBoxName.settingsBox);
-    bool darkMode = settingBox.get('darkMode', defaultValue: true);
+    bool darkMode = settingBox.get(keyBox, defaultValue: true);
     await settingBox.close();
     if (darkMode) {
       return Mode.dark;
@@ -23,10 +23,10 @@ class BrightnessDataImpl implements BrightnessData {
   @override
   Future<void> changeBrightness() async {
     var settingBox = await Hive.openBox(HiveBoxName.settingsBox);
-    bool darkMode = settingBox.get('darkMode', defaultValue: true);
+    bool darkMode = settingBox.get(keyBox, defaultValue: true);
 
     // change brightness
-    await settingBox.put('dark', !darkMode);
+    await settingBox.put(keyBox, !darkMode);
 
     // close box
     await settingBox.close();

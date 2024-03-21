@@ -1,10 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/arguments_screen.dart';
+import 'package:defi/core/enum.dart';
 import 'package:defi/domain/entities/crypto.dart';
+import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/presentation/screens/choose_alert_screen.dart';
+import 'package:defi/styles/font_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,15 +30,14 @@ class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode =
+        context.select((BrightnessBloc b) => b.state.brightness == Mode.dark);
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: darkBlue,
       elevation: 0,
       centerTitle: true,
       title: AutoSizeText(
         title,
-        style: const TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
       ),
       leading: leading
           ? Container(
@@ -44,7 +46,8 @@ class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
                   onPressed: () => Navigator.of(context).pop(),
                   style: ElevatedButton.styleFrom(
                       minimumSize: const Size.square(60),
-                      backgroundColor: blueLight,
+                      backgroundColor:
+                          darkMode ? FontColor.blueLight : FontColor.black,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20))),
                   child: const Icon(Icons.arrow_back_ios)))
@@ -54,11 +57,18 @@ class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
             builder: (context, state) {
           final bool visible = state.crypto?.id == crypto.id;
           return IconButton(
-              onPressed: visible ? () => context.read<PrimaryCryptoBloc>().add(PrimaryCryptoEvent.removePrimaryCrypto(crypto)) :() => context.read<PrimaryCryptoBloc>().add( PrimaryCryptoEvent.changePrimaryCrypto(crypto)),
+              onPressed: visible
+                  ? () => context
+                      .read<PrimaryCryptoBloc>()
+                      .add(PrimaryCryptoEvent.removePrimaryCrypto(crypto))
+                  : () => context
+                      .read<PrimaryCryptoBloc>()
+                      .add(PrimaryCryptoEvent.changePrimaryCrypto(crypto)),
               splashRadius: 20,
               padding: EdgeInsets.zero,
-              icon:  Icon( visible ? Icons.visibility :
-                Icons.visibility_outlined,
+              icon: Icon(
+                visible ? Icons.visibility : Icons.visibility_outlined,
+                color: color(activeColor: visible, darkMode: darkMode),
                 weight: 90,
                 size: 30,
               ));
@@ -82,17 +92,19 @@ class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
                 isFavoris ? Icons.star : Icons.star_outline,
                 size: 30,
                 weight: 30,
-                color: isFavoris ? blue : Colors.white,
+                color: color(activeColor: isFavoris, darkMode: darkMode),
               ));
         }),
         IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(ChooseAlertScreen.routeName, arguments: ArgumentNotif(crypto: crypto)  );
+              Navigator.of(context).pushNamed(ChooseAlertScreen.routeName,
+                  arguments: ArgumentNotif(crypto: crypto));
             },
             splashRadius: 20,
             padding: EdgeInsets.zero,
-            icon: const Icon(
+            icon: Icon(
               Icons.notifications_outlined,
+              color: darkMode ? FontColor.white : FontColor.black,
               weight: 90,
               size: 30,
             )),
@@ -100,15 +112,10 @@ class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  Widget bodyBottomSheet(BuildContext context) {
-    final size = ScreenUtil();
-    return SizedBox(
-      width: size.screenWidth,
-      height: size.screenHeight * 0.9,
-      child: ElevatedButton(
-          onPressed: () => Navigator.of(context).pop(),
-          style: ElevatedButton.styleFrom(maximumSize: const Size.square(50)),
-          child: const Text("hello")),
-    );
+  Color color({required bool activeColor, required bool darkMode}) {
+    if (activeColor) {
+      return darkMode ? FontColor.blue : FontColor.black;
+    }
+    return darkMode ? FontColor.white : FontColor.black;
   }
 }

@@ -1,28 +1,45 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:defi/core/enum.dart';
+import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/styles/font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CardBalance extends StatelessWidget {
+class CardBalance extends StatefulWidget {
   const CardBalance({Key? key}) : super(key: key);
 
   @override
+  State<CardBalance> createState() => _CardBalanceState();
+}
+
+class _CardBalanceState extends State<CardBalance> {
+  @override
   Widget build(BuildContext context) {
+    final darkMode =
+        context.select((BrightnessBloc b) => b.state.brightness == Mode.dark);
+    BoxDecoration decoration;
+    if (darkMode) {
+      decoration = BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          gradient: const LinearGradient(colors: [
+            Color(0XFFA460ED),
+            Color(0XFF19A5D1),
+          ], stops: [
+            0.4,
+            1
+          ], begin: Alignment.topLeft, end: Alignment.bottomRight));
+    } else {
+      decoration = BoxDecoration(
+          borderRadius: BorderRadius.circular(30), color: Colors.white);
+    }
+
     return Container(
         width: 400,
         height: 220,
         padding: const EdgeInsets.only(left: 30),
         margin: const EdgeInsets.symmetric(horizontal: 8),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            gradient: const LinearGradient(colors: [
-              Color(0XFFA460ED),
-              Color(0XFF19A5D1),
-            ], stops: [
-              0.4,
-              1
-            ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+        decoration: decoration,
         child: BlocBuilder<PrimaryCryptoBloc, PrimaryCryptoState>(
           builder: (context, state) {
             if (!state.loading) {
