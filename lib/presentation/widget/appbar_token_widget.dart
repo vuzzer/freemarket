@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/arguments_screen.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/domain/entities/crypto.dart';
@@ -10,7 +9,6 @@ import 'package:defi/presentation/screens/choose_alert_screen.dart';
 import 'package:defi/styles/font_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;

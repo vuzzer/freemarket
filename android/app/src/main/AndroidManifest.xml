@@ -8,10 +8,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-    <service
-        android:name="id.flutter.flutter_background_service.BackgroundService"
-        android:foregroundServiceType="shortService"
-    />
 
    <application
         android:label="defi"

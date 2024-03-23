@@ -11,6 +11,7 @@ class MyThemeMode {
   static ThemeData themeData() {
     bool isDarkMode = sl<BrightnessBloc>().state.brightness == Mode.dark;
     return ThemeData(
+        useMaterial3: false,
         primarySwatch: Colors.blue,
         primaryColor: Colors.white,
         fontFamily: 'Raleway',

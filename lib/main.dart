@@ -13,8 +13,8 @@ import 'package:defi/presentation/blocs/notification-triggered/notification_trig
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/presentation/provider/network_provider.dart';
 import 'package:defi/service_locator.dart';
-import 'package:defi/styles/font_family.dart';
 import 'package:defi/styles/my_theme_mode.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,12 +22,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
 
   await setupLocator();
 
@@ -41,11 +41,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  // Dark therme for mobile app
-  /* SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarBrightness: Brightness.dark,
-  )); */
 
   // Date Format
   await initializeDateFormatting(Intl.getCurrentLocale(), null);
@@ -94,12 +89,12 @@ class _MyAppState extends State<MyApp> {
         minTextAdapt: true,
         builder: (context, child) => GlobalLoaderOverlay(
             useDefaultLoading: false,
-            overlayWidget: const Center(
-              child: SpinKitCubeGrid(
-                color: Colors.white,
-                size: 50.0,
-              ),
-            ),
+            overlayWidgetBuilder: (_) => const Center(
+                  child: SpinKitCubeGrid(
+                    color: Colors.white,
+                    size: 50.0,
+                  ),
+                ),
             child: BlocBuilder<BrightnessBloc, BrightnessState>(
                 builder: (context, state) {
               SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -108,6 +103,7 @@ class _MyAppState extends State<MyApp> {
                     : Brightness.light,
               ));
               return MaterialApp(
+                  
                   title: 'Freemarket',
                   debugShowCheckedModeBanner: false,
                   theme: MyThemeMode.themeData(),
