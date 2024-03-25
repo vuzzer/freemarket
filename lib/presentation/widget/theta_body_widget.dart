@@ -4,6 +4,7 @@ import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/widget/crypto_asset_widget.dart';
 import 'package:defi/presentation/widget/favoris_list_widget.dart';
 import 'package:defi/styles/font_color.dart';
+import 'package:defi/styles/media_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +24,7 @@ class ThetaBodyWidget extends StatelessWidget {
       return Expanded(
         child: Container(
             width: size.screenWidth,
-            decoration:  BoxDecoration(
+            decoration: BoxDecoration(
                 color: isDarkMode ? blue1 : FontColor.white,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(30),
@@ -34,27 +35,34 @@ class ThetaBodyWidget extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                      decoration:  BoxDecoration(
-                          border: Border(bottom: BorderSide(color: isDarkMode ? blueLight : greyLight ))),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                                  color: isDarkMode ? blueLight : greyLight))),
                       child: TabBar(
                           splashBorderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(30),
                               topRight: Radius.circular(30)),
                           indicatorPadding:
                               const EdgeInsets.symmetric(horizontal: 15),
-                              indicatorColor: isDarkMode ? FontColor.blue : FontColor.greyLight,
+                          indicatorColor:
+                              isDarkMode ? FontColor.blue : FontColor.greyLight,
                           unselectedLabelColor: greyLight,
-                          tabs: const [
+                          tabs: [
                             Tab(
                               child: Text(
                                 'Cryptos',
-                                style: TextStyle(fontWeight: FontWeight.w700),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: Media.headline4),
                               ),
                             ),
                             Tab(
                               child: Text(
                                 'Favoris',
-                                style: TextStyle(fontWeight: FontWeight.w700),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: Media.headline4),
                               ),
                             ),
                           ])),

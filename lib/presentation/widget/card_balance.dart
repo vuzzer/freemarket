@@ -3,11 +3,12 @@ import 'package:defi/core/enum.dart';
 import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/styles/font_family.dart';
+import 'package:defi/styles/media_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CardBalance extends StatefulWidget {
-  const CardBalance({Key? key}) : super(key: key);
+  const CardBalance({super.key});
 
   @override
   State<CardBalance> createState() => _CardBalanceState();
@@ -35,8 +36,8 @@ class _CardBalanceState extends State<CardBalance> {
     }
 
     return Container(
-        width: 400,
-        height: 220,
+        width: Media.width,
+        height: Media.height,
         padding: const EdgeInsets.only(left: 30),
         margin: const EdgeInsets.symmetric(horizontal: 8),
         decoration: decoration,
@@ -51,20 +52,15 @@ class _CardBalanceState extends State<CardBalance> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 30,
-                  ),
+                  Media.topSpace,
                   AutoSizeText(
                     "${state.crypto?.name}",
                     style: TextStyle(
                         color: Theme.of(context).textTheme.headline6!.color,
-                        fontSize:
-                            Theme.of(context).textTheme.headline6!.fontSize,
+                        fontSize: Media.headline2,
                         fontFamily: FontFamily.montSerrat),
                   ),
-                  const SizedBox(
-                    height: 60,
-                  ),
+                  Media.middleSpace,
                   TweenAnimationBuilder(
                       tween: Tween<double>(begin: 68000, end: currentPrice),
                       duration: const Duration(seconds: 2),
@@ -75,10 +71,7 @@ class _CardBalanceState extends State<CardBalance> {
                                     .textTheme
                                     .headline3!
                                     .color,
-                                fontSize: Theme.of(context)
-                                    .textTheme
-                                    .headline3!
-                                    .fontSize,
+                                fontSize: Media.headline1,
                                 fontFamily: FontFamily.montSerrat),
                           )),
                   const SizedBox(
@@ -101,8 +94,7 @@ class _CardBalanceState extends State<CardBalance> {
                         "${state.crypto?.priceChange24h?.toStringAsFixed(2)}%",
                         style: TextStyle(
                           color: Theme.of(context).textTheme.headline6!.color,
-                          fontSize:
-                              Theme.of(context).textTheme.headline6!.fontSize,
+                          fontSize: Media.headline3,
                           fontFamily: FontFamily.montSerrat,
                         ),
                       ),

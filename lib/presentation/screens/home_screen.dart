@@ -16,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/card_balance.dart';
 import '../widget/theta_body_widget.dart';
@@ -66,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void refreshData() {
     sl<CryptosBloc>().add(const UpdateCryptoInfo());
+
     final cryptoData = sl<CryptosBloc>()
         .state
         .cryptos
@@ -111,6 +113,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
+                                    IconButton(
+                                        onPressed: () async {
+                                          await Share.shareUri(Uri.parse(
+                                              "https://github.com/vuzzer"));
+                                        },
+                                        splashRadius: 20,
+                                        padding: EdgeInsets.zero,
+                                        icon: const Icon(Icons.share)),
+                                    const Spacer(),
                                     BlocBuilder<BrightnessBloc,
                                             BrightnessState>(
                                         builder: (context, state) {

@@ -49,7 +49,6 @@ class BackgroundService {
     // Android configuration
     if (instance is AndroidServiceInstance) {
       instance.setAsForegroundService();
-      instance.setAsBackgroundService();
     }
 
     // Listen to fetch data crypto
