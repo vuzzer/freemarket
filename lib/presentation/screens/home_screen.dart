@@ -6,7 +6,6 @@ import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/active-notification/active_notification_bloc.dart';
 import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
-import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/presentation/screens/notification_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_color.dart';
@@ -17,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/card_balance.dart';
 import '../widget/theta_body_widget.dart';
@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void refreshData() {
     sl<CryptosBloc>().add(const UpdateCryptoInfo());
-   
+
     final cryptoData = sl<CryptosBloc>()
         .state
         .cryptos
@@ -113,6 +113,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
+                                    IconButton(
+                                        onPressed: () async {
+                                          await Share.shareUri(Uri.parse(
+                                              "https://github.com/vuzzer"));
+                                        },
+                                        splashRadius: 20,
+                                        padding: EdgeInsets.zero,
+                                        icon: const Icon(Icons.share)),
+                                    const Spacer(),
                                     BlocBuilder<BrightnessBloc,
                                             BrightnessState>(
                                         builder: (context, state) {
