@@ -23,7 +23,7 @@ import '../widget/theta_body_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/home";
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

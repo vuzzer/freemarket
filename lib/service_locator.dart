@@ -74,7 +74,7 @@ Future<void> configApp() async {
   sl.registerFactory(() => MarketTokenBloc(tokenMarketUsecase: sl()));
   sl.registerLazySingleton(() => CryptosBloc(cryptoInfoUseCase: sl()));
   sl.registerFactory(() => FavorisBloc(favorisCryptoUsecase: sl()));
-  sl.registerFactory(() => PrimaryCryptoBloc(primaryCryptoUsecase: sl()));
+  sl.registerLazySingleton(() => PrimaryCryptoBloc(primaryCryptoUsecase: sl()));
   sl.registerLazySingleton(() => NotificationPriceBloc(
       notificationPriceUsecase: sl())); // for notification based price
   sl.registerLazySingleton(
@@ -91,7 +91,7 @@ Future<void> configApp() async {
   // Notification based price usecases
   sl.registerLazySingleton(() => NotificationPriceUsecase(sl()));
   sl.registerLazySingleton(() => ActiveNotificationUsecase(sl()));
-   sl.registerLazySingleton(() => BrightnessUsecases(sl()));
+  sl.registerLazySingleton(() => BrightnessUsecases(sl()));
 
   //! Repositories
   sl.registerLazySingleton<TokenMarketRepository>(() =>
@@ -107,8 +107,7 @@ Future<void> configApp() async {
       () => NotificationPriceRepoImpl(notificationPriceData: sl()));
   sl.registerLazySingleton<ActiveNotificationRepo>(
       () => ActiveNotificationRepoImpl(sl()));
-    sl.registerLazySingleton<BrightnessRepo>(
-      () => BrightnessRepoImpl(sl()));
+  sl.registerLazySingleton<BrightnessRepo>(() => BrightnessRepoImpl(sl()));
 
   //! Data
   sl.registerLazySingleton<TokenMarketDataSource>(
@@ -121,8 +120,7 @@ Future<void> configApp() async {
       () => NotificationPriceDataImpl());
   sl.registerLazySingleton<ActiveNotificationData>(
       () => ActiveNotificationDataImpl());
-    sl.registerLazySingleton<BrightnessData>(
-      () => BrightnessDataImpl());
+  sl.registerLazySingleton<BrightnessData>(() => BrightnessDataImpl());
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(

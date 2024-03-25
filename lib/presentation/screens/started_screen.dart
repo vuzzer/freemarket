@@ -1,9 +1,11 @@
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/core/notifications/setup_notification.dart';
+import 'package:defi/generated/locale_keys.g.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/screens/home_screen.dart';
 import 'package:defi/presentation/widget/adaptive_dialog.dart';
 import 'package:defi/service_locator.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -126,11 +128,11 @@ class _StartedScreenState extends State<StartedScreen> {
                                         borderRadius:
                                             BorderRadius.circular(10))),
                                 child: const Text(
-                                  'Sign In',
+                                  LocaleKeys.startScreen_button,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
-                                )))
+                                ).tr()))
                       ],
                     ),
                   ));

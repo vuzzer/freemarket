@@ -1,0 +1,12 @@
+name: merge-freemarket-to-main
+on: 
+    push:
+        branches: [freemarket]
+jobs:
+    test:
+        name: "Job must merge automatically freemarket to main"
+        runs-on: ubuntu-latest
+        steps:
+            - name: Writing hello world message
+              run: echo "Hello world"
+

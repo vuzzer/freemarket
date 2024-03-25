@@ -1,7 +1,9 @@
 import 'package:defi/core/background/background_service.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/core/notifications/setup_notification.dart';
+import 'package:defi/core/utils_process.dart';
 import 'package:defi/firebase_options.dart';
+import 'package:defi/generated/codegen_loader.g.dart';
 import 'package:defi/get_routes.dart';
 import 'package:defi/presentation/blocs/active-notification/active_notification_bloc.dart';
 import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
@@ -24,6 +26,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
+import 'package:logger/logger.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,22 +53,27 @@ void main() async {
   await sl<SetupNotification>().initialize();
 
   // Running app
-  runApp(MultiBlocProvider(providers: [
-    Provider(create: (context) => NetworkProvider()),
-    BlocProvider(create: (context) => sl<MarketTokenBloc>()),
-    BlocProvider(
-        create: (context) =>
-            sl<ActiveNotificationBloc>()..add(const GetActiveNotification())),
-    BlocProvider(create: (context) => sl<CryptosBloc>()),
-    BlocProvider(
-        create: (context) => sl<FavorisBloc>()..add(LoadFavorisEvent())),
-    BlocProvider(create: (context) => sl<NotificationPriceBloc>()),
-    BlocProvider(
-        create: (context) => sl<PrimaryCryptoBloc>()
-          ..add(const PrimaryCryptoEvent.getPrimaryCrypto())),
-    BlocProvider(create: (context) => sl<NotificationTriggeredBloc>()),
-    BlocProvider(create: (context) => sl<BrightnessBloc>())
-  ], child: const MyApp()));
+  runApp(EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('fr')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en'),
+      assetLoader: const CodegenLoader(),
+      child: MultiBlocProvider(providers: [
+        Provider(create: (context) => NetworkProvider()),
+        BlocProvider(create: (context) => sl<MarketTokenBloc>()),
+        BlocProvider(
+            create: (context) => sl<ActiveNotificationBloc>()
+              ..add(const GetActiveNotification())),
+        BlocProvider(create: (context) => sl<CryptosBloc>()),
+        BlocProvider(
+            create: (context) => sl<FavorisBloc>()..add(LoadFavorisEvent())),
+        BlocProvider(create: (context) => sl<NotificationPriceBloc>()),
+        BlocProvider(
+            create: (context) => sl<PrimaryCryptoBloc>()
+              ..add(const PrimaryCryptoEvent.getPrimaryCrypto())),
+        BlocProvider(create: (context) => sl<NotificationTriggeredBloc>()),
+        BlocProvider(create: (context) => sl<BrightnessBloc>())
+      ], child: const MyApp())));
 }
 
 class MyApp extends StatefulWidget {
@@ -103,6 +112,9 @@ class _MyAppState extends State<MyApp> {
                     : Brightness.light,
               ));
               return MaterialApp(
+                  localizationsDelegates: context.localizationDelegates,
+                  supportedLocales: context.supportedLocales,
+                  locale: extractPrimaryLocale(context.deviceLocale),
                   title: 'Freemarket',
                   debugShowCheckedModeBanner: false,
                   theme: MyThemeMode.themeData(),
