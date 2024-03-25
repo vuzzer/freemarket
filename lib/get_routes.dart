@@ -4,10 +4,11 @@ import 'package:defi/presentation/screens/home_screen.dart';
 import 'package:defi/presentation/screens/notification_screen.dart';
 import 'package:defi/presentation/screens/set_alert_screen.dart';
 import 'package:defi/presentation/screens/started_screen.dart';
+import 'package:defi/styles/media_screen.dart';
 import 'package:flutter/material.dart';
 
 Map<String, WidgetBuilder> getRoutes(context) {
-
+  MediaScreen.media();
   return {
     StartedScreen.routeName: (context) {
       return const StartedScreen();

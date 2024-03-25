@@ -3,6 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:defi/core/utils_type.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/usecases/crypto-info/crypto_info_usecases.dart';
+import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
+import 'package:defi/service_locator.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -44,6 +46,9 @@ class CryptosBloc extends Bloc<CryptosEvent, CryptoState> {
           final newCrypto = List<CryptoInfo>.from(cryptos);
           emit(state.copyWith(cryptos: newCrypto));
         });
+
+        // update crypto favoris
+        sl<PrimaryCryptoBloc>().add(const GetPrimaryCrypto() );
       });
     });
   }

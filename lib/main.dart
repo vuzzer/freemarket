@@ -103,7 +103,6 @@ class _MyAppState extends State<MyApp> {
                     : Brightness.light,
               ));
               return MaterialApp(
-                  
                   title: 'Freemarket',
                   debugShowCheckedModeBanner: false,
                   theme: MyThemeMode.themeData(),

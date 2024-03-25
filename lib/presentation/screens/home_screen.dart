@@ -6,6 +6,7 @@ import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/active-notification/active_notification_bloc.dart';
 import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
+import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
 import 'package:defi/presentation/screens/notification_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_color.dart';
@@ -66,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void refreshData() {
     sl<CryptosBloc>().add(const UpdateCryptoInfo());
+   
     final cryptoData = sl<CryptosBloc>()
         .state
         .cryptos
