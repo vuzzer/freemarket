@@ -2,6 +2,8 @@ import 'package:defi/core/create_unique_id.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
+import 'package:defi/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
@@ -180,4 +182,21 @@ Locale extractPrimaryLocale(Locale languageCode) {
   String primaryLanguage = parts[0];
   Logger().d(primaryLanguage);
   return Locale(primaryLanguage);
+}
+
+// Format number
+String formatNumber(num number) {
+  if (number >= 1000000000) {
+    return LocaleKeys.billion.tr(namedArgs: {
+      'billion': '\$${(number / 1000000000).toStringAsFixed(1)}'
+    });
+  } else if (number >= 1000000) {
+    return LocaleKeys.million.tr(
+        namedArgs: {'million': '\$${(number / 1000000).toStringAsFixed(1)}'});
+  } else if (number >= 1000) {
+    return LocaleKeys.kilo
+        .tr(namedArgs: {'kilo': '\$${(number / 1000).toStringAsFixed(1)}'});
+  } else {
+    return '\$${number.toStringAsFixed(0)}';
+  }
 }

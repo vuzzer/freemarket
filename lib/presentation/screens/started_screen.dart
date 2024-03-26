@@ -12,7 +12,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class StartedScreen extends StatefulWidget {
   static const routeName = "/";
-  const StartedScreen({Key? key}) : super(key: key);
+  const StartedScreen({super.key});
 
   @override
   State<StartedScreen> createState() => _StartedScreenState();
@@ -83,30 +83,30 @@ class _StartedScreenState extends State<StartedScreen> {
                         const SizedBox(
                           height: 2,
                         ),
-                        const Column(
+                        Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Manage your',
+                              const Text(
+                                LocaleKeys.startScreen_helloMsg1,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 60,
                                     fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                'crypto assets',
+                              ).tr(),
+                              const Text(
+                                LocaleKeys.startScreen_helloMsg2,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 60,
                                     fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                'simply',
+                              ).tr(),
+                              const Text(
+                                LocaleKeys.startScreen_helloMsg3,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 60,
                                     fontWeight: FontWeight.bold),
-                              ),
+                              ).tr(),
                             ]),
                         Align(
                             alignment: Alignment.bottomCenter,

@@ -16,13 +16,63 @@ class CodegenLoader extends AssetLoader{
 
   static const Map<String,dynamic> en = {
   "startScreen": {
-    "button": "Get started"
-  }
+    "button": "Get started",
+    "helloMsg1": "Manage your crypto assets simply",
+    "helloMsg2": "your crypto assets",
+    "helloMsg3": "simply"
+  },
+  "cryptoAssetScreen": {
+    "msg": "The data presented is for informational purposes only. It is provided by CoingecKo, and shown on an as is basis, without representation or warranty of any kind.",
+    "frame1": "Day",
+    "frame2": "Week",
+    "frame3": "Month",
+    "frame4": "Year",
+    "price": "Price",
+    "24high": "24h High",
+    "24low": "24h Low",
+    "rank": "Market Cap Rank",
+    "marketCap": "Market Cap",
+    "supply": "Circulating Supply",
+    "totalSupply": "Total Supply",
+    "allTimeHigh": "All-Time High",
+    "allTimeLow": "All-Time Low",
+    "alertTitle": "Alert",
+    "alertMsg": "Receive a one-time notification for this stocks when your conditions are mets"
+  },
+  "alertBtn": "Create Alert",
+  "billion": "{billion}B",
+  "million": "{million}M",
+  "kilo": "{kilo}k"
 };
 static const Map<String,dynamic> fr = {
   "startScreen": {
-    "button": "Demarrer"
-  }
+    "button": "Demarrer",
+    "helloMsg1": "Gérez",
+    "helloMsg2": "vos actifs crypto",
+    "helloMsg3": "en toute simplicité"
+  },
+  "cryptoAssetScreen": {
+    "msg": "Les données présentées le sont à titre informatif uniquement. Elles sont fournies par CoingecKo et présentées en l'état, sans déclaration ni garantie d'aucune sorte.",
+    "frame1": "Jour",
+    "frame2": "Semaine",
+    "frame3": "Mois",
+    "frame4": "Année",
+    "price": "Prix",
+    "24high": "Hausse 24h",
+    "24low": "Baisse 24h",
+    "rank": "Rang",
+    "marketCap": "Capitalisation",
+    "supply": "Offre en circulation",
+    "totalSupply": "Offre totale",
+    "allTimeHigh": "Hausse historique",
+    "allTimeLow": "Baisse historique",
+    "alertTitle": "Alerte",
+    "alertMsg": "Recevez une notification unique pour cette crypto-monnaie lorsque vos conditions sont remplies."
+  },
+  "alertBtn": "Créer une alerte",
+  "billion": "{billion}Md",
+  "million": "{million}M",
+  "kilo": "{kilo}k"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "fr": fr};
 }
