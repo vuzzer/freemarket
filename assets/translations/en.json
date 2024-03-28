@@ -1,7 +1,7 @@
 {
     "startScreen":{
         "button": "Get started", 
-        "helloMsg1": "Manage your crypto assets simply",
+        "helloMsg1": "Manage",
         "helloMsg2": "your crypto assets",
         "helloMsg3": "simply"
     },

@@ -17,7 +17,7 @@ class CodegenLoader extends AssetLoader{
   static const Map<String,dynamic> en = {
   "startScreen": {
     "button": "Get started",
-    "helloMsg1": "Manage your crypto assets simply",
+    "helloMsg1": "Manage",
     "helloMsg2": "your crypto assets",
     "helloMsg3": "simply"
   },
@@ -38,6 +38,12 @@ class CodegenLoader extends AssetLoader{
     "allTimeLow": "All-Time Low",
     "alertTitle": "Alert",
     "alertMsg": "Receive a one-time notification for this stocks when your conditions are mets"
+  },
+  "notification": {
+    "priceCrosses": "Price crosses",
+    "down": "Down {}",
+    "up": "Up {}",
+    "scheduled": "Every day at"
   },
   "alertBtn": "Create Alert",
   "billion": "{billion}B",
@@ -68,6 +74,12 @@ static const Map<String,dynamic> fr = {
     "allTimeLow": "Baisse historique",
     "alertTitle": "Alerte",
     "alertMsg": "Recevez une notification unique pour cette crypto-monnaie lorsque vos conditions sont remplies."
+  },
+  "notification": {
+    "priceCrosses": "Croisement du prix",
+    "down": "En baisse de {}",
+    "up": "En hausse de {}",
+    "scheduled": "Every day at"
   },
   "alertBtn": "Créer une alerte",
   "billion": "{billion}Md",

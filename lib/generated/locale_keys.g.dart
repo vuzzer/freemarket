@@ -23,6 +23,11 @@ abstract class  LocaleKeys {
   static const cryptoAssetScreen_alertTitle = 'cryptoAssetScreen.alertTitle';
   static const cryptoAssetScreen_alertMsg = 'cryptoAssetScreen.alertMsg';
   static const cryptoAssetScreen = 'cryptoAssetScreen';
+  static const notification_priceCrosses = 'notification.priceCrosses';
+  static const notification_down = 'notification.down';
+  static const notification_up = 'notification.up';
+  static const notification_scheduled = 'notification.scheduled';
+  static const notification = 'notification';
   static const alertBtn = 'alertBtn';
   static const billion = 'billion';
   static const million = 'million';

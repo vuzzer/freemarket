@@ -21,21 +21,25 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
 
-
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
-  await setupLocator();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  await EasyLocalization.ensureInitialized();
 
   // Create bloc and service
   await configApp();
+
+  // Notification configuration
+  await sl<SetupNotification>().initialize();
 
   //! Background service
   await BackgroundService.initialize();
@@ -47,9 +51,6 @@ void main() async {
 
   // Date Format
   await initializeDateFormatting(Intl.getCurrentLocale(), null);
-
-  // Notification configuration
-  await sl<SetupNotification>().initialize();
 
   // Running app
   runApp(EasyLocalization(
@@ -87,6 +88,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     sl<BrightnessBloc>().add(const GetBrightness());
+    FlutterNativeSplash.remove();
     super.initState();
   }
 

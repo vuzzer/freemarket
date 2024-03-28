@@ -180,7 +180,6 @@ NotificationCrypto updateNotification(
 Locale extractPrimaryLocale(Locale languageCode) {
   List<String> parts = languageCode.toString().split('_');
   String primaryLanguage = parts[0];
-  Logger().d(primaryLanguage);
   return Locale(primaryLanguage);
 }
 
