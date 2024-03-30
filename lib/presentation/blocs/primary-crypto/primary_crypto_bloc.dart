@@ -59,8 +59,8 @@ class PrimaryCryptoBloc extends Bloc<PrimaryCryptoEvent, PrimaryCryptoState> {
                         left(CryptoError("Erreur lors du chargement")),
                   )), (removed) {
             // Call action getPrimaryCrypto to update state
-          
             add(const PrimaryCryptoEvent.getPrimaryCrypto());
+            
           });
         });
       },

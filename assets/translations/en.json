@@ -1,0 +1,36 @@
+{
+    "startScreen":{
+        "button": "Get started", 
+        "helloMsg1": "Manage",
+        "helloMsg2": "your crypto assets",
+        "helloMsg3": "simply"
+    },
+    "cryptoAssetScreen":{
+        "msg": "The data presented is for informational purposes only. It is provided by CoingecKo, and shown on an as is basis, without representation or warranty of any kind.",
+        "frame1": "Day",
+        "frame2": "Week",
+        "frame3": "Month",
+        "frame4": "Year",
+        "price": "Price",
+        "24high": "24h High",
+        "24low": "24h Low",
+        "rank": "Market Cap Rank",
+        "marketCap": "Market Cap",
+        "supply": "Circulating Supply",
+        "totalSupply": "Total Supply",
+        "allTimeHigh": "All-Time High",
+        "allTimeLow": "All-Time Low",
+        "alertTitle": "Alert",
+        "alertMsg":  "Receive a one-time notification for this stocks when your conditions are mets"
+    },
+    "notification":{
+        "priceCrosses": "Price crosses",
+        "down": "Down {}",
+        "up": "Up {}",
+        "scheduled": "Every day at"
+    },
+    "alertBtn": "Create Alert",
+    "billion":"{billion}B",
+    "million":"{million}M",
+    "kilo":"{kilo}k"
+}

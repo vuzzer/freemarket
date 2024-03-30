@@ -1,0 +1,36 @@
+{
+    "startScreen":{
+        "button": "Demarrer",
+        "helloMsg1": "Gérez",
+        "helloMsg2": "vos actifs crypto",
+        "helloMsg3": "en toute simplicité"
+    },
+    "cryptoAssetScreen":{
+        "msg": "Les données présentées le sont à titre informatif uniquement. Elles sont fournies par CoingecKo et présentées en l'état, sans déclaration ni garantie d'aucune sorte.",
+        "frame1": "Jour",
+        "frame2": "Semaine",
+        "frame3": "Mois",
+        "frame4": "Année",
+        "price": "Prix",
+        "24high": "Hausse 24h",
+        "24low": "Baisse 24h",
+        "rank": "Rang",
+        "marketCap": "Capitalisation",
+        "supply": "Offre en circulation",
+        "totalSupply": "Offre totale",
+        "allTimeHigh": "Hausse historique",
+        "allTimeLow": "Baisse historique",
+        "alertTitle": "Alerte",
+        "alertMsg":  "Recevez une notification unique pour cette crypto-monnaie lorsque vos conditions sont remplies."
+    },
+    "notification":{
+        "priceCrosses": "Croisement du prix",
+        "down": "En baisse de {}",
+        "up": "En hausse de {}",
+        "scheduled": "Every day at"
+    },
+    "alertBtn": "Créer une alerte",
+    "billion":"{billion}Md",
+    "million":"{million}M",
+    "kilo":"{kilo}k"
+}

@@ -1,16 +1,18 @@
 import 'package:defi/core/network/network_info.dart';
 import 'package:defi/core/notifications/setup_notification.dart';
+import 'package:defi/generated/locale_keys.g.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/screens/home_screen.dart';
 import 'package:defi/presentation/widget/adaptive_dialog.dart';
 import 'package:defi/service_locator.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class StartedScreen extends StatefulWidget {
   static const routeName = "/";
-  const StartedScreen({Key? key}) : super(key: key);
+  const StartedScreen({super.key});
 
   @override
   State<StartedScreen> createState() => _StartedScreenState();
@@ -81,30 +83,30 @@ class _StartedScreenState extends State<StartedScreen> {
                         const SizedBox(
                           height: 2,
                         ),
-                        const Column(
+                        Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Manage your',
+                              const Text(
+                                LocaleKeys.startScreen_helloMsg1,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 60,
                                     fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                'crypto assets',
+                              ).tr(),
+                              const Text(
+                                LocaleKeys.startScreen_helloMsg2,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 60,
                                     fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                'simply',
+                              ).tr(),
+                              const Text(
+                                LocaleKeys.startScreen_helloMsg3,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 60,
                                     fontWeight: FontWeight.bold),
-                              ),
+                              ).tr(),
                             ]),
                         Align(
                             alignment: Alignment.bottomCenter,
@@ -126,11 +128,11 @@ class _StartedScreenState extends State<StartedScreen> {
                                         borderRadius:
                                             BorderRadius.circular(10))),
                                 child: const Text(
-                                  'Sign In',
+                                  LocaleKeys.startScreen_button,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
-                                )))
+                                ).tr()))
                       ],
                     ),
                   ));

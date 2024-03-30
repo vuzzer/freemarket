@@ -1,4 +1,4 @@
-package com.example.defi
+package com.legenddev.freemarket
 
 import io.flutter.embedding.android.FlutterActivity
 

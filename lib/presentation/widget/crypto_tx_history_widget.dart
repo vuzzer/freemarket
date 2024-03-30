@@ -1,9 +1,12 @@
 import 'package:defi/core/enum.dart';
+import 'package:defi/core/utils_process.dart';
 import 'package:defi/domain/entities/crypto.dart';
+import 'package:defi/generated/locale_keys.g.dart';
 import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/widget/display_notification_setup.dart';
 import 'package:defi/styles/font_color.dart';
 import 'package:defi/styles/font_family.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,8 +15,7 @@ import '../../constants/app_colors.dart';
 
 class CryptoTxHistoryWidget extends StatelessWidget {
   final CryptoInfo crypto;
-  const CryptoTxHistoryWidget({Key? key, required this.crypto})
-      : super(key: key);
+  const CryptoTxHistoryWidget({super.key, required this.crypto});
   final space = 4.0;
 
   @override
@@ -39,10 +41,13 @@ class CryptoTxHistoryWidget extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Text(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed euismod nisi porta lorem mollis aliquam ut porttitor leo.",
-                    style: TextStyle(color: darkMode ? Colors.grey.withOpacity(0.6) : FontColor.black ),
+                    LocaleKeys.cryptoAssetScreen_msg,
+                    style: TextStyle(
+                        color: darkMode
+                            ? Colors.grey.withOpacity(0.6)
+                            : FontColor.black),
                     textAlign: TextAlign.start,
-                  )),
+                  ).tr()),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -51,7 +56,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text("Price",
+                      Text(LocaleKeys.cryptoAssetScreen_price.tr(),
                           style: TextStyle(
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontFamily:
@@ -61,7 +66,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                       SizedBox(
                         height: space,
                       ),
-                      Text("24 High",
+                      Text(LocaleKeys.cryptoAssetScreen_24high.tr(),
                           style: TextStyle(
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontFamily:
@@ -71,7 +76,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                       SizedBox(
                         height: space,
                       ),
-                      Text("24h Low",
+                      Text(LocaleKeys.cryptoAssetScreen_24low.tr(),
                           style: TextStyle(
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontFamily:
@@ -81,7 +86,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                       SizedBox(
                         height: space,
                       ),
-                      Text("Market Cap Rank",
+                      Text(LocaleKeys.cryptoAssetScreen_rank.tr(),
                           style: TextStyle(
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontFamily:
@@ -91,7 +96,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                       SizedBox(
                         height: space,
                       ),
-                      Text("Market Cap",
+                      Text(LocaleKeys.cryptoAssetScreen_marketCap.tr(),
                           style: TextStyle(
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontFamily:
@@ -101,7 +106,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                       SizedBox(
                         height: space,
                       ),
-                      Text("Circulating Supply",
+                      Text(LocaleKeys.cryptoAssetScreen_supply.tr(),
                           style: TextStyle(
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontFamily:
@@ -111,7 +116,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                       SizedBox(
                         height: space,
                       ),
-                      Text("Total Supply",
+                      Text(LocaleKeys.cryptoAssetScreen_totalSupply.tr(),
                           style: TextStyle(
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontFamily:
@@ -121,7 +126,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                       SizedBox(
                         height: space,
                       ),
-                      Text("All-Time High",
+                      Text(LocaleKeys.cryptoAssetScreen_allTimeHigh.tr(),
                           style: TextStyle(
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontFamily:
@@ -131,7 +136,7 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                       SizedBox(
                         height: space,
                       ),
-                      Text("All-Time Low",
+                      Text(LocaleKeys.cryptoAssetScreen_allTimeLow.tr(),
                           style: TextStyle(
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontFamily:
@@ -140,14 +145,15 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                           )),
                     ],
                   ),
+                  const Spacer(),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
-                        "\$ 897",
+                        formatNumber(crypto.currentPrice as num),
                         style: TextStyle(
-                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontFamily: FontFamily.robotoCondensedItalic,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
                             color: color),
@@ -156,9 +162,9 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                         height: space,
                       ),
                       Text(
-                        "\$ 890",
+                        formatNumber(crypto.allTimeHigh24h as num),
                         style: TextStyle(
-                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontFamily: FontFamily.robotoCondensedItalic,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
                             color: color),
@@ -167,9 +173,9 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                         height: space,
                       ),
                       Text(
-                        "\$ 89",
+                        formatNumber(crypto.allTimeLow24h as num),
                         style: TextStyle(
-                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontFamily: FontFamily.robotoCondensedItalic,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
                             color: color),
@@ -178,9 +184,9 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                         height: space,
                       ),
                       Text(
-                        "3",
+                        '${crypto.marketCapRank}',
                         style: TextStyle(
-                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontFamily: FontFamily.robotoCondensedItalic,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
                             color: color),
@@ -188,16 +194,16 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                       SizedBox(
                         height: space,
                       ),
-                      Text("7M",
+                      Text(formatNumber(crypto.marketCap as num),
                           style: TextStyle(
-                              fontFamily: FontFamily.robotoCondensedBold,
+                              fontFamily: FontFamily.robotoCondensedItalic,
                               fontSize: theme.textTheme.displayMedium!.fontSize,
                               fontWeight: FontWeight.w900,
                               color: color)),
                       Text(
-                        "19.7K",
+                        formatNumber(crypto.circulatingSupply as num),
                         style: TextStyle(
-                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontFamily: FontFamily.robotoCondensedItalic,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
                             color: color),
@@ -206,9 +212,9 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                         height: space,
                       ),
                       Text(
-                        "20K",
+                        formatNumber(crypto.totalSupply as num),
                         style: TextStyle(
-                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontFamily: FontFamily.robotoCondensedItalic,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
                             color: color),
@@ -217,9 +223,9 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                         height: space,
                       ),
                       Text(
-                        "19.7K",
+                        formatNumber(crypto.allTimeHigh as num),
                         style: TextStyle(
-                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontFamily: FontFamily.robotoCondensedItalic,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
                             color: color),
@@ -228,9 +234,9 @@ class CryptoTxHistoryWidget extends StatelessWidget {
                         height: space,
                       ),
                       Text(
-                        "20K",
+                        formatNumber(crypto.allTimeLow as num),
                         style: TextStyle(
-                            fontFamily: FontFamily.robotoCondensedBold,
+                            fontFamily: FontFamily.robotoCondensedItalic,
                             fontSize: theme.textTheme.displayMedium!.fontSize,
                             fontWeight: FontWeight.w900,
                             color: color),

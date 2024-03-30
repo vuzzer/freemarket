@@ -26,7 +26,6 @@ import 'package:defi/domain/usecases/favoris/favoris_crypto_usecase.dart';
 import 'package:defi/domain/usecases/market/token_market_usecase.dart';
 import 'package:defi/domain/usecases/notification-price/notification_price_usecase.dart';
 import 'package:defi/domain/usecases/primary-crypto/primary_crypto_usecase.dart';
-import 'package:defi/domain/usecases/setup/wallet_setup_handler.dart';
 import 'package:defi/presentation/blocs/active-notification/active_notification_bloc.dart';
 import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/client/client_profil_bloc.dart';
@@ -36,13 +35,10 @@ import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/blocs/notification-triggered/notification_triggered_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
-import 'package:defi/services/address_service.dart';
-import 'package:defi/services/configuration_service.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'data/datasource/notification/notification_price_data.dart';
 import 'data/datasource/primary_crypto_data.dart';
@@ -51,19 +47,6 @@ import 'domain/repositories/notification-crypto/notification_price_repo.dart';
 
 GetIt sl = GetIt.instance;
 
-Future<void> setupLocator() async {
-  final sharedPrefs = await SharedPreferences.getInstance();
-  final configurationService = ConfigurationService(sharedPrefs);
-  final addressService = AddressService(configurationService);
-
-  //INJECT CONFIGURATIONSERVICE
-  sl.registerLazySingleton<ConfigurationService>(
-      () => ConfigurationService(sharedPrefs));
-
-  //INJECT WalletSetupHandler
-  sl.registerLazySingleton<WalletSetupHandler>(
-      () => WalletSetupHandler(addressService));
-}
 
 Future<void> configApp() async {
   //! Local Database
@@ -74,7 +57,7 @@ Future<void> configApp() async {
   sl.registerFactory(() => MarketTokenBloc(tokenMarketUsecase: sl()));
   sl.registerLazySingleton(() => CryptosBloc(cryptoInfoUseCase: sl()));
   sl.registerFactory(() => FavorisBloc(favorisCryptoUsecase: sl()));
-  sl.registerFactory(() => PrimaryCryptoBloc(primaryCryptoUsecase: sl()));
+  sl.registerLazySingleton(() => PrimaryCryptoBloc(primaryCryptoUsecase: sl()));
   sl.registerLazySingleton(() => NotificationPriceBloc(
       notificationPriceUsecase: sl())); // for notification based price
   sl.registerLazySingleton(
@@ -91,7 +74,7 @@ Future<void> configApp() async {
   // Notification based price usecases
   sl.registerLazySingleton(() => NotificationPriceUsecase(sl()));
   sl.registerLazySingleton(() => ActiveNotificationUsecase(sl()));
-   sl.registerLazySingleton(() => BrightnessUsecases(sl()));
+  sl.registerLazySingleton(() => BrightnessUsecases(sl()));
 
   //! Repositories
   sl.registerLazySingleton<TokenMarketRepository>(() =>
@@ -107,8 +90,7 @@ Future<void> configApp() async {
       () => NotificationPriceRepoImpl(notificationPriceData: sl()));
   sl.registerLazySingleton<ActiveNotificationRepo>(
       () => ActiveNotificationRepoImpl(sl()));
-    sl.registerLazySingleton<BrightnessRepo>(
-      () => BrightnessRepoImpl(sl()));
+  sl.registerLazySingleton<BrightnessRepo>(() => BrightnessRepoImpl(sl()));
 
   //! Data
   sl.registerLazySingleton<TokenMarketDataSource>(
@@ -121,8 +103,7 @@ Future<void> configApp() async {
       () => NotificationPriceDataImpl());
   sl.registerLazySingleton<ActiveNotificationData>(
       () => ActiveNotificationDataImpl());
-    sl.registerLazySingleton<BrightnessData>(
-      () => BrightnessDataImpl());
+  sl.registerLazySingleton<BrightnessData>(() => BrightnessDataImpl());
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(

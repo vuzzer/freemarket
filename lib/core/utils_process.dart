@@ -2,7 +2,10 @@ import 'package:defi/core/create_unique_id.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
-import 'package:intl/intl.dart';
+import 'package:defi/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+
 
 // Validate Value typed by user
 bool validateInput(AlertValue typeAlert, CryptoInfo crypto, String value) {
@@ -93,7 +96,7 @@ NotificationCrypto createNotification(
           idNotification: id,
           cryptoId: crypto.id,
           typeNotification: typeAlert,
-          image:  crypto.image,
+          image: crypto.image,
           futurePrice: futurePrice);
     case AlertValue.decrease:
       final percent = double.parse(value);
@@ -115,18 +118,18 @@ NotificationCrypto createNotification(
           cryptoId: crypto.id,
           typeNotification: typeAlert,
           percent: percent,
-           image: crypto.image,
+          image: crypto.image,
           futurePrice: futurePrice);
     case AlertValue.schedular:
       return NotificationCrypto(
-          idNotification: id,
-          cryptoId: crypto.id,
-           image: crypto.image,
-          typeNotification: typeAlert,
-          cron: value,);
+        idNotification: id,
+        cryptoId: crypto.id,
+        image: crypto.image,
+        typeNotification: typeAlert,
+        cron: value,
+      );
   }
 }
-
 
 NotificationCrypto updateNotification(
     AlertValue typeAlert, CryptoInfo crypto, String value, int id) {
@@ -137,7 +140,7 @@ NotificationCrypto updateNotification(
           idNotification: id,
           cryptoId: crypto.id,
           typeNotification: typeAlert,
-           image: crypto.image,
+          image: crypto.image,
           futurePrice: futurePrice);
     case AlertValue.decrease:
       final percent = double.parse(value);
@@ -148,7 +151,7 @@ NotificationCrypto updateNotification(
           cryptoId: crypto.id,
           typeNotification: typeAlert,
           percent: percent,
-           image: crypto.image,
+          image: crypto.image,
           futurePrice: futurePrice);
     case AlertValue.increase:
       final percent = double.parse(value);
@@ -159,14 +162,39 @@ NotificationCrypto updateNotification(
           cryptoId: crypto.id,
           typeNotification: typeAlert,
           percent: percent,
-           image: crypto.image,
+          image: crypto.image,
           futurePrice: futurePrice);
     case AlertValue.schedular:
       return NotificationCrypto(
-          idNotification: id,
-          cryptoId: crypto.id,
-           image: crypto.image,
-          typeNotification: typeAlert,
-          cron: value,);
+        idNotification: id,
+        cryptoId: crypto.id,
+        image: crypto.image,
+        typeNotification: typeAlert,
+        cron: value,
+      );
+  }
+}
+
+// Extract principal language
+Locale extractPrimaryLocale(Locale languageCode) {
+  List<String> parts = languageCode.toString().split('_');
+  String primaryLanguage = parts[0];
+  return Locale(primaryLanguage);
+}
+
+// Format number
+String formatNumber(num number) {
+  if (number >= 1000000000) {
+    return LocaleKeys.billion.tr(namedArgs: {
+      'billion': '\$${(number / 1000000000).toStringAsFixed(1)}'
+    });
+  } else if (number >= 1000000) {
+    return LocaleKeys.million.tr(
+        namedArgs: {'million': '\$${(number / 1000000).toStringAsFixed(1)}'});
+  } else if (number >= 1000) {
+    return LocaleKeys.kilo
+        .tr(namedArgs: {'kilo': '\$${(number / 1000).toStringAsFixed(1)}'});
+  } else {
+    return '\$${number.toStringAsFixed(0)}';
   }
 }

@@ -44,13 +44,11 @@ class CryptosBloc extends Bloc<CryptosEvent, CryptoState> {
         // update only data
         cryptos.fold((e) => null, (cryptos) {
           final newCrypto = List<CryptoInfo>.from(cryptos);
+          // update crypto favoris
+          sl<PrimaryCryptoBloc>().add(const GetPrimaryCrypto());
           emit(state.copyWith(cryptos: newCrypto));
         });
-
-        // update crypto favoris
-        sl<PrimaryCryptoBloc>().add(const GetPrimaryCrypto() );
       });
     });
   }
 }
-

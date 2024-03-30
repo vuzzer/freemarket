@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.defi">
+    package="com.legenddev.freemarket">
    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATION" />
     <uses-permission android:name="android.permission.VIBRATE"/>
@@ -10,9 +10,9 @@
 
 
    <application
-        android:label="defi"
+        android:label="Freemarket"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
