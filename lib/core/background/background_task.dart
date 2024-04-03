@@ -54,7 +54,8 @@ class BackgroundTask {
           // Display notification to screen
           if (await configNotification.awesomeNotifications
               .isNotificationAllowed()) {
-            configNotification.createAlertNotificationBasedPrice(notification);
+            // create notification display to user
+            configNotification.createAlertNotificationAsync(notification);
           }
 
           // Register date of notification create

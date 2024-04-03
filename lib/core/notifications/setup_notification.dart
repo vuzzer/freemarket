@@ -88,6 +88,42 @@ class SetupNotification {
             notificationLayout: NotificationLayout.BigPicture));
   }
 
+  // Called by background process
+  Future<void> createAlertNotificationAsync(
+      NotificationCrypto notification) async {
+    final id = createUniqueId();
+
+    // title of notification
+    final header = await NotificationMessage.headerAsync(
+        value: notification.typeNotification,
+        cryptoId: notification.cryptoId,
+        percent: notification.percent,
+        futurePrice: notification.futurePrice);
+
+    // body of notification
+    final body = await NotificationMessage.bodyAsync(
+        value: notification.typeNotification,
+        cryptoId: notification.cryptoId,
+        percent: notification.percent,
+        futurePrice: notification.futurePrice);
+
+    await awesomeNotifications.createNotification(
+        content: NotificationContent(
+            id: id,
+            channelKey: channelKeyPrice,
+            color: blue,
+            title: header,
+            body: body,
+            payload: {
+              "typeNotif": priceType,
+              "cryptoId": notification.cryptoId,
+              "id": id.toString(),
+              "price": notification.futurePrice.toString()
+            },
+            bigPicture: notification.image,
+            notificationLayout: NotificationLayout.BigPicture));
+  }
+
   // Create alert scheduled
   Future<void> createAlertNotificationScheduled(CryptoInfo crypto) async {
     await awesomeNotifications.createNotification(

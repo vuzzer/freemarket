@@ -5,6 +5,7 @@ import 'package:defi/data/datasource/active_notification_data.dart';
 import 'package:defi/data/datasource/brightness_data.dart';
 import 'package:defi/data/datasource/crypto_info_source.dart';
 import 'package:defi/data/datasource/favoris_crypto_data.dart';
+import 'package:defi/data/datasource/settings_data.dart';
 import 'package:defi/data/datasource/token_market_datasource.dart';
 import 'package:defi/data/repositories/active_notification_repo_impl.dart';
 import 'package:defi/data/repositories/brightness_repo_impl.dart';
@@ -47,8 +48,10 @@ import 'domain/repositories/notification-crypto/notification_price_repo.dart';
 
 GetIt sl = GetIt.instance;
 
-
 Future<void> configApp() async {
+  //! Language
+  sl.registerLazySingleton<SettingsData>(() => SettingsDataImpl());
+
   //! Local Database
   await Hive.initFlutter();
 

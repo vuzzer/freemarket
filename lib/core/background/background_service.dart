@@ -4,11 +4,11 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:defi/core/background/background_task.dart';
 import 'package:defi/core/hive_box_name.dart';
 import 'package:defi/core/notifications/setup_notification.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:logger/logger.dart';
 
 class BackgroundService {
   // Listen data fetch from UI
@@ -24,9 +24,13 @@ class BackgroundService {
 
   static final configNotification = SetupNotification(AwesomeNotifications());
 
+  // Initialize service
   static Future<void> initialize() async {
     // listen notification actions
-    configNotification.createdStrem();
+    await configNotification.createdStrem();
+
+    // initialize easy_translation
+    await EasyLocalization.ensureInitialized();
 
     await service.configure(
         iosConfiguration: IosConfiguration(
@@ -80,7 +84,6 @@ class BackgroundService {
   static Future<bool> onIosBackground(ServiceInstance instance) async {
     WidgetsFlutterBinding.ensureInitialized();
     DartPluginRegistrant.ensureInitialized();
-    Logger().d('Background activate');
 
     //TODO1 : create process to verify if notification can be created
     //TODO2 : Create Scheduled notification

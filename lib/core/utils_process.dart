@@ -6,7 +6,6 @@ import 'package:defi/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-
 // Validate Value typed by user
 bool validateInput(AlertValue typeAlert, CryptoInfo crypto, String value) {
   double constant = 500000; // Constant use to calculate the max price of crypto
@@ -54,17 +53,23 @@ String messageCalcul(AlertValue typeAlert, CryptoInfo crypto, String value) {
         final percent = double.parse(value);
         final reduction = crypto.currentPrice! * (percent / 100);
         final futurePrice = crypto.currentPrice! - reduction;
-        return "Alert will set for -\$${futurePrice.abs().toStringAsFixed(2)} (-$percent%)";
+        return LocaleKeys.setAlertScreen_alertFor.tr(args: [
+          '\$${futurePrice.toStringAsFixed(2)} ',
+          '(-$percent%)'
+        ]);
       case AlertValue.increase:
         final percent = double.parse(value);
         final futurePrice =
             crypto.currentPrice! + crypto.currentPrice! * (percent / 100);
-        return "Alert will set for \$${futurePrice.toStringAsFixed(2)} (+$percent%)";
+        return LocaleKeys.setAlertScreen_alertFor
+            .tr(args: ['\$${futurePrice.toStringAsFixed(2)}', '(+$percent%)']);
       case AlertValue.schedular:
         break;
     }
   }
-  return "Last update price: \$${crypto.currentPrice} of $date";
+
+  return LocaleKeys.setAlertScreen_indicatePrice
+      .tr(args: ['\$${crypto.currentPrice}', date]);
 }
 
 // Display message error for wrong inputs
@@ -74,14 +79,14 @@ String messageError(AlertValue typeAlert, CryptoInfo crypto, String value) {
       case AlertValue.price:
         break;
       case AlertValue.decrease:
-        return "Target price cannot be less than zero dollars.";
+        return LocaleKeys.setAlertScreen_priceUnderZero.tr();
       case AlertValue.increase:
         break;
       case AlertValue.schedular:
         break;
     }
   }
-  return "Target price is too high";
+  return LocaleKeys.setAlertScreen_priceTooHigh.tr();
 }
 
 // Return correct Notification accordin

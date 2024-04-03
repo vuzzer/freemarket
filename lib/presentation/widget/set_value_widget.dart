@@ -5,6 +5,7 @@ import 'package:defi/core/utils_process.dart';
 import 'package:defi/core/utils_type.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
+import 'package:defi/generated/locale_keys.g.dart';
 import 'package:defi/helpers/crypto_symbols.dart';
 import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
@@ -15,10 +16,11 @@ import 'package:defi/presentation/widget/button_widget.dart';
 import 'package:defi/presentation/widget/keyboard_widget.dart';
 import 'package:defi/styles/font_color.dart';
 import 'package:defi/styles/font_family.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:logger/logger.dart';
+
 
 class SetValueWidget extends StatefulWidget {
   final CryptoInfo crypto;
@@ -188,7 +190,6 @@ class _SetValueWidgetState extends State<SetValueWidget> {
                       if (isUpdate) {
                         final notificationCreate =
                             createNotification(alert.value, crypto, value);
-                        Logger().d(notificationCreate);
 
                         // Created Notification
                         context
@@ -196,8 +197,6 @@ class _SetValueWidgetState extends State<SetValueWidget> {
                             .add(CreateNotificationPrice(notificationCreate));
                       } else {
                         final id = widget.notification!.idNotification;
-
-                        Logger().d('update id $id');
 
                         final notificationUpdate =
                             updateNotification(alert.value, crypto, value, id);
@@ -211,7 +210,7 @@ class _SetValueWidgetState extends State<SetValueWidget> {
                       Navigator.of(context).popUntil(
                           ModalRoute.withName(CryptoAssetScreen.routeName));
                     },
-                    title: updated ? "Create alert" : "Update alert",
+                    title: updated ? LocaleKeys.alertBtn.tr() : LocaleKeys.updateBtn.tr(),
                     raduis: 10,
                   ),
                 )),
@@ -221,7 +220,7 @@ class _SetValueWidgetState extends State<SetValueWidget> {
           child: ButtonWidget(
             onPressed: () => Navigator.of(context).pop(),
             color: blue1,
-            title: "Dismiss",
+            title: LocaleKeys.dismissBtn.tr(),
             raduis: 10,
           ),
         ),

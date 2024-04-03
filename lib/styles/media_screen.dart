@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:logger/logger.dart';
 
 part 'media/media.dart';
 
 class MediaScreen {
   static void media() {
     if (SizeScreen.extraLarge) {
-      Logger().d("extraLarge screen");
     } else if (SizeScreen.large) {
-      Logger().d("large screen");
     } else if (SizeScreen.meduim) {
-      Logger().d("meduim screen");
     } else if (SizeScreen.small) {
-      Logger().d("meduim screen");
     } else {
-      Logger().d("extrasmall screen");
     }
   }
 }

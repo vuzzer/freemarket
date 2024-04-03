@@ -13,7 +13,7 @@ import '../../constants/app_colors.dart';
 
 class ThetaBodyWidget extends StatelessWidget {
   final List<CryptoInfo> cryptos;
-  const ThetaBodyWidget({Key? key, required this.cryptos}) : super(key: key);
+  const ThetaBodyWidget({super.key, required this.cryptos});
 
   @override
   Widget build(BuildContext context) {

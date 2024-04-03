@@ -2,9 +2,6 @@ import 'package:defi/core/enum.dart';
 import 'package:defi/core/error/exception.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:logger/logger.dart';
-
-var logger = Logger();
 
 abstract class NotificationPriceData {
   Future<NotificationCrypto> createNotificationPrice(
@@ -59,9 +56,6 @@ class NotificationPriceDataImpl implements NotificationPriceData {
       // Get list of favoris
       List notifications = await box.get(boxKey) ?? [];
 
-      Logger().d(
-          "Debug file notification_price_dart.dart\n Before removed notif $idNotification in $notifications");
-
       // Remove notification of idNotification
       notifications.removeWhere(
           (notification) => notification["idNotification"] == idNotification);
@@ -69,15 +63,11 @@ class NotificationPriceDataImpl implements NotificationPriceData {
       //Update box
       await box.put(boxKey, notifications);
 
-      Logger().d(
-          "Debug file notification_price_dart.dart\n After removed notif $idNotification in $notifications");
-
       // Close box and
       await box.close();
 
       return true;
     } catch (e) {
-      Logger().d(e.toString());
       throw DeleteNotificationPriceException();
     }
   }
@@ -111,7 +101,6 @@ class NotificationPriceDataImpl implements NotificationPriceData {
 
       return notificationCrypto;
     } catch (e) {
-      Logger().d(e.toString());
       throw GetNotificationException();
     }
   }
@@ -167,9 +156,7 @@ class NotificationPriceDataImpl implements NotificationPriceData {
       for (var p = 0; p < notifications.length; p++) {
         if (notifications[p]["idNotification"] ==
             updateNotification.idNotification) {
-          logger.d('Before update ${notifications[p]}');
           notifications[p] = updateNotification.props[0];
-          logger.d('After update ${notifications[p]}');
           break;
         }
       }

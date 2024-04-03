@@ -7,6 +7,7 @@ import 'package:defi/presentation/blocs/active-notification/active_notification_
 import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/screens/notification_screen.dart';
+import 'package:defi/presentation/widget/nointernet_widget.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_color.dart';
 import 'package:defi/styles/font_family.dart';
@@ -20,6 +21,7 @@ import 'package:share_plus/share_plus.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/card_balance.dart';
 import '../widget/theta_body_widget.dart';
+
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/home";
@@ -40,10 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
     CheckConnectivity.checkConnectivity();
     Hive.openBox(HiveBoxName.countNotificationBox);
 
-    // Background check notification
+    // No data available for notification at initialization
     flutterBackgroundService
         .invoke(BackgroundService.notificationEvent, {'tokens': []});
 
+   // Background check notification every 1min
     timer = Timer.periodic(const Duration(seconds: 60), (timer) async {
       if (await CheckConnectivity.isConnected) {
         refreshData();
@@ -89,11 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (context, snapshot) {
               final status = snapshot.data;
               if (status == InternetConnectionStatus.disconnected) {
-                return Center(
-                    child: Text(
-                  "Pas de connexion internet",
-                  style: Theme.of(context).textTheme.displayMedium,
-                ));
+                return const NoInternetWiget();
               }
               return Scaffold(
                   backgroundColor:

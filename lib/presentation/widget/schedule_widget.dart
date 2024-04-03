@@ -6,11 +6,14 @@ import 'package:defi/core/utils_type.dart';
 import 'package:defi/data/datasource/notification/notification_price_data.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
+import 'package:defi/generated/locale_keys.g.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/screens/crypto_asset_screen.dart';
 import 'package:defi/presentation/widget/button_widget.dart';
 import 'package:defi/presentation/widget/switch_widget.dart';
 import 'package:defi/service_locator.dart';
+import 'package:defi/styles/media_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,17 +41,17 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
 
   @override
   void initState() {
-    marketOpenNotifier = ValueNotifier<TimeFrame>(const TimeFrame(
-        title: "Market open",
-        desc: "You'll be notified daily at 9:00 am EST",
+    marketOpenNotifier = ValueNotifier<TimeFrame>( TimeFrame(
+        title: LocaleKeys.setAlertScreen_marketOpen.tr(),
+        desc: LocaleKeys.setAlertScreen_marketOpenDesc.tr(),
         cron: CronExpression.morning));
-    midDayNotifier = ValueNotifier<TimeFrame>(const TimeFrame(
-        title: "Mid-day",
-        desc: "You'll be notified daily at 12:00 pm EST",
+    midDayNotifier = ValueNotifier<TimeFrame>( TimeFrame(
+        title: LocaleKeys.setAlertScreen_midDay.tr(),
+        desc: LocaleKeys.setAlertScreen_midDayDesc.tr(),
         cron: CronExpression.noon));
-    marketCloseNotifier = ValueNotifier<TimeFrame>(const TimeFrame(
-        title: "Market close",
-        desc: "You'll be notified daily at 4:00 pm EST",
+    marketCloseNotifier = ValueNotifier<TimeFrame>( TimeFrame(
+        title: LocaleKeys.setAlertScreen_marketClose.tr(),
+        desc: LocaleKeys.setAlertScreen_marketCloseDesc.tr(),
         cron: CronExpression.night));
 
     // Execute in case of update
@@ -67,9 +70,9 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
           const SizedBox(
             height: 20,
           ),
-          const AutoSizeText(
-            "When would you like to receive daily Bitcoin alerts ?",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+           AutoSizeText(
+            LocaleKeys.setAlertScreen_dailyAlertFor.tr(args: [widget.crypto.name]),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: Media.headline2 ),
           ),
           const SizedBox(
             height: 10,
@@ -115,7 +118,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
                     Navigator.of(context).popUntil(
                         ModalRoute.withName(CryptoAssetScreen.routeName));
                   },
-                  title: widget.isUpdate ? "Update alert" : "Create alert",
+                  title: widget.isUpdate ? LocaleKeys.updateBtn.tr() : LocaleKeys.alertBtn.tr(),
                   raduis: 10,
                 ),
               )),
@@ -126,7 +129,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
               onPressed: () => Navigator.of(context)
                   .popUntil(ModalRoute.withName(CryptoAssetScreen.routeName)),
               color: blue1,
-              title: "Dismiss",
+              title: LocaleKeys.dismissBtn.tr(),
               raduis: 10,
             ),
           ),

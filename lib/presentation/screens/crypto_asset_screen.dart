@@ -12,6 +12,7 @@ import 'package:defi/presentation/widget/appbar_token_widget.dart';
 import 'package:defi/presentation/widget/bottom_titles_widget.dart';
 import 'package:defi/presentation/widget/crypto_tx_history_widget.dart';
 import 'package:defi/presentation/widget/line_chart_widget.dart';
+import 'package:defi/presentation/widget/nointernet_widget.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_color.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ import 'package:intl/intl.dart';
 
 class CryptoAssetScreen extends StatefulWidget {
   static const routeName = "/cryto-asset";
-  const CryptoAssetScreen({Key? key}) : super(key: key);
+  const CryptoAssetScreen({super.key});
 
   @override
   State<CryptoAssetScreen> createState() => _CryptoAssetScreenState();
@@ -67,11 +68,7 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
             builder: (context, snapshot) {
               final status = snapshot.data;
               if (status == InternetConnectionStatus.disconnected) {
-                return Center(
-                    child: Text(
-                  "Pas de connexion internet",
-                  style: Theme.of(context).textTheme.displayMedium,
-                ));
+                return const NoInternetWiget();
               }
               return BlocProvider<MarketTokenBloc>(
                   create: (context) => sl<MarketTokenBloc>()
@@ -125,18 +122,13 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                                             color: Colors.redAccent,
                                             size: 30,
                                           ),
-                                          BlocConsumer<MarketTokenBloc,
-                                                  MarketTokenState>(
-                                              builder: (context, state) {
-                                                return const AutoSizeText(
-                                                  "\$ 13.54 (1.23%)",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontFamily: roboto,
-                                                      color: Colors.redAccent),
-                                                );
-                                              },
-                                              listener: (context, state) {})
+                                          AutoSizeText(
+                                            crypto.priceChange24h!.toStringAsFixed(2),
+                                            style: const TextStyle(
+                                                fontSize: 15,
+                                                fontFamily: roboto,
+                                                color: Colors.redAccent),
+                                          ),
                                         ],
                                       ),
                                       const SizedBox(
@@ -178,8 +170,7 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                       child: SizedBox(
                         width: 50,
                         height: 50,
-                        child: CircularProgressIndicator(
-                        ),
+                        child: CircularProgressIndicator(),
                       ),
                     );
                   }));

@@ -1,17 +1,19 @@
 import 'package:defi/core/arguments_screen.dart';
 import 'package:defi/core/enum.dart';
+import 'package:defi/generated/locale_keys.g.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/schedule_widget.dart';
 import 'package:defi/presentation/widget/set_value_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class SetAlertScreen extends StatefulWidget {
   static const routeName = "/set-amount";
   final bool scheduled;
   const SetAlertScreen({
-    Key? key,
+    super.key,
     this.scheduled = false,
-  }) : super(key: key);
+  });
 
   @override
   State<SetAlertScreen> createState() => _SetAlertScreenState();
@@ -28,8 +30,8 @@ class _SetAlertScreenState extends State<SetAlertScreen> {
     final notification = arguments.notification; // Notification possible null
 
     return Scaffold(
-        appBar: const AppBarWidget(
-          title: "Price Alert",
+        appBar:  AppBarWidget(
+          title: LocaleKeys.setAlertScreen_titleAppBar.tr(),
           leading: true,
         ),
         body: alert.value == AlertValue.schedular

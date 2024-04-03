@@ -5,11 +5,13 @@ import 'package:defi/core/cron_expression.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
+import 'package:defi/generated/locale_keys.g.dart';
 import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/screens/choose_alert_screen.dart';
 import 'package:defi/presentation/widget/custom_bottom_sheet.dart';
 import 'package:defi/styles/font_color.dart';
 import 'package:defi/styles/font_family.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,16 +26,18 @@ class NotificationWidget extends StatelessWidget {
     String message = "";
     switch (notification.typeNotification) {
       case AlertValue.decrease:
-        message = 'Down ${notification.percent} %';
+        message = LocaleKeys.notification_down
+            .tr(args: ['${notification.percent} %']);
         break;
       case AlertValue.increase:
-        message = 'Up ${notification.percent} %';
+        message =
+            LocaleKeys.notification_up.tr(args: ['${notification.percent} %']);
         break;
       case AlertValue.price:
-        message = 'Price crosses';
+        message = LocaleKeys.notification_priceCrosses.tr();
         break;
       case AlertValue.schedular:
-        message = 'Every day at';
+        message = LocaleKeys.notification_scheduled.tr();
         break;
     }
     return message;
@@ -55,13 +59,13 @@ class NotificationWidget extends StatelessWidget {
       case AlertValue.schedular:
         switch (notification.cron) {
           case CronExpression.morning:
-            message = 'Market Open';
+            message = LocaleKeys.setAlertScreen_marketOpen.tr() ;
             break;
           case CronExpression.night:
-            message = 'Market close';
+            message = LocaleKeys.setAlertScreen_marketClose.tr();
             break;
           case CronExpression.noon:
-            message = 'Mid-day';
+            message = LocaleKeys.setAlertScreen_midDay.tr();
             break;
         }
         break;

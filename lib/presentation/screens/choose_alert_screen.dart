@@ -4,17 +4,21 @@ import 'package:defi/core/arguments_screen.dart';
 import 'package:defi/core/utils_type.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/data/datasource/notification/notification_price_data.dart';
+import 'package:defi/generated/locale_keys.g.dart';
 import 'package:defi/presentation/screens/set_alert_screen.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/button_widget.dart';
 import 'package:defi/presentation/widget/categorie_notification_widget.dart';
 import 'package:defi/service_locator.dart';
+import 'package:defi/styles/font_family.dart';
+import 'package:defi/styles/media_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ChooseAlertScreen extends StatefulWidget {
   static const routeName = "/choose-currency";
 
-  const ChooseAlertScreen({Key? key}) : super(key: key);
+  const ChooseAlertScreen({super.key});
 
   @override
   State<ChooseAlertScreen> createState() => _ChooseAlertScreenState();
@@ -28,37 +32,37 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
 
   //Definition of alert options
   List<Alert> alertOptions = [
-    const Alert(
-        title: "Price",
-        desc: "You'll be notified when the daily price increase",
+     Alert(
+        title: LocaleKeys.price.tr(),
+        desc: LocaleKeys.chooseAlertScreen_price.tr(),
         image: "assets/images/price.png",
         icon: Icons.attach_money,
         value: AlertValue.price),
-    const Alert(
-        title: "Percentage increase",
-        desc: "You'll be notified when the daily price increase",
+     Alert(
+        title: LocaleKeys.percentageIncrease.tr(),
+        desc: LocaleKeys.chooseAlertScreen_percentageIncrease.tr(),
         image: "assets/images/increase.png",
         icon: Icons.add,
         value: AlertValue.increase),
-    const Alert(
-        title: "Percentage decrease",
-        desc: "You'll be notified when the daily price increase",
+     Alert(
+        title: LocaleKeys.percentageDecrease.tr(),
+        desc: LocaleKeys.chooseAlertScreen_percentageIncrease.tr(),
         image: "assets/images/decrease.png",
         icon: Icons.remove,
         value: AlertValue.decrease),
-    const Alert(
-        title: "Calendar",
-        desc: "You'll be notified when the daily price increase",
+     Alert(
+        title: LocaleKeys.calendar.tr(),
+        desc: LocaleKeys.chooseAlertScreen_calendar.tr(),
         image: "assets/images/calendar.png",
         value: AlertValue.schedular),
   ];
 
   //Parameters for set_alert_screen
-  Alert param = const Alert(
-      title: "Calendar",
-      desc: "You'll be notified when the daily price increase",
-      image: "assets/images/calendar.png",
-      value: AlertValue.schedular);
+  Alert param = Alert(
+        title: LocaleKeys.calendar.tr(),
+        desc: LocaleKeys.chooseAlertScreen_calendar.tr(),
+        image: "assets/images/calendar.png",
+        value: AlertValue.schedular);
 
   void _update(Alert alert) {
     alertNotifierDefaultValue.value = alert.value;
@@ -114,8 +118,8 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
     allDailyNotificationIsCreated(arguments);
 
     return Scaffold(
-      appBar: const AppBarWidget(
-        title: "Set an alert for bitcoin",
+      appBar:  AppBarWidget(
+        title: LocaleKeys.chooseAlertScreen_titleAppBar.tr(args: [crypto.name] ),
         leading: true,
         actions: false,
       ),
@@ -124,10 +128,11 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
           const SizedBox(
             height: 20,
           ),
-          const AutoSizeText(
-            "Receive AlertValues for price changes and more",
-            style: TextStyle(fontSize: 8),
-          ),
+          Padding(padding: const EdgeInsets.symmetric(horizontal: 10), child: 
+           AutoSizeText(
+            LocaleKeys.chooseAlertScreen_subtitle.tr(),
+            style: TextStyle(fontSize: Media.headline4, fontFamily: FontFamily.montSerrat ),
+          )),
           const SizedBox(
             height: 20,
           ),
@@ -162,7 +167,7 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
                       alert: param,
                       isUpdate: isUpdate,
                       notification: arguments.notification)),
-              title: "Next",
+              title: LocaleKeys.nextBtn.tr(),
               raduis: 10,
             ),
           ),
@@ -172,7 +177,7 @@ class _ChooseAlertScreenState extends State<ChooseAlertScreen> {
             child: ButtonWidget(
               onPressed: () => Navigator.of(context).pop(),
               color: blue1,
-              title: "Dismiss",
+              title: LocaleKeys.dismissBtn.tr(),
               raduis: 10,
             ),
           )

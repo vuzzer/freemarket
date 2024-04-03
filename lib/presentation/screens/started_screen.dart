@@ -4,6 +4,7 @@ import 'package:defi/generated/locale_keys.g.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/screens/home_screen.dart';
 import 'package:defi/presentation/widget/adaptive_dialog.dart';
+import 'package:defi/presentation/widget/nointernet_widget.dart';
 import 'package:defi/service_locator.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -46,11 +47,7 @@ class _StartedScreenState extends State<StartedScreen> {
             builder: (context, snapshot) {
               final status = snapshot.data;
               if (status == InternetConnectionStatus.disconnected) {
-                return Center(
-                    child: Text(
-                  "Pas de connexion internet",
-                  style: Theme.of(context).textTheme.displayMedium,
-                ));
+                return const NoInternetWiget();
               }
               return Container(
                   width: MediaQuery.of(context).size.width,

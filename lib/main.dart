@@ -2,6 +2,7 @@ import 'package:defi/core/background/background_service.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/core/notifications/setup_notification.dart';
 import 'package:defi/core/utils_process.dart';
+import 'package:defi/data/datasource/settings_data.dart';
 import 'package:defi/firebase_options.dart';
 import 'package:defi/generated/codegen_loader.g.dart';
 import 'package:defi/get_routes.dart';
@@ -112,6 +113,10 @@ class _MyAppState extends State<MyApp> {
                     ? Brightness.dark
                     : Brightness.light,
               ));
+              
+              // Define language in SharedPreference
+              sl<SettingsData>().language(context.locale.toString());
+
               return MaterialApp(
                   localizationsDelegates: context.localizationDelegates,
                   supportedLocales: context.supportedLocales,

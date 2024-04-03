@@ -5,6 +5,13 @@
         "helloMsg2": "vos actifs crypto",
         "helloMsg3": "en toute simplicité"
     },
+    "homeScreen":{
+        "noFavoris": "Vous avez aucun favoris crypto"
+    },
+    "notificationScreen":{
+        "titleAppBar": "Mes Notifications",
+        "noNotification": "Pas de notification."
+    },
     "cryptoAssetScreen":{
         "msg": "Les données présentées le sont à titre informatif uniquement. Elles sont fournies par CoingecKo et présentées en l'état, sans déclaration ni garantie d'aucune sorte.",
         "frame1": "Jour",
@@ -23,14 +30,51 @@
         "alertTitle": "Alerte",
         "alertMsg":  "Recevez une notification unique pour cette crypto-monnaie lorsque vos conditions sont remplies."
     },
+    "chooseAlertScreen": {
+        "titleAppBar": "Créer une alert pour {}",
+        "subtitle": "Recevoir des notifications en cas de changement de prix et plus encore.",
+        "price": "Vous serez informé si le prix évolue au-dessus ou au-dessous de la valeur de votre choix.",
+        "percentageIncrease": "Vous serez averti lorsque le prix augmentera du pourcentage de votre choix.",
+        "percentageDecrease": "Vous serez averti lorsque le prix diminuera du pourcentage de votre choix.",
+        "calendar": "Vous serez informé du cours actuel de l'action à des heures précises chaque jour."
+    },
+    "setAlertScreen":{
+      "titleAppBar": "Alerte prix",
+      "indicatePrice": "Dernière mise à jour du prix: {} à {}",
+      "alertFor": "L'alerte sera déclenchée pour {} {}",
+      "priceUnderZero": "Le prix cible ne peut être inférieur à zéro dollar.",
+      "priceTooHigh": "Le prix cible est trop élevé",
+      "dailyAlertFor": "Quand souhaitez-vous recevoir des alertes quotidiennes sur les {} ?",
+      "marketOpen": "Ouverture des marchés",
+      "marketOpenDesc": "Vous serez informé tous les jours à 9h00",
+      "midDay": "A la mi-journée",
+      "midDayDesc": "Vous serez informé chaque jour à 12 heures",
+      "marketClose": "Clôture du marché",
+      "marketCloseDesc": "Vous serez informé chaque jour à 16 heures"
+    },
     "notification":{
         "priceCrosses": "Croisement du prix",
         "down": "En baisse de {}",
         "up": "En hausse de {}",
-        "scheduled": "Every day at"
+        "scheduled": "Every day at",
+        "increase": "{}, une hausse du prix de {} {}",
+        "decrease": "{}, une baisse du prix de {} {}",
+        "reached": "{} a atteint le prix de {}",
+        "titlePrice": "{} prix",
+        "increaseTitle": "{} hausse",
+        "decreaseTitle": "{} baisse",
+        "titleAlert": "{} alerte"
     },
+    "price": "Prix",
+    "percentageIncrease": "Pourcentage de hausse",
+    "percentageDecrease": "Pourcentage de baisse",
+    "calendar": "Calendrier",
     "alertBtn": "Créer une alerte",
+    "updateBtn": "Alerte mise à jour",
+    "nextBtn": "Suivant",
+    "dismissBtn": "Annuler",
     "billion":"{billion}Md",
     "million":"{million}M",
-    "kilo":"{kilo}k"
+    "kilo":"{kilo}k",
+    "noInternet": "Pas de connexion internet"
 }
