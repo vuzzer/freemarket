@@ -55,10 +55,9 @@ class CheckConnectivity {
   static Stream<InternetConnectionStatus> get listener =>
       CheckConnectivity.internetController.stream;
 
+  // Check network connectivity
   static void checkConnectivity() {
     listen = connectionChecker.onStatusChange.listen((status) {
-      Logger().d(status);
-      //if(CheckConnectivity.internetController)
       CheckConnectivity.internetController.sink.add(status);
     });
   }
