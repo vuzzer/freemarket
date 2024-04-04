@@ -29,7 +29,6 @@ import 'package:defi/domain/usecases/notification-price/notification_price_useca
 import 'package:defi/domain/usecases/primary-crypto/primary_crypto_usecase.dart';
 import 'package:defi/presentation/blocs/active-notification/active_notification_bloc.dart';
 import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
-import 'package:defi/presentation/blocs/client/client_profil_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
@@ -56,7 +55,6 @@ Future<void> configApp() async {
   await Hive.initFlutter();
 
   //! Bloc client
-  sl.registerFactory(() => ClientProfilBloc(clientProfilUsecase: sl()));
   sl.registerFactory(() => MarketTokenBloc(tokenMarketUsecase: sl()));
   sl.registerLazySingleton(() => CryptosBloc(cryptoInfoUseCase: sl()));
   sl.registerFactory(() => FavorisBloc(favorisCryptoUsecase: sl()));

@@ -23,17 +23,21 @@ class TokenMarketDataSourceImpl implements TokenMarketDataSource {
           "cache-control": "max-age=30,public,must-revalidate,s-maxage=30"
         });
 
-    // Fetch daily data token
-    final response = await dio.get(
-        "${baseUrl}coins/${params.idToken}/market_chart?vs_currency=${params.currentOfMarket}&days=2&precision=2",
-        options: options);
+    try {
+      // Fetch daily data token
+      final response = await dio.get(
+          "${baseUrl}coins/${params.idToken}/market_chart?vs_currency=${params.currentOfMarket}&days=2&precision=2",
+          options: options);
 
-    // Succes request so get data
-    if (response.statusCode == 200) {
-      final data = response.data;
-      return TokenMarketDataModel.fromJson(data);
+      // Succes request so get data
+      if (response.statusCode == 200) {
+        final data = response.data;
+        return TokenMarketDataModel.fromJson(data);
+      }
+
+      throw NetworkException();
+    } catch (e) {
+      throw NetworkException();
     }
-
-    throw NetworkException();
   }
 }

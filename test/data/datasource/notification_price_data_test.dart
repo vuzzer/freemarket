@@ -1,5 +1,4 @@
 import 'package:defi/data/datasource/notification/notification_price_data.dart';
-import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';
@@ -12,7 +11,7 @@ void main() {
   });
 
   test("Get notification created", () async {
-    final result = await notificationPriceDataImpl.getNotificationPrice();
+    final result = await notificationPriceDataImpl.getNotificationPrice("Bitcoin");
     Logger().d(result);
   });
 }

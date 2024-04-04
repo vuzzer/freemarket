@@ -11,7 +11,7 @@ import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/presentation/widget/appbar_token_widget.dart';
 import 'package:defi/presentation/widget/bottom_titles_widget.dart';
 import 'package:defi/presentation/widget/crypto_tx_history_widget.dart';
-import 'package:defi/presentation/widget/line_chart_widget.dart';
+import 'package:defi/presentation/widget/graph_stock_widget.dart';
 import 'package:defi/presentation/widget/nointernet_widget.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_color.dart';
@@ -107,7 +107,7 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 3),
                                           child: AutoSizeText(
-                                            "\$ ${crypto.currentPrice}",
+                                            "\$${crypto.currentPrice}",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headlineMedium,
@@ -139,7 +139,7 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                                 ),
 
                                 //Chart
-                                const LineChartWidget(),
+                                const GraphStockWidget(),
                                 Container(
                                   height: 8,
                                   decoration: BoxDecoration(

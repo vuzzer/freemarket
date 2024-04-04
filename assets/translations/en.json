@@ -6,7 +6,8 @@
         "helloMsg3": "simply"
     },
     "homeScreen":{
-        "noFavoris": "You have no favoris crypto."
+        "noFavoris": "You have no favoris crypto.",
+        "networkErrorMsg": "Sorry, we've reached our limit of API calls at the moment. Please take a short break and try again in a few moments! 😊"
     },
     "notificationScreen":{
         "titleAppBar": "My Notifications",
@@ -28,7 +29,8 @@
         "allTimeHigh": "All-Time High",
         "allTimeLow": "All-Time Low",
         "alertTitle": "Alert",
-        "alertMsg":  "Receive a one-time notification for this stocks when your conditions are mets"
+        "alertMsg":  "Receive a one-time notification for this stocks when your conditions are mets",
+        "networkErrorMsg": "Data update in progress. Take a break to explore other features - it'll be ready in no time! 🚀"
     },
     "chooseAlertScreen": {
         "titleAppBar": "Set an alert for {}",

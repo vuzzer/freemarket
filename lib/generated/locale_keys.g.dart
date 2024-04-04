@@ -7,6 +7,7 @@ abstract class  LocaleKeys {
   static const startScreen_helloMsg3 = 'startScreen.helloMsg3';
   static const startScreen = 'startScreen';
   static const homeScreen_noFavoris = 'homeScreen.noFavoris';
+  static const homeScreen_networkErrorMsg = 'homeScreen.networkErrorMsg';
   static const homeScreen = 'homeScreen';
   static const notificationScreen_titleAppBar = 'notificationScreen.titleAppBar';
   static const notificationScreen_noNotification = 'notificationScreen.noNotification';
@@ -27,6 +28,7 @@ abstract class  LocaleKeys {
   static const cryptoAssetScreen_allTimeLow = 'cryptoAssetScreen.allTimeLow';
   static const cryptoAssetScreen_alertTitle = 'cryptoAssetScreen.alertTitle';
   static const cryptoAssetScreen_alertMsg = 'cryptoAssetScreen.alertMsg';
+  static const cryptoAssetScreen_networkErrorMsg = 'cryptoAssetScreen.networkErrorMsg';
   static const cryptoAssetScreen = 'cryptoAssetScreen';
   static const chooseAlertScreen_titleAppBar = 'chooseAlertScreen.titleAppBar';
   static const chooseAlertScreen_subtitle = 'chooseAlertScreen.subtitle';

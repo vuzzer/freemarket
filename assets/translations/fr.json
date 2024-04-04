@@ -6,7 +6,8 @@
         "helloMsg3": "en toute simplicité"
     },
     "homeScreen":{
-        "noFavoris": "Vous avez aucun favoris crypto"
+        "noFavoris": "Vous avez aucun favoris crypto",
+        "networkErrorMsg": "Désolé, nous avons atteint notre limite d'appels à l'API pour le moment. Prenez une petite pause et réessayez dans quelques instants ! 😊"
     },
     "notificationScreen":{
         "titleAppBar": "Mes Notifications",
@@ -28,7 +29,8 @@
         "allTimeHigh": "Hausse historique",
         "allTimeLow": "Baisse historique",
         "alertTitle": "Alerte",
-        "alertMsg":  "Recevez une notification unique pour cette crypto-monnaie lorsque vos conditions sont remplies."
+        "alertMsg":  "Recevez une notification unique pour cette crypto-monnaie lorsque vos conditions sont remplies.",
+        "networkErrorMsg": "Une mise à jour des données en cours. Prenez une pause pour explorer d'autres fonctionnalités, il sera prêt en un rien de temps ! 🚀"
     },
     "chooseAlertScreen": {
         "titleAppBar": "Créer une alert pour {}",

@@ -8,6 +8,7 @@ import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/screens/notification_screen.dart';
 import 'package:defi/presentation/widget/nointernet_widget.dart';
+import 'package:defi/presentation/widget/reloading_widget.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_color.dart';
 import 'package:defi/styles/font_family.dart';
@@ -21,7 +22,6 @@ import 'package:share_plus/share_plus.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/card_balance.dart';
 import '../widget/theta_body_widget.dart';
-
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/home";
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     flutterBackgroundService
         .invoke(BackgroundService.notificationEvent, {'tokens': []});
 
-   // Background check notification every 1min
+    // Background check notification every 1min
     timer = Timer.periodic(const Duration(seconds: 60), (timer) async {
       if (await CheckConnectivity.isConnected) {
         refreshData();
@@ -100,6 +100,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   body: BlocBuilder<CryptosBloc, CryptoState>(
                       builder: (context, state) {
                     if (!state.loading) {
+                      if (state.successOrFailure.isLeft()) {
+                        return const ReloadingWidget();
+                      }
                       return Column(
                         children: [
                           SizedBox(

@@ -22,7 +22,8 @@ class CodegenLoader extends AssetLoader{
     "helloMsg3": "simply"
   },
   "homeScreen": {
-    "noFavoris": "You have no favoris crypto."
+    "noFavoris": "You have no favoris crypto.",
+    "networkErrorMsg": "Sorry, we've reached our limit of API calls at the moment. Please take a short break and try again in a few moments! 😊"
   },
   "notificationScreen": {
     "titleAppBar": "My Notifications",
@@ -44,7 +45,8 @@ class CodegenLoader extends AssetLoader{
     "allTimeHigh": "All-Time High",
     "allTimeLow": "All-Time Low",
     "alertTitle": "Alert",
-    "alertMsg": "Receive a one-time notification for this stocks when your conditions are mets"
+    "alertMsg": "Receive a one-time notification for this stocks when your conditions are mets",
+    "networkErrorMsg": "Data update in progress. Take a break to explore other features - it'll be ready in no time! 🚀"
   },
   "chooseAlertScreen": {
     "titleAppBar": "Set an alert for {}",
@@ -102,7 +104,8 @@ static const Map<String,dynamic> fr = {
     "helloMsg3": "en toute simplicité"
   },
   "homeScreen": {
-    "noFavoris": "Vous avez aucun favoris crypto"
+    "noFavoris": "Vous avez aucun favoris crypto",
+    "networkErrorMsg": "Désolé, nous avons atteint notre limite d'appels à l'API pour le moment. Prenez une petite pause et réessayez dans quelques instants ! 😊"
   },
   "notificationScreen": {
     "titleAppBar": "Mes Notifications",
@@ -124,7 +127,8 @@ static const Map<String,dynamic> fr = {
     "allTimeHigh": "Hausse historique",
     "allTimeLow": "Baisse historique",
     "alertTitle": "Alerte",
-    "alertMsg": "Recevez une notification unique pour cette crypto-monnaie lorsque vos conditions sont remplies."
+    "alertMsg": "Recevez une notification unique pour cette crypto-monnaie lorsque vos conditions sont remplies.",
+    "networkErrorMsg": "Une mise à jour des données en cours. Prenez une pause pour explorer d'autres fonctionnalités, il sera prêt en un rien de temps ! 🚀"
   },
   "chooseAlertScreen": {
     "titleAppBar": "Créer une alert pour {}",
