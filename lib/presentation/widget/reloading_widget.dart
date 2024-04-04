@@ -26,7 +26,7 @@ class ReloadingWidget extends StatelessWidget {
           child: ButtonWidget(
             onPressed: () => sl<CryptosBloc>().add(const GetCryptoInfo()),
             color: FontColor.blue1,
-            title: "Ressayer",
+            title: LocaleKeys.retryBtn.tr(),
             raduis: 10,
           ),
         )

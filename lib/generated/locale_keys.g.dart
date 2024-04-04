@@ -69,6 +69,7 @@ abstract class  LocaleKeys {
   static const alertBtn = 'alertBtn';
   static const updateBtn = 'updateBtn';
   static const nextBtn = 'nextBtn';
+  static const retryBtn = 'retryBtn';
   static const dismissBtn = 'dismissBtn';
   static const billion = 'billion';
   static const million = 'million';

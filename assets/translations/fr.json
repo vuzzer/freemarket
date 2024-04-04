@@ -74,6 +74,7 @@
     "alertBtn": "Créer une alerte",
     "updateBtn": "Alerte mise à jour",
     "nextBtn": "Suivant",
+    "retryBtn": "Réessayer",
     "dismissBtn": "Annuler",
     "billion":"{billion}Md",
     "million":"{million}M",

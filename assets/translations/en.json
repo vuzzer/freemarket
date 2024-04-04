@@ -74,6 +74,7 @@
     "alertBtn": "Create Alert",
     "updateBtn": "Uppdate Alert",
     "nextBtn": "Next",
+    "retryBtn": "Retry",
     "dismissBtn": "Dismiss",
     "billion":"{billion}B",
     "million":"{million}M",
