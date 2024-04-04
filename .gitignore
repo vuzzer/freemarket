@@ -45,3 +45,4 @@ app.*.map.json
 
 # contains firebase secret keys
 /lib/firebase_options.dart
+key.properties
