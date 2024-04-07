@@ -3,7 +3,7 @@ import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/create_unique_id.dart';
 import 'package:defi/core/cron_expression.dart';
 import 'package:defi/core/utils_type.dart';
-import 'package:defi/data/datasource/notification/notification_price_data.dart';
+import 'package:defi/data/datasource/notification_price_data.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:defi/generated/locale_keys.g.dart';

@@ -1,4 +1,4 @@
-import 'package:defi/data/datasource/notification/notification_price_data.dart';
+import 'package:defi/data/datasource/notification_price_data.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';

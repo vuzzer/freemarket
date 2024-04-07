@@ -2,7 +2,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/core/hive_box_name.dart';
 import 'package:defi/core/notifications/setup_notification.dart';
-import 'package:defi/data/datasource/notification/notification_price_data.dart';
+import 'package:defi/data/datasource/notification_price_data.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:hive/hive.dart';

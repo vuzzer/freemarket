@@ -10,11 +10,11 @@ import 'package:defi/presentation/blocs/active-notification/active_notification_
 import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
 import 'package:defi/presentation/blocs/favoris/favoris_bloc.dart';
+import 'package:defi/presentation/blocs/linkStore/link_store_bloc.dart';
 import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/blocs/notification-triggered/notification_triggered_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
-import 'package:defi/presentation/provider/network_provider.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/my_theme_mode.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -27,11 +27,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
+  // portrait view
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  // Preserve launch screen when app start
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await EasyLocalization.ensureInitialized();
@@ -60,7 +63,6 @@ void main() async {
       fallbackLocale: const Locale('en'),
       assetLoader: const CodegenLoader(),
       child: MultiBlocProvider(providers: [
-        Provider(create: (context) => NetworkProvider()),
         BlocProvider(create: (context) => sl<MarketTokenBloc>()),
         BlocProvider(
             create: (context) => sl<ActiveNotificationBloc>()
@@ -73,7 +75,8 @@ void main() async {
             create: (context) => sl<PrimaryCryptoBloc>()
               ..add(const PrimaryCryptoEvent.getPrimaryCrypto())),
         BlocProvider(create: (context) => sl<NotificationTriggeredBloc>()),
-        BlocProvider(create: (context) => sl<BrightnessBloc>())
+        BlocProvider(create: (context) => sl<BrightnessBloc>()),
+          BlocProvider(create: (context) => sl<LinkStoreBloc>())
       ], child: const MyApp())));
 }
 
@@ -113,7 +116,7 @@ class _MyAppState extends State<MyApp> {
                     ? Brightness.dark
                     : Brightness.light,
               ));
-              
+
               // Define language in SharedPreference
               sl<SettingsData>().language(context.locale.toString());
 

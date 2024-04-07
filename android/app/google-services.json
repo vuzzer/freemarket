@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "605726570322-fbl7igghirkcc5ueeg38u2mg19fl715v.apps.googleusercontent.com",
+              "client_id": "605726570322-3dn5f20omvm5vgjnvoqrknr7jl3co76h.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.defi"
+                "bundle_id": "com.legenddev.freemarket"
               }
             }
           ]
@@ -75,10 +75,10 @@
               "client_type": 3
             },
             {
-              "client_id": "605726570322-fbl7igghirkcc5ueeg38u2mg19fl715v.apps.googleusercontent.com",
+              "client_id": "605726570322-3dn5f20omvm5vgjnvoqrknr7jl3co76h.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.defi"
+                "bundle_id": "com.legenddev.freemarket"
               }
             }
           ]

@@ -6,6 +6,7 @@ import 'package:defi/core/network/network_info.dart';
 import 'package:defi/presentation/blocs/active-notification/active_notification_bloc.dart';
 import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/blocs/cryptos/cryptos_bloc.dart';
+import 'package:defi/presentation/blocs/linkStore/link_store_bloc.dart';
 import 'package:defi/presentation/screens/notification_screen.dart';
 import 'package:defi/presentation/widget/nointernet_widget.dart';
 import 'package:defi/presentation/widget/reloading_widget.dart';
@@ -18,6 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/card_balance.dart';
@@ -103,6 +105,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (state.successOrFailure.isLeft()) {
                         return const ReloadingWidget();
                       }
+
+                      // LinkToShare
+                      sl<LinkStoreBloc>().add(const GetLinkStoreToShare());
+
                       return Column(
                         children: [
                           SizedBox(
@@ -115,14 +121,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    IconButton(
-                                        onPressed: () async {
-                                          await Share.shareUri(Uri.parse(
-                                              "https://github.com/vuzzer"));
-                                        },
-                                        splashRadius: 20,
-                                        padding: EdgeInsets.zero,
-                                        icon: const Icon(Icons.share)),
+                                    BlocBuilder<LinkStoreBloc, LinkStoreState>(
+                                      builder: (context, state) {
+                                        return IconButton(
+                                            onPressed: () async {
+                                              if (state.successOrFailure
+                                                  .isRight()) {
+                                                await Share.shareUri(
+                                                    Uri.parse(state.link));
+                                              }
+                                            },
+                                            splashRadius: 20,
+                                            padding: EdgeInsets.zero,
+                                            icon: const Icon(Icons.share));
+                                      },
+                                    ),
                                     const Spacer(),
                                     BlocBuilder<BrightnessBloc,
                                             BrightnessState>(

@@ -3,7 +3,7 @@ import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/arguments_screen.dart';
 import 'package:defi/core/utils_type.dart';
 import 'package:defi/core/enum.dart';
-import 'package:defi/data/datasource/notification/notification_price_data.dart';
+import 'package:defi/data/datasource/notification_price_data.dart';
 import 'package:defi/generated/locale_keys.g.dart';
 import 'package:defi/presentation/screens/set_alert_screen.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';

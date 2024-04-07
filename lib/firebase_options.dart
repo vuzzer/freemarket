@@ -63,13 +63,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyD6v2vOkAKXVQQmzaNKleL74acyRb17I18',
-    appId: '1:605726570322:ios:dc7a98ce958afecf9aec8b',
+    appId: '1:605726570322:ios:2f6dbbe0bc740fa29aec8b',
     messagingSenderId: '605726570322',
     projectId: 'theta-1a323',
     storageBucket: 'theta-1a323.appspot.com',
     androidClientId: '605726570322-05spivt92c871vu7smk0vflbp4pnpqiu.apps.googleusercontent.com',
-    iosClientId: '605726570322-fbl7igghirkcc5ueeg38u2mg19fl715v.apps.googleusercontent.com',
-    iosBundleId: 'com.example.defi',
+    iosClientId: '605726570322-9umts1l9nkb066d9eokkaitv0nun66h5.apps.googleusercontent.com',
+    iosBundleId: 'com.legend.freemarket',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
