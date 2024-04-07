@@ -15,8 +15,8 @@ class TokenMarketDataModel extends TokenMarketData {
     // Data Market of token
     final marketCaps = rawMarketCaps.last as List;
     final totalVolumes = rawTotalVolumes.last as List;
-    final prices = rawPrices.map((data) => data.last as double).toList();
-    final times = rawPrices.map((data) => data.first as int).toList();
+    final prices = rawPrices.map((data) => double.parse(data.last.toString())).toList();
+    final times = rawPrices.map((data) => int.parse(data.first.toString()) ).toList();
 
     return TokenMarketDataModel(
         times: times,
@@ -27,7 +27,7 @@ class TokenMarketDataModel extends TokenMarketData {
 
   Map<String, dynamic> toJson() {
     return {
-        "times":  times,
+      "times": times,
       "prices": prices,
       "market_caps": marketCapitalization,
       "total_volumes": volumeTotal

@@ -19,7 +19,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../helpers/crypto_symbols.dart';
 import '../widget/card_balance.dart';

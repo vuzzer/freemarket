@@ -200,6 +200,6 @@ String formatNumber(num number) {
     return LocaleKeys.kilo
         .tr(namedArgs: {'kilo': '\$${(number / 1000).toStringAsFixed(1)}'});
   } else {
-    return '\$${number.toStringAsFixed(0)}';
+    return '\$${number.toStringAsFixed(2)}';
   }
 }

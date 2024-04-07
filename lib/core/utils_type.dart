@@ -22,7 +22,7 @@ class CryptoError {
   CryptoError(this.message);
 }
 
-// Mark success
+// Indicate success of http request
 class Success {}
 
 // TimeFrame expression
@@ -34,4 +34,12 @@ class TimeFrame with _$TimeFrame {
       required String desc,
       required String cron,
       @Default(false) bool value}) = _TimeFrame;
+}
+
+// Indicate timeframe to show market_chart
+class IntervalChart {
+  static int day = 1;
+  static int week = 7;
+  static int month = 30;
+  static int year = 360;
 }

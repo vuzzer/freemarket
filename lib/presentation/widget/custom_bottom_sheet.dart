@@ -82,7 +82,14 @@ void customBottomSheet(BuildContext context, NotificationCrypto notification,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pushNamed(
+                                    ChooseAlertScreen.routeName,
+                                    arguments: ArgumentNotif(
+                                        crypto: crypto,
+                                        notification: notification));
+                              },
                               splashRadius: 20,
                               icon: Icon(
                                 Icons.arrow_forward_ios,
@@ -124,7 +131,14 @@ void customBottomSheet(BuildContext context, NotificationCrypto notification,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                // delete notification
+                                sl<NotificationPriceBloc>().add(
+                                    DeleteNotificationPrice(crypto.id,
+                                        notification.idNotification));
+                                // Close bottomSheet
+                                Navigator.of(context).pop();
+                              },
                               splashRadius: 20,
                               icon: const Icon(
                                 Icons.delete_forever_outlined,

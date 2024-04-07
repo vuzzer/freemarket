@@ -26,7 +26,7 @@ class TokenMarketDataSourceImpl implements TokenMarketDataSource {
     try {
       // Fetch daily data token
       final response = await dio.get(
-          "${baseUrl}coins/${params.idToken}/market_chart?vs_currency=${params.currentOfMarket}&days=2&precision=2",
+          "${baseUrl}coins/${params.idToken}/market_chart?vs_currency=${params.currentOfMarket}&days=${params.periode}&precision=${params.decimalOfPrice}",
           options: options);
 
       // Succes request so get data

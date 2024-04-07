@@ -81,6 +81,11 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                       final crypto = state.cryptos
                           .where((value) => value.id == id)
                           .toList()[0];
+
+                      // token change indicator
+                      final price24h =
+                          double.parse(crypto.priceChange24h.toString());
+
                       return Scaffold(
                           appBar: AppBarTokenWidget(
                               title: crypto.id, crypto: crypto),
@@ -117,17 +122,24 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                                             MainAxisAlignment.center,
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          const Icon(
-                                            Icons.arrow_drop_up,
-                                            color: Colors.redAccent,
+                                          Icon(
+                                            price24h > 0
+                                                ? Icons.arrow_drop_up
+                                                : Icons.arrow_drop_down,
+                                            color: price24h > 0
+                                                ? Colors.green
+                                                : FontColor.red,
                                             size: 30,
                                           ),
                                           AutoSizeText(
-                                            crypto.priceChange24h!.toStringAsFixed(2),
-                                            style: const TextStyle(
+                                            crypto.priceChange24h!
+                                                .toStringAsFixed(2),
+                                            style: TextStyle(
                                                 fontSize: 15,
                                                 fontFamily: roboto,
-                                                color: Colors.redAccent),
+                                                color: price24h > 0
+                                                    ? Colors.green
+                                                    : FontColor.red),
                                           ),
                                         ],
                                       ),
@@ -147,7 +159,7 @@ class _CryptoAssetScreenState extends State<CryptoAssetScreen> {
                                           ? darkBlue
                                           : FontColor.white),
                                 ),
-                                const BottomTitlesWidget(),
+                                BottomTitlesWidget(id: id),
                                 Container(
                                   height: 10,
                                   decoration: BoxDecoration(
