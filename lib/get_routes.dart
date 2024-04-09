@@ -15,7 +15,7 @@ Map<String, WidgetBuilder> getRoutes(context) {
     },
     CryptoAssetScreen.routeName: (context) => const CryptoAssetScreen(),
     ChooseAlertScreen.routeName: (context) => const ChooseAlertScreen(),
-    SetAlertScreen.routeName: (context) => const SetAlertScreen(),
+    SetAlertScreen.routeName: (context) =>  const SetAlertScreen() ,
     NotificationScreen.routeName: (context) => const NotificationScreen(),
     HomeScreen.routeName: (BuildContext context) {
       return const HomeScreen();

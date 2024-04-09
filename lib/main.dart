@@ -76,7 +76,7 @@ void main() async {
               ..add(const PrimaryCryptoEvent.getPrimaryCrypto())),
         BlocProvider(create: (context) => sl<NotificationTriggeredBloc>()),
         BlocProvider(create: (context) => sl<BrightnessBloc>()),
-          BlocProvider(create: (context) => sl<LinkStoreBloc>())
+        BlocProvider(create: (context) => sl<LinkStoreBloc>())
       ], child: const MyApp())));
 }
 

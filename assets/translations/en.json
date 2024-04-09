@@ -30,7 +30,10 @@
         "allTimeLow": "All-Time Low",
         "alertTitle": "Alert",
         "alertMsg":  "Receive a one-time notification for this stocks when your conditions are mets",
-        "networkErrorMsg": "Data update in progress. Take a break to explore other features - it'll be ready in no time! 🚀"
+        "networkErrorMsg": "Data update in progress. Take a break to explore other features - it'll be ready in no time!",
+        "target": "Target price {}",
+        "update": "Update",
+        "deleteAlert": "Delete Alert"
     },
     "chooseAlertScreen": {
         "titleAppBar": "Set an alert for {}",
@@ -66,6 +69,12 @@
         "increaseTitle": "{} increase",
         "decreaseTitle": "{} decrease",
         "titleAlert": "{} alert"
+    },
+    "permissionNotification":{
+        "title": "Allow Notifications",
+        "body": "Freemarket would like to send you notifications",
+        "allow": "Allow",
+        "disallow": "Don't Allow"
     },
     "price": "Price",
     "percentageIncrease": "Percentage increase",

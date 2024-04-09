@@ -29,6 +29,9 @@ abstract class  LocaleKeys {
   static const cryptoAssetScreen_alertTitle = 'cryptoAssetScreen.alertTitle';
   static const cryptoAssetScreen_alertMsg = 'cryptoAssetScreen.alertMsg';
   static const cryptoAssetScreen_networkErrorMsg = 'cryptoAssetScreen.networkErrorMsg';
+  static const cryptoAssetScreen_target = 'cryptoAssetScreen.target';
+  static const cryptoAssetScreen_update = 'cryptoAssetScreen.update';
+  static const cryptoAssetScreen_deleteAlert = 'cryptoAssetScreen.deleteAlert';
   static const cryptoAssetScreen = 'cryptoAssetScreen';
   static const chooseAlertScreen_titleAppBar = 'chooseAlertScreen.titleAppBar';
   static const chooseAlertScreen_subtitle = 'chooseAlertScreen.subtitle';
@@ -62,6 +65,11 @@ abstract class  LocaleKeys {
   static const notification_decreaseTitle = 'notification.decreaseTitle';
   static const notification_titleAlert = 'notification.titleAlert';
   static const notification = 'notification';
+  static const permissionNotification_title = 'permissionNotification.title';
+  static const permissionNotification_body = 'permissionNotification.body';
+  static const permissionNotification_allow = 'permissionNotification.allow';
+  static const permissionNotification_disallow = 'permissionNotification.disallow';
+  static const permissionNotification = 'permissionNotification';
   static const price = 'price';
   static const percentageIncrease = 'percentageIncrease';
   static const percentageDecrease = 'percentageDecrease';

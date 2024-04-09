@@ -46,7 +46,10 @@ class CodegenLoader extends AssetLoader{
     "allTimeLow": "All-Time Low",
     "alertTitle": "Alert",
     "alertMsg": "Receive a one-time notification for this stocks when your conditions are mets",
-    "networkErrorMsg": "Data update in progress. Take a break to explore other features - it'll be ready in no time! 🚀"
+    "networkErrorMsg": "Data update in progress. Take a break to explore other features - it'll be ready in no time!",
+    "target": "Target price {}",
+    "update": "Update",
+    "deleteAlert": "Delete Alert"
   },
   "chooseAlertScreen": {
     "titleAppBar": "Set an alert for {}",
@@ -82,6 +85,12 @@ class CodegenLoader extends AssetLoader{
     "increaseTitle": "{} increase",
     "decreaseTitle": "{} decrease",
     "titleAlert": "{} alert"
+  },
+  "permissionNotification": {
+    "title": "Allow Notifications",
+    "body": "Freemarket would like to send you notifications",
+    "allow": "Allow",
+    "disallow": "Don't Allow"
   },
   "price": "Price",
   "percentageIncrease": "Percentage increase",
@@ -129,7 +138,10 @@ static const Map<String,dynamic> fr = {
     "allTimeLow": "Baisse historique",
     "alertTitle": "Alerte",
     "alertMsg": "Recevez une notification unique pour cette crypto-monnaie lorsque vos conditions sont remplies.",
-    "networkErrorMsg": "Une mise à jour des données en cours. Prenez une pause pour explorer d'autres fonctionnalités, il sera prêt en un rien de temps ! 🚀"
+    "networkErrorMsg": "Une mise à jour des données en cours. Prenez une pause pour explorer d'autres fonctionnalités, il sera prêt en un rien de temps !",
+    "target": "Prix cible {}",
+    "update": "Modification",
+    "deleteAlert": "Supprimer alerte"
   },
   "chooseAlertScreen": {
     "titleAppBar": "Créer une alert pour {}",
@@ -157,7 +169,7 @@ static const Map<String,dynamic> fr = {
     "priceCrosses": "Croisement du prix",
     "down": "En baisse de {}",
     "up": "En hausse de {}",
-    "scheduled": "Every day at",
+    "scheduled": "Chaque jour",
     "increase": "{}, une hausse du prix de {} {}",
     "decrease": "{}, une baisse du prix de {} {}",
     "reached": "{} a atteint le prix de {}",
@@ -165,6 +177,12 @@ static const Map<String,dynamic> fr = {
     "increaseTitle": "{} hausse",
     "decreaseTitle": "{} baisse",
     "titleAlert": "{} alerte"
+  },
+  "permissionNotification": {
+    "title": "Autoriser notifications",
+    "body": "Freemarket souhaite vous envoyer des notifications",
+    "allow": "Autoriser",
+    "disallow": "Ne pas autoriser"
   },
   "price": "Prix",
   "percentageIncrease": "Pourcentage de hausse",

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:defi/constants/app_colors.dart';
+import 'package:defi/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,15 +12,15 @@ Future<void> adaptiveDialog(BuildContext context) async {
       ? showCupertinoDialog(
           context: context,
           builder: (context) => CupertinoAlertDialog(
-                title: const Text('Allow Notifications'),
+                title: Text(LocaleKeys.permissionNotification_title.tr() ),
                 content:
-                    const Text('Our app would like to send you notifications'),
+                    Text(LocaleKeys.permissionNotification_body.tr()),
                 actions: [
                   CupertinoDialogAction(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text(
-                      'Don\'t Allow',
-                      style: TextStyle(color: Colors.grey, fontSize: 18),
+                    child:  Text(
+                      LocaleKeys.permissionNotification_disallow.tr(),
+                      style: const TextStyle(color: Colors.grey, fontSize: 18),
                     ),
                   ),
                   CupertinoDialogAction(
@@ -29,9 +31,9 @@ Future<void> adaptiveDialog(BuildContext context) async {
                       });
                        Navigator.pop(context);
                     },
-                    child: const Text(
-                      'Allow',
-                      style: TextStyle(
+                    child:  Text(
+                      LocaleKeys.permissionNotification_allow.tr(),
+                      style: const TextStyle(
                         color: blue,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

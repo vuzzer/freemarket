@@ -26,7 +26,9 @@ class NotificationPriceBloc
               _getNotification(emit: emit, cryptoId: value.cryptoId),
           updateNotificationPrice: (UpdateNotificationPrice value) =>
               _updateNotificaiton(emit: emit, updateNotif: value.notification),
-          createNotificationFromList: (CreateNotificationFromList value) => _createNotificationFromList(emit: emit, createNotification: value.createNotification) );
+          createNotificationFromList: (CreateNotificationFromList value) =>
+              _createNotificationFromList(
+                  emit: emit, createNotification: value.createNotification));
     });
   }
 
@@ -48,14 +50,19 @@ class NotificationPriceBloc
   Future<void> _getNotification(
       {required Emitter<NotificationPriceState> emit,
       required String cryptoId}) async {
+    // Active loading
+    emit(state.copyWith(loading: true));
+
     final notification =
         await notificationPriceUsecase.getNotificationPrice(cryptoId);
 
     //fold
     notification.fold(
         (e) => emit(state.copyWith(
+            loading: false,
             successOrFail: left(CryptoError("Erreur lors du chargement")))),
         (listNotif) => emit(state.copyWith(
+          loading: false,
             notifications: listNotif, successOrFail: right(Success()))));
   }
 
@@ -63,12 +70,16 @@ class NotificationPriceBloc
       {required Emitter<NotificationPriceState> emit,
       required String cryptoId,
       required int idNotification}) async {
+        // Active loading
+    emit(state.copyWith(loading: true));
+
     final deleteNotificationPrice =
         await notificationPriceUsecase.deleteNotificationPrice(idNotification);
 
     // fold
     deleteNotificationPrice.fold(
         (error) => emit(state.copyWith(
+            loading: false,
             successOrFail: left(CryptoError("Erreur lors du chargement")))),
         (success) =>
             add(NotificationPriceEvent.getNotificationPrice(cryptoId)));
@@ -77,12 +88,16 @@ class NotificationPriceBloc
   Future<void> _updateNotificaiton(
       {required Emitter<NotificationPriceState> emit,
       required NotificationCrypto updateNotif}) async {
+        // Active loading
+    emit(state.copyWith(loading: true));
+
     final notificatons =
         await notificationPriceUsecase.updateNotification(updateNotif);
 
     // fold
     notificatons.fold(
         (error) => emit(state.copyWith(
+          loading: false,
             successOrFail: left(CryptoError("Erreur lors du chargement")))),
         (response) {
       add(NotificationPriceEvent.getNotificationPrice(updateNotif.cryptoId));
@@ -92,17 +107,21 @@ class NotificationPriceBloc
   Future<void> _createNotificationFromList(
       {required Emitter<NotificationPriceState> emit,
       required List<NotificationCrypto> createNotification}) async {
-        // Get id crypto
+                // Active loading
+    emit(state.copyWith(loading: true));
+
+    // Get id crypto
     final cryptoId = createNotification[0].cryptoId;
-    
+
     final notification = await notificationPriceUsecase
         .createNotificationFromList(createNotification);
 
     // Fold
     notification.fold(
         (error) => emit(state.copyWith(
+          loading: false,
             successOrFail: left(CryptoError("Erreur lors du chargement")))),
-        (response) => add(
-            NotificationPriceEvent.getNotificationPrice(cryptoId)));
+        (response) =>
+            add(NotificationPriceEvent.getNotificationPrice(cryptoId)));
   }
 }

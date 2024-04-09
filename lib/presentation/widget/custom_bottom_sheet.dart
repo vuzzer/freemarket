@@ -5,11 +5,13 @@ import 'package:defi/core/cron_expression.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/domain/entities/crypto.dart';
 import 'package:defi/domain/entities/notification_crypto.dart';
+import 'package:defi/generated/locale_keys.g.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/screens/choose_alert_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/font_color.dart';
 import 'package:defi/styles/font_family.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -71,7 +73,7 @@ void customBottomSheet(BuildContext context, NotificationCrypto notification,
                   child: ListTile(
                       contentPadding: const EdgeInsets.only(left: 15, right: 5),
                       title: AutoSizeText(
-                        'Update',
+                        LocaleKeys.cryptoAssetScreen_update.tr(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontFamily: FontFamily.montSerrat,
@@ -119,7 +121,7 @@ void customBottomSheet(BuildContext context, NotificationCrypto notification,
                   child: ListTile(
                       contentPadding: const EdgeInsets.only(left: 15, right: 5),
                       title: AutoSizeText(
-                        'Delete Alert',
+                      LocaleKeys.cryptoAssetScreen_deleteAlert.tr(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontFamily: FontFamily.montSerrat,
@@ -156,12 +158,13 @@ String titleCustom(NotificationCrypto notification) {
   if (notification.typeNotification == AlertValue.schedular) {
     switch (notification.cron) {
       case CronExpression.morning:
-        return 'Market Open';
+        return LocaleKeys.setAlertScreen_marketOpen.tr();
       case CronExpression.noon:
-        return 'Mid-day';
+        return LocaleKeys.setAlertScreen_midDay.tr();
       default:
-        return 'Market close';
+        return LocaleKeys.setAlertScreen_marketClose.tr();
     }
   }
-  return 'Target price ${notification.futurePrice.toStringAsFixed(2)}';
+  return LocaleKeys.cryptoAssetScreen_target
+      .tr(args: ['\$${notification.futurePrice.toStringAsFixed(2)}']);
 }

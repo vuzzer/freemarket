@@ -1,9 +1,13 @@
 import 'package:defi/core/arguments_screen.dart';
 import 'package:defi/core/enum.dart';
+import 'package:defi/domain/entities/crypto.dart';
+import 'package:defi/domain/entities/notification_crypto.dart';
 import 'package:defi/generated/locale_keys.g.dart';
 import 'package:defi/presentation/widget/appbar_widget.dart';
 import 'package:defi/presentation/widget/schedule_widget.dart';
 import 'package:defi/presentation/widget/set_value_widget.dart';
+import 'package:defi/presentation/widget/set_value_xm_widget.dart';
+import 'package:defi/styles/media_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -30,16 +34,31 @@ class _SetAlertScreenState extends State<SetAlertScreen> {
     final notification = arguments.notification; // Notification possible null
 
     return Scaffold(
-        appBar:  AppBarWidget(
+        appBar: AppBarWidget(
           title: LocaleKeys.setAlertScreen_titleAppBar.tr(),
           leading: true,
         ),
         body: alert.value == AlertValue.schedular
             ? ScheduleWidget(alert: alert, crypto: crypto, isUpdate: isUpdate)
-            : SetValueWidget(
-                alert: alert,
-                crypto: crypto,
-                notification: notification,
+            : setValueWidget(
+                alert,
+                crypto,
+                notification,
               ));
+  }
+
+  Widget setValueWidget( alert, CryptoInfo crypto, NotificationCrypto? notification) {
+    if (SizeScreen.veryExtraSmall) {
+      return SetValueXMWidget(
+        alert: alert,
+        crypto: crypto,
+        notification: notification,
+      );
+    }
+    return SetValueWidget(
+      alert: alert,
+      crypto: crypto,
+      notification: notification,
+    );
   }
 }

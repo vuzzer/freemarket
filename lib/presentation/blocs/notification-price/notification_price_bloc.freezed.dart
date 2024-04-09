@@ -984,6 +984,7 @@ abstract class CreateNotificationFromList implements NotificationPriceEvent {
 
 /// @nodoc
 mixin _$NotificationPriceState {
+  bool get loading => throw _privateConstructorUsedError;
   List<NotificationCrypto> get notifications =>
       throw _privateConstructorUsedError;
   Either<CryptoError, Success> get successOrFail =>
@@ -1001,7 +1002,8 @@ abstract class $NotificationPriceStateCopyWith<$Res> {
       _$NotificationPriceStateCopyWithImpl<$Res, NotificationPriceState>;
   @useResult
   $Res call(
-      {List<NotificationCrypto> notifications,
+      {bool loading,
+      List<NotificationCrypto> notifications,
       Either<CryptoError, Success> successOrFail});
 }
 
@@ -1019,10 +1021,15 @@ class _$NotificationPriceStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? loading = null,
     Object? notifications = null,
     Object? successOrFail = null,
   }) {
     return _then(_value.copyWith(
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
       notifications: null == notifications
           ? _value.notifications
           : notifications // ignore: cast_nullable_to_non_nullable
@@ -1045,7 +1052,8 @@ abstract class _$$NotificationPriceStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<NotificationCrypto> notifications,
+      {bool loading,
+      List<NotificationCrypto> notifications,
       Either<CryptoError, Success> successOrFail});
 }
 
@@ -1062,10 +1070,15 @@ class __$$NotificationPriceStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? loading = null,
     Object? notifications = null,
     Object? successOrFail = null,
   }) {
     return _then(_$NotificationPriceStateImpl(
+      loading: null == loading
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
       notifications: null == notifications
           ? _value._notifications
           : notifications // ignore: cast_nullable_to_non_nullable
@@ -1082,10 +1095,13 @@ class __$$NotificationPriceStateImplCopyWithImpl<$Res>
 
 class _$NotificationPriceStateImpl implements _NotificationPriceState {
   const _$NotificationPriceStateImpl(
-      {required final List<NotificationCrypto> notifications,
+      {required this.loading,
+      required final List<NotificationCrypto> notifications,
       required this.successOrFail})
       : _notifications = notifications;
 
+  @override
+  final bool loading;
   final List<NotificationCrypto> _notifications;
   @override
   List<NotificationCrypto> get notifications {
@@ -1099,7 +1115,7 @@ class _$NotificationPriceStateImpl implements _NotificationPriceState {
 
   @override
   String toString() {
-    return 'NotificationPriceState(notifications: $notifications, successOrFail: $successOrFail)';
+    return 'NotificationPriceState(loading: $loading, notifications: $notifications, successOrFail: $successOrFail)';
   }
 
   @override
@@ -1107,6 +1123,7 @@ class _$NotificationPriceStateImpl implements _NotificationPriceState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NotificationPriceStateImpl &&
+            (identical(other.loading, loading) || other.loading == loading) &&
             const DeepCollectionEquality()
                 .equals(other._notifications, _notifications) &&
             (identical(other.successOrFail, successOrFail) ||
@@ -1114,7 +1131,7 @@ class _$NotificationPriceStateImpl implements _NotificationPriceState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
+  int get hashCode => Object.hash(runtimeType, loading,
       const DeepCollectionEquality().hash(_notifications), successOrFail);
 
   @JsonKey(ignore: true)
@@ -1127,10 +1144,13 @@ class _$NotificationPriceStateImpl implements _NotificationPriceState {
 
 abstract class _NotificationPriceState implements NotificationPriceState {
   const factory _NotificationPriceState(
-          {required final List<NotificationCrypto> notifications,
+          {required final bool loading,
+          required final List<NotificationCrypto> notifications,
           required final Either<CryptoError, Success> successOrFail}) =
       _$NotificationPriceStateImpl;
 
+  @override
+  bool get loading;
   @override
   List<NotificationCrypto> get notifications;
   @override

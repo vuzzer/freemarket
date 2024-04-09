@@ -11,6 +11,7 @@ import 'package:defi/presentation/screens/choose_alert_screen.dart';
 import 'package:defi/presentation/widget/custom_bottom_sheet.dart';
 import 'package:defi/styles/font_color.dart';
 import 'package:defi/styles/font_family.dart';
+import 'package:defi/styles/media_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,18 +49,18 @@ class NotificationWidget extends StatelessWidget {
     String message = "";
     switch (notification.typeNotification) {
       case AlertValue.decrease:
-        message = '\$${notification.futurePrice.toStringAsFixed(2)}';
+        message = formatNumber(notification.futurePrice);
         break;
       case AlertValue.increase:
-        message = '\$${notification.futurePrice.toStringAsFixed(2)}';
+        message = formatNumber(notification.futurePrice);;
         break;
       case AlertValue.price:
-        message = '\$${notification.futurePrice.toStringAsFixed(2)}';
+        message = formatNumber(notification.futurePrice);;
         break;
       case AlertValue.schedular:
         switch (notification.cron) {
           case CronExpression.morning:
-            message = LocaleKeys.setAlertScreen_marketOpen.tr() ;
+            message = LocaleKeys.setAlertScreen_marketOpen.tr();
             break;
           case CronExpression.night:
             message = LocaleKeys.setAlertScreen_marketClose.tr();
@@ -112,8 +113,11 @@ class NotificationWidget extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        //price of token on the market (use chainlink)
-                        AutoSizeText(target(notification),
+                        // Price prediction
+                        AutoSizeText(
+                            predictFor(notification.typeNotification,
+                                target(notification)),
+                            overflow: TextOverflow.ellipsis,
                             style:
                                 TextStyle(fontFamily: FontFamily.montSerrat)),
                         //Balance token
@@ -133,5 +137,36 @@ class NotificationWidget extends StatelessWidget {
                             ))
                       ],
                     )))));
+  }
+
+  // Display prediction
+  String predictFor(AlertValue alert, String prediction) {
+    if (alert == AlertValue.schedular) {
+      return truncateText(message: prediction);
+    }
+    return prediction;
+  }
+
+  String truncateText({required String message, int maxLength = 10}) {
+    if (SizeScreen.veryExtraSmall) {
+      if (message.length <= maxLength) {
+        return message;
+      }
+      return '${message.substring(0, maxLength)}...';
+    }
+    return message;
+  }
+
+  String formatNumber(double number) {
+    if (number >= 1000000000) {
+      return LocaleKeys.billion.tr(namedArgs: {
+        'billion': '\$${(number / 1000000000).toStringAsFixed(1)}'
+      });
+    } else if (number >= 1000000) {
+      return LocaleKeys.million.tr(
+          namedArgs: {'million': '\$${(number / 1000000).toStringAsFixed(1)}'});
+    } else {
+      return '\$${number.toStringAsFixed(2)}';
+    }
   }
 }
