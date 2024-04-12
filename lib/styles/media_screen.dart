@@ -7,9 +7,10 @@ class MediaScreen {
     if (SizeScreen.extraLarge) {
     } else if (SizeScreen.large) {
     } else if (SizeScreen.meduim) {
+      Media.headline1 = 28.sp;
+      Media.height = 210.h;
     } else if (SizeScreen.small) {
-    }
-    else if(SizeScreen.extraSmall){
+    } else if (SizeScreen.extraSmall) {
     }
     // Very Extra Small Screen
     else {
@@ -19,7 +20,7 @@ class MediaScreen {
 }
 
 class SizeScreen {
-  static final bool veryExtraSmall =  ScreenUtil().screenWidth < 376; 
+  static final bool veryExtraSmall = ScreenUtil().screenWidth < 376;
   static final bool extraSmall = ScreenUtil().screenWidth >= 376;
   static final bool small = ScreenUtil().screenWidth >= 576;
   static final bool meduim = ScreenUtil().screenWidth >= 768;
