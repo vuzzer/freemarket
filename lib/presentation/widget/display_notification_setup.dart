@@ -46,7 +46,7 @@ class DisplayNotificationSetup extends StatelessWidget {
                 children: [
                   ...state.notifications
                       .map((notification) => NotificationWidget(
-                            notification: notification,
+                            notification: notification,  
                             crypto: crypto,
                           ))
                 ],

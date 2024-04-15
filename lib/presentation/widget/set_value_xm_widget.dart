@@ -184,61 +184,62 @@ class _SetValueXMWidgetState extends State<SetValueXMWidget> {
                   );
                 }),
             const Spacer(),
-            if(!focusNotifier.value)
+            if (!focusNotifier.value)
+              ValueListenableBuilder(
+                  valueListenable: checkPriceNotifier,
+                  builder: (context, value, child) => Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        child: ButtonWidget(
+                          disable: validateInput(
+                                  alert.value, crypto, _controller.text)
+                              ? false
+                              : true,
+                          onPressed: () {
+                            final isUpdate = widget.notification == null;
+                            if (isUpdate) {
+                              final notificationCreate = createNotification(
+                                  alert.value, crypto, value);
+
+                              // Created Notification
+                              context.read<NotificationPriceBloc>().add(
+                                  CreateNotificationPrice(notificationCreate));
+                            } else {
+                              final id = widget.notification!.idNotification;
+
+                              final notificationUpdate = updateNotification(
+                                  alert.value, crypto, value, id);
+
+                              // Update notification
+                              context.read<NotificationPriceBloc>().add(
+                                  UpdateNotificationPrice(notificationUpdate));
+                            }
+
+                            Navigator.of(context).popUntil(ModalRoute.withName(
+                                CryptoAssetScreen.routeName));
+                          },
+                          title: updated
+                              ? LocaleKeys.alertBtn.tr()
+                              : LocaleKeys.updateBtn.tr(),
+                          raduis: 10,
+                        ),
+                      )),
             ValueListenableBuilder(
-                valueListenable: checkPriceNotifier,
-                builder: (context, value, child) => Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                valueListenable: focusNotifier,
+                builder: (context, focus, child) {
+                  if (!focus) {
+                    return Container(
+                      padding: const EdgeInsets.only(
+                          left: 30, right: 30, bottom: 35, top: 10),
                       child: ButtonWidget(
-                        disable:
-                            validateInput(alert.value, crypto, _controller.text)
-                                ? false
-                                : true,
-                        onPressed: () {
-                          final isUpdate = widget.notification == null;
-                          if (isUpdate) {
-                            final notificationCreate =
-                                createNotification(alert.value, crypto, value);
-
-                            // Created Notification
-                            context.read<NotificationPriceBloc>().add(
-                                CreateNotificationPrice(notificationCreate));
-                          } else {
-                            final id = widget.notification!.idNotification;
-
-                            final notificationUpdate = updateNotification(
-                                alert.value, crypto, value, id);
-
-                            // Update notification
-                            context.read<NotificationPriceBloc>().add(
-                                UpdateNotificationPrice(notificationUpdate));
-                          }
-
-                          Navigator.of(context).popUntil(
-                              ModalRoute.withName(CryptoAssetScreen.routeName));
-                        },
-                        title: updated
-                            ? LocaleKeys.alertBtn.tr()
-                            : LocaleKeys.updateBtn.tr(),
+                        onPressed: () => Navigator.of(context).pop(),
+                        color: blue1,
+                        title: LocaleKeys.dismissBtn.tr(),
                         raduis: 10,
                       ),
-                    )),
-            ValueListenableBuilder(valueListenable: focusNotifier, builder: (context, focus ,child) {
-              if(!focus){
- return Container(
-              padding: const EdgeInsets.only(
-                  left: 30, right: 30, bottom: 35, top: 10),
-              child: ButtonWidget(
-                onPressed: () => Navigator.of(context).pop(),
-                color: blue1,
-                title: LocaleKeys.dismissBtn.tr(),
-                raduis: 10,
-              ),
-            );
-              }
-              return const SizedBox.shrink();
-            } ),
-           
+                    );
+                  }
+                  return const SizedBox.shrink();
+                }),
             ValueListenableBuilder(
                 valueListenable: focusNotifier,
                 builder: (context, hasFocus, child) => Visibility(
@@ -259,5 +260,4 @@ class _SetValueXMWidgetState extends State<SetValueXMWidget> {
           ],
         ));
   }
-
 }
