@@ -15,6 +15,7 @@ import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/blocs/notification-triggered/notification_triggered_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
+import 'package:defi/presentation/screens/plaid_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/my_theme_mode.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -127,7 +128,7 @@ class _MyAppState extends State<MyApp> {
                   title: 'Freemarket',
                   debugShowCheckedModeBanner: false,
                   theme: MyThemeMode.themeData(),
-                  routes: getRoutes(context));
+                  home: PlaidScreen(),);
             })));
   }
 }
