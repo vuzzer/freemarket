@@ -8,8 +8,7 @@ class ButtonIconWidget extends StatelessWidget {
   final double raduis;
   final VoidCallback onPressed;
   const ButtonIconWidget(
-      {Key? key, required this.iconData, required this.label, this.raduis = 30, required this.onPressed})
-      : super(key: key);
+      {super.key, required this.iconData, required this.label, this.raduis = 30, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

@@ -13,13 +13,12 @@ class ButtonWidget extends StatelessWidget {
   final double raduis;
   final bool disable;
   const ButtonWidget(
-      {Key? key,
+      {super.key,
       required this.onPressed,
       required this.title,
       this.color = blue,
       this.disable = false,
-      this.raduis = 0})
-      : super(key: key);
+      this.raduis = 0});
 
   @override
   Widget build(BuildContext context) {

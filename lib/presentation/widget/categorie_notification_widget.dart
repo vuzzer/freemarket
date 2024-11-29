@@ -13,19 +13,18 @@ class CategorieNotificationWidget extends StatelessWidget {
   final Function update;
   final bool disable;
   const CategorieNotificationWidget(
-      {Key? key,
+      {super.key,
       required this.alert,
       required this.radio,
       required this.update,
-      this.disable = false})
-      : super(key: key);
+      this.disable = false});
 
-  Color getColor(Set<MaterialState> states) {
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.pressed,
-      MaterialState.hovered,
-      MaterialState.focused,
-      MaterialState.selected
+  Color getColor(Set<WidgetState> states) {
+    const Set<WidgetState> interactiveStates = <WidgetState>{
+      WidgetState.pressed,
+      WidgetState.hovered,
+      WidgetState.focused,
+      WidgetState.selected
     };
     if (states.any(interactiveStates.contains)) {
       return blue;
@@ -88,7 +87,7 @@ class CategorieNotificationWidget extends StatelessWidget {
                       children: [
                         Radio(
                             fillColor:
-                                MaterialStateProperty.resolveWith(getColor),
+                                WidgetStateProperty.resolveWith(getColor),
                             activeColor: blue,
                             value: alert.value,
                             groupValue: radio,

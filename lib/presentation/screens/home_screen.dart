@@ -3,7 +3,7 @@ import 'package:defi/constants/app_colors.dart';
 import 'package:defi/core/enum.dart';
 import 'package:defi/presentation/blocs/brightness/brightness_bloc.dart';
 import 'package:defi/presentation/screens/credit_card_screen.dart';
-import 'package:defi/presentation/screens/setting_screen.dart';
+import 'package:defi/presentation/screens/setting_screen/setting_screen.dart';
 import 'package:defi/presentation/screens/stock_screen.dart';
 import 'package:defi/styles/font_color.dart';
 import 'package:flutter/material.dart';

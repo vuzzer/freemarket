@@ -11,11 +11,10 @@ class NumberButtonWiget extends StatelessWidget {
   final TextEditingController controller;
   final bool amount;
   const NumberButtonWiget(
-      {Key? key,
+      {super.key,
       required this.touch,
       required this.controller,
-      this.amount = false})
-      : super(key: key);
+      this.amount = false});
   @override
   Widget build(BuildContext context) {
     final darkMode =

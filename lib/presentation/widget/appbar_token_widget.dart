@@ -16,12 +16,12 @@ class AppBarTokenWidget extends StatelessWidget implements PreferredSizeWidget {
   final CryptoInfo crypto;
 
   const AppBarTokenWidget({
-    Key? key,
+    super.key,
     required this.title,
     required this.crypto,
     this.leading = true,
     this.actions = false,
-  }) : super(key: key);
+  });
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);

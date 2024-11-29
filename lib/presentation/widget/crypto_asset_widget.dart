@@ -11,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CryptoAssetWidget extends StatelessWidget {
   final CryptoInfo crypto;
-  const CryptoAssetWidget({Key? key, required this.crypto}) : super(key: key);
+  const CryptoAssetWidget({super.key, required this.crypto});
 
   @override
   Widget build(BuildContext context) {

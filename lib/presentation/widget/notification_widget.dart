@@ -52,10 +52,10 @@ class NotificationWidget extends StatelessWidget {
         message = formatNumber(notification.futurePrice);
         break;
       case AlertValue.increase:
-        message = formatNumber(notification.futurePrice);;
+        message = formatNumber(notification.futurePrice); {}
         break;
       case AlertValue.price:
-        message = formatNumber(notification.futurePrice);;
+        message = formatNumber(notification.futurePrice); {}
         break;
       case AlertValue.schedular:
         switch (notification.cron) {

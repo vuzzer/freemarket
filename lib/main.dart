@@ -15,7 +15,6 @@ import 'package:defi/presentation/blocs/market/market_token_bloc.dart';
 import 'package:defi/presentation/blocs/notification-price/notification_price_bloc.dart';
 import 'package:defi/presentation/blocs/notification-triggered/notification_triggered_bloc.dart';
 import 'package:defi/presentation/blocs/primary-crypto/primary_crypto_bloc.dart';
-import 'package:defi/presentation/screens/plaid_screen.dart';
 import 'package:defi/service_locator.dart';
 import 'package:defi/styles/my_theme_mode.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -122,13 +121,14 @@ class _MyAppState extends State<MyApp> {
               sl<SettingsData>().language(context.locale.toString());
 
               return MaterialApp(
-                  localizationsDelegates: context.localizationDelegates,
-                  supportedLocales: context.supportedLocales,
-                  locale: extractPrimaryLocale(context.deviceLocale),
-                  title: 'Freemarket',
-                  debugShowCheckedModeBanner: false,
-                  theme: MyThemeMode.themeData(),
-                  home: PlaidScreen(),);
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: extractPrimaryLocale(context.deviceLocale),
+                title: 'Freemarket',
+                debugShowCheckedModeBanner: false,
+                theme: MyThemeMode.themeData(),
+                routes: getRoutes(context),
+              );
             })));
   }
 }
