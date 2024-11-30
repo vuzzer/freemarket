@@ -7,7 +7,6 @@ import 'package:defi/core/notifications/setup_notification.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
-import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class BackgroundService {

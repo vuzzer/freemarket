@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:logger/logger.dart';
 
 abstract class NetworkInfo {
   static final StreamController<InternetConnectionStatus> internetController =
@@ -28,7 +27,6 @@ class NetworkInfoImpl extends NetworkInfo {
   @override
   void checkConnectivity() {
     listen = connectionChecker.onStatusChange.listen((status) {
-      Logger().d(status);
       NetworkInfo.internetController.sink.add(status);
     });
   }

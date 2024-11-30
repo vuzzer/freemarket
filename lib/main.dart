@@ -121,13 +121,14 @@ class _MyAppState extends State<MyApp> {
               sl<SettingsData>().language(context.locale.toString());
 
               return MaterialApp(
-                  localizationsDelegates: context.localizationDelegates,
-                  supportedLocales: context.supportedLocales,
-                  locale: extractPrimaryLocale(context.deviceLocale),
-                  title: 'Freemarket',
-                  debugShowCheckedModeBanner: false,
-                  theme: MyThemeMode.themeData(),
-                  routes: getRoutes(context));
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: extractPrimaryLocale(context.deviceLocale),
+                title: 'Freemarket',
+                debugShowCheckedModeBanner: false,
+                theme: MyThemeMode.themeData(),
+                routes: getRoutes(context),
+              );
             })));
   }
 }

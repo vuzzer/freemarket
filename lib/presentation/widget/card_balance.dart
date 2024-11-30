@@ -56,7 +56,7 @@ class _CardBalanceState extends State<CardBalance> {
                   AutoSizeText(
                     "${state.crypto?.name}",
                     style: TextStyle(
-                        color: Theme.of(context).textTheme.headline6!.color,
+                        color: Theme.of(context).textTheme.titleLarge!.color,
                         fontSize: Media.headline2,
                         fontFamily: FontFamily.montSerrat),
                   ),
@@ -69,7 +69,7 @@ class _CardBalanceState extends State<CardBalance> {
                             style: TextStyle(
                                 color: Theme.of(context)
                                     .textTheme
-                                    .headline3!
+                                    .displaySmall!
                                     .color,
                                 fontSize: Media.headline1,
                                 fontFamily: FontFamily.montSerrat),
@@ -93,7 +93,7 @@ class _CardBalanceState extends State<CardBalance> {
                       AutoSizeText(
                         "${state.crypto?.priceChange24h?.toStringAsFixed(2)}%",
                         style: TextStyle(
-                          color: Theme.of(context).textTheme.headline6!.color,
+                          color: Theme.of(context).textTheme.titleLarge!.color,
                           fontSize: Media.headline3,
                           fontFamily: FontFamily.montSerrat,
                         ),

@@ -13,13 +13,12 @@ class KeyBoardWidget extends StatelessWidget {
   final VoidCallback onPressed;
   final bool submit;
   const KeyBoardWidget(
-      {Key? key,
+      {super.key,
       required this.controller,
       required this.routeName,
       required this.onPressed,
       this.submit = false,
-      this.amount = false})
-      : super(key: key);
+      this.amount = false});
 
   @override
   Widget build(BuildContext context) {
